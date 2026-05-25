@@ -1,0 +1,279 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Customers API
+  description: >
+    Register and manage merchant customers, attach their bank accounts, and run
+    AIS-based identity verifications. Persisted customer records pre-fill
+    payment fields and accelerate repeat checkouts.
+  version: "v1"
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+
+servers:
+  - url: https://api.fintecture.com
+    description: Production
+  - url: https://api-sandbox.fintecture.com
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Customers
+    description: Customer records
+  - name: Bank Accounts
+    description: Customer bank accounts
+  - name: Verifications
+    description: Customer identity verifications
+
+paths:
+  /v1/customers:
+    get:
+      summary: List All Customers
+      description: Comprehensive overview of all registered customers.
+      operationId: listAllCustomers
+      tags: [Customers]
+      parameters:
+        - in: query
+          name: page[number]
+          schema: { type: integer }
+        - in: query
+          name: page[size]
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Customer list
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomerList' }
+    post:
+      summary: Create Customer
+      description: Register a customer to accelerate payments.
+      operationId: createCustomer
+      tags: [Customers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomerCreate' }
+      responses:
+        '201':
+          description: Customer created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Customer' }
+
+  /v1/customers/{customer_id}:
+    get:
+      summary: Get A Customer
+      description: Retrieve a customer's details by customer_id.
+      operationId: getCustomerById
+      tags: [Customers]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '200':
+          description: Customer details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Customer' }
+
+  /v1/customers/{customer_id}/bank-accounts:
+    get:
+      summary: List All Customer Bank Accounts
+      operationId: listAllCustomerBankAccounts
+      tags: [Bank Accounts]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '200':
+          description: Bank account list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/CustomerBankAccount' }
+    post:
+      summary: Create Customer Bank Account
+      operationId: createCustomerBankAccount
+      tags: [Bank Accounts]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CustomerBankAccountCreate' }
+      responses:
+        '201':
+          description: Bank account created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomerBankAccount' }
+
+  /v1/customers/{customer_id}/bank-accounts/{account_id}:
+    get:
+      summary: Get A Bank Account From A Customer
+      operationId: getBankAccountById
+      tags: [Bank Accounts]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+        - in: path
+          name: account_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Bank account
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomerBankAccount' }
+
+  /v1/customers/{customer_id}/verification:
+    post:
+      summary: Initiate Customer Verification
+      operationId: initiateCustomerVerification
+      tags: [Verifications]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider_id: { type: string }
+                expected_name: { type: string }
+      responses:
+        '201':
+          description: Verification started
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomerVerification' }
+
+  /v1/customers/{customer_id}/verifications:
+    get:
+      summary: List All Customer Verifications
+      operationId: listAllCustomerVerifications
+      tags: [Verifications]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '200':
+          description: Verification list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/CustomerVerification' }
+
+  /v1/customers/{customer_id}/verification/{verification_id}:
+    get:
+      summary: Get A Verification
+      operationId: getCustomerVerificationById
+      tags: [Verifications]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+        - in: path
+          name: verification_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Verification details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CustomerVerification' }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema: { type: string }
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id: { type: string }
+        first_name: { type: string }
+        last_name: { type: string }
+        company_name: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string }
+        address:
+          type: object
+          properties:
+            line1: { type: string }
+            line2: { type: string }
+            postal_code: { type: string }
+            city: { type: string }
+            country: { type: string }
+        external_id: { type: string }
+        created_at: { type: string, format: date-time }
+
+    CustomerCreate:
+      type: object
+      required: [first_name, last_name, email]
+      properties:
+        first_name: { type: string }
+        last_name: { type: string }
+        company_name: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string }
+        external_id: { type: string }
+
+    CustomerList:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Customer' }
+        meta:
+          type: object
+          properties:
+            count: { type: integer }
+
+    CustomerBankAccount:
+      type: object
+      properties:
+        id: { type: string }
+        iban: { type: string }
+        bic: { type: string }
+        holder_name: { type: string }
+        currency: { type: string }
+        verified: { type: boolean }
+
+    CustomerBankAccountCreate:
+      type: object
+      required: [iban, holder_name]
+      properties:
+        iban: { type: string }
+        bic: { type: string }
+        holder_name: { type: string }
+        currency: { type: string }
+
+    CustomerVerification:
+      type: object
+      properties:
+        id: { type: string }
+        status:
+          type: string
+          enum: [pending, verified, unverified, failed]
+        match_score: { type: number }
+        provider_id: { type: string }
+        verified_at: { type: string, format: date-time }

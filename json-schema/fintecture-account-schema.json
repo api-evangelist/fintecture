@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fintecture/main/json-schema/fintecture-account-schema.json",
+  "title": "Fintecture Bank Account",
+  "description": "Bank account retrieved via the Fintecture AIS API after PSU authentication.",
+  "type": "object",
+  "required": ["id", "iban", "currency"],
+  "properties": {
+    "id": { "type": "string" },
+    "iban": { "type": "string", "pattern": "^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$" },
+    "bic": { "type": "string" },
+    "currency": { "type": "string", "minLength": 3, "maxLength": 3 },
+    "type": { "type": "string", "enum": ["CACC", "SVGS", "LOAN", "CARD", "OTHR"] },
+    "balances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["available", "current", "closingBooked", "expected"]
+          },
+          "amount": { "type": "string" },
+          "currency": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "holders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "address": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "phone": { "type": "string" }
+        }
+      }
+    }
+  }
+}

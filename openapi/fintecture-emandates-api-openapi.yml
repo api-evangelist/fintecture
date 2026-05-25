@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Fintecture E-Mandates API
+  description: >
+    Create, list, retrieve, update (cancel/revoke), and manage SEPA-style
+    customer e-mandates identified by a unique Reference Unique Mandate (RUM).
+    Duplicate RUM submissions return 409 Conflict. Requires a dedicated
+    E-Mandate access token.
+  version: "v1"
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+
+servers:
+  - url: https://api.fintecture.com
+    description: Production
+  - url: https://api-sandbox.fintecture.com
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: E-Mandates
+    description: Customer e-mandates
+
+paths:
+  /v1/e-mandates:
+    get:
+      summary: List All E-Mandates
+      description: List all merchant e-mandates.
+      operationId: listAllEmandates
+      tags: [E-Mandates]
+      responses:
+        '200':
+          description: E-mandates list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/EMandate' }
+    post:
+      summary: Create E-Mandate
+      description: Create a customer e-mandate. Returns 409 Conflict if an e-mandate with the same RUM already exists.
+      operationId: createEmandate
+      tags: [E-Mandates]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/EMandateCreate' }
+      responses:
+        '201':
+          description: E-mandate created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EMandate' }
+        '409':
+          description: RUM already exists
+
+  /v1/e-mandates/{mandate_id}:
+    get:
+      summary: Get An E-Mandate
+      operationId: getEmandateById
+      tags: [E-Mandates]
+      parameters:
+        - $ref: '#/components/parameters/MandateIdPath'
+      responses:
+        '200':
+          description: E-mandate details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EMandate' }
+    patch:
+      summary: Update An E-Mandate
+      description: Update a customer e-mandate. Only status updates are allowed. Accepted statuses are 'cancelled' and 'revoked'.
+      operationId: patchEmandateById
+      tags: [E-Mandates]
+      parameters:
+        - $ref: '#/components/parameters/MandateIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [cancelled, revoked]
+      responses:
+        '200':
+          description: E-mandate updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EMandate' }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    MandateIdPath:
+      in: path
+      name: mandate_id
+      required: true
+      schema: { type: string }
+  schemas:
+    EMandate:
+      type: object
+      properties:
+        id: { type: string }
+        rum:
+          type: string
+          description: Reference Unique Mandate identifier.
+        customer_id: { type: string }
+        iban: { type: string }
+        holder_name: { type: string }
+        type:
+          type: string
+          enum: [recurring, one-off]
+        scheme:
+          type: string
+          enum: [SEPA, SEPA-B2B]
+        status:
+          type: string
+          enum: [active, cancelled, revoked, expired]
+        signed_at: { type: string, format: date-time }
+        created_at: { type: string, format: date-time }
+
+    EMandateCreate:
+      type: object
+      required: [rum, customer_id, iban, holder_name]
+      properties:
+        rum: { type: string }
+        customer_id: { type: string }
+        iban: { type: string }
+        holder_name: { type: string }
+        type:
+          type: string
+          enum: [recurring, one-off]
+        scheme:
+          type: string
+          enum: [SEPA, SEPA-B2B]

@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture PIS API — Refunds
+  description: 'Fintecture PIS API — Refunds. 2 operations. Lead operation: Create A Refund.'
+  tags: [Fintecture, PIS, Refunds]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_ACCESS_TOKEN: FINTECTURE_ACCESS_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: pis-refunds
+      baseUri: https://api.fintecture.com
+      description: Refund initiation and inspection.
+      resources:
+        - name: pis-v2-refund
+          path: /pis/v2/refund
+          operations:
+            - name: createpisv2refund
+              method: POST
+              description: Create A Refund
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  required: true
+        - name: pis-v2-payment-refunds
+          path: /pis/v2/payments/{payment_id}/refunds
+          operations:
+            - name: getpisv2paymentrefunds
+              method: GET
+              description: Get Payment Refunds
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: payment_id
+                  in: path
+                  required: true
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_ACCESS_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: pis-refunds-rest
+      port: 8080
+      resources:
+        - path: /v1/pis/v2/refund
+          name: pis-v2-refund
+          operations:
+            - method: POST
+              name: createpisv2refund
+              call: pis-refunds.createpisv2refund
+              with:
+                body: rest.body
+    - type: mcp
+      namespace: pis-refunds-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-create-refund
+          description: Create A Refund
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: pis-refunds.createpisv2refund
+          with:
+            body: tools.body
+        - name: fintecture-get-payment-refunds
+          description: Get Payment Refunds
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: pis-refunds.getpisv2paymentrefunds
+          with:
+            payment_id: tools.payment_id

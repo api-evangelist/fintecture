@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.fintecture.com/pis/v2/request-to-pay",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOi...",
+      "Content-Type": "application/json",
+      "Signature": "keyId=\"app_public_key\",algorithm=\"rsa-sha256\",headers=\"(request-target) date digest x-request-id\",signature=\"...\"",
+      "Digest": "SHA-256=...",
+      "Date": "Mon, 25 May 2026 09:05:00 GMT",
+      "x-request-id": "f1c8e3b2-5a4c-4d9e-9b3a-2d6c7e8f9a01"
+    },
+    "body": {
+      "meta": {
+        "psu_name": "Jean Martin",
+        "psu_email": "jean.martin@example.fr"
+      },
+      "data": {
+        "type": "PIS",
+        "attributes": {
+          "amount": "49.00",
+          "currency": "EUR",
+          "communication": "Invoice INV-2026-00042",
+          "payment_method": "smart_transfer"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "meta": {
+        "session_id": "sess_2026rtp9a7b3c2d4",
+        "url": "https://payments.fintecture.com/s/sess_2026rtp9a7b3c2d4",
+        "link_id": "link_a1b2c3d4"
+      }
+    }
+  }
+}

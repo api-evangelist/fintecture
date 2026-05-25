@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fintecture/main/json-schema/fintecture-payment-schema.json",
+  "title": "Fintecture Payment",
+  "description": "A Fintecture PIS payment session covering Immediate Transfer, Smart Transfer, and Buy Now Pay Later.",
+  "type": "object",
+  "required": ["id", "type", "attributes", "status"],
+  "properties": {
+    "id": { "type": "string" },
+    "type": { "type": "string", "enum": ["PIS"] },
+    "attributes": {
+      "type": "object",
+      "required": ["amount", "currency", "communication"],
+      "properties": {
+        "amount": { "type": "string", "pattern": "^[0-9]+(\\.[0-9]{1,2})?$" },
+        "currency": { "type": "string", "enum": ["EUR", "GBP", "PLN"] },
+        "customer_id": { "type": "string" },
+        "end_to_end_id": { "type": "string", "maxLength": 35 },
+        "communication": { "type": "string", "maxLength": 140 },
+        "payment_method": {
+          "type": "string",
+          "enum": ["immediate_transfer", "smart_transfer", "bnpl"]
+        },
+        "rail": {
+          "type": "string",
+          "enum": ["SEPA", "iSCT", "FPS", "PLN", "INT"]
+        },
+        "beneficiary": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "iban": { "type": "string" },
+            "bic": { "type": "string" }
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "payment_created",
+        "payment_pending",
+        "payment_initiated",
+        "payment_completed",
+        "payment_rejected",
+        "payment_cancelled",
+        "payment_failed"
+      ]
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

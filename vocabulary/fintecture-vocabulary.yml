@@ -1,0 +1,123 @@
+vocabulary: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: Fintecture
+providerId: fintecture
+created: '2026-05-25'
+modified: '2026-05-25'
+description: >-
+  Vocabulary of the operational and capability dimensions exposed by Fintecture's
+  Open Banking platform. Aligns industry PSD2 / Berlin Group terms with
+  Fintecture product names.
+tags:
+  - Open Banking
+  - PSD2
+  - Payments
+concepts:
+  - term: PIS
+    label: Payment Initiation Services
+    definition: PSD2 regulated service category for initiating payments from a PSU's payment account on their behalf.
+    aliases: [Payment Initiation Service Provider, PISP]
+  - term: AIS
+    label: Account Information Services
+    definition: PSD2 regulated service category for retrieving information from a PSU's payment account on their behalf.
+    aliases: [Account Information Service Provider, AISP]
+  - term: PSU
+    label: Payment Service User
+    definition: The end customer initiating a payment or granting account access.
+  - term: ASPSP
+    label: Account Servicing Payment Service Provider
+    definition: The PSU's bank that ultimately holds the account being debited or read.
+  - term: TPP
+    label: Third Party Provider
+    definition: The PSD2 regulated party (Fintecture here) acting on the PSU's behalf as PISP and/or AISP.
+  - term: SCA
+    label: Strong Customer Authentication
+    definition: Two-factor authentication required by PSD2 for most regulated payment and account-access flows.
+  - term: RUM
+    label: Reference Unique Mandate
+    definition: Per-mandate unique identifier in the SEPA Direct Debit / e-mandate scheme. Duplicate RUMs return 409 Conflict.
+products:
+  - id: immediate-transfer
+    name: Immediate Transfer
+    description: Pay-by-bank Open Banking transfer initiation. The PSU authenticates at their bank and confirms the payment; settlement is near-instant.
+  - id: smart-transfer
+    name: Smart Transfer
+    description: Auto-reconciled transfer using a merchant-allocated virtual unique IBAN. Inbound funds match exactly back to the payment session.
+  - id: request-to-pay
+    name: Request To Pay
+    description: Payment link delivered by email, SMS, QR code, or embedded in an invoice. PSU follows the link to complete an Immediate Transfer, Smart Transfer, or BNPL payment.
+  - id: bnpl
+    name: Buy Now Pay Later
+    description: Deferred payment option composed inside the Payment Hub.
+  - id: verified-payout
+    name: Verified Payout
+    description: Outbound disbursement to a verified bank account, used for customer reimbursements and credits.
+  - id: immediate-refund
+    name: Immediate Refund
+    description: Full or partial refund initiated to the original payment account or to an alternative payout account.
+  - id: account-information
+    name: Account Information
+    description: Retrieve PSU accounts, balances, holders, and transactions.
+  - id: ais-verification
+    name: AIS Identity Verification
+    description: AIS-backed name-match check that the bank account holder matches the merchant's customer record.
+  - id: e-mandates
+    name: E-Mandates
+    description: SEPA-style mandates identified by RUM; supports cancel and revoke status transitions.
+  - id: payment-hub
+    name: Payment Hub
+    description: Single endpoint that orchestrates Immediate Transfer, Smart Transfer, and BNPL inside a unified payment session.
+  - id: local-acquiring
+    name: Local Acquiring
+    description: Merchant funds first land in a Fintecture-managed acquiring account, then are settled to the merchant's own bank account.
+services:
+  - id: pis
+    capabilities: [Immediate Transfer, Smart Transfer, Request To Pay, BNPL, Verified Payout, Immediate Refund]
+  - id: ais
+    capabilities: [Accounts, Holders, Balances, Transactions, Verification]
+  - id: customers
+    capabilities: [Customer registration, Customer bank accounts, Verifications]
+  - id: e-mandates
+    capabilities: [Create, List, Get, Cancel, Revoke]
+  - id: oac
+    capabilities: [Applications, Bank Accounts, Companies, Organisation Nodes, Memberships, Users]
+rails:
+  - id: SEPA
+    name: SEPA Credit Transfer
+    region: EEA
+  - id: iSCT
+    name: SEPA Instant Credit Transfer
+    region: EEA
+  - id: FPS
+    name: UK Faster Payments
+    region: UK
+  - id: PLN
+    name: ELIXIR
+    region: Poland
+  - id: INT
+    name: International
+    region: Cross-border
+auth:
+  - id: pis-token
+    grant: client_credentials
+    scope: PIS
+  - id: ais-token
+    grant: authorization_code
+    scope: AIS
+  - id: customer-token
+    grant: client_credentials
+    scope: customer
+  - id: emandate-token
+    grant: client_credentials
+    scope: e-mandate
+  - id: oac-token
+    grant: client_credentials
+    scope: OAC
+    status: beta
+security:
+  - id: http-message-signature
+    definition: RFC draft-cavage-http-signatures. Production calls require Signature, Digest, Date, and x-request-id headers.
+sources:
+  - https://doc.fintecture.com/
+  - https://fintecture.com/
+  - https://doc.fintecture.com/llms.txt

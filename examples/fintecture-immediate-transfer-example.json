@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.fintecture.com/pis/v2/connect",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOi...",
+      "Content-Type": "application/json",
+      "Signature": "keyId=\"app_public_key\",algorithm=\"rsa-sha256\",headers=\"(request-target) date digest x-request-id\",signature=\"...\"",
+      "Digest": "SHA-256=...",
+      "Date": "Mon, 25 May 2026 09:00:00 GMT",
+      "x-request-id": "8d3c1a02-7e3f-4f3b-a9fa-9a4d2a4b8a17"
+    },
+    "body": {
+      "meta": {
+        "psu_name": "Marie Dupont",
+        "psu_email": "marie.dupont@example.fr",
+        "psu_phone": "+33611223344"
+      },
+      "data": {
+        "type": "PIS",
+        "attributes": {
+          "amount": "149.90",
+          "currency": "EUR",
+          "communication": "Order #20260525-A1B2",
+          "end_to_end_id": "ORD-20260525-A1B2",
+          "payment_method": "immediate_transfer",
+          "beneficiary": {
+            "name": "ACME SARL",
+            "iban": "FR7630006000011234567890189",
+            "bic": "AGRIFRPP"
+          }
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "meta": {
+        "session_id": "sess_2026e7f3a90c4f2d",
+        "status": "payment_created",
+        "url": "https://payments.fintecture.com/s/sess_2026e7f3a90c4f2d",
+        "code": "ok"
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Transactions and Settlements API
+  description: >
+    Inspect transactions and settlements. Settlements are outgoing payments
+    from the merchant's Local Acquiring account to the merchant's own bank
+    account. The sandbox exposes an additional /v1/transactions/simulate
+    endpoint for testing webhook and event flows.
+  version: "v1"
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+
+servers:
+  - url: https://api.fintecture.com
+    description: Production
+  - url: https://api-sandbox.fintecture.com
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Transactions
+  - name: Sandbox
+
+paths:
+  /v1/transactions:
+    get:
+      summary: List All Transactions
+      operationId: listAllTransactions
+      tags: [Transactions]
+      parameters:
+        - in: query
+          name: filter[from]
+          schema: { type: string, format: date }
+        - in: query
+          name: filter[to]
+          schema: { type: string, format: date }
+        - in: query
+          name: filter[type]
+          schema: { type: string, enum: [debit, credit] }
+      responses:
+        '200':
+          description: Transactions list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/MerchantTransaction' }
+
+  /v1/transactions/{transaction_id}:
+    get:
+      summary: Get Specific Transaction
+      operationId: getTransactionById
+      tags: [Transactions]
+      parameters:
+        - in: path
+          name: transaction_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Transaction details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MerchantTransaction' }
+
+  /v1/transactions/simulate:
+    post:
+      summary: Simulate A Transaction
+      description: Simulate a credit/debit transaction in the Sandbox environment. Use this to test webhook and event flows.
+      operationId: simulateTransactionEvent
+      tags: [Sandbox]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SimulateTransactionRequest' }
+      responses:
+        '200':
+          description: Simulation result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MerchantTransaction' }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    MerchantTransaction:
+      type: object
+      properties:
+        id: { type: string }
+        amount: { type: string }
+        currency: { type: string }
+        type:
+          type: string
+          enum: [debit, credit]
+        status: { type: string }
+        booking_date: { type: string, format: date }
+        value_date: { type: string, format: date }
+        description: { type: string }
+        related_payment_id: { type: string }
+        related_settlement_id: { type: string }
+
+    SimulateTransactionRequest:
+      type: object
+      required: [amount, currency, type]
+      properties:
+        amount: { type: string }
+        currency: { type: string }
+        type:
+          type: string
+          enum: [debit, credit]
+        description: { type: string }
+        bank_account_id: { type: string }

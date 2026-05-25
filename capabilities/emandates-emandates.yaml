@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture E-Mandates API — E-Mandates
+  description: 'Fintecture E-Mandates API — E-Mandates. 4 operations. Lead operation: Create E-Mandate.'
+  tags: [Fintecture, E-Mandates, SEPA, Recurring]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_EMANDATE_TOKEN: FINTECTURE_EMANDATE_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: emandates-emandates
+      baseUri: https://api.fintecture.com
+      description: SEPA-style e-mandate lifecycle (create, list, get, cancel/revoke).
+      resources:
+        - name: v1-emandates
+          path: /v1/e-mandates
+          operations:
+            - name: createemandate
+              method: POST
+              description: Create E-Mandate
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: body, in: body, required: true }
+            - name: listallemandates
+              method: GET
+              description: List All E-Mandates
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+        - name: v1-emandate
+          path: /v1/e-mandates/{mandate_id}
+          operations:
+            - name: getemandatebyid
+              method: GET
+              description: Get An E-Mandate
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: mandate_id, in: path, required: true }
+            - name: patchemandatebyid
+              method: PATCH
+              description: Update An E-Mandate
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: mandate_id, in: path, required: true }
+                - { name: body, in: body, required: true }
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_EMANDATE_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: emandates-emandates-rest
+      port: 8080
+      resources:
+        - path: /v1/v1/e-mandates
+          name: v1-emandates
+          operations:
+            - { method: POST, name: createemandate, call: emandates-emandates.createemandate, with: { body: rest.body } }
+            - { method: GET, name: listallemandates, call: emandates-emandates.listallemandates }
+    - type: mcp
+      namespace: emandates-emandates-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-create-emandate
+          description: Create E-Mandate
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: emandates-emandates.createemandate
+          with: { body: tools.body }
+        - name: fintecture-list-emandates
+          description: List All E-Mandates
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: emandates-emandates.listallemandates
+        - name: fintecture-get-emandate
+          description: Get An E-Mandate
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: emandates-emandates.getemandatebyid
+          with: { mandate_id: tools.mandate_id }
+        - name: fintecture-update-emandate
+          description: Update An E-Mandate (cancelled or revoked)
+          hints: { readOnly: false, destructive: true, idempotent: true }
+          call: emandates-emandates.patchemandatebyid
+          with: { mandate_id: tools.mandate_id, body: tools.body }

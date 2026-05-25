@@ -1,0 +1,109 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture OAC API — Applications
+  description: 'Fintecture OAC API — Applications. 6 operations. Lead operation: List Applications.'
+  tags: [Fintecture, OAC, Applications, Beta]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_OAC_TOKEN: FINTECTURE_OAC_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: oac-applications
+      baseUri: https://api.fintecture.com
+      description: Beta multi-tenant Application management.
+      resources:
+        - name: v1-applications
+          path: /v1/applications
+          operations:
+            - name: getapplications
+              method: GET
+              description: List Applications
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+            - name: postapplications
+              method: POST
+              description: Create Application
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: body, in: body, required: true }
+        - name: v1-applications-current
+          path: /v1/applications/current
+          operations:
+            - name: getcurrentapplication
+              method: GET
+              description: Get Current Application
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+        - name: v1-application
+          path: /v1/applications/{app_id}
+          operations:
+            - name: getapplicationbyid
+              method: GET
+              description: Get An Application
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: app_id, in: path, required: true }
+            - name: patchapplicationbyid
+              method: PATCH
+              description: Update Application
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: app_id, in: path, required: true }
+                - { name: body, in: body, required: true }
+            - name: deleteapplicationbyid
+              method: DELETE
+              description: Remove An Application
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: app_id, in: path, required: true }
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_OAC_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: oac-applications-rest
+      port: 8080
+      resources:
+        - path: /v1/v1/applications
+          name: v1-applications
+          operations:
+            - { method: GET, name: getapplications, call: oac-applications.getapplications }
+            - { method: POST, name: postapplications, call: oac-applications.postapplications, with: { body: rest.body } }
+    - type: mcp
+      namespace: oac-applications-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-list-applications
+          description: List Applications
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: oac-applications.getapplications
+        - name: fintecture-create-application
+          description: Create Application
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: oac-applications.postapplications
+          with: { body: tools.body }
+        - name: fintecture-get-application
+          description: Get An Application
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: oac-applications.getapplicationbyid
+          with: { app_id: tools.app_id }
+        - name: fintecture-update-application
+          description: Update Application
+          hints: { readOnly: false, destructive: false, idempotent: true }
+          call: oac-applications.patchapplicationbyid
+          with: { app_id: tools.app_id, body: tools.body }
+        - name: fintecture-delete-application
+          description: Remove An Application
+          hints: { readOnly: false, destructive: true, idempotent: true }
+          call: oac-applications.deleteapplicationbyid
+          with: { app_id: tools.app_id }

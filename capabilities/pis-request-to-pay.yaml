@@ -1,0 +1,64 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture PIS API — Request To Pay
+  description: 'Fintecture PIS API — Request To Pay. 1 operation. Lead operation: Create A Request To Pay.'
+  tags: [Fintecture, PIS, Request To Pay, Payment Links]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_ACCESS_TOKEN: FINTECTURE_ACCESS_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: pis-request-to-pay
+      baseUri: https://api.fintecture.com
+      description: Request To Pay payment link generation.
+      resources:
+        - name: pis-v2-request-to-pay
+          path: /pis/v2/request-to-pay
+          operations:
+            - name: createpisv2requesttopay
+              method: POST
+              description: Create A Request To Pay
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  required: true
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_ACCESS_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: pis-request-to-pay-rest
+      port: 8080
+      resources:
+        - path: /v1/pis/v2/request-to-pay
+          name: pis-v2-request-to-pay
+          operations:
+            - method: POST
+              name: createpisv2requesttopay
+              call: pis-request-to-pay.createpisv2requesttopay
+              with:
+                body: rest.body
+    - type: mcp
+      namespace: pis-request-to-pay-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-create-request-to-pay
+          description: Create A Request To Pay
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: pis-request-to-pay.createpisv2requesttopay
+          with:
+            body: tools.body

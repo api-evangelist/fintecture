@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture OAuth API — Tokens
+  description: 'Fintecture OAuth API — Tokens. 2 operations. Lead operation: Create Access Token.'
+  tags: [Fintecture, OAuth, Authentication]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_CLIENT_ID: FINTECTURE_CLIENT_ID
+      FINTECTURE_CLIENT_SECRET: FINTECTURE_CLIENT_SECRET
+capability:
+  consumes:
+    - type: http
+      namespace: oauth-tokens
+      baseUri: https://api.fintecture.com
+      description: Issue and refresh access tokens via authorization_code or client_credentials grants.
+      resources:
+        - name: oauth-accesstoken
+          path: /oauth/accesstoken
+          operations:
+            - name: createaccesstoken
+              method: POST
+              description: Create Access Token
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: body, in: body, required: true }
+        - name: oauth-refreshtoken
+          path: /oauth/refreshtoken
+          operations:
+            - name: createrefreshtoken
+              method: POST
+              description: Create Refresh Token
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: body, in: body, required: true }
+      authentication:
+        type: basic
+        username: '{{env.FINTECTURE_CLIENT_ID}}'
+        password: '{{env.FINTECTURE_CLIENT_SECRET}}'
+  exposes:
+    - type: rest
+      namespace: oauth-tokens-rest
+      port: 8080
+      resources:
+        - path: /v1/oauth/accesstoken
+          name: oauth-accesstoken
+          operations:
+            - { method: POST, name: createaccesstoken, call: oauth-tokens.createaccesstoken, with: { body: rest.body } }
+    - type: mcp
+      namespace: oauth-tokens-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-create-access-token
+          description: Create Access Token
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: oauth-tokens.createaccesstoken
+          with: { body: tools.body }
+        - name: fintecture-create-refresh-token
+          description: Create Refresh Token
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: oauth-tokens.createrefreshtoken
+          with: { body: tools.body }

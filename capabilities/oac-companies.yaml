@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture OAC API — Companies
+  description: 'Fintecture OAC API — Companies. 5 operations. Lead operation: List Companies.'
+  tags: [Fintecture, OAC, Companies, Beta]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_OAC_TOKEN: FINTECTURE_OAC_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: oac-companies
+      baseUri: https://api.fintecture.com
+      description: Beta multi-tenant Company management.
+      resources:
+        - name: v1-companies
+          path: /v1/companies
+          operations:
+            - name: getcompanies
+              method: GET
+              description: List Companies
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+            - name: postcompanies
+              method: POST
+              description: Create Company
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters: [{ name: body, in: body, required: true }]
+        - name: v1-company
+          path: /v1/companies/{company_id}
+          operations:
+            - name: getcompanybyid
+              method: GET
+              description: Get A Company
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters: [{ name: company_id, in: path, required: true }]
+            - name: patchcompanybyid
+              method: PATCH
+              description: Update Company
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: company_id, in: path, required: true }
+                - { name: body, in: body, required: true }
+            - name: deletecompanybyid
+              method: DELETE
+              description: Remove Company
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters: [{ name: company_id, in: path, required: true }]
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_OAC_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: oac-companies-rest
+      port: 8080
+      resources:
+        - path: /v1/v1/companies
+          name: v1-companies
+          operations:
+            - { method: GET, name: getcompanies, call: oac-companies.getcompanies }
+            - { method: POST, name: postcompanies, call: oac-companies.postcompanies, with: { body: rest.body } }
+    - type: mcp
+      namespace: oac-companies-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-list-companies
+          description: List Companies
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: oac-companies.getcompanies
+        - name: fintecture-create-company
+          description: Create Company
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: oac-companies.postcompanies
+          with: { body: tools.body }
+        - name: fintecture-get-company
+          description: Get A Company
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: oac-companies.getcompanybyid
+          with: { company_id: tools.company_id }

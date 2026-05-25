@@ -1,0 +1,76 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture Customers API — Customers
+  description: 'Fintecture Customers API — Customers. 3 operations. Lead operation: Create Customer.'
+  tags: [Fintecture, Customers]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_CUSTOMER_TOKEN: FINTECTURE_CUSTOMER_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: customers-customers
+      baseUri: https://api.fintecture.com
+      description: Register and inspect merchant customers.
+      resources:
+        - name: v1-customers
+          path: /v1/customers
+          operations:
+            - name: createcustomer
+              method: POST
+              description: Create Customer
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: body, in: body, required: true }
+            - name: listallcustomers
+              method: GET
+              description: List All Customers
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+        - name: v1-customer
+          path: /v1/customers/{customer_id}
+          operations:
+            - name: getcustomerbyid
+              method: GET
+              description: Get A Customer
+              outputRawFormat: json
+              outputParameters: [{ name: result, type: object, value: '$.' }]
+              inputParameters:
+                - { name: customer_id, in: path, required: true }
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_CUSTOMER_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: customers-customers-rest
+      port: 8080
+      resources:
+        - path: /v1/v1/customers
+          name: v1-customers
+          operations:
+            - { method: POST, name: createcustomer, call: customers-customers.createcustomer, with: { body: rest.body } }
+            - { method: GET, name: listallcustomers, call: customers-customers.listallcustomers }
+    - type: mcp
+      namespace: customers-customers-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-create-customer
+          description: Create Customer
+          hints: { readOnly: false, destructive: false, idempotent: false }
+          call: customers-customers.createcustomer
+          with: { body: tools.body }
+        - name: fintecture-list-customers
+          description: List All Customers
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: customers-customers.listallcustomers
+        - name: fintecture-get-customer
+          description: Get A Customer
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: customers-customers.getcustomerbyid
+          with: { customer_id: tools.customer_id }

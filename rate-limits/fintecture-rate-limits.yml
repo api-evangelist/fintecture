@@ -1,0 +1,49 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Fintecture
+providerId: fintecture
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Open Banking
+  - PSD2
+description: >-
+  Fintecture does not publish public rate-limit tables; effective limits sit
+  upstream at each PSD2 bank ASPSP and are subject to Berlin Group / OBIE
+  guidance (typically 4 AIS calls per account per day for unattended access).
+  Production payment initiation calls additionally require HTTP message
+  signature, digest, date, and x-request-id headers, which are enforced before
+  any rate-limiting applies.
+sources:
+  - https://doc.fintecture.com/docs/api-overview
+  - https://doc.fintecture.com/docs/api-http-signature
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: per-bank-ASPSP
+headers:
+  retryAfter: retry-after
+limits:
+  - scope: AIS unattended
+    note: >-
+      Each bank ASPSP enforces its own limits. PSD2 RTS / Berlin Group guidance
+      generally limits unattended AIS access to 4 calls per account per day;
+      attended (PSU-present) access is uncapped.
+  - scope: AIS attended
+    note: Uncapped per PSD2 RTS when the PSU is present.
+  - scope: PIS
+    note: >-
+      No published global per-application rate limit. Production requests
+      require HTTP message signatures and unique x-request-id per call.
+  - scope: Sandbox
+    note: >-
+      The Fintecture Sandbox is suitable for development volumes. Heavy load
+      testing should be coordinated with Fintecture support.
+errorBehavior:
+  on429: |
+    Clients should honor any Retry-After header and back off. Production
+    payment-initiation requests that fail signature verification return 401
+    before any rate-limit applies.

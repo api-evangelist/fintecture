@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Fintecture OAuth and Tokens API
+  description: >
+    Authentication endpoints. The /v1/access-token endpoint issues access tokens
+    via the authorization_code grant (used for AIS code exchange) and the
+    client_credentials grant (used for PIS, Customers, E-Mandates, and OAC).
+    Access tokens are valid for 1 hour and can be refreshed via
+    /v1/refresh-token.
+  version: "v1"
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+
+servers:
+  - url: https://api.fintecture.com
+    description: Production
+  - url: https://api-sandbox.fintecture.com
+    description: Sandbox
+
+tags:
+  - name: OAuth
+    description: Access and refresh tokens
+
+paths:
+  /oauth/accesstoken:
+    post:
+      summary: Create Access Token
+      description: >
+        The access token endpoint enables the TPP to authenticate to the Fintecture
+        Authentication Server. Two grant types are supported — `authorization_code`
+        for AIS, and `client_credentials` for PIS, Customers, E-Mandates, and the
+        beta OAC (Organisation Access Credentials) scopes.
+      operationId: createAccessToken
+      tags: [OAuth]
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [grant_type]
+              properties:
+                grant_type:
+                  type: string
+                  enum: [authorization_code, client_credentials]
+                code: { type: string }
+                redirect_uri: { type: string, format: uri }
+                scope:
+                  type: string
+                  description: One of PIS, AIS, customer, e-mandate, OAC.
+                client_id: { type: string }
+                client_secret: { type: string }
+      responses:
+        '200':
+          description: Token issued
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AccessToken' }
+
+  /oauth/refreshtoken:
+    post:
+      summary: Create Refresh Token
+      description: Generates a new access_token and invalidates the previous one.
+      operationId: createRefreshToken
+      tags: [OAuth]
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [grant_type, refresh_token]
+              properties:
+                grant_type:
+                  type: string
+                  enum: [refresh_token]
+                refresh_token: { type: string }
+                client_id: { type: string }
+                client_secret: { type: string }
+      responses:
+        '200':
+          description: New token issued
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AccessToken' }
+
+components:
+  schemas:
+    AccessToken:
+      type: object
+      properties:
+        access_token: { type: string }
+        token_type:
+          type: string
+          enum: [Bearer]
+        expires_in:
+          type: integer
+          description: Lifetime in seconds (3600 by default).
+        refresh_token: { type: string }
+        scope: { type: string }

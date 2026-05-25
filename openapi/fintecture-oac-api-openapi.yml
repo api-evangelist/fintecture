@@ -1,0 +1,640 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Organisation Access Credentials API
+  description: >
+    Beta multi-tenant management API. Manages Applications, Bank Accounts,
+    Companies, Organisation Nodes (hierarchical tree), Memberships, and Users
+    in the Fintecture Console. Requires an OAC (Organisation Access Credentials)
+    access token with per-resource read/write scopes. Currently in beta and
+    available only to selected clients.
+  version: "v1-beta"
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+
+servers:
+  - url: https://api.fintecture.com
+    description: Production
+  - url: https://api-sandbox.fintecture.com
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Applications
+  - name: Bank Accounts
+  - name: Companies
+  - name: Organisation Nodes
+  - name: Memberships
+  - name: Users
+
+paths:
+  /v1/applications:
+    get:
+      summary: List Applications
+      description: List applications linked to companies within the authenticated organisation's subtree. Requires `applications:read`.
+      operationId: getApplications
+      tags: [Applications]
+      parameters:
+        - in: query
+          name: include
+          schema: { type: string, enum: [bank_accounts] }
+        - in: query
+          name: filter[company_id]
+          schema: { type: string }
+      responses:
+        '200':
+          description: Applications list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Application' }
+    post:
+      summary: Create Application
+      description: Create a new application for a company within the authenticated organisation's subtree. Requires `applications:write`.
+      operationId: postApplications
+      tags: [Applications]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ApplicationCreate' }
+      responses:
+        '201':
+          description: Application created
+
+  /v1/applications/current:
+    get:
+      summary: Get Current Application
+      description: Information related to the application used to sign the request.
+      operationId: getResV1Applications
+      tags: [Applications]
+      responses:
+        '200':
+          description: Current application
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+
+  /v1/applications/{app_id}:
+    get:
+      summary: Get An Application
+      operationId: getApplicationById
+      tags: [Applications]
+      parameters:
+        - $ref: '#/components/parameters/AppIdPath'
+        - in: query
+          name: include
+          schema: { type: string, enum: [bank_accounts] }
+      responses:
+        '200':
+          description: Application
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Application' }
+    patch:
+      summary: Update Application
+      description: Update app_name, app_webhooks, or app_urls. Requires `applications:write`.
+      operationId: patchApplicationById
+      tags: [Applications]
+      parameters:
+        - $ref: '#/components/parameters/AppIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ApplicationPatch' }
+      responses:
+        '200':
+          description: Application updated
+    delete:
+      summary: Remove An Application
+      description: Removing an application is irreversible. Requires `applications:write`.
+      operationId: deleteApplicationById
+      tags: [Applications]
+      parameters:
+        - $ref: '#/components/parameters/AppIdPath'
+      responses:
+        '204':
+          description: Deleted
+
+  /v1/bank-accounts:
+    get:
+      summary: List Bank Accounts
+      description: List bank accounts linked to companies in the authenticated organisation's subtree.
+      operationId: getBankAccounts
+      tags: [Bank Accounts]
+      responses:
+        '200':
+          description: Bank account list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/OacBankAccount' }
+    post:
+      summary: Create Bank Account
+      operationId: postBankAccounts
+      tags: [Bank Accounts]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OacBankAccountCreate' }
+      responses:
+        '201':
+          description: Bank account created
+
+  /v1/bank-accounts/{bank_account_id}:
+    patch:
+      summary: Update Bank Account
+      operationId: patchBankAccountById
+      tags: [Bank Accounts]
+      parameters:
+        - in: path
+          name: bank_account_id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OacBankAccountCreate' }
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete Bank Account
+      operationId: deleteBankAccountById
+      tags: [Bank Accounts]
+      parameters:
+        - in: path
+          name: bank_account_id
+          required: true
+          schema: { type: string }
+      responses:
+        '204':
+          description: Deleted
+
+  /v1/companies:
+    get:
+      summary: List Companies
+      operationId: getCompanies
+      tags: [Companies]
+      responses:
+        '200':
+          description: Companies list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Company' }
+    post:
+      summary: Create Company
+      operationId: postCompanies
+      tags: [Companies]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CompanyCreate' }
+      responses:
+        '201':
+          description: Created
+
+  /v1/companies/{company_id}:
+    get:
+      summary: Get A Company
+      operationId: getCompanyById
+      tags: [Companies]
+      parameters:
+        - $ref: '#/components/parameters/CompanyIdPath'
+      responses:
+        '200':
+          description: Company
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Company' }
+    patch:
+      summary: Update Company
+      operationId: patchCompanyById
+      tags: [Companies]
+      parameters:
+        - $ref: '#/components/parameters/CompanyIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CompanyCreate' }
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Remove Company
+      operationId: deleteCompanyById
+      tags: [Companies]
+      parameters:
+        - $ref: '#/components/parameters/CompanyIdPath'
+      responses:
+        '204':
+          description: Deleted
+
+  /v1/organisation-nodes:
+    post:
+      summary: Create Organisation Node
+      description: Create a child organisation node. Requires `organisations:write`.
+      operationId: postOrganisationNodes
+      tags: [Organisation Nodes]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OrganisationNodeCreate' }
+      responses:
+        '201':
+          description: Created
+
+  /v1/organisation-nodes/{organisation_node_id}:
+    get:
+      summary: Get Organisation
+      operationId: getOrganisationNodeById
+      tags: [Organisation Nodes]
+      parameters:
+        - $ref: '#/components/parameters/OrgNodeIdPath'
+      responses:
+        '200':
+          description: Organisation node
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrganisationNode' }
+    patch:
+      summary: Update Organisation
+      operationId: patchOrganisationNodeById
+      tags: [Organisation Nodes]
+      parameters:
+        - $ref: '#/components/parameters/OrgNodeIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/OrganisationNodeCreate' }
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Remove Organisation
+      operationId: deleteOrganisationNodeById
+      tags: [Organisation Nodes]
+      parameters:
+        - $ref: '#/components/parameters/OrgNodeIdPath'
+      responses:
+        '204':
+          description: Deleted
+
+  /v1/organisation-nodes/{organisation_node_id}/tree:
+    get:
+      summary: Get Organisation Tree
+      description: Returns the organisation tree expanded from the top accessible node to the specified node.
+      operationId: getOrganisationNodeTree
+      tags: [Organisation Nodes]
+      parameters:
+        - $ref: '#/components/parameters/OrgNodeIdPath'
+      responses:
+        '200':
+          description: Organisation tree
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/OrganisationNode' }
+                  meta:
+                    type: object
+                    properties:
+                      requested_node_id: { type: string }
+                      top_accessible_organisation_node_id: { type: string }
+
+  /v1/organisation-nodes/{organisation_node_id}/companies:
+    get:
+      summary: Get Companies In Organisation
+      operationId: getOrganisationNodeCompanies
+      tags: [Organisation Nodes]
+      parameters:
+        - $ref: '#/components/parameters/OrgNodeIdPath'
+        - in: query
+          name: recursive
+          schema: { type: boolean, default: true }
+      responses:
+        '200':
+          description: Companies in this organisation subtree
+
+  /v1/memberships:
+    post:
+      summary: Create Membership
+      description: Associate a user with either a company or an organisation node.
+      operationId: postMemberships
+      tags: [Memberships]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MembershipCreate' }
+      responses:
+        '201':
+          description: Membership created
+
+  /v1/memberships/{membership_id}:
+    patch:
+      summary: Update Membership
+      operationId: patchMembershipById
+      tags: [Memberships]
+      parameters:
+        - in: path
+          name: membership_id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role: { type: string }
+                status: { type: string }
+                notification_preferences: { type: object }
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete Membership
+      operationId: deleteMembershipById
+      tags: [Memberships]
+      parameters:
+        - in: path
+          name: membership_id
+          required: true
+          schema: { type: string }
+      responses:
+        '204':
+          description: Deleted
+
+  /v1/users:
+    post:
+      summary: Create User
+      operationId: postUsers
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserCreate' }
+      responses:
+        '201':
+          description: User created
+
+  /v1/users/{user_id}:
+    get:
+      summary: Get User
+      operationId: getUserById
+      tags: [Users]
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '200':
+          description: User
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+    patch:
+      summary: Update User
+      operationId: patchUserById
+      tags: [Users]
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserPatch' }
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete User
+      description: Destructive. Deletes Firebase auth credentials and all memberships.
+      operationId: deleteUserById
+      tags: [Users]
+      parameters:
+        - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '204':
+          description: Deleted
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    AppIdPath:
+      in: path
+      name: app_id
+      required: true
+      schema: { type: string }
+    CompanyIdPath:
+      in: path
+      name: company_id
+      required: true
+      schema: { type: string }
+    OrgNodeIdPath:
+      in: path
+      name: organisation_node_id
+      required: true
+      schema: { type: string }
+    UserIdPath:
+      in: path
+      name: user_id
+      required: true
+      schema: { type: string }
+
+  schemas:
+    Application:
+      type: object
+      properties:
+        id: { type: string }
+        app_name: { type: string }
+        app_public_key: { type: string }
+        app_urls:
+          type: object
+          properties:
+            return_url: { type: string, format: uri }
+            domain: { type: string }
+        app_webhooks:
+          type: array
+          items:
+            type: object
+            properties:
+              url: { type: string, format: uri }
+              events:
+                type: array
+                items: { type: string }
+
+    ApplicationCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            type: { type: string, enum: [applications] }
+            attributes:
+              type: object
+              properties:
+                app_name: { type: string }
+                app_public_key: { type: string }
+            relationships:
+              type: object
+              properties:
+                bank_account:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        lid: { type: string }
+
+    ApplicationPatch:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                app_name: { type: string }
+                app_webhooks:
+                  type: array
+                  items: { type: object }
+                app_urls: { type: object }
+
+    OacBankAccount:
+      type: object
+      properties:
+        id: { type: string }
+        iban: { type: string }
+        bic: { type: string }
+        holder_name: { type: string }
+        currency: { type: string }
+
+    OacBankAccountCreate:
+      type: object
+      required: [iban, holder_name]
+      properties:
+        iban: { type: string }
+        bic: { type: string }
+        holder_name: { type: string }
+        currency: { type: string }
+
+    Company:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        incorporation:
+          type: object
+          properties:
+            siren: { type: string }
+            vat: { type: string }
+            hrb: { type: string }
+        external_id: { type: string }
+
+    CompanyCreate:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        incorporation:
+          type: object
+          properties:
+            siren: { type: string }
+            vat: { type: string }
+            hrb: { type: string }
+        external_id: { type: string }
+
+    OrganisationNode:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        parent_id: { type: string }
+        children:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+
+    OrganisationNodeCreate:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string }
+        parent_id: { type: string }
+
+    MembershipCreate:
+      type: object
+      required: [user_id, role]
+      properties:
+        user_id: { type: string }
+        company_id: { type: string }
+        organisation_node_id: { type: string }
+        role:
+          type: string
+          enum: [admin, developer, viewer]
+        notification_preferences:
+          type: object
+
+    User:
+      type: object
+      properties:
+        id: { type: string }
+        email: { type: string, format: email }
+        first_name: { type: string }
+        last_name: { type: string }
+        phone: { type: string }
+
+    UserCreate:
+      type: object
+      required: [email, membership]
+      properties:
+        email: { type: string, format: email }
+        first_name: { type: string }
+        last_name: { type: string }
+        phone: { type: string }
+        membership: { $ref: '#/components/schemas/MembershipCreate' }
+
+    UserPatch:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        first_name: { type: string }
+        last_name: { type: string }
+        phone: { type: string }

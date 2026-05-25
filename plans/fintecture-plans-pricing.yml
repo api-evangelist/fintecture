@@ -1,0 +1,147 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Fintecture
+providerId: fintecture
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - Open Banking
+  - Payments
+  - PSD2
+description: >-
+  Pricing for Fintecture's Open Banking payment products. Fintecture does not
+  publish per-transaction unit prices on the open web; commercial terms are
+  negotiated per merchant. Plans below reflect the productized surfaces
+  publicly listed in the developer documentation and on fintecture.com/tarifs.
+sources:
+  - https://fintecture.com/tarifs
+  - https://fintecture.com/
+  - https://doc.fintecture.com/
+plans:
+  - id: fintecture-sandbox
+    name: Sandbox
+    type: free
+    description: Free sandbox access for development and integration testing against the Demo Bank and provider sandboxes.
+    entries:
+      - label: Sandbox API access
+        name: sandbox_access
+        type: included
+        metric: account
+        limit: -1
+        timeFrame: month
+        geo: global
+        price: '0'
+  - id: fintecture-immediate-transfer
+    name: Immediate Transfer
+    type: usage-based
+    description: Pay-by-bank Open Banking transfer initiation. Commercial pricing negotiated per merchant.
+    entries:
+      - label: Per successful payment
+        name: immediate_transfer_fee
+        type: metered
+        metric: payment
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'
+  - id: fintecture-smart-transfer
+    name: Smart Transfer
+    type: usage-based
+    description: Auto-reconciled transfers using merchant-allocated virtual unique IBANs. Pricing per merchant.
+    entries:
+      - label: Per successful smart transfer
+        name: smart_transfer_fee
+        type: metered
+        metric: payment
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'
+  - id: fintecture-request-to-pay
+    name: Request To Pay
+    type: usage-based
+    description: Payment link delivery (email, SMS, QR). Pricing per merchant.
+    entries:
+      - label: Per delivered request to pay
+        name: request_to_pay_fee
+        type: metered
+        metric: link
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'
+  - id: fintecture-bnpl
+    name: Buy Now Pay Later
+    type: usage-based
+    description: BNPL initiated via the Payment Hub. Pricing per merchant.
+    entries:
+      - label: Per BNPL transaction
+        name: bnpl_fee
+        type: metered
+        metric: payment
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'
+  - id: fintecture-verified-payout
+    name: Verified Payout
+    type: usage-based
+    description: Outbound payouts to verified bank accounts. Pricing per merchant.
+    entries:
+      - label: Per payout
+        name: payout_fee
+        type: metered
+        metric: payout
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'
+  - id: fintecture-immediate-refund
+    name: Immediate Refund
+    type: usage-based
+    description: Refund initiation against the original payment account or an alternative payout account.
+    entries:
+      - label: Per refund
+        name: refund_fee
+        type: metered
+        metric: refund
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'
+  - id: fintecture-account-information
+    name: Account Information
+    type: usage-based
+    description: AIS access (accounts, holders, balances, transactions, verification). Pricing per merchant.
+    entries:
+      - label: Per AIS connection
+        name: ais_connection_fee
+        type: metered
+        metric: connection
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'
+  - id: fintecture-e-mandates
+    name: E-Mandates
+    type: usage-based
+    description: SEPA-style e-mandates with RUM lifecycle. Pricing per merchant.
+    entries:
+      - label: Per mandate
+        name: emandate_fee
+        type: metered
+        metric: mandate
+        limit: -1
+        timeFrame: usage
+        geo: EEA
+        unit: 1
+        price: 'contact_sales'

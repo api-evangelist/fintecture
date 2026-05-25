@@ -1,0 +1,61 @@
+extends:
+  - spectral:oas
+rules:
+  fintecture-info-contact:
+    description: Every Fintecture OpenAPI spec must declare a contact block.
+    given: $.info
+    severity: error
+    then:
+      field: contact
+      function: truthy
+  fintecture-server-host:
+    description: Servers must point at api.fintecture.com or api-sandbox.fintecture.com.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api(-sandbox)?\\.fintecture\\.com$"
+  fintecture-operation-id-required:
+    description: All operations must declare an operationId.
+    given: $.paths[*][get,post,patch,put,delete].operationId
+    severity: error
+    then:
+      function: truthy
+  fintecture-operation-summary-title-case:
+    description: Operation summaries should be Title Case.
+    given: $.paths[*][get,post,patch,put,delete].summary
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(?:[A-Z][A-Za-z0-9]*)(?: (?:[A-Z][A-Za-z0-9]*|A|An|And|Or|The|Of|To|For|With|In|On|By))*$"
+  fintecture-paths-versioned:
+    description: All Fintecture paths begin with /v1, /v2, /pis/, /ais/, /res/, or /oauth/.
+    given: $.paths[*]~
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/(v[12]|pis|ais|res|oauth)/"
+  fintecture-pis-requires-signature-headers:
+    description: PIS v2 mutation operations require Signature, Digest, Date, x-request-id parameters declared.
+    given: "$.paths['/pis/v2/connect','/pis/v2/request-to-pay'].post.parameters[*].name"
+    severity: warn
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - Signature
+          - Digest
+          - Date
+          - x-request-id
+  fintecture-security-bearer:
+    description: Most Fintecture endpoints use bearer auth.
+    given: $.components.securitySchemes.BearerAuth.type
+    severity: warn
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - http

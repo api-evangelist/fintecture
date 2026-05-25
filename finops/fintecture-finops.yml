@@ -1,0 +1,91 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Fintecture
+providerId: fintecture
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Open Banking
+  - Payments
+description: >-
+  FOCUS-aligned FinOps definition for Fintecture's Open Banking payments
+  platform. Charges are usage-based per successful payment, AIS connection,
+  e-mandate, and payout, with commercial rates negotiated per merchant.
+sources:
+  - https://fintecture.com/tarifs
+  - https://fintecture.com/
+  - https://doc.fintecture.com/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Fintecture
+serviceCategory: Financial Services
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: EUR
+  chargeCategories:
+    - Usage
+    - Tax
+    - Credit
+    - Adjustment
+  primaryUnit: payment
+  secondaryUnits:
+    - connection
+    - mandate
+    - payout
+    - refund
+focusColumns:
+  ServiceName: Fintecture Open Banking Payments
+  ServiceCategory: Financial Services
+  ProviderName: Fintecture
+  PublisherName: Fintecture
+  InvoiceIssuerName: Fintecture SAS
+  PricingCategory: Usage-Based
+  CommitmentDiscountType: Negotiated
+  ChargeFrequency: Recurring
+  BillingCurrency: EUR
+costAllocation:
+  tagging:
+    - end_to_end_id
+    - customer_id
+    - application_id
+    - company_id
+    - organisation_node_id
+  reportingViews:
+    - by-payment-method
+    - by-rail
+    - by-application
+    - by-company
+    - by-organisation-node
+metering:
+  events:
+    - name: payment_completed
+      unit: payment
+      category: PIS
+    - name: refund_completed
+      unit: refund
+      category: PIS
+    - name: payout_completed
+      unit: payout
+      category: PIS
+    - name: ais_connection_active
+      unit: connection
+      category: AIS
+    - name: emandate_signed
+      unit: mandate
+      category: E-Mandates
+optimizationLevers:
+  - lever: Negotiated per-payment fee
+    note: Commercial fee tiers are negotiable on volume.
+  - lever: Local Acquiring batching
+    note: Local Acquiring consolidates many incoming payments into fewer outbound settlements.
+  - lever: AIS frequency
+    note: Cache AIS account/balance reads to stay under per-bank Berlin Group limits.

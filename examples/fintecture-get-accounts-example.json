@@ -1,0 +1,37 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.fintecture.com/ais/v1/customer/cust_abc123/accounts",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOi..."
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": "acc_fr_001",
+          "iban": "FR7630006000011234567890189",
+          "bic": "AGRIFRPP",
+          "currency": "EUR",
+          "type": "CACC",
+          "balances": [
+            {
+              "type": "available",
+              "amount": "1284.32",
+              "currency": "EUR",
+              "timestamp": "2026-05-25T09:00:00Z"
+            },
+            {
+              "type": "closingBooked",
+              "amount": "1284.32",
+              "currency": "EUR",
+              "timestamp": "2026-05-24T22:00:00Z"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

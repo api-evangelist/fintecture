@@ -1,0 +1,127 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture PIS API — Payments
+  description: 'Fintecture PIS API — Payments. 4 operations. Lead operation: Create A Payment Session. Self-contained Naftiko capability covering one Fintecture business surface.'
+  tags:
+    - Fintecture
+    - PIS
+    - Payments
+    - Open Banking
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_ACCESS_TOKEN: FINTECTURE_ACCESS_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: pis-payments
+      baseUri: https://api.fintecture.com
+      description: Fintecture PIS payment session business capability. Production calls require HTTP message signature, digest, date, and x-request-id headers.
+      resources:
+        - name: pis-v2-connect
+          path: /pis/v2/connect
+          operations:
+            - name: createpisv2connect
+              method: POST
+              description: Create A Payment Session
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: pis-v2-payments
+          path: /pis/v2/payments
+          operations:
+            - name: getpisv2payments
+              method: GET
+              description: Get All Payments
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: pis-v2-payment
+          path: /pis/v2/payments/{payment_id}
+          operations:
+            - name: getpaymentsession
+              method: GET
+              description: Get Specific Payment
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: payment_id
+                  in: path
+                  required: true
+            - name: patchpisv2paymentsession
+              method: PATCH
+              description: Update A Payment
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: payment_id
+                  in: path
+                  required: true
+                - name: body
+                  in: body
+                  required: true
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_ACCESS_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: pis-payments-rest
+      port: 8080
+      description: REST adapter for PIS Payments.
+      resources:
+        - path: /v1/pis/v2/connect
+          name: pis-v2-connect
+          operations:
+            - method: POST
+              name: createpisv2connect
+              description: Create A Payment Session
+              call: pis-payments.createpisv2connect
+              with:
+                body: rest.body
+        - path: /v1/pis/v2/payments
+          name: pis-v2-payments
+          operations:
+            - method: GET
+              name: getpisv2payments
+              description: Get All Payments
+              call: pis-payments.getpisv2payments
+    - type: mcp
+      namespace: pis-payments-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for PIS Payments.
+      tools:
+        - name: fintecture-create-payment-session
+          description: Create A Payment Session
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: pis-payments.createpisv2connect
+          with:
+            body: tools.body
+        - name: fintecture-get-payments
+          description: Get All Payments
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: pis-payments.getpisv2payments

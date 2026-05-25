@@ -1,0 +1,74 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Fintecture PIS API — Settlements
+  description: 'Fintecture PIS API — Settlements. 2 operations. Lead operation: Get All Settlements.'
+  tags: [Fintecture, PIS, Settlements, Local Acquiring]
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      FINTECTURE_ACCESS_TOKEN: FINTECTURE_ACCESS_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: pis-settlements
+      baseUri: https://api.fintecture.com
+      description: Local Acquiring settlement inspection.
+      resources:
+        - name: pis-v2-settlements
+          path: /pis/v2/settlements
+          operations:
+            - name: getpisv2settlements
+              method: GET
+              description: Get All Settlements
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: pis-v2-settlement
+          path: /pis/v2/settlements/{settlement_id}
+          operations:
+            - name: getsettlementbyid
+              method: GET
+              description: Get Specific Settlement
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: settlement_id
+                  in: path
+                  required: true
+      authentication:
+        type: bearer
+        value: '{{env.FINTECTURE_ACCESS_TOKEN}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: pis-settlements-rest
+      port: 8080
+      resources:
+        - path: /v1/pis/v2/settlements
+          name: pis-v2-settlements
+          operations:
+            - method: GET
+              name: getpisv2settlements
+              call: pis-settlements.getpisv2settlements
+    - type: mcp
+      namespace: pis-settlements-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: fintecture-get-settlements
+          description: Get All Settlements
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: pis-settlements.getpisv2settlements
+        - name: fintecture-get-settlement
+          description: Get Specific Settlement
+          hints: { readOnly: true, destructive: false, idempotent: true }
+          call: pis-settlements.getsettlementbyid
+          with:
+            settlement_id: tools.settlement_id
