@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Connect, List Accounts, and Pull Transactions
+  summary: Open an AIS connect session, list the linked accounts, then pull one account's transactions.
+  description: >-
+    The core Account Information Services aggregation flow. It opens an AIS
+    connect session for a PSU to establish a connection, lists all bank accounts
+    exposed by that connection, and then retrieves the transaction history for
+    the first account within a date range. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aisApi
+  url: ../openapi/fintecture-ais-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: connect-accounts-transactions
+  summary: Establish an AIS connection, then enumerate accounts and transactions.
+  description: >-
+    Creates an AIS connect session, lists the accounts on the resulting
+    connection, and pulls transactions for the first account between two dates.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - customerId
+    - redirectUri
+    properties:
+      accessToken:
+        type: string
+        description: A valid AIS-scoped bearer access token.
+      customerId:
+        type: string
+        description: The connection (customer) identifier returned after PSU authentication.
+      redirectUri:
+        type: string
+        description: URI the PSU is redirected to after the connect session.
+      state:
+        type: string
+        description: Opaque state value echoed back on redirect.
+      from:
+        type: string
+        description: Inclusive start date (YYYY-MM-DD) for the transaction query.
+      to:
+        type: string
+        description: Inclusive end date (YYYY-MM-DD) for the transaction query.
+  steps:
+  - stepId: openConnect
+    description: Open an AIS connect session so the PSU can create a connection enabling account access.
+    operationId: getAisV2Connect
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: redirect_uri
+      in: query
+      value: $inputs.redirectUri
+    - name: state
+      in: query
+      value: $inputs.state
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+      connectUrl: $response.body#/meta/url
+  - stepId: listAccounts
+    description: List all accounts linked to the established connection.
+    operationId: getAisV1CustomerAccounts
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accounts: $response.body#/data
+      firstAccountId: $response.body#/data/0/id
+  - stepId: getTransactions
+    description: Retrieve the transactions for the first linked account within the requested date range.
+    operationId: getAisV1CustomerAccountTransactions
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $inputs.customerId
+    - name: account_id
+      in: path
+      value: $steps.listAccounts.outputs.firstAccountId
+    - name: from
+      in: query
+      value: $inputs.from
+    - name: to
+      in: query
+      value: $inputs.to
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transactions: $response.body#/data
+      count: $response.body#/meta/count
+  outputs:
+    sessionId: $steps.openConnect.outputs.sessionId
+    accounts: $steps.listAccounts.outputs.accounts
+    transactions: $steps.getTransactions.outputs.transactions

@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Update Payment Communication
+  summary: Read a payment, patch its communication while it is still pending, then re-read to confirm.
+  description: >-
+    A safe payment-edit flow. It reads a payment and branches on whether it is
+    still in an editable state, patches the payment's communication field only
+    while it is editable, and re-reads the payment to confirm the change took
+    effect. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-payment-communication
+  summary: Read a payment, patch its communication if still pending, and confirm.
+  description: >-
+    Reads a payment, branches on whether it is still pending, patches the
+    communication field, and re-reads the payment to confirm.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - paymentId
+    - communication
+    properties:
+      accessToken:
+        type: string
+        description: A valid PIS-scoped bearer access token.
+      paymentId:
+        type: string
+        description: Identifier of the payment to update.
+      communication:
+        type: string
+        description: New free-form remittance information to write to the payment.
+  steps:
+  - stepId: getPayment
+    description: >-
+      Read the payment and branch on its status — only a created or pending
+      payment proceeds to the patch step.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $inputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: editable
+      type: goto
+      stepId: patchPayment
+      criteria:
+      - context: $response.body
+        condition: $.status in ["payment_created","payment_pending"]
+        type: jsonpath
+    - name: locked
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status in ["payment_initiated","payment_completed","payment_rejected","payment_cancelled","payment_failed"]
+        type: jsonpath
+  - stepId: patchPayment
+    description: Patch the payment's communication field while it is still editable.
+    operationId: patchPisV2PaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $inputs.paymentId
+    requestBody:
+      contentType: application/json
+      payload:
+        data:
+          attributes:
+            communication: $inputs.communication
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      patchedStatus: $response.body#/status
+  - stepId: confirmPayment
+    description: Re-read the payment to confirm the updated communication took effect.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $inputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedCommunication: $response.body#/attributes/communication
+      confirmedStatus: $response.body#/status
+  outputs:
+    initialStatus: $steps.getPayment.outputs.status
+    confirmedStatus: $steps.confirmPayment.outputs.confirmedStatus
+    confirmedCommunication: $steps.confirmPayment.outputs.confirmedCommunication

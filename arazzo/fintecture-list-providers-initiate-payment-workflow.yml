@@ -1,0 +1,130 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture List Providers and Initiate Payment
+  summary: Discover supported bank providers, then open a payment session and inspect its status.
+  description: >-
+    A merchant onboarding-to-checkout flow. It first reads the Fintecture
+    Resources catalog of bank providers to confirm coverage and PIS rails for a
+    country, then creates a PIS payment session (Immediate Transfer) via the
+    Payment Initiation Services API, and finally reads back the created payment
+    to surface its connect URL and lifecycle status. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: resourcesApi
+  url: ../openapi/fintecture-resources-api-openapi.yml
+  type: openapi
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: list-providers-initiate-payment
+  summary: List bank providers for a country, then create and inspect a payment session.
+  description: >-
+    Resolves the provider catalog filtered by country, creates a payment
+    session for the requested amount, and reads the resulting payment back to
+    obtain the PSU connect URL and payment status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - country
+    - amount
+    - currency
+    - communication
+    - psuName
+    - psuEmail
+    properties:
+      accessToken:
+        type: string
+        description: A valid PIS-scoped bearer access token.
+      country:
+        type: string
+        description: ISO 3166-1 alpha-2 country code used to filter providers (e.g. "FR").
+      amount:
+        type: string
+        description: Payment amount as a string in the given currency (e.g. "12.34").
+      currency:
+        type: string
+        description: ISO currency code for the payment (EUR, GBP, or PLN).
+      communication:
+        type: string
+        description: Free-form remittance information shown to the PSU.
+      psuName:
+        type: string
+        description: Full name of the paying PSU.
+      psuEmail:
+        type: string
+        description: Email address of the paying PSU.
+  steps:
+  - stepId: listProviders
+    description: >-
+      Retrieve the banks accessible for payment initiation in the requested
+      country, including their supported PIS rails.
+    operationId: getResV1Providers
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: country
+      in: query
+      value: $inputs.country
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providers: $response.body#/data
+      firstProviderId: $response.body#/data/0/id
+  - stepId: createPayment
+    description: >-
+      Create an Immediate Transfer payment session for the requested amount,
+      returning the connect URL the PSU uses to authorize the payment at their
+      bank.
+    operationId: createPisV2Connect
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-request-id
+      in: header
+      value: $inputs.communication
+    requestBody:
+      contentType: application/json
+      payload:
+        meta:
+          psu_name: $inputs.psuName
+          psu_email: $inputs.psuEmail
+        data:
+          type: PIS
+          attributes:
+            amount: $inputs.amount
+            currency: $inputs.currency
+            communication: $inputs.communication
+            payment_method: immediate_transfer
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+      connectUrl: $response.body#/meta/url
+  - stepId: getPayment
+    description: >-
+      Read the created payment back to surface its current lifecycle status
+      and attributes.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $steps.createPayment.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      paymentId: $response.body#/id
+      status: $response.body#/status
+  outputs:
+    providers: $steps.listProviders.outputs.providers
+    sessionId: $steps.createPayment.outputs.sessionId
+    connectUrl: $steps.createPayment.outputs.connectUrl
+    status: $steps.getPayment.outputs.status

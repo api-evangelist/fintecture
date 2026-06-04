@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Request To Pay and Track Status
+  summary: Generate a payment link, find the resulting payment by status filter, then read its details.
+  description: >-
+    A pay-by-link flow. It generates a Fintecture payment link delivered to the
+    customer by email or SMS, then lists payments filtered by a pending status to
+    locate the payment the link created, and finally reads that payment back to
+    surface its current lifecycle status. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: request-to-pay-status
+  summary: Create a request-to-pay link, locate its payment, and read the payment status.
+  description: >-
+    Generates a payment link, lists payments filtered by status to find the
+    created payment, and reads the matched payment's detailed status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - amount
+    - currency
+    - communication
+    - psuName
+    - psuEmail
+    - requestId
+    properties:
+      accessToken:
+        type: string
+        description: A valid PIS-scoped bearer access token.
+      amount:
+        type: string
+        description: Payment amount as a string in the given currency.
+      currency:
+        type: string
+        description: ISO currency code (EUR, GBP, or PLN).
+      communication:
+        type: string
+        description: Free-form remittance information shown on the payment link.
+      psuName:
+        type: string
+        description: Full name of the customer the link is sent to.
+      psuEmail:
+        type: string
+        description: Email address the payment link is delivered to.
+      requestId:
+        type: string
+        description: Unique request identifier (UUID v4) for the request-to-pay call.
+      statusFilter:
+        type: string
+        description: Payment status used to filter the payment list (e.g. "payment_pending").
+  steps:
+  - stepId: createLink
+    description: Generate a Fintecture payment link and deliver it to the customer by email.
+    operationId: createPisV2RequestToPay
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-request-id
+      in: header
+      value: $inputs.requestId
+    requestBody:
+      contentType: application/json
+      payload:
+        meta:
+          psu_name: $inputs.psuName
+          psu_email: $inputs.psuEmail
+        data:
+          type: PIS
+          attributes:
+            amount: $inputs.amount
+            currency: $inputs.currency
+            communication: $inputs.communication
+            payment_method: immediate_transfer
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+      linkUrl: $response.body#/meta/url
+      linkId: $response.body#/meta/link_id
+  - stepId: findPayment
+    description: List payments filtered by status to locate the payment the link created.
+    operationId: getPisV2Payments
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: filter[status]
+      in: query
+      value: $inputs.statusFilter
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      payments: $response.body#/data
+      firstPaymentId: $response.body#/data/0/id
+  - stepId: getPayment
+    description: Read the matched payment back to surface its current detailed status.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $steps.findPayment.outputs.firstPaymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  outputs:
+    sessionId: $steps.createLink.outputs.sessionId
+    linkUrl: $steps.createLink.outputs.linkUrl
+    status: $steps.getPayment.outputs.status

@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Account Holders and Identity Verification
+  summary: List a connection's accounts, read the first account's holders, then run an AIS identity verification.
+  description: >-
+    An AIS-backed KYC flow. It lists the accounts on an existing connection,
+    reads the beneficiary owner (holder) details for the first account, and then
+    runs an AIS identity verification against the provider to confirm the holder
+    matches an expected name. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: aisApi
+  url: ../openapi/fintecture-ais-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: account-holders-identity
+  summary: Enumerate accounts, read holders, and verify identity via AIS.
+  description: >-
+    Lists accounts on a connection, retrieves the first account's holders, and
+    runs an AIS identity verification keyed on the expected holder name.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - customerId
+    - providerId
+    - expectedName
+    properties:
+      accessToken:
+        type: string
+        description: A valid AIS-scoped bearer access token.
+      customerId:
+        type: string
+        description: The connection (customer) identifier to inspect.
+      providerId:
+        type: string
+        description: Identifier of the bank provider backing the verification.
+      expectedName:
+        type: string
+        description: The name the verification should match against the account holder.
+  steps:
+  - stepId: listAccounts
+    description: List all accounts linked to the connection.
+    operationId: getAisV1CustomerAccounts
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstAccountId: $response.body#/data/0/id
+  - stepId: getHolders
+    description: Retrieve the beneficiary owner details for the first account.
+    operationId: getAisV1CustomerAccountHolders
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $inputs.customerId
+    - name: account_id
+      in: path
+      value: $steps.listAccounts.outputs.firstAccountId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      holders: $response.body#/data
+      holderName: $response.body#/data/0/name
+  - stepId: verifyIdentity
+    description: Run an AIS identity verification matching the connection against the expected name.
+    operationId: createAisV1Verification
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        meta:
+          customer_id: $inputs.customerId
+        data:
+          attributes:
+            provider_id: $inputs.providerId
+            expected_name: $inputs.expectedName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      verificationId: $response.body#/id
+      verificationStatus: $response.body#/status
+      matchScore: $response.body#/match_score
+  outputs:
+    holders: $steps.getHolders.outputs.holders
+    verificationId: $steps.verifyIdentity.outputs.verificationId
+    verificationStatus: $steps.verifyIdentity.outputs.verificationStatus

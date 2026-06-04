@@ -1,0 +1,151 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Customer Verification with Polling
+  summary: Register a customer, start an AIS identity verification, then poll until it resolves.
+  description: >-
+    A customer KYC flow built on the Customers API. It registers a merchant
+    customer, initiates an AIS-based identity verification against a provider,
+    and polls the verification until it leaves the pending state, branching to
+    success on a verified result and to a failure step on unverified or failed.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: customersApi
+  url: ../openapi/fintecture-customers-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: customer-verification-poll
+  summary: Create a customer, start verification, and poll until verified or failed.
+  description: >-
+    Registers a customer, initiates an identity verification, and polls the
+    verification resource until it reaches a terminal status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - firstName
+    - lastName
+    - email
+    - providerId
+    - expectedName
+    properties:
+      accessToken:
+        type: string
+        description: A valid Customers-scoped bearer access token.
+      firstName:
+        type: string
+        description: Customer first name.
+      lastName:
+        type: string
+        description: Customer last name.
+      email:
+        type: string
+        description: Customer email address.
+      providerId:
+        type: string
+        description: Identifier of the bank provider backing the verification.
+      expectedName:
+        type: string
+        description: The name the verification should match against.
+  steps:
+  - stepId: createCustomer
+    description: Register the merchant customer whose identity will be verified.
+    operationId: createCustomer
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        first_name: $inputs.firstName
+        last_name: $inputs.lastName
+        email: $inputs.email
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      customerId: $response.body#/id
+  - stepId: startVerification
+    description: Initiate an AIS-based identity verification for the customer against the provider.
+    operationId: initiateCustomerVerification
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $steps.createCustomer.outputs.customerId
+    requestBody:
+      contentType: application/json
+      payload:
+        provider_id: $inputs.providerId
+        expected_name: $inputs.expectedName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      verificationId: $response.body#/id
+      status: $response.body#/status
+  - stepId: pollVerification
+    description: >-
+      Poll the verification until it resolves. A verified result ends the
+      workflow; unverified or failed routes to the failure step; pending loops.
+    operationId: getCustomerVerificationById
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $steps.createCustomer.outputs.customerId
+    - name: verification_id
+      in: path
+      value: $steps.startVerification.outputs.verificationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      matchScore: $response.body#/match_score
+    onSuccess:
+    - name: verified
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "verified"
+        type: jsonpath
+    - name: notVerified
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status in ["unverified","failed"]
+        type: jsonpath
+    - name: pending
+      type: goto
+      stepId: pollVerification
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending"
+        type: jsonpath
+  - stepId: reportFailure
+    description: Terminal failure handling — re-read the verification so the failing status is captured.
+    operationId: getCustomerVerificationById
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $steps.createCustomer.outputs.customerId
+    - name: verification_id
+      in: path
+      value: $steps.startVerification.outputs.verificationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failedStatus: $response.body#/status
+  outputs:
+    customerId: $steps.createCustomer.outputs.customerId
+    verificationId: $steps.startVerification.outputs.verificationId
+    finalStatus: $steps.pollVerification.outputs.status
+    failedStatus: $steps.reportFailure.outputs.failedStatus

@@ -1,0 +1,132 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Create Payment and Poll Status
+  summary: Open a payment session and poll its status until it settles, branching on the outcome.
+  description: >-
+    Creates a PIS payment session and then repeatedly reads the payment back
+    until it reaches a terminal state. The polling step branches: a completed
+    payment ends the workflow successfully, a rejected/cancelled/failed payment
+    routes to a terminal failure step, and any non-terminal status loops back to
+    poll again. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: payment-status-poll
+  summary: Create a payment session, then poll until the payment reaches a terminal status.
+  description: >-
+    Creates an Immediate Transfer payment session, then polls the payment
+    resource. Branches to success on payment_completed and to failure on
+    payment_rejected, payment_cancelled, or payment_failed; otherwise loops.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - amount
+    - currency
+    - communication
+    - requestId
+    properties:
+      accessToken:
+        type: string
+        description: A valid PIS-scoped bearer access token.
+      amount:
+        type: string
+        description: Payment amount as a string in the given currency (e.g. "49.90").
+      currency:
+        type: string
+        description: ISO currency code (EUR, GBP, or PLN).
+      communication:
+        type: string
+        description: Free-form remittance information for the payment.
+      requestId:
+        type: string
+        description: Unique request identifier (UUID v4) for the create call.
+  steps:
+  - stepId: createPayment
+    description: Create an Immediate Transfer payment session to obtain a payment id and connect URL.
+    operationId: createPisV2Connect
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-request-id
+      in: header
+      value: $inputs.requestId
+    requestBody:
+      contentType: application/json
+      payload:
+        meta: {}
+        data:
+          type: PIS
+          attributes:
+            amount: $inputs.amount
+            currency: $inputs.currency
+            communication: $inputs.communication
+            payment_method: immediate_transfer
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+      connectUrl: $response.body#/meta/url
+  - stepId: pollPayment
+    description: >-
+      Read the payment back and decide whether it has reached a terminal state.
+      A completed payment ends the workflow; a rejected, cancelled, or failed
+      payment routes to failure; anything else loops back to poll again.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $steps.createPayment.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: paymentSettled
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "payment_completed"
+        type: jsonpath
+    - name: paymentFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status in ["payment_rejected","payment_cancelled","payment_failed"]
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollPayment
+      criteria:
+      - context: $response.body
+        condition: $.status in ["payment_created","payment_pending","payment_initiated"]
+        type: jsonpath
+  - stepId: reportFailure
+    description: >-
+      Terminal failure handling — read the payment one final time so the failing
+      status and attributes are captured in the workflow outputs.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $steps.createPayment.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failedStatus: $response.body#/status
+  outputs:
+    sessionId: $steps.createPayment.outputs.sessionId
+    finalStatus: $steps.pollPayment.outputs.status
+    failedStatus: $steps.reportFailure.outputs.failedStatus

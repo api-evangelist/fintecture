@@ -1,0 +1,146 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Sandbox Test Payment
+  summary: Pick a sandbox test account, open a payment session against its bank, then poll for completion.
+  description: >-
+    A sandbox end-to-end test flow. It retrieves the sandbox test accounts to
+    pick a known IBAN and its provider, creates an Immediate Transfer payment
+    session, and polls the payment until it reaches a terminal state, branching to
+    success on payment_completed and to a failure step otherwise. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: resourcesApi
+  url: ../openapi/fintecture-resources-api-openapi.yml
+  type: openapi
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: sandbox-test-payment
+  summary: Select a sandbox test account, create a payment, and poll to a terminal status.
+  description: >-
+    Reads sandbox test accounts, creates an Immediate Transfer payment session,
+    and polls the payment until completed or failed.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - amount
+    - currency
+    - communication
+    - requestId
+    properties:
+      accessToken:
+        type: string
+        description: A valid PIS-scoped bearer access token (sandbox).
+      amount:
+        type: string
+        description: Payment amount as a string.
+      currency:
+        type: string
+        description: ISO currency code (EUR, GBP, or PLN).
+      communication:
+        type: string
+        description: Free-form remittance information for the payment.
+      requestId:
+        type: string
+        description: Unique request identifier (UUID v4) for the payment create call.
+  steps:
+  - stepId: listTestAccounts
+    description: Retrieve the sandbox test accounts to obtain a known IBAN and its provider.
+    operationId: getResV1TestAccounts
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      testAccounts: $response.body#/data
+      firstIban: $response.body#/data/0/iban
+      firstHolder: $response.body#/data/0/holder_name
+  - stepId: createPayment
+    description: Create an Immediate Transfer payment session using the sandbox test account holder.
+    operationId: createPisV2Connect
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-request-id
+      in: header
+      value: $inputs.requestId
+    requestBody:
+      contentType: application/json
+      payload:
+        meta:
+          psu_name: $steps.listTestAccounts.outputs.firstHolder
+        data:
+          type: PIS
+          attributes:
+            amount: $inputs.amount
+            currency: $inputs.currency
+            communication: $inputs.communication
+            payment_method: immediate_transfer
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+      connectUrl: $response.body#/meta/url
+  - stepId: pollPayment
+    description: >-
+      Poll the payment until it reaches a terminal state. Completed ends the
+      workflow; rejected, cancelled, or failed routes to the failure step;
+      otherwise loops.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $steps.createPayment.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "payment_completed"
+        type: jsonpath
+    - name: failed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status in ["payment_rejected","payment_cancelled","payment_failed"]
+        type: jsonpath
+    - name: pending
+      type: goto
+      stepId: pollPayment
+      criteria:
+      - context: $response.body
+        condition: $.status in ["payment_created","payment_pending","payment_initiated"]
+        type: jsonpath
+  - stepId: reportFailure
+    description: Terminal failure handling — re-read the payment so the failing status is captured.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $steps.createPayment.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failedStatus: $response.body#/status
+  outputs:
+    sessionId: $steps.createPayment.outputs.sessionId
+    finalStatus: $steps.pollPayment.outputs.status
+    failedStatus: $steps.reportFailure.outputs.failedStatus

@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Mint Token then Initiate Payment
+  summary: Mint a client-credentials access token, open a payment session, and read its status.
+  description: >-
+    The full authenticate-then-pay flow. It mints a PIS access token via the
+    OAuth client_credentials grant, uses that bearer token to create an Immediate
+    Transfer payment session, and reads the resulting payment back to surface its
+    connect URL and lifecycle status. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: oauthApi
+  url: ../openapi/fintecture-oauth-api-openapi.yml
+  type: openapi
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: token-then-payment
+  summary: Obtain an access token via client_credentials, then create and inspect a payment.
+  description: >-
+    Mints a PIS-scoped access token, creates an Immediate Transfer payment
+    session with it, and reads the payment back to obtain its status.
+  inputs:
+    type: object
+    required:
+    - clientId
+    - clientSecret
+    - amount
+    - currency
+    - communication
+    - requestId
+    properties:
+      clientId:
+        type: string
+        description: OAuth client identifier.
+      clientSecret:
+        type: string
+        description: OAuth client secret.
+      amount:
+        type: string
+        description: Payment amount as a string.
+      currency:
+        type: string
+        description: ISO currency code (EUR, GBP, or PLN).
+      communication:
+        type: string
+        description: Free-form remittance information for the payment.
+      requestId:
+        type: string
+        description: Unique request identifier (UUID v4) for the payment create call.
+  steps:
+  - stepId: mintToken
+    description: Mint a PIS-scoped access token via the OAuth client_credentials grant.
+    operationId: createAccessToken
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        grant_type: client_credentials
+        scope: PIS
+        client_id: $inputs.clientId
+        client_secret: $inputs.clientSecret
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accessToken: $response.body#/access_token
+      expiresIn: $response.body#/expires_in
+  - stepId: createPayment
+    description: Create an Immediate Transfer payment session using the minted bearer token.
+    operationId: createPisV2Connect
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $steps.mintToken.outputs.accessToken"
+    - name: x-request-id
+      in: header
+      value: $inputs.requestId
+    requestBody:
+      contentType: application/json
+      payload:
+        meta: {}
+        data:
+          type: PIS
+          attributes:
+            amount: $inputs.amount
+            currency: $inputs.currency
+            communication: $inputs.communication
+            payment_method: immediate_transfer
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+      connectUrl: $response.body#/meta/url
+  - stepId: getPayment
+    description: Read the created payment back to surface its current lifecycle status.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $steps.mintToken.outputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $steps.createPayment.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  outputs:
+    accessToken: $steps.mintToken.outputs.accessToken
+    sessionId: $steps.createPayment.outputs.sessionId
+    connectUrl: $steps.createPayment.outputs.connectUrl
+    status: $steps.getPayment.outputs.status

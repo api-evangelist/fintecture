@@ -1,0 +1,161 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Decoupled Authentication then List Accounts
+  summary: Authenticate a PSU with the decoupled (mobile-app) model, poll until approved, then list accounts.
+  description: >-
+    Drives the decoupled AIS authentication model end to end. It reads the
+    target provider to confirm it supports the decoupled auth model, triggers a
+    provider authorization to start the PSU's bank mobile-app approval, polls the
+    decoupled status until it reaches COMPLETED (branching to a failure step on
+    FAILED), and then lists the accounts on the newly established connection.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: resourcesApi
+  url: ../openapi/fintecture-resources-api-openapi.yml
+  type: openapi
+- name: aisApi
+  url: ../openapi/fintecture-ais-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: decoupled-auth-accounts
+  summary: Run decoupled PSU authentication, poll to completion, then enumerate accounts.
+  description: >-
+    Confirms the provider, starts decoupled authorization, polls the decoupled
+    status until COMPLETED or FAILED, and lists the connection's accounts on
+    success.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - providerId
+    - customerId
+    properties:
+      accessToken:
+        type: string
+        description: A valid AIS-scoped bearer access token.
+      providerId:
+        type: string
+        description: Identifier of the bank provider to authenticate against.
+      customerId:
+        type: string
+        description: The connection (customer) identifier to read accounts from once authenticated.
+      psuType:
+        type: string
+        description: PSU segment, either "retail" or "corporate".
+  steps:
+  - stepId: getProvider
+    description: Read the provider to confirm it supports the decoupled authentication model.
+    operationId: getResV1Provider
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: provider_id
+      in: path
+      value: $inputs.providerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      authModels: $response.body#/auth_models
+  - stepId: startAuthorization
+    description: >-
+      Trigger provider authorization, which initiates a decoupled authentication
+      request on the PSU's bank mobile app and returns a session id to poll.
+    operationId: getAisV1ProviderAuthorization
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: provider_id
+      in: path
+      value: $inputs.providerId
+    - name: psu_type
+      in: query
+      value: $inputs.psuType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+  - stepId: pollDecoupled
+    description: >-
+      Poll the decoupled authentication status. COMPLETED proceeds to list
+      accounts, FAILED routes to the failure step, and PENDING loops back.
+    operationId: getAisV1ProviderAuthorizationDecoupled
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: provider_id
+      in: path
+      value: $inputs.providerId
+    - name: session_id
+      in: query
+      value: $steps.startAuthorization.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: authCompleted
+      type: goto
+      stepId: listAccounts
+      criteria:
+      - context: $response.body
+        condition: $.status == "COMPLETED"
+        type: jsonpath
+    - name: authFailed
+      type: goto
+      stepId: reportFailure
+      criteria:
+      - context: $response.body
+        condition: $.status == "FAILED"
+        type: jsonpath
+    - name: authPending
+      type: goto
+      stepId: pollDecoupled
+      criteria:
+      - context: $response.body
+        condition: $.status == "PENDING"
+        type: jsonpath
+  - stepId: listAccounts
+    description: List the accounts linked to the connection now that the PSU has authenticated.
+    operationId: getAisV1CustomerAccounts
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accounts: $response.body#/data
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportFailure
+    description: >-
+      Terminal failure handling — re-read the decoupled status so the failing
+      state is captured in the workflow outputs.
+    operationId: getAisV1ProviderAuthorizationDecoupled
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: provider_id
+      in: path
+      value: $inputs.providerId
+    - name: session_id
+      in: query
+      value: $steps.startAuthorization.outputs.sessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failedStatus: $response.body#/status
+  outputs:
+    sessionId: $steps.startAuthorization.outputs.sessionId
+    accounts: $steps.listAccounts.outputs.accounts
+    failedStatus: $steps.reportFailure.outputs.failedStatus

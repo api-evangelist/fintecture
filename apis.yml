@@ -224,6 +224,48 @@ kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/fintecture-account-holders-identity-workflow.yml
+    name: Fintecture Account Holders and Identity Verification
+    summary: List a connection's accounts, read the first account's holders, then run an AIS identity verification.
+  - url: arazzo/fintecture-connect-accounts-transactions-workflow.yml
+    name: Fintecture Connect, List Accounts, and Pull Transactions
+    summary: Open an AIS connect session, list the linked accounts, then pull one account's transactions.
+  - url: arazzo/fintecture-customer-onboard-payment-workflow.yml
+    name: Fintecture Onboard Customer and Initiate Payment
+    summary: Register a merchant customer, attach their bank account, then open a payment session for them.
+  - url: arazzo/fintecture-customer-verification-poll-workflow.yml
+    name: Fintecture Customer Verification with Polling
+    summary: Register a customer, start an AIS identity verification, then poll until it resolves.
+  - url: arazzo/fintecture-decoupled-auth-accounts-workflow.yml
+    name: Fintecture Decoupled Authentication then List Accounts
+    summary: Authenticate a PSU with the decoupled (mobile-app) model, poll until approved, then list accounts.
+  - url: arazzo/fintecture-list-providers-initiate-payment-workflow.yml
+    name: Fintecture List Providers and Initiate Payment
+    summary: Discover supported bank providers, then open a payment session and inspect its status.
+  - url: arazzo/fintecture-payment-refund-workflow.yml
+    name: Fintecture Refund a Completed Payment
+    summary: Verify a payment is completed, issue a refund against it, then list the payment's refunds.
+  - url: arazzo/fintecture-payment-status-poll-workflow.yml
+    name: Fintecture Create Payment and Poll Status
+    summary: Open a payment session and poll its status until it settles, branching on the outcome.
+  - url: arazzo/fintecture-request-to-pay-status-workflow.yml
+    name: Fintecture Request To Pay and Track Status
+    summary: Generate a payment link, find the resulting payment by status filter, then read its details.
+  - url: arazzo/fintecture-sandbox-test-payment-workflow.yml
+    name: Fintecture Sandbox Test Payment
+    summary: Pick a sandbox test account, open a payment session against its bank, then poll for completion.
+  - url: arazzo/fintecture-settlement-reconciliation-workflow.yml
+    name: Fintecture Settlement Reconciliation
+    summary: List settlements, read one settlement's detail, then pull merchant transactions to reconcile.
+  - url: arazzo/fintecture-token-then-payment-workflow.yml
+    name: Fintecture Mint Token then Initiate Payment
+    summary: Mint a client-credentials access token, open a payment session, and read its status.
+  - url: arazzo/fintecture-update-payment-communication-workflow.yml
+    name: Fintecture Update Payment Communication
+    summary: Read a payment, patch its communication while it is still pending, then re-read to confirm.
 - type: LinkedIn
   url: https://www.linkedin.com/company/fintecture
 - type: Portal

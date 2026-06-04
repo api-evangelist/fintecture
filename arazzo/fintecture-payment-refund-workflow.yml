@@ -1,0 +1,141 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Refund a Completed Payment
+  summary: Verify a payment is completed, issue a refund against it, then list the payment's refunds.
+  description: >-
+    A merchant refund flow. It reads the original payment to confirm it reached
+    payment_completed before refunding, branches away to an abort step if the
+    payment is not in a refundable state, creates an immediate refund for the
+    requested amount, and lists all refunds tied to the payment to confirm the
+    new refund is recorded. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: payment-refund
+  summary: Confirm a payment is completed, refund it, and list the resulting refunds.
+  description: >-
+    Reads the original payment, branches on whether it is completed, creates a
+    refund for the requested amount, and lists all refunds on the payment.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - paymentId
+    - sessionId
+    - amount
+    - currency
+    - communication
+    properties:
+      accessToken:
+        type: string
+        description: A valid PIS-scoped bearer access token.
+      paymentId:
+        type: string
+        description: Identifier of the original payment to refund.
+      sessionId:
+        type: string
+        description: The session id of the original payment, supplied in the refund meta.
+      amount:
+        type: string
+        description: Refund amount as a string (full or partial).
+      currency:
+        type: string
+        description: ISO currency code of the refund.
+      communication:
+        type: string
+        description: Free-form remittance information for the refund.
+  steps:
+  - stepId: getPayment
+    description: >-
+      Read the original payment and branch on its status — only a completed
+      payment proceeds to the refund step.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $inputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: refundable
+      type: goto
+      stepId: createRefund
+      criteria:
+      - context: $response.body
+        condition: $.status == "payment_completed"
+        type: jsonpath
+    - name: notRefundable
+      type: goto
+      stepId: abortNotRefundable
+      criteria:
+      - context: $response.body
+        condition: $.status != "payment_completed"
+        type: jsonpath
+  - stepId: createRefund
+    description: Initiate an immediate refund for the requested amount against the original payment session.
+    operationId: createPisV2Refund
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        meta:
+          session_id: $inputs.sessionId
+        data:
+          attributes:
+            amount: $inputs.amount
+            currency: $inputs.currency
+            communication: $inputs.communication
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      refundId: $response.body#/id
+      refundStatus: $response.body#/status
+  - stepId: listRefunds
+    description: List all refunds related to the original payment to confirm the new refund is recorded.
+    operationId: getPisV2PaymentRefunds
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $inputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      refunds: $response.body#/data
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: abortNotRefundable
+    description: >-
+      Terminal step taken when the payment is not in a refundable state — capture
+      the blocking status in the workflow outputs.
+    operationId: getPaymentSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: payment_id
+      in: path
+      value: $inputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      blockingStatus: $response.body#/status
+  outputs:
+    refundId: $steps.createRefund.outputs.refundId
+    refunds: $steps.listRefunds.outputs.refunds
+    blockingStatus: $steps.abortNotRefundable.outputs.blockingStatus

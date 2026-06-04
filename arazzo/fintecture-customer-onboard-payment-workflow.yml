@@ -1,0 +1,141 @@
+arazzo: 1.0.1
+info:
+  title: Fintecture Onboard Customer and Initiate Payment
+  summary: Register a merchant customer, attach their bank account, then open a payment session for them.
+  description: >-
+    A repeat-checkout setup flow. It registers a merchant customer to persist
+    their details, attaches a bank account to that customer record to accelerate
+    future payments, and then creates a PIS payment session linked to the
+    customer so payment fields are pre-filled. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: customersApi
+  url: ../openapi/fintecture-customers-api-openapi.yml
+  type: openapi
+- name: pisApi
+  url: ../openapi/fintecture-pis-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: customer-onboard-payment
+  summary: Create a customer, attach a bank account, and initiate a linked payment.
+  description: >-
+    Registers a customer, creates a bank account on the customer record, and
+    opens an Immediate Transfer payment session referencing the customer id.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - firstName
+    - lastName
+    - email
+    - iban
+    - holderName
+    - amount
+    - currency
+    - communication
+    - requestId
+    properties:
+      accessToken:
+        type: string
+        description: A bearer access token valid for both the Customers and PIS scopes.
+      firstName:
+        type: string
+        description: Customer first name.
+      lastName:
+        type: string
+        description: Customer last name.
+      email:
+        type: string
+        description: Customer email address.
+      iban:
+        type: string
+        description: IBAN of the customer's bank account.
+      holderName:
+        type: string
+        description: Account holder name on the bank account.
+      amount:
+        type: string
+        description: Payment amount as a string.
+      currency:
+        type: string
+        description: ISO currency code (EUR, GBP, or PLN).
+      communication:
+        type: string
+        description: Free-form remittance information for the payment.
+      requestId:
+        type: string
+        description: Unique request identifier (UUID v4) for the payment create call.
+  steps:
+  - stepId: createCustomer
+    description: Register the merchant customer to persist their details for repeat checkouts.
+    operationId: createCustomer
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        first_name: $inputs.firstName
+        last_name: $inputs.lastName
+        email: $inputs.email
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      customerId: $response.body#/id
+  - stepId: addBankAccount
+    description: Attach a bank account to the customer record to accelerate future payments.
+    operationId: createCustomerBankAccount
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: customer_id
+      in: path
+      value: $steps.createCustomer.outputs.customerId
+    requestBody:
+      contentType: application/json
+      payload:
+        iban: $inputs.iban
+        holder_name: $inputs.holderName
+        currency: $inputs.currency
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      bankAccountId: $response.body#/id
+  - stepId: createPayment
+    description: Open an Immediate Transfer payment session linked to the newly created customer.
+    operationId: createPisV2Connect
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-request-id
+      in: header
+      value: $inputs.requestId
+    requestBody:
+      contentType: application/json
+      payload:
+        meta:
+          psu_name: $inputs.holderName
+          psu_email: $inputs.email
+        data:
+          type: PIS
+          attributes:
+            amount: $inputs.amount
+            currency: $inputs.currency
+            communication: $inputs.communication
+            customer_id: $steps.createCustomer.outputs.customerId
+            payment_method: immediate_transfer
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/meta/session_id
+      connectUrl: $response.body#/meta/url
+  outputs:
+    customerId: $steps.createCustomer.outputs.customerId
+    bankAccountId: $steps.addBankAccount.outputs.bankAccountId
+    sessionId: $steps.createPayment.outputs.sessionId
+    connectUrl: $steps.createPayment.outputs.connectUrl
