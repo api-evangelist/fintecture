@@ -1,0 +1,267 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Payment Initiation Services API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Payment Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/pis/v2/connect",
+            "headers": [
+              {
+                "name": "Signature",
+                "value": ""
+              },
+              {
+                "name": "Digest",
+                "value": ""
+              },
+              {
+                "name": "Date",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a payment session for a PSU to initiate an Immediate Transfer, Smart Transfer, or Buy Now Pay Later payment. To mix them in a single session, use the Payment Hub semantics. Signature, digest, date and x-request-id headers are mandatory in production.\n"
+        },
+        {
+          "info": {
+            "name": "Get All Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/payments",
+            "params": [
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[to]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all payments linked to the calling application. Supports filters."
+        },
+        {
+          "info": {
+            "name": "Get Specific Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/payments/:payment_id",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Detailed information for a specific payment session."
+        },
+        {
+          "info": {
+            "name": "Update A Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.fintecture.com/pis/v2/payments/:payment_id",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify information on a specific payment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Payment Refunds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/payments/:payment_id/refunds",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all refunds related to a specific payment."
+        },
+        {
+          "info": {
+            "name": "Create A Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/pis/v2/refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a refund. Refunds may be full or partial. By default the refund is sent to the original payment account, but a payout account may be specified instead.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Request To Pay",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Request To Pay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/pis/v2/request-to-pay",
+            "headers": [
+              {
+                "name": "Signature",
+                "value": ""
+              },
+              {
+                "name": "Digest",
+                "value": ""
+              },
+              {
+                "name": "Date",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a Fintecture payment link. Link can be returned in the response and/or delivered to the customer by email or SMS. Same endpoint backs Immediate Transfer, Smart Transfer, and Buy Now Pay Later.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Request For Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/pis/v2/request-for-payout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a request for payout that the merchant can share with a customer for asynchronous payout."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Settlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Settlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/settlements"
+          },
+          "docs": "List all disbursements from the merchant's Local Acquiring account."
+        },
+        {
+          "info": {
+            "name": "Get Specific Settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/settlements/:settlement_id",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Information about a specific settlement."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

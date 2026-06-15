@@ -1,0 +1,1014 @@
+{
+  "info": {
+    "_postman_id": "ec921c91-ae6c-4156-b561-618819001634",
+    "name": "Fintecture Customers API",
+    "description": "Register and manage merchant customers, attach their bank accounts, and run AIS-based identity verifications. Persisted customer records pre-fill payment fields and accelerate repeat checkouts.\n\n\nContact Support:\n Name: Fintecture Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:40.000Z",
+    "updatedAt": "2026-06-05T15:08:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ec921c91-ae6c-4156-b561-618819001634"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "customers",
+          "item": [
+            {
+              "name": "{customer_id}",
+              "item": [
+                {
+                  "name": "bank-accounts",
+                  "item": [
+                    {
+                      "name": "{account_id}",
+                      "item": [
+                        {
+                          "name": "Get A Bank Account From A Customer",
+                          "id": "0aec11fd-5b31-474d-8adb-8c4069bebc98",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/customers/:customer_id/bank-accounts/:account_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "customers",
+                                ":customer_id",
+                                "bank-accounts",
+                                ":account_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "be3039ec-6675-48e1-a1f0-8137adc21896",
+                                  "key": "customer_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "0f0d44b2-e05b-43d0-affc-599323b68309",
+                                  "key": "account_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "3daec522-b79d-4c2f-9309-279394c901fe",
+                              "name": "Bank account",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/customers/:customer_id/bank-accounts/:account_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "customers",
+                                    ":customer_id",
+                                    "bank-accounts",
+                                    ":account_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "customer_id"
+                                    },
+                                    {
+                                      "key": "account_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"verified\": \"<boolean>\"\n}",
+                              "createdAt": "2026-06-05T15:08:40.000Z",
+                              "updatedAt": "2026-06-05T15:08:40.000Z",
+                              "uid": "35240-3daec522-b79d-4c2f-9309-279394c901fe"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:08:40.000Z",
+                          "updatedAt": "2026-06-05T15:08:40.000Z",
+                          "uid": "35240-0aec11fd-5b31-474d-8adb-8c4069bebc98"
+                        }
+                      ],
+                      "id": "fd36a9f2-5a84-488d-9681-1eeb0e43041b",
+                      "createdAt": "2026-06-05T15:08:40.000Z",
+                      "updatedAt": "2026-06-05T15:08:40.000Z",
+                      "uid": "35240-fd36a9f2-5a84-488d-9681-1eeb0e43041b"
+                    },
+                    {
+                      "name": "List All Customer Bank Accounts",
+                      "id": "1eab7fec-9b51-4de1-85d5-3b948b92290f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/customers/:customer_id/bank-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "customers",
+                            ":customer_id",
+                            "bank-accounts"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a0b53ced-24be-44d5-9f67-1ab90b340d42",
+                              "key": "customer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "32d1de69-4769-42d9-a6e3-b1d120e4615e",
+                          "name": "Bank account list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/customers/:customer_id/bank-accounts",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "customers",
+                                ":customer_id",
+                                "bank-accounts"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"holder_name\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"verified\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"holder_name\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"verified\": \"<boolean>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:08:40.000Z",
+                          "updatedAt": "2026-06-05T15:08:40.000Z",
+                          "uid": "35240-32d1de69-4769-42d9-a6e3-b1d120e4615e"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:40.000Z",
+                      "updatedAt": "2026-06-05T15:08:40.000Z",
+                      "uid": "35240-1eab7fec-9b51-4de1-85d5-3b948b92290f"
+                    },
+                    {
+                      "name": "Create Customer Bank Account",
+                      "id": "756212f6-4a44-4735-b96e-5ce0e08a3083",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/customers/:customer_id/bank-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "customers",
+                            ":customer_id",
+                            "bank-accounts"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d07edcaa-e12c-4606-9980-fad91db5f2c6",
+                              "key": "customer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "703ce8d1-519c-426c-a9f2-3221e15d81f0",
+                          "name": "Bank account created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/customers/:customer_id/bank-accounts",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "customers",
+                                ":customer_id",
+                                "bank-accounts"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"verified\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T15:08:40.000Z",
+                          "updatedAt": "2026-06-05T15:08:40.000Z",
+                          "uid": "35240-703ce8d1-519c-426c-a9f2-3221e15d81f0"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:40.000Z",
+                      "updatedAt": "2026-06-05T15:08:40.000Z",
+                      "uid": "35240-756212f6-4a44-4735-b96e-5ce0e08a3083"
+                    }
+                  ],
+                  "id": "12b956e7-15df-426d-ba98-1bc6f05c0980",
+                  "createdAt": "2026-06-05T15:08:40.000Z",
+                  "updatedAt": "2026-06-05T15:08:40.000Z",
+                  "uid": "35240-12b956e7-15df-426d-ba98-1bc6f05c0980"
+                },
+                {
+                  "name": "verification",
+                  "item": [
+                    {
+                      "name": "{verification_id}",
+                      "item": [
+                        {
+                          "name": "Get A Verification",
+                          "id": "7877fc62-e33b-492a-9685-7d414d79c947",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/customers/:customer_id/verification/:verification_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "customers",
+                                ":customer_id",
+                                "verification",
+                                ":verification_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "13a05dd9-3b30-4e21-860f-0d0d3f70b9fc",
+                                  "key": "customer_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "1ff0b19f-8820-4793-814e-7918559e8beb",
+                                  "key": "verification_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b52f64e7-c50b-4869-a839-76d1af5d2529",
+                              "name": "Verification details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/customers/:customer_id/verification/:verification_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "customers",
+                                    ":customer_id",
+                                    "verification",
+                                    ":verification_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "customer_id"
+                                    },
+                                    {
+                                      "key": "verification_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"failed\",\n  \"match_score\": \"<number>\",\n  \"provider_id\": \"<string>\",\n  \"verified_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:08:40.000Z",
+                              "updatedAt": "2026-06-05T15:08:40.000Z",
+                              "uid": "35240-b52f64e7-c50b-4869-a839-76d1af5d2529"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:08:40.000Z",
+                          "updatedAt": "2026-06-05T15:08:40.000Z",
+                          "uid": "35240-7877fc62-e33b-492a-9685-7d414d79c947"
+                        }
+                      ],
+                      "id": "9af3dc4b-3495-4afa-90e7-6bf90f7ccb69",
+                      "createdAt": "2026-06-05T15:08:40.000Z",
+                      "updatedAt": "2026-06-05T15:08:40.000Z",
+                      "uid": "35240-9af3dc4b-3495-4afa-90e7-6bf90f7ccb69"
+                    },
+                    {
+                      "name": "Initiate Customer Verification",
+                      "id": "def9f9bd-d2f7-4ae2-91ab-4392e27cef4a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"provider_id\": \"<string>\",\n  \"expected_name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/customers/:customer_id/verification",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "customers",
+                            ":customer_id",
+                            "verification"
+                          ],
+                          "variable": [
+                            {
+                              "id": "76cba127-5988-41d6-966e-72cab9453fc8",
+                              "key": "customer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "aa5eea65-eb1f-4833-a7c0-df3707480da3",
+                          "name": "Verification started",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"provider_id\": \"<string>\",\n  \"expected_name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/customers/:customer_id/verification",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "customers",
+                                ":customer_id",
+                                "verification"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"failed\",\n  \"match_score\": \"<number>\",\n  \"provider_id\": \"<string>\",\n  \"verified_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:08:40.000Z",
+                          "updatedAt": "2026-06-05T15:08:40.000Z",
+                          "uid": "35240-aa5eea65-eb1f-4833-a7c0-df3707480da3"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:40.000Z",
+                      "updatedAt": "2026-06-05T15:08:40.000Z",
+                      "uid": "35240-def9f9bd-d2f7-4ae2-91ab-4392e27cef4a"
+                    }
+                  ],
+                  "id": "678280f6-b6d8-4ac2-b949-37e635909503",
+                  "createdAt": "2026-06-05T15:08:40.000Z",
+                  "updatedAt": "2026-06-05T15:08:40.000Z",
+                  "uid": "35240-678280f6-b6d8-4ac2-b949-37e635909503"
+                },
+                {
+                  "name": "verifications",
+                  "item": [
+                    {
+                      "name": "List All Customer Verifications",
+                      "id": "a31db861-dd1c-4c50-8d2d-b1b5b2781614",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/customers/:customer_id/verifications",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "customers",
+                            ":customer_id",
+                            "verifications"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8cd17ebd-5049-4f20-93f6-7aba415e968e",
+                              "key": "customer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "0d95e74e-2064-4a98-aea3-536312b82b5e",
+                          "name": "Verification list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/customers/:customer_id/verifications",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "customers",
+                                ":customer_id",
+                                "verifications"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"unverified\",\n      \"match_score\": \"<number>\",\n      \"provider_id\": \"<string>\",\n      \"verified_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"verified\",\n      \"match_score\": \"<number>\",\n      \"provider_id\": \"<string>\",\n      \"verified_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:08:40.000Z",
+                          "updatedAt": "2026-06-05T15:08:40.000Z",
+                          "uid": "35240-0d95e74e-2064-4a98-aea3-536312b82b5e"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:40.000Z",
+                      "updatedAt": "2026-06-05T15:08:40.000Z",
+                      "uid": "35240-a31db861-dd1c-4c50-8d2d-b1b5b2781614"
+                    }
+                  ],
+                  "id": "95efc28e-8df7-48ea-bdb1-df7f142757d9",
+                  "createdAt": "2026-06-05T15:08:40.000Z",
+                  "updatedAt": "2026-06-05T15:08:40.000Z",
+                  "uid": "35240-95efc28e-8df7-48ea-bdb1-df7f142757d9"
+                },
+                {
+                  "name": "Get A Customer",
+                  "id": "d8588966-143b-4699-9b69-51bdd160b8f9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/customers/:customer_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "customers",
+                        ":customer_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d29c8b86-38f5-41a8-9f27-7799d72449a1",
+                          "key": "customer_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a customer's details by customer_id."
+                  },
+                  "response": [
+                    {
+                      "id": "f7dc5c2c-470a-4fd0-9415-57092d90c753",
+                      "name": "Customer details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/customers/:customer_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "customers",
+                            ":customer_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:08:40.000Z",
+                      "updatedAt": "2026-06-05T15:08:40.000Z",
+                      "uid": "35240-f7dc5c2c-470a-4fd0-9415-57092d90c753"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:40.000Z",
+                  "updatedAt": "2026-06-05T15:08:40.000Z",
+                  "uid": "35240-d8588966-143b-4699-9b69-51bdd160b8f9"
+                }
+              ],
+              "id": "82def938-8014-470f-903d-5df06d97349b",
+              "createdAt": "2026-06-05T15:08:40.000Z",
+              "updatedAt": "2026-06-05T15:08:40.000Z",
+              "uid": "35240-82def938-8014-470f-903d-5df06d97349b"
+            },
+            {
+              "name": "List All Customers",
+              "id": "39d1380d-ba59-49f0-9b34-f0f2d7ca536b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/customers?page[number]=<integer>&page[size]=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "customers"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Comprehensive overview of all registered customers."
+              },
+              "response": [
+                {
+                  "id": "9c93663a-3f75-4fd5-86f8-52a85a19e185",
+                  "name": "Customer list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/customers?page[number]=<integer>&page[size]=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "customers"
+                      ],
+                      "query": [
+                        {
+                          "key": "page[number]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "page[size]",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"external_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ],\n  \"meta\": {\n    \"count\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:40.000Z",
+                  "updatedAt": "2026-06-05T15:08:40.000Z",
+                  "uid": "35240-9c93663a-3f75-4fd5-86f8-52a85a19e185"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:40.000Z",
+              "updatedAt": "2026-06-05T15:08:40.000Z",
+              "uid": "35240-39d1380d-ba59-49f0-9b34-f0f2d7ca536b"
+            },
+            {
+              "name": "Create Customer",
+              "id": "24dbcada-b3b4-4984-853f-560e2b646ae3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"company_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "customers"
+                  ]
+                },
+                "description": "Register a customer to accelerate payments."
+              },
+              "response": [
+                {
+                  "id": "7a8d2a20-9901-4359-96ec-3a7d59667673",
+                  "name": "Customer created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"company_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"external_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/customers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "customers"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"external_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:08:40.000Z",
+                  "updatedAt": "2026-06-05T15:08:40.000Z",
+                  "uid": "35240-7a8d2a20-9901-4359-96ec-3a7d59667673"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:40.000Z",
+              "updatedAt": "2026-06-05T15:08:40.000Z",
+              "uid": "35240-24dbcada-b3b4-4984-853f-560e2b646ae3"
+            }
+          ],
+          "id": "b0a0e9c4-1d40-424b-8e4c-5e0f41c7f55a",
+          "createdAt": "2026-06-05T15:08:40.000Z",
+          "updatedAt": "2026-06-05T15:08:40.000Z",
+          "uid": "35240-b0a0e9c4-1d40-424b-8e4c-5e0f41c7f55a"
+        }
+      ],
+      "id": "6b3e26f6-bf78-4ef0-adaa-a1fec38d8fc0",
+      "createdAt": "2026-06-05T15:08:40.000Z",
+      "updatedAt": "2026-06-05T15:08:40.000Z",
+      "uid": "35240-6b3e26f6-bf78-4ef0-adaa-a1fec38d8fc0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fintecture.com"
+    }
+  ]
+}

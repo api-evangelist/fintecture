@@ -1,0 +1,484 @@
+{
+  "item": [
+    {
+      "id": "f283190f-ec14-49ec-9750-3ae514983a4a",
+      "name": "E-Mandates",
+      "description": {
+        "content": "Customer e-mandates",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1c87bc12-d794-4a53-88b7-6f779f64bbad",
+          "name": "List All E-Mandates",
+          "request": {
+            "name": "List All E-Mandates",
+            "description": {
+              "content": "List all merchant e-mandates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "e-mandates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "285cce89-38d8-45e0-8ecb-05f795c396e4",
+              "name": "E-mandates list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "e-mandates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"rum\": \"string\",\n      \"customer_id\": \"string\",\n      \"iban\": \"string\",\n      \"holder_name\": \"string\",\n      \"type\": \"one-off\",\n      \"scheme\": \"SEPA-B2B\",\n      \"status\": \"revoked\",\n      \"signed_at\": \"2013-08-25T14:28:03.090Z\",\n      \"created_at\": \"1991-02-19T07:44:00.905Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"rum\": \"string\",\n      \"customer_id\": \"string\",\n      \"iban\": \"string\",\n      \"holder_name\": \"string\",\n      \"type\": \"recurring\",\n      \"scheme\": \"SEPA-B2B\",\n      \"status\": \"expired\",\n      \"signed_at\": \"1964-05-25T15:57:24.872Z\",\n      \"created_at\": \"1997-06-13T20:21:00.542Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06497b3a-8786-44b5-914a-efa8a4446337",
+          "name": "Create E-Mandate",
+          "request": {
+            "name": "Create E-Mandate",
+            "description": {
+              "content": "Create a customer e-mandate. Returns 409 Conflict if an e-mandate with the same RUM already exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "e-mandates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rum\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"scheme\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d009d76-a8cf-48db-9b77-b4ed416214bc",
+              "name": "E-mandate created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "e-mandates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rum\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"scheme\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"rum\": \"string\",\n  \"customer_id\": \"string\",\n  \"iban\": \"string\",\n  \"holder_name\": \"string\",\n  \"type\": \"recurring\",\n  \"scheme\": \"SEPA-B2B\",\n  \"status\": \"revoked\",\n  \"signed_at\": \"1963-08-31T09:59:20.634Z\",\n  \"created_at\": \"2005-11-13T23:03:16.935Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d294e0c4-fbae-4667-8c9d-b335ce653371",
+              "name": "RUM already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "e-mandates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rum\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"scheme\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "232edf93-f1ea-468f-874f-9bafffa74fb0",
+          "name": "Get An E-Mandate",
+          "request": {
+            "name": "Get An E-Mandate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "e-mandates",
+                ":mandate_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mandate_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3895a336-f723-4581-ba30-40874f5ab21f",
+              "name": "E-mandate details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "e-mandates",
+                    ":mandate_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandate_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"rum\": \"string\",\n  \"customer_id\": \"string\",\n  \"iban\": \"string\",\n  \"holder_name\": \"string\",\n  \"type\": \"recurring\",\n  \"scheme\": \"SEPA-B2B\",\n  \"status\": \"revoked\",\n  \"signed_at\": \"1963-08-31T09:59:20.634Z\",\n  \"created_at\": \"2005-11-13T23:03:16.935Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69275fe3-19c3-4ff4-a56a-38245c489050",
+          "name": "Update An E-Mandate",
+          "request": {
+            "name": "Update An E-Mandate",
+            "description": {
+              "content": "Update a customer e-mandate. Only status updates are allowed. Accepted statuses are 'cancelled' and 'revoked'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "e-mandates",
+                ":mandate_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mandate_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0bb342f5-4c73-4bcf-baf2-5c7e6d719c48",
+              "name": "E-mandate updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "e-mandates",
+                    ":mandate_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandate_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"rum\": \"string\",\n  \"customer_id\": \"string\",\n  \"iban\": \"string\",\n  \"holder_name\": \"string\",\n  \"type\": \"recurring\",\n  \"scheme\": \"SEPA-B2B\",\n  \"status\": \"revoked\",\n  \"signed_at\": \"1963-08-31T09:59:20.634Z\",\n  \"created_at\": \"2005-11-13T23:03:16.935Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d4d74378-aae6-4b32-8c61-57ab93e1ca88",
+    "name": "Fintecture E-Mandates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create, list, retrieve, update (cancel/revoke), and manage SEPA-style customer e-mandates identified by a unique Reference Unique Mandate (RUM). Duplicate RUM submissions return 409 Conflict. Requires a dedicated E-Mandate access token.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

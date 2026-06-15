@@ -1,0 +1,362 @@
+{
+  "info": {
+    "_postman_id": "726aaf81-91bb-4373-9edf-1af54b6e3ace",
+    "name": "Fintecture Transactions and Settlements API",
+    "description": "Inspect transactions and settlements. Settlements are outgoing payments from the merchant's Local Acquiring account to the merchant's own bank account. The sandbox exposes an additional /v1/transactions/simulate endpoint for testing webhook and event flows.\n\n\nContact Support:\n Name: Fintecture Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:45.000Z",
+    "updatedAt": "2026-06-05T15:08:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-726aaf81-91bb-4373-9edf-1af54b6e3ace"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "transactions",
+          "item": [
+            {
+              "name": "{transaction_id}",
+              "item": [
+                {
+                  "name": "Get Specific Transaction",
+                  "id": "5020be0f-3ead-4675-94d1-5d84e05664d3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/transactions/:transaction_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "transactions",
+                        ":transaction_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b67bf310-c73d-499f-bb42-1914e8841f47",
+                          "key": "transaction_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3f367b6c-867a-48d4-9825-0b40ae7de922",
+                      "name": "Transaction details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/transactions/:transaction_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "transactions",
+                            ":transaction_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "transaction_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"type\": \"debit\",\n  \"status\": \"<string>\",\n  \"booking_date\": \"<date>\",\n  \"value_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"related_payment_id\": \"<string>\",\n  \"related_settlement_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:45.000Z",
+                      "updatedAt": "2026-06-05T15:08:45.000Z",
+                      "uid": "35240-3f367b6c-867a-48d4-9825-0b40ae7de922"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:45.000Z",
+                  "updatedAt": "2026-06-05T15:08:45.000Z",
+                  "uid": "35240-5020be0f-3ead-4675-94d1-5d84e05664d3"
+                }
+              ],
+              "id": "66019c05-dc3d-4730-a078-5190953dc32f",
+              "createdAt": "2026-06-05T15:08:45.000Z",
+              "updatedAt": "2026-06-05T15:08:45.000Z",
+              "uid": "35240-66019c05-dc3d-4730-a078-5190953dc32f"
+            },
+            {
+              "name": "simulate",
+              "item": [
+                {
+                  "name": "Simulate A Transaction",
+                  "id": "a6af97e5-ba91-43de-b620-74c627d7bfe2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"type\": \"debit\",\n  \"description\": \"<string>\",\n  \"bank_account_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/transactions/simulate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "transactions",
+                        "simulate"
+                      ]
+                    },
+                    "description": "Simulate a credit/debit transaction in the Sandbox environment. Use this to test webhook and event flows."
+                  },
+                  "response": [
+                    {
+                      "id": "8e13801d-78c6-4fa0-a8bc-78184ca01a38",
+                      "name": "Simulation result",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"type\": \"debit\",\n  \"description\": \"<string>\",\n  \"bank_account_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/transactions/simulate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "transactions",
+                            "simulate"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"type\": \"debit\",\n  \"status\": \"<string>\",\n  \"booking_date\": \"<date>\",\n  \"value_date\": \"<date>\",\n  \"description\": \"<string>\",\n  \"related_payment_id\": \"<string>\",\n  \"related_settlement_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:45.000Z",
+                      "updatedAt": "2026-06-05T15:08:45.000Z",
+                      "uid": "35240-8e13801d-78c6-4fa0-a8bc-78184ca01a38"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:45.000Z",
+                  "updatedAt": "2026-06-05T15:08:45.000Z",
+                  "uid": "35240-a6af97e5-ba91-43de-b620-74c627d7bfe2"
+                }
+              ],
+              "id": "89914ae6-d8cc-4ecd-99ee-425a389d47aa",
+              "createdAt": "2026-06-05T15:08:45.000Z",
+              "updatedAt": "2026-06-05T15:08:45.000Z",
+              "uid": "35240-89914ae6-d8cc-4ecd-99ee-425a389d47aa"
+            },
+            {
+              "name": "List All Transactions",
+              "id": "d993fb73-efea-40fe-ab25-497f07e4a05c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/transactions?filter[from]=<date>&filter[to]=<date>&filter[type]=credit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "transactions"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[from]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[to]",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter[type]",
+                      "value": "credit"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "3ccb0801-01ce-4fa9-8f00-fd64eaf01dfe",
+                  "name": "Transactions list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/transactions?filter[from]=<date>&filter[to]=<date>&filter[type]=credit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "transactions"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[from]",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "filter[to]",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "filter[type]",
+                          "value": "credit"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"type\": \"credit\",\n      \"status\": \"<string>\",\n      \"booking_date\": \"<date>\",\n      \"value_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"related_payment_id\": \"<string>\",\n      \"related_settlement_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"type\": \"debit\",\n      \"status\": \"<string>\",\n      \"booking_date\": \"<date>\",\n      \"value_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"related_payment_id\": \"<string>\",\n      \"related_settlement_id\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:08:45.000Z",
+                  "updatedAt": "2026-06-05T15:08:45.000Z",
+                  "uid": "35240-3ccb0801-01ce-4fa9-8f00-fd64eaf01dfe"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:45.000Z",
+              "updatedAt": "2026-06-05T15:08:45.000Z",
+              "uid": "35240-d993fb73-efea-40fe-ab25-497f07e4a05c"
+            }
+          ],
+          "id": "c1fb29b7-df7d-4cc3-865c-04c54f85c86c",
+          "createdAt": "2026-06-05T15:08:45.000Z",
+          "updatedAt": "2026-06-05T15:08:45.000Z",
+          "uid": "35240-c1fb29b7-df7d-4cc3-865c-04c54f85c86c"
+        }
+      ],
+      "id": "eb8d554b-4450-446f-8708-e11484673f50",
+      "createdAt": "2026-06-05T15:08:45.000Z",
+      "updatedAt": "2026-06-05T15:08:45.000Z",
+      "uid": "35240-eb8d554b-4450-446f-8708-e11484673f50"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fintecture.com"
+    }
+  ]
+}

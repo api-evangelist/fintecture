@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Resources API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/res/v1/providers",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the banks accessible for account data and payment initiation. The services available per bank are detailed under the `ais` and `pis` attributes — AIS values include Accountholders, Accounts, Transactions; PIS values include SEPA, iSCT, FPS, PLN, INT.\n"
+        },
+        {
+          "info": {
+            "name": "Get A Specific Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/res/v1/providers/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get A Specific Provider"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Test Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Test Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/res/v1/test-accounts"
+          },
+          "docs": "Retrieves test accounts by bank for use in the sandbox environment only."
+        },
+        {
+          "info": {
+            "name": "Get A Specific Test Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/res/v1/test-accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get A Specific Test Account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

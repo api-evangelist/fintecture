@@ -1,0 +1,1119 @@
+{
+  "info": {
+    "_postman_id": "65e80c50-1747-4b3f-977a-16dc40f16dd5",
+    "name": "Fintecture Account Information Services API",
+    "description": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:38.000Z",
+    "updatedAt": "2026-06-05T15:08:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-65e80c50-1747-4b3f-977a-16dc40f16dd5"
+  },
+  "item": [
+    {
+      "name": "ais",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "provider",
+              "item": [
+                {
+                  "name": "{provider_id}",
+                  "item": [
+                    {
+                      "name": "authorize",
+                      "item": [
+                        {
+                          "name": "decoupled",
+                          "item": [
+                            {
+                              "name": "Get Decoupled Provider Authorization",
+                              "id": "b9e9a72b-b0f5-4a9a-a207-55d74e43dbf6",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ais/v1/provider/:provider_id/authorize/decoupled?session_id=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ais",
+                                    "v1",
+                                    "provider",
+                                    ":provider_id",
+                                    "authorize",
+                                    "decoupled"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "session_id",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1b1568f5-5eee-4e16-9464-b6dd4a1fc96c",
+                                      "key": "provider_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Poll the authentication status within the decoupled model. Status moves from PENDING -> COMPLETED on success, or FAILED on timeout/cancellation.\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "4c579d16-5210-4266-a591-58f5ea2947d1",
+                                  "name": "Decoupled status",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ais/v1/provider/:provider_id/authorize/decoupled?session_id=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ais",
+                                        "v1",
+                                        "provider",
+                                        ":provider_id",
+                                        "authorize",
+                                        "decoupled"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) ",
+                                          "key": "session_id",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "provider_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"PENDING\",\n  \"code\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:08:39.000Z",
+                                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                                  "uid": "35240-4c579d16-5210-4266-a591-58f5ea2947d1"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:08:39.000Z",
+                              "updatedAt": "2026-06-05T15:08:39.000Z",
+                              "uid": "35240-b9e9a72b-b0f5-4a9a-a207-55d74e43dbf6"
+                            }
+                          ],
+                          "id": "fd462df2-eac5-4e11-b3eb-1e5aec9a4335",
+                          "createdAt": "2026-06-05T15:08:39.000Z",
+                          "updatedAt": "2026-06-05T15:08:39.000Z",
+                          "uid": "35240-fd462df2-eac5-4e11-b3eb-1e5aec9a4335"
+                        },
+                        {
+                          "name": "Get Provider Authorization",
+                          "id": "f7933fdc-89e7-4dad-ad2c-148a09b8df90",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ais/v1/provider/:provider_id/authorize?redirect_uri=<uri>&state=<string>&psu_type=corporate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ais",
+                                "v1",
+                                "provider",
+                                ":provider_id",
+                                "authorize"
+                              ],
+                              "query": [
+                                {
+                                  "key": "redirect_uri",
+                                  "value": "<uri>"
+                                },
+                                {
+                                  "key": "state",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "psu_type",
+                                  "value": "corporate"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9fff0c46-c118-445e-8f64-53a0f07c34d6",
+                                  "key": "provider_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Authenticates a PSU at their bank for AIS access. Returns either a redirect URL or triggers a decoupled authentication request on the PSU's bank mobile app, depending on the model the bank supports.\n"
+                          },
+                          "response": [
+                            {
+                              "id": "61de9afe-59a7-45ae-81a1-7c34b6abac94",
+                              "name": "Authorization details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ais/v1/provider/:provider_id/authorize?redirect_uri=<uri>&state=<string>&psu_type=corporate",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ais",
+                                    "v1",
+                                    "provider",
+                                    ":provider_id",
+                                    "authorize"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "redirect_uri",
+                                      "value": "<uri>"
+                                    },
+                                    {
+                                      "key": "state",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "psu_type",
+                                      "value": "corporate"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "provider_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"meta\": {\n    \"url\": \"<uri>\",\n    \"session_id\": \"<string>\",\n    \"decoupled\": \"<boolean>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:08:39.000Z",
+                              "updatedAt": "2026-06-05T15:08:39.000Z",
+                              "uid": "35240-61de9afe-59a7-45ae-81a1-7c34b6abac94"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:08:39.000Z",
+                          "updatedAt": "2026-06-05T15:08:39.000Z",
+                          "uid": "35240-f7933fdc-89e7-4dad-ad2c-148a09b8df90"
+                        }
+                      ],
+                      "id": "441aa8af-82e9-498f-bf29-ca984405d616",
+                      "createdAt": "2026-06-05T15:08:39.000Z",
+                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                      "uid": "35240-441aa8af-82e9-498f-bf29-ca984405d616"
+                    }
+                  ],
+                  "id": "b179ef05-1ad0-4999-b267-e3ede00c09ab",
+                  "createdAt": "2026-06-05T15:08:39.000Z",
+                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                  "uid": "35240-b179ef05-1ad0-4999-b267-e3ede00c09ab"
+                }
+              ],
+              "id": "c0f1f182-5b41-4916-aedc-262f5df3cb24",
+              "createdAt": "2026-06-05T15:08:39.000Z",
+              "updatedAt": "2026-06-05T15:08:39.000Z",
+              "uid": "35240-c0f1f182-5b41-4916-aedc-262f5df3cb24"
+            },
+            {
+              "name": "customer",
+              "item": [
+                {
+                  "name": "{customer_id}",
+                  "item": [
+                    {
+                      "name": "accounts",
+                      "item": [
+                        {
+                          "name": "Get All Accounts",
+                          "id": "b09859c1-0c8e-4055-b9da-a81c332a9871",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/accounts",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ais",
+                                "v1",
+                                "customer",
+                                ":customer_id",
+                                "accounts"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "76faf738-ddeb-4551-9ce8-3252fa224ec8",
+                                  "key": "customer_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Returns all accounts linked to a specific connection."
+                          },
+                          "response": [
+                            {
+                              "id": "0493ac08-4fcc-438c-abc1-4b246c6d49ce",
+                              "name": "Accounts list",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/accounts",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ais",
+                                    "v1",
+                                    "customer",
+                                    ":customer_id",
+                                    "accounts"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "customer_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"balances\": [\n        {\n          \"type\": \"current\",\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"timestamp\": \"<dateTime>\"\n        },\n        {\n          \"type\": \"closingBooked\",\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"timestamp\": \"<dateTime>\"\n        }\n      ],\n      \"type\": \"LOAN\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"balances\": [\n        {\n          \"type\": \"expected\",\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"timestamp\": \"<dateTime>\"\n        },\n        {\n          \"type\": \"available\",\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"timestamp\": \"<dateTime>\"\n        }\n      ],\n      \"type\": \"OTHR\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:08:39.000Z",
+                              "updatedAt": "2026-06-05T15:08:39.000Z",
+                              "uid": "35240-0493ac08-4fcc-438c-abc1-4b246c6d49ce"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:08:39.000Z",
+                          "updatedAt": "2026-06-05T15:08:39.000Z",
+                          "uid": "35240-b09859c1-0c8e-4055-b9da-a81c332a9871"
+                        }
+                      ],
+                      "id": "7f2d1139-5b81-40ac-aa5a-c8af568380bb",
+                      "createdAt": "2026-06-05T15:08:39.000Z",
+                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                      "uid": "35240-7f2d1139-5b81-40ac-aa5a-c8af568380bb"
+                    },
+                    {
+                      "name": "account",
+                      "item": [
+                        {
+                          "name": "{account_id}",
+                          "item": [
+                            {
+                              "name": "holders",
+                              "item": [
+                                {
+                                  "name": "Get Account Holders",
+                                  "id": "358dfe16-a827-4d80-96ba-39f4839442ec",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/account/:account_id/holders",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ais",
+                                        "v1",
+                                        "customer",
+                                        ":customer_id",
+                                        "account",
+                                        ":account_id",
+                                        "holders"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "3777192b-bb58-4a88-9263-a3f49f0df414",
+                                          "key": "customer_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "1fc43d63-1aed-4ab1-93a4-88aa778c25ab",
+                                          "key": "account_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Retrieves personal information of beneficiary owners \u2014 name, address, contact details."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "d7ec07cf-94c6-4ff1-bca4-8c2a5ea5e537",
+                                      "name": "Holders list",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/account/:account_id/holders",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "ais",
+                                            "v1",
+                                            "customer",
+                                            ":customer_id",
+                                            "account",
+                                            ":account_id",
+                                            "holders"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "customer_id"
+                                            },
+                                            {
+                                              "key": "account_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-06-05T15:08:39.000Z",
+                                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                                      "uid": "35240-d7ec07cf-94c6-4ff1-bca4-8c2a5ea5e537"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:08:39.000Z",
+                                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                                  "uid": "35240-358dfe16-a827-4d80-96ba-39f4839442ec"
+                                }
+                              ],
+                              "id": "ff8979ed-091a-430a-95ad-c8e7f1675703",
+                              "createdAt": "2026-06-05T15:08:39.000Z",
+                              "updatedAt": "2026-06-05T15:08:39.000Z",
+                              "uid": "35240-ff8979ed-091a-430a-95ad-c8e7f1675703"
+                            },
+                            {
+                              "name": "transactions",
+                              "item": [
+                                {
+                                  "name": "Get Account Transactions",
+                                  "id": "473a210c-4d48-496b-918d-e98efe88b5a5",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/account/:account_id/transactions?from=<date>&to=<date>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ais",
+                                        "v1",
+                                        "customer",
+                                        ":customer_id",
+                                        "account",
+                                        ":account_id",
+                                        "transactions"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "from",
+                                          "value": "<date>"
+                                        },
+                                        {
+                                          "key": "to",
+                                          "value": "<date>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "06d9092d-3c49-4403-8a31-3e9882738989",
+                                          "key": "customer_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "93273d47-9b2f-4c19-9580-b7dc7cf4fb43",
+                                          "key": "account_id",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "Returns all transactions linked to the requested account."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "add2f94e-9106-434c-9219-d5bec874c083",
+                                      "name": "Transaction list",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/account/:account_id/transactions?from=<date>&to=<date>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "ais",
+                                            "v1",
+                                            "customer",
+                                            ":customer_id",
+                                            "account",
+                                            ":account_id",
+                                            "transactions"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "from",
+                                              "value": "<date>"
+                                            },
+                                            {
+                                              "key": "to",
+                                              "value": "<date>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "customer_id"
+                                            },
+                                            {
+                                              "key": "account_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"booking_date\": \"<date>\",\n      \"value_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"type\": \"credit\",\n      \"counterparty\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"booking_date\": \"<date>\",\n      \"value_date\": \"<date>\",\n      \"description\": \"<string>\",\n      \"type\": \"debit\",\n      \"counterparty\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"count\": \"<integer>\"\n  }\n}",
+                                      "createdAt": "2026-06-05T15:08:39.000Z",
+                                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                                      "uid": "35240-add2f94e-9106-434c-9219-d5bec874c083"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:08:39.000Z",
+                                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                                  "uid": "35240-473a210c-4d48-496b-918d-e98efe88b5a5"
+                                }
+                              ],
+                              "id": "a6011f80-5099-49dc-a6c6-060bc55a33ad",
+                              "createdAt": "2026-06-05T15:08:39.000Z",
+                              "updatedAt": "2026-06-05T15:08:39.000Z",
+                              "uid": "35240-a6011f80-5099-49dc-a6c6-060bc55a33ad"
+                            },
+                            {
+                              "name": "Get Specific Account",
+                              "id": "885833fb-edd1-480e-9808-5b6f72160ff3",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/account/:account_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "ais",
+                                    "v1",
+                                    "customer",
+                                    ":customer_id",
+                                    "account",
+                                    ":account_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "989eb026-1ca2-484b-bb17-b4c9fffb4cb6",
+                                      "key": "customer_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "d36a2991-1fc0-488c-aa27-4fed53036bec",
+                                      "key": "account_id",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "Returns information for a specific account."
+                              },
+                              "response": [
+                                {
+                                  "id": "9ff9d3be-5bbd-4ecd-aeca-84597f6957b0",
+                                  "name": "Account details",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/ais/v1/customer/:customer_id/account/:account_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "ais",
+                                        "v1",
+                                        "customer",
+                                        ":customer_id",
+                                        "account",
+                                        ":account_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "customer_id"
+                                        },
+                                        {
+                                          "key": "account_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"balances\": [\n    {\n      \"type\": \"current\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"timestamp\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"closingBooked\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"timestamp\": \"<dateTime>\"\n    }\n  ],\n  \"type\": \"LOAN\"\n}",
+                                  "createdAt": "2026-06-05T15:08:39.000Z",
+                                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                                  "uid": "35240-9ff9d3be-5bbd-4ecd-aeca-84597f6957b0"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:08:39.000Z",
+                              "updatedAt": "2026-06-05T15:08:39.000Z",
+                              "uid": "35240-885833fb-edd1-480e-9808-5b6f72160ff3"
+                            }
+                          ],
+                          "id": "d814dd69-d3b1-43cd-962b-793dfb094e1f",
+                          "createdAt": "2026-06-05T15:08:39.000Z",
+                          "updatedAt": "2026-06-05T15:08:39.000Z",
+                          "uid": "35240-d814dd69-d3b1-43cd-962b-793dfb094e1f"
+                        }
+                      ],
+                      "id": "1ee2b576-0db7-4c30-a06e-763e3144b33b",
+                      "createdAt": "2026-06-05T15:08:39.000Z",
+                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                      "uid": "35240-1ee2b576-0db7-4c30-a06e-763e3144b33b"
+                    },
+                    {
+                      "name": "Delete Provider Connection",
+                      "id": "3c660fd0-5090-4c0c-a5ef-c56922e1d41f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/ais/v1/customer/:customer_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ais",
+                            "v1",
+                            "customer",
+                            ":customer_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5b146ed1-b587-4a3b-bf99-179a1796bfec",
+                              "key": "customer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Deletes all active access tokens and PSU data linked to the requested connection."
+                      },
+                      "response": [
+                        {
+                          "id": "aac618a2-66c5-417a-b9e8-09324cda6e57",
+                          "name": "Connection deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ais/v1/customer/:customer_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ais",
+                                "v1",
+                                "customer",
+                                ":customer_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:08:39.000Z",
+                          "updatedAt": "2026-06-05T15:08:39.000Z",
+                          "uid": "35240-aac618a2-66c5-417a-b9e8-09324cda6e57"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:39.000Z",
+                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                      "uid": "35240-3c660fd0-5090-4c0c-a5ef-c56922e1d41f"
+                    }
+                  ],
+                  "id": "2f199099-7405-4ce3-85ca-e8a3d68b0fe5",
+                  "createdAt": "2026-06-05T15:08:39.000Z",
+                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                  "uid": "35240-2f199099-7405-4ce3-85ca-e8a3d68b0fe5"
+                }
+              ],
+              "id": "57459e57-86e2-489a-8e41-5e7120822480",
+              "createdAt": "2026-06-05T15:08:39.000Z",
+              "updatedAt": "2026-06-05T15:08:39.000Z",
+              "uid": "35240-57459e57-86e2-489a-8e41-5e7120822480"
+            },
+            {
+              "name": "verification",
+              "item": [
+                {
+                  "name": "Create AIS Identity Verification",
+                  "id": "41215447-2b4f-4d0f-a2d4-b4bfaa35d7d1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"provider_id\": \"<string>\",\n      \"expected_name\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ais/v1/verification",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ais",
+                        "v1",
+                        "verification"
+                      ]
+                    },
+                    "description": "Identity verification based on AIS capabilities."
+                  },
+                  "response": [
+                    {
+                      "id": "6d065e1f-44d9-4574-adb1-c82f5bfcb17a",
+                      "name": "Verification result",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"provider_id\": \"<string>\",\n      \"expected_name\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ais/v1/verification",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ais",
+                            "v1",
+                            "verification"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"unverified\",\n  \"match_score\": \"<number>\",\n  \"verified_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:08:39.000Z",
+                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                      "uid": "35240-6d065e1f-44d9-4574-adb1-c82f5bfcb17a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:39.000Z",
+                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                  "uid": "35240-41215447-2b4f-4d0f-a2d4-b4bfaa35d7d1"
+                }
+              ],
+              "id": "10e6ea34-7628-4d3f-8f5f-473c081d98ac",
+              "createdAt": "2026-06-05T15:08:39.000Z",
+              "updatedAt": "2026-06-05T15:08:39.000Z",
+              "uid": "35240-10e6ea34-7628-4d3f-8f5f-473c081d98ac"
+            }
+          ],
+          "id": "8c229cfb-cd00-4027-97a7-318d804ebc39",
+          "createdAt": "2026-06-05T15:08:39.000Z",
+          "updatedAt": "2026-06-05T15:08:39.000Z",
+          "uid": "35240-8c229cfb-cd00-4027-97a7-318d804ebc39"
+        },
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "connect",
+              "item": [
+                {
+                  "name": "Get AIS Connect Session",
+                  "id": "336bc018-99b6-48c8-8cd4-09f70258c9c8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ais/v2/connect?redirect_uri=<uri>&state=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ais",
+                        "v2",
+                        "connect"
+                      ],
+                      "query": [
+                        {
+                          "key": "redirect_uri",
+                          "value": "<uri>"
+                        },
+                        {
+                          "key": "state",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Provides a connect session for a PSU to create a connection enabling AIS access."
+                  },
+                  "response": [
+                    {
+                      "id": "73211544-c344-4416-ad5f-6cc975ee8fea",
+                      "name": "Connect session URL",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ais/v2/connect?redirect_uri=<uri>&state=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ais",
+                            "v2",
+                            "connect"
+                          ],
+                          "query": [
+                            {
+                              "key": "redirect_uri",
+                              "value": "<uri>"
+                            },
+                            {
+                              "key": "state",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"meta\": {\n    \"session_id\": \"<string>\",\n    \"url\": \"<uri>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:39.000Z",
+                      "updatedAt": "2026-06-05T15:08:39.000Z",
+                      "uid": "35240-73211544-c344-4416-ad5f-6cc975ee8fea"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:39.000Z",
+                  "updatedAt": "2026-06-05T15:08:39.000Z",
+                  "uid": "35240-336bc018-99b6-48c8-8cd4-09f70258c9c8"
+                }
+              ],
+              "id": "dd665f75-ba7b-4248-ad14-dee9de9d50d2",
+              "createdAt": "2026-06-05T15:08:39.000Z",
+              "updatedAt": "2026-06-05T15:08:39.000Z",
+              "uid": "35240-dd665f75-ba7b-4248-ad14-dee9de9d50d2"
+            }
+          ],
+          "id": "61d2f4ba-5fc4-4e38-8175-b90a5b86e47e",
+          "createdAt": "2026-06-05T15:08:39.000Z",
+          "updatedAt": "2026-06-05T15:08:39.000Z",
+          "uid": "35240-61d2f4ba-5fc4-4e38-8175-b90a5b86e47e"
+        }
+      ],
+      "id": "451e17d0-8b9b-47c4-9fcc-95bc4c9939cd",
+      "createdAt": "2026-06-05T15:08:39.000Z",
+      "updatedAt": "2026-06-05T15:08:39.000Z",
+      "uid": "35240-451e17d0-8b9b-47c4-9fcc-95bc4c9939cd"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fintecture.com"
+    }
+  ]
+}

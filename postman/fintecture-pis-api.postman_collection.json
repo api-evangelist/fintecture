@@ -1,0 +1,1365 @@
+{
+  "info": {
+    "_postman_id": "b64c3e3a-0254-45ce-8582-ea3bd508d1c2",
+    "name": "Fintecture Payment Initiation Services API",
+    "description": "PSD2 Payment Initiation Services exposed by Fintecture: Immediate Transfer, Smart Transfer (auto-reconciled via merchant-allocated virtual IBANs), Request To Pay (payment links via email/SMS/QR), Buy Now Pay Later, Verified Payout, and Immediate Refund. The /pis/v2/connect endpoint serves all three payment types and supports mixing them in the same session via the Payment Hub.\n\n\nContact Support:\n Name: Fintecture Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:37.000Z",
+    "updatedAt": "2026-06-05T15:08:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b64c3e3a-0254-45ce-8582-ea3bd508d1c2"
+  },
+  "item": [
+    {
+      "name": "pis",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "connect",
+              "item": [
+                {
+                  "name": "Create A Payment Session",
+                  "id": "4c5b60e2-5510-4894-a9ed-8504e1716596",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                        "key": "Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                        "key": "Digest",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                        "key": "x-request-id",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"type\": \"PIS\",\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"GBP\",\n      \"communication\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"end_to_end_id\": \"<string>\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\"\n      },\n      \"payment_method\": \"bnpl\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pis/v2/connect",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pis",
+                        "v2",
+                        "connect"
+                      ]
+                    },
+                    "description": "Creates a payment session for a PSU to initiate an Immediate Transfer, Smart Transfer, or Buy Now Pay Later payment. To mix them in a single session, use the Payment Hub semantics. Signature, digest, date and x-request-id headers are mandatory in production.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "7469deee-42e1-4fca-a1e8-14d5c2590750",
+                      "name": "Connect URL returned",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                            "key": "Signature",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                            "key": "Digest",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) ",
+                            "key": "Date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                            "key": "x-request-id",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"type\": \"PIS\",\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"GBP\",\n      \"communication\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"end_to_end_id\": \"<string>\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\"\n      },\n      \"payment_method\": \"bnpl\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/connect",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "connect"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"meta\": {\n    \"session_id\": \"<string>\",\n    \"status\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"code\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-7469deee-42e1-4fca-a1e8-14d5c2590750"
+                    },
+                    {
+                      "id": "587e2387-79fd-4045-be5a-e98d9a5614df",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                            "key": "Signature",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                            "key": "Digest",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) ",
+                            "key": "Date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                            "key": "x-request-id",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"type\": \"PIS\",\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"GBP\",\n      \"communication\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"end_to_end_id\": \"<string>\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\"\n      },\n      \"payment_method\": \"bnpl\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/connect",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "connect"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-587e2387-79fd-4045-be5a-e98d9a5614df"
+                    },
+                    {
+                      "id": "9563701d-1021-4233-a104-a952fdef8668",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                            "key": "Signature",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                            "key": "Digest",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) ",
+                            "key": "Date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                            "key": "x-request-id",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"type\": \"PIS\",\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"GBP\",\n      \"communication\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"end_to_end_id\": \"<string>\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\"\n      },\n      \"payment_method\": \"bnpl\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/connect",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "connect"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-9563701d-1021-4233-a104-a952fdef8668"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-4c5b60e2-5510-4894-a9ed-8504e1716596"
+                }
+              ],
+              "id": "c766ddea-4f1c-450b-97aa-eeb0f5baa98f",
+              "createdAt": "2026-06-05T15:08:38.000Z",
+              "updatedAt": "2026-06-05T15:08:38.000Z",
+              "uid": "35240-c766ddea-4f1c-450b-97aa-eeb0f5baa98f"
+            },
+            {
+              "name": "payments",
+              "item": [
+                {
+                  "name": "{payment_id}",
+                  "item": [
+                    {
+                      "name": "refunds",
+                      "item": [
+                        {
+                          "name": "Get Payment Refunds",
+                          "id": "20a9ad74-6409-4708-bc1b-55d3e955f509",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pis/v2/payments/:payment_id/refunds",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pis",
+                                "v2",
+                                "payments",
+                                ":payment_id",
+                                "refunds"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "efd0d068-abb7-42dd-801f-c08d74a671c0",
+                                  "key": "payment_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "List all refunds related to a specific payment."
+                          },
+                          "response": [
+                            {
+                              "id": "55cd1c74-018e-429c-985b-42ac3b602a7f",
+                              "name": "Refund list",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/pis/v2/payments/:payment_id/refunds",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "pis",
+                                    "v2",
+                                    "payments",
+                                    ":payment_id",
+                                    "refunds"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "payment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"status\": \"<string>\",\n      \"original_payment_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"status\": \"<string>\",\n      \"original_payment_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:08:38.000Z",
+                              "updatedAt": "2026-06-05T15:08:38.000Z",
+                              "uid": "35240-55cd1c74-018e-429c-985b-42ac3b602a7f"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:08:38.000Z",
+                          "updatedAt": "2026-06-05T15:08:38.000Z",
+                          "uid": "35240-20a9ad74-6409-4708-bc1b-55d3e955f509"
+                        }
+                      ],
+                      "id": "f4af8c98-c91a-4df0-9da8-169018cf1741",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-f4af8c98-c91a-4df0-9da8-169018cf1741"
+                    },
+                    {
+                      "name": "Get Specific Payment",
+                      "id": "d9707f65-ff94-4f5e-bbcb-a0a2f116b184",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/payments/:payment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "payments",
+                            ":payment_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "955014c9-dac1-42d2-ad4b-dbbf1a60fed3",
+                              "key": "payment_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Detailed information for a specific payment session."
+                      },
+                      "response": [
+                        {
+                          "id": "3915013e-d80c-4a99-9736-436144acd12a",
+                          "name": "Payment details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pis/v2/payments/:payment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pis",
+                                "v2",
+                                "payments",
+                                ":payment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"PIS\",\n  \"attributes\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"EUR\",\n    \"communication\": \"<string>\",\n    \"customer_id\": \"<string>\",\n    \"end_to_end_id\": \"<string>\",\n    \"beneficiary\": {\n      \"name\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\"\n    },\n    \"payment_method\": \"immediate_transfer\"\n  },\n  \"status\": \"payment_failed\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:08:38.000Z",
+                          "updatedAt": "2026-06-05T15:08:38.000Z",
+                          "uid": "35240-3915013e-d80c-4a99-9736-436144acd12a"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-d9707f65-ff94-4f5e-bbcb-a0a2f116b184"
+                    },
+                    {
+                      "name": "Update A Payment",
+                      "id": "43a9ae85-231f-4ea6-ae02-ec85b6722895",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/payments/:payment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "payments",
+                            ":payment_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "49c7c8eb-a954-4de4-be48-69e440189a79",
+                              "key": "payment_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Modify information on a specific payment."
+                      },
+                      "response": [
+                        {
+                          "id": "9c421afc-32e5-4b5f-a0af-afa5214dfbb7",
+                          "name": "Updated payment",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/pis/v2/payments/:payment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pis",
+                                "v2",
+                                "payments",
+                                ":payment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"PIS\",\n  \"attributes\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"EUR\",\n    \"communication\": \"<string>\",\n    \"customer_id\": \"<string>\",\n    \"end_to_end_id\": \"<string>\",\n    \"beneficiary\": {\n      \"name\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\"\n    },\n    \"payment_method\": \"immediate_transfer\"\n  },\n  \"status\": \"payment_failed\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:08:38.000Z",
+                          "updatedAt": "2026-06-05T15:08:38.000Z",
+                          "uid": "35240-9c421afc-32e5-4b5f-a0af-afa5214dfbb7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-43a9ae85-231f-4ea6-ae02-ec85b6722895"
+                    }
+                  ],
+                  "id": "74e5cc6c-139c-475f-b506-c3281282b487",
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-74e5cc6c-139c-475f-b506-c3281282b487"
+                },
+                {
+                  "name": "Get All Payments",
+                  "id": "9d700c3c-918b-4328-b252-87e793a40075",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pis/v2/payments?filter[status]=<string>&filter[from]=<date>&filter[to]=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pis",
+                        "v2",
+                        "payments"
+                      ],
+                      "query": [
+                        {
+                          "key": "filter[status]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "filter[from]",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "filter[to]",
+                          "value": "<date>"
+                        }
+                      ]
+                    },
+                    "description": "List all payments linked to the calling application. Supports filters."
+                  },
+                  "response": [
+                    {
+                      "id": "f5bc52da-ecc8-460a-96da-bf224164db70",
+                      "name": "Payment list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/payments?filter[status]=<string>&filter[from]=<date>&filter[to]=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "payments"
+                          ],
+                          "query": [
+                            {
+                              "key": "filter[status]",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "filter[from]",
+                              "value": "<date>"
+                            },
+                            {
+                              "key": "filter[to]",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"PIS\",\n      \"attributes\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"EUR\",\n        \"communication\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"end_to_end_id\": \"<string>\",\n        \"beneficiary\": {\n          \"name\": \"<string>\",\n          \"iban\": \"<string>\",\n          \"bic\": \"<string>\"\n        },\n        \"payment_method\": \"immediate_transfer\"\n      },\n      \"status\": \"payment_rejected\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"PIS\",\n      \"attributes\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"EUR\",\n        \"communication\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"end_to_end_id\": \"<string>\",\n        \"beneficiary\": {\n          \"name\": \"<string>\",\n          \"iban\": \"<string>\",\n          \"bic\": \"<string>\"\n        },\n        \"payment_method\": \"smart_transfer\"\n      },\n      \"status\": \"payment_rejected\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"meta\": {\n    \"count\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-f5bc52da-ecc8-460a-96da-bf224164db70"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-9d700c3c-918b-4328-b252-87e793a40075"
+                }
+              ],
+              "id": "29c7642c-ba7f-4610-aa9b-9a7a273e90b2",
+              "createdAt": "2026-06-05T15:08:38.000Z",
+              "updatedAt": "2026-06-05T15:08:38.000Z",
+              "uid": "35240-29c7642c-ba7f-4610-aa9b-9a7a273e90b2"
+            },
+            {
+              "name": "refund",
+              "item": [
+                {
+                  "name": "Create A Refund",
+                  "id": "160dfb0a-21b5-4554-b3f0-a2252fd8cce1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"meta\": {\n    \"session_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pis/v2/refund",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pis",
+                        "v2",
+                        "refund"
+                      ]
+                    },
+                    "description": "Initiate a refund. Refunds may be full or partial. By default the refund is sent to the original payment account, but a payout account may be specified instead.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "6a6eb2b7-655d-49da-8537-ec8a2555782c",
+                      "name": "Refund created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"session_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "refund"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"original_payment_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-6a6eb2b7-655d-49da-8537-ec8a2555782c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-160dfb0a-21b5-4554-b3f0-a2252fd8cce1"
+                }
+              ],
+              "id": "9a7bd013-6e0e-4d79-a465-a98d9c15d4c5",
+              "createdAt": "2026-06-05T15:08:38.000Z",
+              "updatedAt": "2026-06-05T15:08:38.000Z",
+              "uid": "35240-9a7bd013-6e0e-4d79-a465-a98d9c15d4c5"
+            },
+            {
+              "name": "request-to-pay",
+              "item": [
+                {
+                  "name": "Create A Request To Pay",
+                  "id": "9681bfa1-ca3a-450a-881b-2de6f1e5529c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                        "key": "Signature",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                        "key": "Digest",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "Date",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                        "key": "x-request-id",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"type\": \"PIS\",\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"PLN\",\n      \"communication\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"end_to_end_id\": \"<string>\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\"\n      },\n      \"payment_method\": \"bnpl\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pis/v2/request-to-pay",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pis",
+                        "v2",
+                        "request-to-pay"
+                      ]
+                    },
+                    "description": "Generate a Fintecture payment link. Link can be returned in the response and/or delivered to the customer by email or SMS. Same endpoint backs Immediate Transfer, Smart Transfer, and Buy Now Pay Later.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "66cedf30-c4dd-4b4d-ba87-c7b205e1e56a",
+                      "name": "Request to pay created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                            "key": "Signature",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                            "key": "Digest",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) ",
+                            "key": "Date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                            "key": "x-request-id",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"type\": \"PIS\",\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"PLN\",\n      \"communication\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"end_to_end_id\": \"<string>\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\"\n      },\n      \"payment_method\": \"bnpl\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/request-to-pay",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "request-to-pay"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"meta\": {\n    \"session_id\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"link_id\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-66cedf30-c4dd-4b4d-ba87-c7b205e1e56a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-9681bfa1-ca3a-450a-881b-2de6f1e5529c"
+                }
+              ],
+              "id": "1d05ae21-48ef-4b7a-845f-dadcc1e83902",
+              "createdAt": "2026-06-05T15:08:38.000Z",
+              "updatedAt": "2026-06-05T15:08:38.000Z",
+              "uid": "35240-1d05ae21-48ef-4b7a-845f-dadcc1e83902"
+            },
+            {
+              "name": "request-for-payout",
+              "item": [
+                {
+                  "name": "Create A Request For Payout",
+                  "id": "f4cafa8d-fb23-47de-aadc-22e6083ebb8a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/pis/v2/request-for-payout",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pis",
+                        "v2",
+                        "request-for-payout"
+                      ]
+                    },
+                    "description": "Create a request for payout that the merchant can share with a customer for asynchronous payout."
+                  },
+                  "response": [
+                    {
+                      "id": "42a55456-ced3-4bf1-a2c6-856b4cd94355",
+                      "name": "Request for payout created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/request-for-payout",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "request-for-payout"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"meta\": {\n    \"session_id\": \"<string>\",\n    \"status\": \"<string>\",\n    \"url\": \"<uri>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-42a55456-ced3-4bf1-a2c6-856b4cd94355"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-f4cafa8d-fb23-47de-aadc-22e6083ebb8a"
+                }
+              ],
+              "id": "1e7fd7c9-3514-4815-b528-e7d53f0db7c0",
+              "createdAt": "2026-06-05T15:08:38.000Z",
+              "updatedAt": "2026-06-05T15:08:38.000Z",
+              "uid": "35240-1e7fd7c9-3514-4815-b528-e7d53f0db7c0"
+            },
+            {
+              "name": "settlements",
+              "item": [
+                {
+                  "name": "{settlement_id}",
+                  "item": [
+                    {
+                      "name": "Get Specific Settlement",
+                      "id": "f3feb312-15f2-4ccd-9e1d-566b5c91a208",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/settlements/:settlement_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "settlements",
+                            ":settlement_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "98dfd843-3e0a-46d1-98e7-aa52bd09573c",
+                              "key": "settlement_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Information about a specific settlement."
+                      },
+                      "response": [
+                        {
+                          "id": "b615ae86-1ab2-4f3b-ac29-e2288cbd2ad2",
+                          "name": "Settlement details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/pis/v2/settlements/:settlement_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "pis",
+                                "v2",
+                                "settlements",
+                                ":settlement_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "settlement_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"settled_at\": \"<dateTime>\",\n  \"beneficiary_iban\": \"<string>\",\n  \"transactions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-06-05T15:08:38.000Z",
+                          "updatedAt": "2026-06-05T15:08:38.000Z",
+                          "uid": "35240-b615ae86-1ab2-4f3b-ac29-e2288cbd2ad2"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-f3feb312-15f2-4ccd-9e1d-566b5c91a208"
+                    }
+                  ],
+                  "id": "2ba3441a-eb86-40f8-8098-d758ec21ac8b",
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-2ba3441a-eb86-40f8-8098-d758ec21ac8b"
+                },
+                {
+                  "name": "Get All Settlements",
+                  "id": "834951ec-f122-4db0-8dc4-8d62091a9e7b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pis/v2/settlements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pis",
+                        "v2",
+                        "settlements"
+                      ]
+                    },
+                    "description": "List all disbursements from the merchant's Local Acquiring account."
+                  },
+                  "response": [
+                    {
+                      "id": "6239be62-98d4-420a-95fb-a4b6c80d8cbc",
+                      "name": "Settlements list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pis/v2/settlements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pis",
+                            "v2",
+                            "settlements"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"status\": \"<string>\",\n      \"settled_at\": \"<dateTime>\",\n      \"beneficiary_iban\": \"<string>\",\n      \"transactions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"status\": \"<string>\",\n      \"settled_at\": \"<dateTime>\",\n      \"beneficiary_iban\": \"<string>\",\n      \"transactions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:38.000Z",
+                      "updatedAt": "2026-06-05T15:08:38.000Z",
+                      "uid": "35240-6239be62-98d4-420a-95fb-a4b6c80d8cbc"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:38.000Z",
+                  "updatedAt": "2026-06-05T15:08:38.000Z",
+                  "uid": "35240-834951ec-f122-4db0-8dc4-8d62091a9e7b"
+                }
+              ],
+              "id": "d8e1d41c-6994-421c-804d-24e5261234c3",
+              "createdAt": "2026-06-05T15:08:38.000Z",
+              "updatedAt": "2026-06-05T15:08:38.000Z",
+              "uid": "35240-d8e1d41c-6994-421c-804d-24e5261234c3"
+            }
+          ],
+          "id": "0b8f1594-842e-447b-a1d9-9ca248dfabd2",
+          "createdAt": "2026-06-05T15:08:38.000Z",
+          "updatedAt": "2026-06-05T15:08:38.000Z",
+          "uid": "35240-0b8f1594-842e-447b-a1d9-9ca248dfabd2"
+        }
+      ],
+      "id": "8e76cba4-1bf3-40d3-81cd-5161c862af92",
+      "createdAt": "2026-06-05T15:08:38.000Z",
+      "updatedAt": "2026-06-05T15:08:38.000Z",
+      "uid": "35240-8e76cba4-1bf3-40d3-81cd-5161c862af92"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fintecture.com"
+    }
+  ]
+}

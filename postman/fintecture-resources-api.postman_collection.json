@@ -1,0 +1,432 @@
+{
+  "info": {
+    "_postman_id": "b4ab1186-5767-4a65-b79d-02deb523a365",
+    "name": "Fintecture Resources API",
+    "description": "Reference data. Lists the supported bank providers with their AIS capabilities (accountholders, accounts, transactions) and PIS rails (SEPA, iSCT, FPS, PLN, INT), plus sandbox test accounts available per bank.\n\n\nContact Support:\n Name: Fintecture Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:42.000Z",
+    "updatedAt": "2026-06-05T15:08:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b4ab1186-5767-4a65-b79d-02deb523a365"
+  },
+  "item": [
+    {
+      "name": "res",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "providers",
+              "item": [
+                {
+                  "name": "{provider_id}",
+                  "item": [
+                    {
+                      "name": "Get A Specific Provider",
+                      "id": "cde717be-1b72-40a7-9a02-153e6893c3ba",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/res/v1/providers/:provider_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "res",
+                            "v1",
+                            "providers",
+                            ":provider_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0e5a1dfd-7408-4579-a4cf-725ca1483539",
+                              "key": "provider_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "68c2aeb9-e739-4ced-84d0-5c25f80c5b65",
+                          "name": "Provider details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/res/v1/providers/:provider_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "res",
+                                "v1",
+                                "providers",
+                                ":provider_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "provider_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"country\": \"<string>\",\n  \"logo_url\": \"<uri>\",\n  \"auth_models\": [\n    \"redirect\",\n    \"redirect\"\n  ],\n  \"ais\": [\n    \"Transactions\",\n    \"Accountholders\"\n  ],\n  \"pis\": [\n    \"iSCT\",\n    \"INT\"\n  ],\n  \"psu_types\": [\n    \"retail\",\n    \"retail\"\n  ]\n}",
+                          "createdAt": "2026-06-05T15:08:43.000Z",
+                          "updatedAt": "2026-06-05T15:08:43.000Z",
+                          "uid": "35240-68c2aeb9-e739-4ced-84d0-5c25f80c5b65"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:43.000Z",
+                      "updatedAt": "2026-06-05T15:08:43.000Z",
+                      "uid": "35240-cde717be-1b72-40a7-9a02-153e6893c3ba"
+                    }
+                  ],
+                  "id": "3eaf2730-5b6f-4347-99b5-142e5632d511",
+                  "createdAt": "2026-06-05T15:08:43.000Z",
+                  "updatedAt": "2026-06-05T15:08:43.000Z",
+                  "uid": "35240-3eaf2730-5b6f-4347-99b5-142e5632d511"
+                },
+                {
+                  "name": "Get All Providers",
+                  "id": "5b8345d2-bbe5-48e5-9bb8-e566018a7592",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/res/v1/providers?country=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "res",
+                        "v1",
+                        "providers"
+                      ],
+                      "query": [
+                        {
+                          "key": "country",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the banks accessible for account data and payment initiation. The services available per bank are detailed under the `ais` and `pis` attributes \u2014 AIS values include Accountholders, Accounts, Transactions; PIS values include SEPA, iSCT, FPS, PLN, INT.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "5e4b0aa7-2c7e-43ba-91cc-8f1988c25a93",
+                      "name": "Providers list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/res/v1/providers?country=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "res",
+                            "v1",
+                            "providers"
+                          ],
+                          "query": [
+                            {
+                              "key": "country",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"logo_url\": \"<uri>\",\n      \"auth_models\": [\n        \"decoupled\",\n        \"decoupled\"\n      ],\n      \"ais\": [\n        \"Accounts\",\n        \"Accounts\"\n      ],\n      \"pis\": [\n        \"PLN\",\n        \"iSCT\"\n      ],\n      \"psu_types\": [\n        \"corporate\",\n        \"corporate\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"logo_url\": \"<uri>\",\n      \"auth_models\": [\n        \"redirect\",\n        \"redirect\"\n      ],\n      \"ais\": [\n        \"Accountholders\",\n        \"Accounts\"\n      ],\n      \"pis\": [\n        \"SEPA\",\n        \"iSCT\"\n      ],\n      \"psu_types\": [\n        \"retail\",\n        \"retail\"\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:43.000Z",
+                      "updatedAt": "2026-06-05T15:08:43.000Z",
+                      "uid": "35240-5e4b0aa7-2c7e-43ba-91cc-8f1988c25a93"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:43.000Z",
+                  "updatedAt": "2026-06-05T15:08:43.000Z",
+                  "uid": "35240-5b8345d2-bbe5-48e5-9bb8-e566018a7592"
+                }
+              ],
+              "id": "57aff8f3-64e5-4690-80ba-5dc4db7a60a4",
+              "createdAt": "2026-06-05T15:08:43.000Z",
+              "updatedAt": "2026-06-05T15:08:43.000Z",
+              "uid": "35240-57aff8f3-64e5-4690-80ba-5dc4db7a60a4"
+            },
+            {
+              "name": "test-accounts",
+              "item": [
+                {
+                  "name": "{account_id}",
+                  "item": [
+                    {
+                      "name": "Get A Specific Test Account",
+                      "id": "e26deae3-0a60-4f1a-8631-80f825fea457",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/res/v1/test-accounts/:account_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "res",
+                            "v1",
+                            "test-accounts",
+                            ":account_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c7f0fbd4-0409-4003-9077-2761902b9a48",
+                              "key": "account_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "764fe536-7dbe-452f-9575-3e1039b61ba7",
+                          "name": "Test account details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/res/v1/test-accounts/:account_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "res",
+                                "v1",
+                                "test-accounts",
+                                ":account_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"provider_id\": \"<string>\",\n  \"iban\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"balance\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:08:43.000Z",
+                          "updatedAt": "2026-06-05T15:08:43.000Z",
+                          "uid": "35240-764fe536-7dbe-452f-9575-3e1039b61ba7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:43.000Z",
+                      "updatedAt": "2026-06-05T15:08:43.000Z",
+                      "uid": "35240-e26deae3-0a60-4f1a-8631-80f825fea457"
+                    }
+                  ],
+                  "id": "884c3ba3-d101-4202-84ae-eaa7c314b625",
+                  "createdAt": "2026-06-05T15:08:43.000Z",
+                  "updatedAt": "2026-06-05T15:08:43.000Z",
+                  "uid": "35240-884c3ba3-d101-4202-84ae-eaa7c314b625"
+                },
+                {
+                  "name": "Get All Test Accounts",
+                  "id": "99baa57b-7553-47f5-89c3-c170f942d160",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/res/v1/test-accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "res",
+                        "v1",
+                        "test-accounts"
+                      ]
+                    },
+                    "description": "Retrieves test accounts by bank for use in the sandbox environment only."
+                  },
+                  "response": [
+                    {
+                      "id": "3d13e544-abd2-474a-8f5c-f5b189446372",
+                      "name": "Test accounts list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/res/v1/test-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "res",
+                            "v1",
+                            "test-accounts"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"holder_name\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"holder_name\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"currency\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:43.000Z",
+                      "updatedAt": "2026-06-05T15:08:43.000Z",
+                      "uid": "35240-3d13e544-abd2-474a-8f5c-f5b189446372"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:43.000Z",
+                  "updatedAt": "2026-06-05T15:08:43.000Z",
+                  "uid": "35240-99baa57b-7553-47f5-89c3-c170f942d160"
+                }
+              ],
+              "id": "1009a09e-953f-4953-b0df-357d5c6d4398",
+              "createdAt": "2026-06-05T15:08:43.000Z",
+              "updatedAt": "2026-06-05T15:08:43.000Z",
+              "uid": "35240-1009a09e-953f-4953-b0df-357d5c6d4398"
+            }
+          ],
+          "id": "c2466495-c2f5-496e-8323-f9254e379e73",
+          "createdAt": "2026-06-05T15:08:43.000Z",
+          "updatedAt": "2026-06-05T15:08:43.000Z",
+          "uid": "35240-c2466495-c2f5-496e-8323-f9254e379e73"
+        }
+      ],
+      "id": "55bff566-91f2-4522-8c52-21d487fd197f",
+      "createdAt": "2026-06-05T15:08:43.000Z",
+      "updatedAt": "2026-06-05T15:08:43.000Z",
+      "uid": "35240-55bff566-91f2-4522-8c52-21d487fd197f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fintecture.com"
+    }
+  ]
+}

@@ -1,0 +1,2658 @@
+{
+  "info": {
+    "_postman_id": "f7629f90-aef9-4633-be07-d48db547f384",
+    "name": "Fintecture Organisation Access Credentials API",
+    "description": "Beta multi-tenant management API. Manages Applications, Bank Accounts, Companies, Organisation Nodes (hierarchical tree), Memberships, and Users in the Fintecture Console. Requires an OAC (Organisation Access Credentials) access token with per-resource read/write scopes. Currently in beta and available only to selected clients.\n\n\nContact Support:\n Name: Fintecture Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:43.000Z",
+    "updatedAt": "2026-06-05T15:08:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f7629f90-aef9-4633-be07-d48db547f384"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "applications",
+          "item": [
+            {
+              "name": "current",
+              "item": [
+                {
+                  "name": "Get Current Application",
+                  "id": "5662f095-cca2-4553-ac88-4c7943714c2f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/applications/current",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "applications",
+                        "current"
+                      ]
+                    },
+                    "description": "Information related to the application used to sign the request."
+                  },
+                  "response": [
+                    {
+                      "id": "59675f1c-d4b2-4fbf-af9d-c7123587314e",
+                      "name": "Current application",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/applications/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "applications",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_public_key\": \"<string>\",\n  \"app_urls\": {\n    \"return_url\": \"<uri>\",\n    \"domain\": \"<string>\"\n  },\n  \"app_webhooks\": [\n    {\n      \"url\": \"<uri>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"url\": \"<uri>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-59675f1c-d4b2-4fbf-af9d-c7123587314e"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-5662f095-cca2-4553-ac88-4c7943714c2f"
+                }
+              ],
+              "id": "0e69c68e-1bf6-40ad-a177-7889043adcdb",
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-0e69c68e-1bf6-40ad-a177-7889043adcdb"
+            },
+            {
+              "name": "{app_id}",
+              "item": [
+                {
+                  "name": "Get An Application",
+                  "id": "a1410538-4143-4198-bfa4-ee1c36e5b7e5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/applications/:app_id?include=bank_accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "applications",
+                        ":app_id"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "bank_accounts"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "426dc68b-053e-4f7a-9482-fc782f03056c",
+                          "key": "app_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "62a8c24c-bcf6-47cd-868c-2db66ea61b95",
+                      "name": "Application",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/applications/:app_id?include=bank_accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "applications",
+                            ":app_id"
+                          ],
+                          "query": [
+                            {
+                              "key": "include",
+                              "value": "bank_accounts"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "app_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"app_name\": \"<string>\",\n  \"app_public_key\": \"<string>\",\n  \"app_urls\": {\n    \"return_url\": \"<uri>\",\n    \"domain\": \"<string>\"\n  },\n  \"app_webhooks\": [\n    {\n      \"url\": \"<uri>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"url\": \"<uri>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-62a8c24c-bcf6-47cd-868c-2db66ea61b95"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-a1410538-4143-4198-bfa4-ee1c36e5b7e5"
+                },
+                {
+                  "name": "Update Application",
+                  "id": "05eb7f50-5647-4036-8881-9d4fd00fb1a6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_urls\": {}\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/applications/:app_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "applications",
+                        ":app_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0e385014-26ca-417f-9496-c00280e723de",
+                          "key": "app_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Update app_name, app_webhooks, or app_urls. Requires `applications:write`."
+                  },
+                  "response": [
+                    {
+                      "id": "13292a7e-8b9a-4a83-b734-e0b0cc840209",
+                      "name": "Application updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_urls\": {}\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/applications/:app_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "applications",
+                            ":app_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "app_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-13292a7e-8b9a-4a83-b734-e0b0cc840209"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-05eb7f50-5647-4036-8881-9d4fd00fb1a6"
+                },
+                {
+                  "name": "Remove An Application",
+                  "id": "b6fd398d-1e38-47d0-8546-83c3eb7b3383",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/applications/:app_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "applications",
+                        ":app_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "530f7e6d-2c48-4057-975f-8bfe509505f4",
+                          "key": "app_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Removing an application is irreversible. Requires `applications:write`."
+                  },
+                  "response": [
+                    {
+                      "id": "3da596c6-1bcf-4b5d-8651-482d74f54476",
+                      "name": "Deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/applications/:app_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "applications",
+                            ":app_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "app_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-3da596c6-1bcf-4b5d-8651-482d74f54476"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-b6fd398d-1e38-47d0-8546-83c3eb7b3383"
+                }
+              ],
+              "id": "204ab3a5-2ec5-468a-aff9-860d4175efa4",
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-204ab3a5-2ec5-468a-aff9-860d4175efa4"
+            },
+            {
+              "name": "List Applications",
+              "id": "c3c47d35-1e12-4d20-8bd5-cd32605acf13",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/applications?include=bank_accounts&filter[company_id]=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "applications"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "bank_accounts"
+                    },
+                    {
+                      "key": "filter[company_id]",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "List applications linked to companies within the authenticated organisation's subtree. Requires `applications:read`."
+              },
+              "response": [
+                {
+                  "id": "3d764353-5c5e-4611-8e80-7da4356d3ae3",
+                  "name": "Applications list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/applications?include=bank_accounts&filter[company_id]=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "applications"
+                      ],
+                      "query": [
+                        {
+                          "key": "include",
+                          "value": "bank_accounts"
+                        },
+                        {
+                          "key": "filter[company_id]",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"app_name\": \"<string>\",\n      \"app_public_key\": \"<string>\",\n      \"app_urls\": {\n        \"return_url\": \"<uri>\",\n        \"domain\": \"<string>\"\n      },\n      \"app_webhooks\": [\n        {\n          \"url\": \"<uri>\",\n          \"events\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"url\": \"<uri>\",\n          \"events\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"app_name\": \"<string>\",\n      \"app_public_key\": \"<string>\",\n      \"app_urls\": {\n        \"return_url\": \"<uri>\",\n        \"domain\": \"<string>\"\n      },\n      \"app_webhooks\": [\n        {\n          \"url\": \"<uri>\",\n          \"events\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"url\": \"<uri>\",\n          \"events\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-3d764353-5c5e-4611-8e80-7da4356d3ae3"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-c3c47d35-1e12-4d20-8bd5-cd32605acf13"
+            },
+            {
+              "name": "Create Application",
+              "id": "e2c92ad9-3868-4560-837f-7f0ce694151c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"applications\",\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_public_key\": \"<string>\"\n    },\n    \"relationships\": {\n      \"bank_account\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"lid\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/applications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "applications"
+                  ]
+                },
+                "description": "Create a new application for a company within the authenticated organisation's subtree. Requires `applications:write`."
+              },
+              "response": [
+                {
+                  "id": "ce1f6bfa-56a2-4375-a58b-926edb8038a7",
+                  "name": "Application created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"type\": \"applications\",\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_public_key\": \"<string>\"\n    },\n    \"relationships\": {\n      \"bank_account\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"lid\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/applications",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "applications"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-ce1f6bfa-56a2-4375-a58b-926edb8038a7"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-e2c92ad9-3868-4560-837f-7f0ce694151c"
+            }
+          ],
+          "id": "d7a05d18-d074-459b-bb83-f3ca0c5c4b58",
+          "createdAt": "2026-06-05T15:08:44.000Z",
+          "updatedAt": "2026-06-05T15:08:44.000Z",
+          "uid": "35240-d7a05d18-d074-459b-bb83-f3ca0c5c4b58"
+        },
+        {
+          "name": "bank-accounts",
+          "item": [
+            {
+              "name": "{bank_account_id}",
+              "item": [
+                {
+                  "name": "Update Bank Account",
+                  "id": "7248a5bc-aa53-4d9c-9d09-9bea22711ca5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/bank-accounts/:bank_account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "bank-accounts",
+                        ":bank_account_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c2455958-2fb7-4378-8c01-2a0723ae970c",
+                          "key": "bank_account_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "270161e6-fc47-47c5-a464-474df0197d1f",
+                      "name": "Updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/bank-accounts/:bank_account_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "bank-accounts",
+                            ":bank_account_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "bank_account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-270161e6-fc47-47c5-a464-474df0197d1f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-7248a5bc-aa53-4d9c-9d09-9bea22711ca5"
+                },
+                {
+                  "name": "Delete Bank Account",
+                  "id": "f369b74e-3dc9-415f-95c9-637d007e447c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/bank-accounts/:bank_account_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "bank-accounts",
+                        ":bank_account_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1ab12efe-7ad7-48d2-990a-bb340a6b68be",
+                          "key": "bank_account_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b435639e-0e82-4453-89a5-40fcf8dc338a",
+                      "name": "Deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/bank-accounts/:bank_account_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "bank-accounts",
+                            ":bank_account_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "bank_account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-b435639e-0e82-4453-89a5-40fcf8dc338a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-f369b74e-3dc9-415f-95c9-637d007e447c"
+                }
+              ],
+              "id": "ce710691-3bf4-4fd0-a7cf-b925bc0e97a7",
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-ce710691-3bf4-4fd0-a7cf-b925bc0e97a7"
+            },
+            {
+              "name": "List Bank Accounts",
+              "id": "a88ef06f-a663-40a3-a692-f5ad189c62a6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/bank-accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "bank-accounts"
+                  ]
+                },
+                "description": "List bank accounts linked to companies in the authenticated organisation's subtree."
+              },
+              "response": [
+                {
+                  "id": "73f29ced-2731-4019-8531-291bc9c66def",
+                  "name": "Bank account list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/bank-accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "bank-accounts"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"holder_name\": \"<string>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"iban\": \"<string>\",\n      \"bic\": \"<string>\",\n      \"holder_name\": \"<string>\",\n      \"currency\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-73f29ced-2731-4019-8531-291bc9c66def"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-a88ef06f-a663-40a3-a692-f5ad189c62a6"
+            },
+            {
+              "name": "Create Bank Account",
+              "id": "a7e6497a-c79a-45cf-8679-ed38afe86ca3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/bank-accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "bank-accounts"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f1ab09fc-24f4-4ea9-8221-ded74ce8e9f6",
+                  "name": "Bank account created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/bank-accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "bank-accounts"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-f1ab09fc-24f4-4ea9-8221-ded74ce8e9f6"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-a7e6497a-c79a-45cf-8679-ed38afe86ca3"
+            }
+          ],
+          "id": "8bfe2f6d-a17d-4062-9462-f1dadb232f63",
+          "createdAt": "2026-06-05T15:08:44.000Z",
+          "updatedAt": "2026-06-05T15:08:44.000Z",
+          "uid": "35240-8bfe2f6d-a17d-4062-9462-f1dadb232f63"
+        },
+        {
+          "name": "companies",
+          "item": [
+            {
+              "name": "{company_id}",
+              "item": [
+                {
+                  "name": "Get A Company",
+                  "id": "447fab99-30df-44ae-a546-d0002ed913e0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/companies/:company_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "companies",
+                        ":company_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "82e8a9e1-6085-4031-835f-48a1dd557ef7",
+                          "key": "company_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "23931691-3f29-4947-ab5e-61b9bcbdbc6c",
+                      "name": "Company",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "company_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"incorporation\": {\n    \"siren\": \"<string>\",\n    \"vat\": \"<string>\",\n    \"hrb\": \"<string>\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-23931691-3f29-4947-ab5e-61b9bcbdbc6c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-447fab99-30df-44ae-a546-d0002ed913e0"
+                },
+                {
+                  "name": "Update Company",
+                  "id": "38d858f2-e0e1-445c-961d-6dc179a87b9a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"incorporation\": {\n    \"siren\": \"<string>\",\n    \"vat\": \"<string>\",\n    \"hrb\": \"<string>\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/companies/:company_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "companies",
+                        ":company_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "13ed245a-0f24-445b-9105-ca54ef3485c0",
+                          "key": "company_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b2cc4e75-72af-4447-bdc1-c7a773bd64c1",
+                      "name": "Updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"incorporation\": {\n    \"siren\": \"<string>\",\n    \"vat\": \"<string>\",\n    \"hrb\": \"<string>\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "company_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-b2cc4e75-72af-4447-bdc1-c7a773bd64c1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-38d858f2-e0e1-445c-961d-6dc179a87b9a"
+                },
+                {
+                  "name": "Remove Company",
+                  "id": "bf2afe49-28ad-4581-9b81-7e6a9583f81b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/companies/:company_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "companies",
+                        ":company_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6d512e52-0593-4e3e-b2da-a4295dc103f4",
+                          "key": "company_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "80f7a055-0620-476c-a434-146e8d3a0c09",
+                      "name": "Deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "company_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-80f7a055-0620-476c-a434-146e8d3a0c09"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-bf2afe49-28ad-4581-9b81-7e6a9583f81b"
+                }
+              ],
+              "id": "828a29fb-88d7-44b6-a848-0500566661de",
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-828a29fb-88d7-44b6-a848-0500566661de"
+            },
+            {
+              "name": "List Companies",
+              "id": "5149e0b3-27ca-4f83-b3f0-712a867572eb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/companies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "companies"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "35c25743-c15e-4bdb-91d6-09b5fefbaf5e",
+                  "name": "Companies list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/companies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "companies"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"incorporation\": {\n        \"siren\": \"<string>\",\n        \"vat\": \"<string>\",\n        \"hrb\": \"<string>\"\n      },\n      \"external_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"incorporation\": {\n        \"siren\": \"<string>\",\n        \"vat\": \"<string>\",\n        \"hrb\": \"<string>\"\n      },\n      \"external_id\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-35c25743-c15e-4bdb-91d6-09b5fefbaf5e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-5149e0b3-27ca-4f83-b3f0-712a867572eb"
+            },
+            {
+              "name": "Create Company",
+              "id": "52436a6c-46da-422e-882a-1592bca05e49",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"incorporation\": {\n    \"siren\": \"<string>\",\n    \"vat\": \"<string>\",\n    \"hrb\": \"<string>\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/companies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "companies"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "015ca0a6-2ee6-4814-bd85-88dd97f463b6",
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"incorporation\": {\n    \"siren\": \"<string>\",\n    \"vat\": \"<string>\",\n    \"hrb\": \"<string>\"\n  },\n  \"external_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/companies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "companies"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-015ca0a6-2ee6-4814-bd85-88dd97f463b6"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-52436a6c-46da-422e-882a-1592bca05e49"
+            }
+          ],
+          "id": "861b98de-6242-49ac-8c45-39bc6f3ebb30",
+          "createdAt": "2026-06-05T15:08:44.000Z",
+          "updatedAt": "2026-06-05T15:08:44.000Z",
+          "uid": "35240-861b98de-6242-49ac-8c45-39bc6f3ebb30"
+        },
+        {
+          "name": "organisation-nodes",
+          "item": [
+            {
+              "name": "{organisation_node_id}",
+              "item": [
+                {
+                  "name": "tree",
+                  "item": [
+                    {
+                      "name": "Get Organisation Tree",
+                      "id": "ed998012-b27a-4f10-82dd-ca18a52d5fe0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id/tree",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "organisation-nodes",
+                            ":organisation_node_id",
+                            "tree"
+                          ],
+                          "variable": [
+                            {
+                              "id": "21b3f0ca-0cc0-4024-aa36-940151bc37e4",
+                              "key": "organisation_node_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Returns the organisation tree expanded from the top accessible node to the specified node."
+                      },
+                      "response": [
+                        {
+                          "id": "7c4d6ca5-10b8-4ec0-84ec-2fac00ba0311",
+                          "name": "Organisation tree",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id/tree",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "organisation-nodes",
+                                ":organisation_node_id",
+                                "tree"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organisation_node_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"parent_id\": \"<string>\",\n      \"children\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"parent_id\": \"<string>\",\n      \"children\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"requested_node_id\": \"<string>\",\n    \"top_accessible_organisation_node_id\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:44.000Z",
+                          "updatedAt": "2026-06-05T15:08:44.000Z",
+                          "uid": "35240-7c4d6ca5-10b8-4ec0-84ec-2fac00ba0311"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-ed998012-b27a-4f10-82dd-ca18a52d5fe0"
+                    }
+                  ],
+                  "id": "3c49670d-9955-4cff-a705-86346a3c994c",
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-3c49670d-9955-4cff-a705-86346a3c994c"
+                },
+                {
+                  "name": "companies",
+                  "item": [
+                    {
+                      "name": "Get Companies In Organisation",
+                      "id": "8498155f-e5ad-45a1-b74e-56339f1b2887",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id/companies?recursive=true",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "organisation-nodes",
+                            ":organisation_node_id",
+                            "companies"
+                          ],
+                          "query": [
+                            {
+                              "key": "recursive",
+                              "value": "true"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "af8a1f73-1b5e-4ecd-b131-c34f2bd68677",
+                              "key": "organisation_node_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d9ec81e1-60c3-4ddb-804b-1d83b6cd8a6f",
+                          "name": "Companies in this organisation subtree",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id/companies?recursive=true",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "organisation-nodes",
+                                ":organisation_node_id",
+                                "companies"
+                              ],
+                              "query": [
+                                {
+                                  "key": "recursive",
+                                  "value": "true"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organisation_node_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:08:44.000Z",
+                          "updatedAt": "2026-06-05T15:08:44.000Z",
+                          "uid": "35240-d9ec81e1-60c3-4ddb-804b-1d83b6cd8a6f"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-8498155f-e5ad-45a1-b74e-56339f1b2887"
+                    }
+                  ],
+                  "id": "bfe4a12f-bf10-476c-9768-f9fd783a387a",
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-bfe4a12f-bf10-476c-9768-f9fd783a387a"
+                },
+                {
+                  "name": "Get Organisation",
+                  "id": "71c250b1-a943-43e5-870e-dda18f28cf33",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "organisation-nodes",
+                        ":organisation_node_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "50f6603a-c287-45e5-925c-b3d501988122",
+                          "key": "organisation_node_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "80c867d2-8c2c-45e0-b90f-f409622b2618",
+                      "name": "Organisation node",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "organisation-nodes",
+                            ":organisation_node_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organisation_node_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parent_id\": \"<string>\",\n  \"children\": [\n    {\n      \"id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-80c867d2-8c2c-45e0-b90f-f409622b2618"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-71c250b1-a943-43e5-870e-dda18f28cf33"
+                },
+                {
+                  "name": "Update Organisation",
+                  "id": "46b30905-9fd8-475d-b60f-cfa55446456f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"parent_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "organisation-nodes",
+                        ":organisation_node_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "aad346be-c8f1-47dc-ac20-fb0af22645d6",
+                          "key": "organisation_node_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "7c6feea9-095d-4852-bd44-e411b7dd6e26",
+                      "name": "Updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"parent_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "organisation-nodes",
+                            ":organisation_node_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organisation_node_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-7c6feea9-095d-4852-bd44-e411b7dd6e26"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-46b30905-9fd8-475d-b60f-cfa55446456f"
+                },
+                {
+                  "name": "Remove Organisation",
+                  "id": "35f842c8-6382-4cdf-bc7c-eef6bbc62306",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "organisation-nodes",
+                        ":organisation_node_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "79543d36-59da-499e-b87c-d85a6145efab",
+                          "key": "organisation_node_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b191f408-c3df-4753-9ad5-8269aad9ca96",
+                      "name": "Deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/organisation-nodes/:organisation_node_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "organisation-nodes",
+                            ":organisation_node_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organisation_node_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-b191f408-c3df-4753-9ad5-8269aad9ca96"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-35f842c8-6382-4cdf-bc7c-eef6bbc62306"
+                }
+              ],
+              "id": "081f3ab8-8b51-4c0b-872a-e209181add8c",
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-081f3ab8-8b51-4c0b-872a-e209181add8c"
+            },
+            {
+              "name": "Create Organisation Node",
+              "id": "41317494-ceea-447c-bc86-998bf0067d24",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"parent_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/organisation-nodes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "organisation-nodes"
+                  ]
+                },
+                "description": "Create a child organisation node. Requires `organisations:write`."
+              },
+              "response": [
+                {
+                  "id": "f2ceb131-c092-4737-9d26-73f2348575cd",
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"parent_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/organisation-nodes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "organisation-nodes"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-f2ceb131-c092-4737-9d26-73f2348575cd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-41317494-ceea-447c-bc86-998bf0067d24"
+            }
+          ],
+          "id": "dc6f5a6c-834d-401c-a176-90fb0725e33c",
+          "createdAt": "2026-06-05T15:08:44.000Z",
+          "updatedAt": "2026-06-05T15:08:44.000Z",
+          "uid": "35240-dc6f5a6c-834d-401c-a176-90fb0725e33c"
+        },
+        {
+          "name": "memberships",
+          "item": [
+            {
+              "name": "{membership_id}",
+              "item": [
+                {
+                  "name": "Update Membership",
+                  "id": "400bd3d6-2124-432b-b601-2ac57618a827",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"role\": \"<string>\",\n  \"status\": \"<string>\",\n  \"notification_preferences\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/memberships/:membership_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "memberships",
+                        ":membership_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "564b22d1-2c3a-4a02-b822-fe5ddff7cefb",
+                          "key": "membership_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "339750ee-69de-4c3f-8f3c-2c7699151112",
+                      "name": "Updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"role\": \"<string>\",\n  \"status\": \"<string>\",\n  \"notification_preferences\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/memberships/:membership_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "memberships",
+                            ":membership_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "membership_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-339750ee-69de-4c3f-8f3c-2c7699151112"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-400bd3d6-2124-432b-b601-2ac57618a827"
+                },
+                {
+                  "name": "Delete Membership",
+                  "id": "35284d03-2a44-459d-b130-75e9a45c046b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/memberships/:membership_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "memberships",
+                        ":membership_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c7dcf313-01a5-41ab-b29b-aafe37a07b9b",
+                          "key": "membership_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c0bb085d-fa0e-4454-b9bf-642a8c8bcb22",
+                      "name": "Deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/memberships/:membership_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "memberships",
+                            ":membership_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "membership_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-c0bb085d-fa0e-4454-b9bf-642a8c8bcb22"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-35284d03-2a44-459d-b130-75e9a45c046b"
+                }
+              ],
+              "id": "9cf6bb12-45fd-4d1f-b6ab-da07603c0df8",
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-9cf6bb12-45fd-4d1f-b6ab-da07603c0df8"
+            },
+            {
+              "name": "Create Membership",
+              "id": "7869c52b-7a4a-48e9-b6d4-397523884471",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"role\": \"developer\",\n  \"company_id\": \"<string>\",\n  \"organisation_node_id\": \"<string>\",\n  \"notification_preferences\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/memberships",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "memberships"
+                  ]
+                },
+                "description": "Associate a user with either a company or an organisation node."
+              },
+              "response": [
+                {
+                  "id": "3edcf1e2-87c5-4fa1-8807-57e6f1ad5c25",
+                  "name": "Membership created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<string>\",\n  \"role\": \"developer\",\n  \"company_id\": \"<string>\",\n  \"organisation_node_id\": \"<string>\",\n  \"notification_preferences\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/memberships",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "memberships"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-3edcf1e2-87c5-4fa1-8807-57e6f1ad5c25"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-7869c52b-7a4a-48e9-b6d4-397523884471"
+            }
+          ],
+          "id": "1f429d61-19b9-4b3e-bcbe-57475a0ec432",
+          "createdAt": "2026-06-05T15:08:44.000Z",
+          "updatedAt": "2026-06-05T15:08:44.000Z",
+          "uid": "35240-1f429d61-19b9-4b3e-bcbe-57475a0ec432"
+        },
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "{user_id}",
+              "item": [
+                {
+                  "name": "Get User",
+                  "id": "efce86d2-e25e-4311-880a-0eed1dab3b7a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f462c858-3008-4509-ac28-87e9e423a2f5",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "78e47526-3fdd-44c4-8706-2f25b9002d98",
+                      "name": "User",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-78e47526-3fdd-44c4-8706-2f25b9002d98"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-efce86d2-e25e-4311-880a-0eed1dab3b7a"
+                },
+                {
+                  "name": "Update User",
+                  "id": "9865f7f1-50a2-4a3a-bc7a-f9c91e8798cf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2c4d3c63-81eb-4c19-81ed-2123d2f637ba",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "9105fa76-88a2-4c24-b35a-49254b002581",
+                      "name": "Updated",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-9105fa76-88a2-4c24-b35a-49254b002581"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-9865f7f1-50a2-4a3a-bc7a-f9c91e8798cf"
+                },
+                {
+                  "name": "Delete User",
+                  "id": "abd230be-9f2f-45dc-8e4e-9f300bd05bb5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6dbdf6cb-98ab-4891-8cb1-08123f16020d",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Destructive. Deletes Firebase auth credentials and all memberships."
+                  },
+                  "response": [
+                    {
+                      "id": "e9306219-3985-4c5d-8cd9-f202127d28e8",
+                      "name": "Deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:08:44.000Z",
+                      "updatedAt": "2026-06-05T15:08:44.000Z",
+                      "uid": "35240-e9306219-3985-4c5d-8cd9-f202127d28e8"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-abd230be-9f2f-45dc-8e4e-9f300bd05bb5"
+                }
+              ],
+              "id": "0cab6881-a53a-489a-9d77-7e90e67c0040",
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-0cab6881-a53a-489a-9d77-7e90e67c0040"
+            },
+            {
+              "name": "Create User",
+              "id": "44be6c9a-ab86-413b-98d5-57e929b88674",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"membership\": {\n    \"user_id\": \"<string>\",\n    \"role\": \"admin\",\n    \"company_id\": \"<string>\",\n    \"organisation_node_id\": \"<string>\",\n    \"notification_preferences\": {}\n  },\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "users"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "622df136-eb6f-4e4e-8d98-a2bb471c76c4",
+                  "name": "User created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"membership\": {\n    \"user_id\": \"<string>\",\n    \"role\": \"admin\",\n    \"company_id\": \"<string>\",\n    \"organisation_node_id\": \"<string>\",\n    \"notification_preferences\": {}\n  },\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:08:44.000Z",
+                  "updatedAt": "2026-06-05T15:08:44.000Z",
+                  "uid": "35240-622df136-eb6f-4e4e-8d98-a2bb471c76c4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:44.000Z",
+              "updatedAt": "2026-06-05T15:08:44.000Z",
+              "uid": "35240-44be6c9a-ab86-413b-98d5-57e929b88674"
+            }
+          ],
+          "id": "5471ac54-f81d-4cb5-824a-72f248538733",
+          "createdAt": "2026-06-05T15:08:44.000Z",
+          "updatedAt": "2026-06-05T15:08:44.000Z",
+          "uid": "35240-5471ac54-f81d-4cb5-824a-72f248538733"
+        }
+      ],
+      "id": "b3287b28-f48e-4e7f-9a93-64defda5add2",
+      "createdAt": "2026-06-05T15:08:44.000Z",
+      "updatedAt": "2026-06-05T15:08:44.000Z",
+      "uid": "35240-b3287b28-f48e-4e7f-9a93-64defda5add2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fintecture.com"
+    }
+  ]
+}

@@ -1,0 +1,311 @@
+{
+  "info": {
+    "_postman_id": "450a0858-b4dc-4591-8835-0da6c5c82584",
+    "name": "Fintecture OAuth and Tokens API",
+    "description": "Authentication endpoints. The /v1/access-token endpoint issues access tokens via the authorization_code grant (used for AIS code exchange) and the client_credentials grant (used for PIS, Customers, E-Mandates, and OAC). Access tokens are valid for 1 hour and can be refreshed via /v1/refresh-token.\n\n\nContact Support:\n Name: Fintecture Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:41.000Z",
+    "updatedAt": "2026-06-05T15:08:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-450a0858-b4dc-4591-8835-0da6c5c82584"
+  },
+  "item": [
+    {
+      "name": "oauth",
+      "item": [
+        {
+          "name": "accesstoken",
+          "item": [
+            {
+              "name": "Create Access Token",
+              "id": "90d31c1c-175e-4e96-b041-d6bed3c0687d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "grant_type",
+                      "value": "authorization_code"
+                    },
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "One of PIS, AIS, customer, e-mandate, OAC.",
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/accesstoken",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "accesstoken"
+                  ]
+                },
+                "description": "The access token endpoint enables the TPP to authenticate to the Fintecture Authentication Server. Two grant types are supported \u2014 `authorization_code` for AIS, and `client_credentials` for PIS, Customers, E-Mandates, and the beta OAC (Organisation Access Credentials) scopes.\n"
+              },
+              "response": [
+                {
+                  "id": "e1974a93-8f47-448e-b3a8-a309f05f3e5e",
+                  "name": "Token issued",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) ",
+                          "key": "grant_type",
+                          "value": "authorization_code"
+                        },
+                        {
+                          "key": "code",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "redirect_uri",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "One of PIS, AIS, customer, e-mandate, OAC.",
+                          "key": "scope",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "client_secret",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/accesstoken",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "accesstoken"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\",\n  \"scope\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:42.000Z",
+                  "updatedAt": "2026-06-05T15:08:42.000Z",
+                  "uid": "35240-e1974a93-8f47-448e-b3a8-a309f05f3e5e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:42.000Z",
+              "updatedAt": "2026-06-05T15:08:42.000Z",
+              "uid": "35240-90d31c1c-175e-4e96-b041-d6bed3c0687d"
+            }
+          ],
+          "id": "3909d28d-b2b6-4195-9418-6040259a59d3",
+          "createdAt": "2026-06-05T15:08:42.000Z",
+          "updatedAt": "2026-06-05T15:08:42.000Z",
+          "uid": "35240-3909d28d-b2b6-4195-9418-6040259a59d3"
+        },
+        {
+          "name": "refreshtoken",
+          "item": [
+            {
+              "name": "Create Refresh Token",
+              "id": "04448d52-2a0b-46de-9bca-3f3e03cbc5d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "grant_type",
+                      "value": "refresh_token"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "refresh_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/refreshtoken",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "refreshtoken"
+                  ]
+                },
+                "description": "Generates a new access_token and invalidates the previous one."
+              },
+              "response": [
+                {
+                  "id": "04451000-ae41-4df5-81f7-1dac6bb597ca",
+                  "name": "New token issued",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) ",
+                          "key": "grant_type",
+                          "value": "refresh_token"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "refresh_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "client_secret",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/refreshtoken",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "refreshtoken"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\",\n  \"scope\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:42.000Z",
+                  "updatedAt": "2026-06-05T15:08:42.000Z",
+                  "uid": "35240-04451000-ae41-4df5-81f7-1dac6bb597ca"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:42.000Z",
+              "updatedAt": "2026-06-05T15:08:42.000Z",
+              "uid": "35240-04448d52-2a0b-46de-9bca-3f3e03cbc5d2"
+            }
+          ],
+          "id": "23745714-733a-47bd-84a8-3f89e6c0601a",
+          "createdAt": "2026-06-05T15:08:42.000Z",
+          "updatedAt": "2026-06-05T15:08:42.000Z",
+          "uid": "35240-23745714-733a-47bd-84a8-3f89e6c0601a"
+        }
+      ],
+      "id": "db11aff4-fac1-4a24-9f54-db07e24cdf4e",
+      "createdAt": "2026-06-05T15:08:42.000Z",
+      "updatedAt": "2026-06-05T15:08:42.000Z",
+      "uid": "35240-db11aff4-fac1-4a24-9f54-db07e24cdf4e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.fintecture.com"
+    }
+  ]
+}
