@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/fintecture-ais-api-openapi.yml, openapi/fintecture-customers-api-openapi.yml,
+  openapi/fintecture-emandates-api-openapi.yml, openapi/fintecture-oac-api-openapi.yml, openapi/fintecture-pis-api-openapi.yml,
+  openapi/fintecture-resources-api-openapi.yml, openapi/fintecture-transactions-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/fintecture-ais-api-openapi.yml
+  - openapi/fintecture-customers-api-openapi.yml
+  - openapi/fintecture-emandates-api-openapi.yml
+  - openapi/fintecture-oac-api-openapi.yml
+  - openapi/fintecture-pis-api-openapi.yml
+  - openapi/fintecture-resources-api-openapi.yml
+  - openapi/fintecture-transactions-api-openapi.yml

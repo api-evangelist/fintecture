@@ -1,0 +1,31 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: fintecture.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 17 17:52:47 2026 GMT
+  hsts: null
+- host: doc.fintecture.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 18 05:57:50 2026 GMT
+  hsts: null
+- host: api.fintecture.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 18 19:42:41 2026 GMT
+  hsts: true
+  hsts_max_age: 15552000
+domains:
+- domain: fintecture.com
+  dnssec: true
+  caa:
+  - 0 issue "pki.goog"
+  - 0 issue "actalis.it"
+  - 0 issue "multicert.com"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
