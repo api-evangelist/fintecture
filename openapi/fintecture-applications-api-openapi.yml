@@ -1,0 +1,220 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Applications API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Applications
+paths:
+  /v1/applications:
+    get:
+      summary: List Applications
+      description: List applications linked to companies within the authenticated organisation's subtree. Requires `applications:read`.
+      operationId: getApplications
+      tags:
+      - Applications
+      parameters:
+      - in: query
+        name: include
+        schema:
+          type: string
+          enum:
+          - bank_accounts
+      - in: query
+        name: filter[company_id]
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Applications list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Application'
+    post:
+      summary: Create Application
+      description: Create a new application for a company within the authenticated organisation's subtree. Requires `applications:write`.
+      operationId: postApplications
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreate'
+      responses:
+        '201':
+          description: Application created
+  /v1/applications/current:
+    get:
+      summary: Get Current Application
+      description: Information related to the application used to sign the request.
+      operationId: getResV1Applications
+      tags:
+      - Applications
+      responses:
+        '200':
+          description: Current application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+  /v1/applications/{app_id}:
+    get:
+      summary: Get An Application
+      operationId: getApplicationById
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/AppIdPath'
+      - in: query
+        name: include
+        schema:
+          type: string
+          enum:
+          - bank_accounts
+      responses:
+        '200':
+          description: Application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+    patch:
+      summary: Update Application
+      description: Update app_name, app_webhooks, or app_urls. Requires `applications:write`.
+      operationId: patchApplicationById
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/AppIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationPatch'
+      responses:
+        '200':
+          description: Application updated
+    delete:
+      summary: Remove An Application
+      description: Removing an application is irreversible. Requires `applications:write`.
+      operationId: deleteApplicationById
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/AppIdPath'
+      responses:
+        '204':
+          description: Deleted
+components:
+  parameters:
+    AppIdPath:
+      in: path
+      name: app_id
+      required: true
+      schema:
+        type: string
+  schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        app_name:
+          type: string
+        app_public_key:
+          type: string
+        app_urls:
+          type: object
+          properties:
+            return_url:
+              type: string
+              format: uri
+            domain:
+              type: string
+        app_webhooks:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+              events:
+                type: array
+                items:
+                  type: string
+    ApplicationCreate:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - applications
+            attributes:
+              type: object
+              properties:
+                app_name:
+                  type: string
+                app_public_key:
+                  type: string
+            relationships:
+              type: object
+              properties:
+                bank_account:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        lid:
+                          type: string
+    ApplicationPatch:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                app_name:
+                  type: string
+                app_webhooks:
+                  type: array
+                  items:
+                    type: object
+                app_urls:
+                  type: object
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,219 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Bank Accounts API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Bank Accounts
+  description: Customer bank accounts
+paths:
+  /v1/customers/{customer_id}/bank-accounts:
+    get:
+      summary: List All Customer Bank Accounts
+      operationId: listAllCustomerBankAccounts
+      tags:
+      - Bank Accounts
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '200':
+          description: Bank account list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomerBankAccount'
+    post:
+      summary: Create Customer Bank Account
+      operationId: createCustomerBankAccount
+      tags:
+      - Bank Accounts
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerBankAccountCreate'
+      responses:
+        '201':
+          description: Bank account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerBankAccount'
+  /v1/customers/{customer_id}/bank-accounts/{account_id}:
+    get:
+      summary: Get A Bank Account From A Customer
+      operationId: getBankAccountById
+      tags:
+      - Bank Accounts
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      - in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bank account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerBankAccount'
+  /v1/bank-accounts:
+    get:
+      summary: List Bank Accounts
+      description: List bank accounts linked to companies in the authenticated organisation's subtree.
+      operationId: getBankAccounts
+      tags:
+      - Bank Accounts
+      responses:
+        '200':
+          description: Bank account list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OacBankAccount'
+    post:
+      summary: Create Bank Account
+      operationId: postBankAccounts
+      tags:
+      - Bank Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OacBankAccountCreate'
+      responses:
+        '201':
+          description: Bank account created
+  /v1/bank-accounts/{bank_account_id}:
+    patch:
+      summary: Update Bank Account
+      operationId: patchBankAccountById
+      tags:
+      - Bank Accounts
+      parameters:
+      - in: path
+        name: bank_account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OacBankAccountCreate'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete Bank Account
+      operationId: deleteBankAccountById
+      tags:
+      - Bank Accounts
+      parameters:
+      - in: path
+        name: bank_account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+components:
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+  schemas:
+    CustomerBankAccountCreate:
+      type: object
+      required:
+      - iban
+      - holder_name
+      properties:
+        iban:
+          type: string
+        bic:
+          type: string
+        holder_name:
+          type: string
+        currency:
+          type: string
+    CustomerBankAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        iban:
+          type: string
+        bic:
+          type: string
+        holder_name:
+          type: string
+        currency:
+          type: string
+        verified:
+          type: boolean
+    OacBankAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        iban:
+          type: string
+        bic:
+          type: string
+        holder_name:
+          type: string
+        currency:
+          type: string
+    OacBankAccountCreate:
+      type: object
+      required:
+      - iban
+      - holder_name
+      properties:
+        iban:
+          type: string
+        bic:
+          type: string
+        holder_name:
+          type: string
+        currency:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

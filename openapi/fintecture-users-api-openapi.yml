@@ -1,0 +1,154 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Users API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Users
+paths:
+  /v1/users:
+    post:
+      summary: Create User
+      operationId: postUsers
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+      responses:
+        '201':
+          description: User created
+  /v1/users/{user_id}:
+    get:
+      summary: Get User
+      operationId: getUserById
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '200':
+          description: User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    patch:
+      summary: Update User
+      operationId: patchUserById
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPatch'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete User
+      description: Destructive. Deletes Firebase auth credentials and all memberships.
+      operationId: deleteUserById
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserIdPath'
+      responses:
+        '204':
+          description: Deleted
+components:
+  schemas:
+    UserPatch:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+    UserCreate:
+      type: object
+      required:
+      - email
+      - membership
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        membership:
+          $ref: '#/components/schemas/MembershipCreate'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+    MembershipCreate:
+      type: object
+      required:
+      - user_id
+      - role
+      properties:
+        user_id:
+          type: string
+        company_id:
+          type: string
+        organisation_node_id:
+          type: string
+        role:
+          type: string
+          enum:
+          - admin
+          - developer
+          - viewer
+        notification_preferences:
+          type: object
+  parameters:
+    UserIdPath:
+      in: path
+      name: user_id
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

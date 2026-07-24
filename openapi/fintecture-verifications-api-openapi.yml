@@ -1,0 +1,120 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Verifications API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Verifications
+  description: Customer identity verifications
+paths:
+  /v1/customers/{customer_id}/verification:
+    post:
+      summary: Initiate Customer Verification
+      operationId: initiateCustomerVerification
+      tags:
+      - Verifications
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider_id:
+                  type: string
+                expected_name:
+                  type: string
+      responses:
+        '201':
+          description: Verification started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerVerification'
+  /v1/customers/{customer_id}/verifications:
+    get:
+      summary: List All Customer Verifications
+      operationId: listAllCustomerVerifications
+      tags:
+      - Verifications
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '200':
+          description: Verification list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomerVerification'
+  /v1/customers/{customer_id}/verification/{verification_id}:
+    get:
+      summary: Get A Verification
+      operationId: getCustomerVerificationById
+      tags:
+      - Verifications
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      - in: path
+        name: verification_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Verification details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerVerification'
+components:
+  schemas:
+    CustomerVerification:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - verified
+          - unverified
+          - failed
+        match_score:
+          type: number
+        provider_id:
+          type: string
+        verified_at:
+          type: string
+          format: date-time
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

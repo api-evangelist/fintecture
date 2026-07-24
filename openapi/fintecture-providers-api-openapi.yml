@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Providers API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Providers
+  description: Bank providers / coverage
+paths:
+  /res/v1/providers:
+    get:
+      summary: Get All Providers
+      description: 'Retrieves the banks accessible for account data and payment initiation. The services available per bank are detailed under the `ais` and `pis` attributes — AIS values include Accountholders, Accounts, Transactions; PIS values include SEPA, iSCT, FPS, PLN, INT.
+
+        '
+      operationId: getResV1Providers
+      tags:
+      - Providers
+      parameters:
+      - in: query
+        name: country
+        schema:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+      responses:
+        '200':
+          description: Providers list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Provider'
+  /res/v1/providers/{provider_id}:
+    get:
+      summary: Get A Specific Provider
+      operationId: getResV1Provider
+      tags:
+      - Providers
+      parameters:
+      - in: path
+        name: provider_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Provider details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+components:
+  schemas:
+    Provider:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        logo_url:
+          type: string
+          format: uri
+        auth_models:
+          type: array
+          items:
+            type: string
+            enum:
+            - redirect
+            - decoupled
+        ais:
+          type: array
+          items:
+            type: string
+            enum:
+            - Accountholders
+            - Accounts
+            - Transactions
+        pis:
+          type: array
+          items:
+            type: string
+            enum:
+            - SEPA
+            - iSCT
+            - FPS
+            - PLN
+            - INT
+        psu_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - retail
+            - corporate
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

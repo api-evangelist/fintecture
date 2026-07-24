@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Organisation Nodes API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Organisation Nodes
+paths:
+  /v1/organisation-nodes:
+    post:
+      summary: Create Organisation Node
+      description: Create a child organisation node. Requires `organisations:write`.
+      operationId: postOrganisationNodes
+      tags:
+      - Organisation Nodes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganisationNodeCreate'
+      responses:
+        '201':
+          description: Created
+  /v1/organisation-nodes/{organisation_node_id}:
+    get:
+      summary: Get Organisation
+      operationId: getOrganisationNodeById
+      tags:
+      - Organisation Nodes
+      parameters:
+      - $ref: '#/components/parameters/OrgNodeIdPath'
+      responses:
+        '200':
+          description: Organisation node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationNode'
+    patch:
+      summary: Update Organisation
+      operationId: patchOrganisationNodeById
+      tags:
+      - Organisation Nodes
+      parameters:
+      - $ref: '#/components/parameters/OrgNodeIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganisationNodeCreate'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Remove Organisation
+      operationId: deleteOrganisationNodeById
+      tags:
+      - Organisation Nodes
+      parameters:
+      - $ref: '#/components/parameters/OrgNodeIdPath'
+      responses:
+        '204':
+          description: Deleted
+  /v1/organisation-nodes/{organisation_node_id}/tree:
+    get:
+      summary: Get Organisation Tree
+      description: Returns the organisation tree expanded from the top accessible node to the specified node.
+      operationId: getOrganisationNodeTree
+      tags:
+      - Organisation Nodes
+      parameters:
+      - $ref: '#/components/parameters/OrgNodeIdPath'
+      responses:
+        '200':
+          description: Organisation tree
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganisationNode'
+                  meta:
+                    type: object
+                    properties:
+                      requested_node_id:
+                        type: string
+                      top_accessible_organisation_node_id:
+                        type: string
+  /v1/organisation-nodes/{organisation_node_id}/companies:
+    get:
+      summary: Get Companies In Organisation
+      operationId: getOrganisationNodeCompanies
+      tags:
+      - Organisation Nodes
+      parameters:
+      - $ref: '#/components/parameters/OrgNodeIdPath'
+      - in: query
+        name: recursive
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Companies in this organisation subtree
+components:
+  schemas:
+    OrganisationNode:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        parent_id:
+          type: string
+        children:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+    OrganisationNodeCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        parent_id:
+          type: string
+  parameters:
+    OrgNodeIdPath:
+      in: path
+      name: organisation_node_id
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

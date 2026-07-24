@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Request To Pay API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Request To Pay
+  description: Generate Fintecture payment links
+paths:
+  /pis/v2/request-to-pay:
+    post:
+      summary: Create A Request To Pay
+      description: 'Generate a Fintecture payment link. Link can be returned in the response and/or delivered to the customer by email or SMS. Same endpoint backs Immediate Transfer, Smart Transfer, and Buy Now Pay Later.
+
+        '
+      operationId: createPisV2RequestToPay
+      tags:
+      - Request To Pay
+      parameters:
+      - $ref: '#/components/parameters/SignatureHeader'
+      - $ref: '#/components/parameters/DigestHeader'
+      - $ref: '#/components/parameters/DateHeader'
+      - $ref: '#/components/parameters/RequestIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestToPayRequest'
+      responses:
+        '200':
+          description: Request to pay created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestToPayResponse'
+components:
+  parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      required: true
+      description: Unique request identifier (UUID v4 recommended).
+      schema:
+        type: string
+        format: uuid
+    SignatureHeader:
+      in: header
+      name: Signature
+      required: true
+      description: HTTP message signature (RFC draft-cavage-http-signatures).
+      schema:
+        type: string
+    DigestHeader:
+      in: header
+      name: Digest
+      required: true
+      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
+      schema:
+        type: string
+    DateHeader:
+      in: header
+      name: Date
+      required: true
+      schema:
+        type: string
+  schemas:
+    PaymentMeta:
+      type: object
+      properties:
+        psu_name:
+          type: string
+        psu_email:
+          type: string
+          format: email
+        psu_phone:
+          type: string
+        psu_address:
+          type: string
+    RequestToPayResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id:
+              type: string
+            url:
+              type: string
+              format: uri
+            link_id:
+              type: string
+    RequestToPayRequest:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/PaymentMeta'
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - PIS
+            attributes:
+              $ref: '#/components/schemas/PaymentAttributes'
+    PaymentAttributes:
+      type: object
+      required:
+      - amount
+      - currency
+      - communication
+      properties:
+        amount:
+          type: string
+          description: Amount in the given currency, as a string (e.g. "12.34").
+        currency:
+          type: string
+          enum:
+          - EUR
+          - GBP
+          - PLN
+        customer_id:
+          type: string
+        end_to_end_id:
+          type: string
+        communication:
+          type: string
+          description: Free-form payment communication / remittance information.
+        beneficiary:
+          type: object
+          properties:
+            name:
+              type: string
+            iban:
+              type: string
+            bic:
+              type: string
+        payment_method:
+          type: string
+          enum:
+          - immediate_transfer
+          - smart_transfer
+          - bnpl
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

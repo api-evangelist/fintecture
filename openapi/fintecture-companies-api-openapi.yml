@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Companies API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Companies
+paths:
+  /v1/companies:
+    get:
+      summary: List Companies
+      operationId: getCompanies
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: Companies list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+    post:
+      summary: Create Company
+      operationId: postCompanies
+      tags:
+      - Companies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyCreate'
+      responses:
+        '201':
+          description: Created
+  /v1/companies/{company_id}:
+    get:
+      summary: Get A Company
+      operationId: getCompanyById
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+      responses:
+        '200':
+          description: Company
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+    patch:
+      summary: Update Company
+      operationId: patchCompanyById
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyCreate'
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Remove Company
+      operationId: deleteCompanyById
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/CompanyIdPath'
+      responses:
+        '204':
+          description: Deleted
+components:
+  parameters:
+    CompanyIdPath:
+      in: path
+      name: company_id
+      required: true
+      schema:
+        type: string
+  schemas:
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        incorporation:
+          type: object
+          properties:
+            siren:
+              type: string
+            vat:
+              type: string
+            hrb:
+              type: string
+        external_id:
+          type: string
+    CompanyCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        incorporation:
+          type: object
+          properties:
+            siren:
+              type: string
+            vat:
+              type: string
+            hrb:
+              type: string
+        external_id:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

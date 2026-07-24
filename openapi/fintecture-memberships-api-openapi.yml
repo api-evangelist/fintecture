@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Memberships API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Memberships
+paths:
+  /v1/memberships:
+    post:
+      summary: Create Membership
+      description: Associate a user with either a company or an organisation node.
+      operationId: postMemberships
+      tags:
+      - Memberships
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MembershipCreate'
+      responses:
+        '201':
+          description: Membership created
+  /v1/memberships/{membership_id}:
+    patch:
+      summary: Update Membership
+      operationId: patchMembershipById
+      tags:
+      - Memberships
+      parameters:
+      - in: path
+        name: membership_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                status:
+                  type: string
+                notification_preferences:
+                  type: object
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete Membership
+      operationId: deleteMembershipById
+      tags:
+      - Memberships
+      parameters:
+      - in: path
+        name: membership_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+components:
+  schemas:
+    MembershipCreate:
+      type: object
+      required:
+      - user_id
+      - role
+      properties:
+        user_id:
+          type: string
+        company_id:
+          type: string
+        organisation_node_id:
+          type: string
+        role:
+          type: string
+          enum:
+          - admin
+          - developer
+          - viewer
+        notification_preferences:
+          type: object
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

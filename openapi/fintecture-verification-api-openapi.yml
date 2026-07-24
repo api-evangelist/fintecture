@@ -1,0 +1,81 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services Accounts Verification API
+  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
+
+    '
+  version: v2
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+servers:
+- url: https://api.fintecture.com
+  description: Production
+- url: https://api-sandbox.fintecture.com
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Verification
+  description: AIS-based identity verification
+paths:
+  /ais/v1/verification:
+    post:
+      summary: Create AIS Identity Verification
+      description: Identity verification based on AIS capabilities.
+      operationId: createAisV1Verification
+      tags:
+      - Verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                meta:
+                  type: object
+                  properties:
+                    customer_id:
+                      type: string
+                data:
+                  type: object
+                  properties:
+                    attributes:
+                      type: object
+                      properties:
+                        provider_id:
+                          type: string
+                        expected_name:
+                          type: string
+      responses:
+        '200':
+          description: Verification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verification'
+components:
+  schemas:
+    Verification:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - verified
+          - unverified
+          - pending
+          - failed
+        match_score:
+          type: number
+        verified_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
