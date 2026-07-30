@@ -1,173 +1,768 @@
 aid: fintecture
 url: https://raw.githubusercontent.com/api-evangelist/fintecture/refs/heads/main/apis.yml
 apis:
-  - aid: fintecture:fintecture-pis-api
-    name: Fintecture Payment Initiation Services API
-    tags:
-      - Open Banking
-      - Payments
-      - PIS
-      - PSD2
-      - Bank Transfers
-      - Account-to-Account
-    humanURL: https://doc.fintecture.com/reference/createpisv2connect
-    properties:
-      - url: https://doc.fintecture.com/reference/createpisv2connect
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
-        type: Documentation
-      - url: openapi/fintecture-pis-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/fintecture-payment-schema.json
-        type: JSONSchema
-      - url: json-ld/fintecture-context.jsonld
-        type: JSONLD
-    description: >-
-      PSD2 Payment Initiation Services for Immediate Transfer, Smart Transfer (auto-reconciled with virtual IBANs),
-      Request To Pay (payment links via email/SMS/QR), Buy Now Pay Later, and Verified Payout. The same /pis/v2/connect
-      endpoint serves immediate transfers, smart transfers, and BNPL via a single Payment Hub abstraction. Production
-      calls require HTTP message signature (RFC draft-cavage-http-signatures), digest, date, and x-request-id headers.
-  - aid: fintecture:fintecture-ais-api
-    name: Fintecture Account Information Services API
-    tags:
-      - Open Banking
-      - AIS
-      - PSD2
-      - Account Information
-      - Bank Data
-    humanURL: https://doc.fintecture.com/reference/getaisv2connect
-    properties:
-      - url: https://doc.fintecture.com/reference/getaisv2connect
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-recover-bank-accounts
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
-        type: Documentation
-      - url: openapi/fintecture-ais-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/fintecture-account-schema.json
-        type: JSONSchema
-    description: >-
-      PSD2 Account Information Services. Retrieve PSU bank accounts, holders, balances, and transaction history after
-      the PSU authenticates with their bank via the redirect or decoupled (mobile app) flow. Includes an AIS-based
-      identity verification endpoint used to confirm the bank account holder name matches the merchant's customer
-      record.
-  - aid: fintecture:fintecture-customers-api
-    name: Fintecture Customers API
-    tags:
-      - Customers
-      - KYC
-      - Bank Accounts
-      - Verification
-    humanURL: https://doc.fintecture.com/reference/createcustomer
-    properties:
-      - url: https://doc.fintecture.com/reference/createcustomer
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-verify-a-customer
-        type: Documentation
-      - url: openapi/fintecture-customers-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Register and manage merchant customers, attach their bank accounts, and run identity verifications. Persisted
-      customer records pre-fill payment fields and accelerate repeat checkouts; verifications confirm account holder
-      identity through the AIS rails.
-  - aid: fintecture:fintecture-emandates-api
-    name: Fintecture E-Mandates API
-    tags:
-      - E-Mandates
-      - SEPA
-      - Direct Debit
-      - Recurring Payments
-    humanURL: https://doc.fintecture.com/reference/createemandate
-    properties:
-      - url: https://doc.fintecture.com/reference/createemandate
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/request-e-mandate-access-token
-        type: Documentation
-      - url: openapi/fintecture-emandates-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Create, list, retrieve, update (cancel/revoke), and manage SEPA-style customer e-mandates identified by a unique
-      Reference Unique Mandate (RUM). Returns 409 Conflict on duplicate RUM. Requires a dedicated E-Mandate access
-      token.
-  - aid: fintecture:fintecture-oauth-api
-    name: Fintecture OAuth and Tokens API
-    tags:
-      - OAuth
-      - Authentication
-      - Access Tokens
-      - Security
-    humanURL: https://doc.fintecture.com/reference/createaccesstoken
-    properties:
-      - url: https://doc.fintecture.com/reference/createaccesstoken
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-request-a-pis-access-token
-        type: Documentation
-      - url: https://doc.fintecture.com/docs/api-request-an-ais-token
-        type: Documentation
-      - url: openapi/fintecture-oauth-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Issues access tokens via authorization_code and client_credentials grants. Distinct scopes for PIS, AIS,
-      Customers, E-Mandates, and OAC (Organisation Access Credentials, beta). Access tokens are valid for 1 hour and can
-      be refreshed.
-  - aid: fintecture:fintecture-resources-api
-    name: Fintecture Resources API
-    tags:
-      - Banks
-      - Providers
-      - Reference Data
-      - Sandbox
-    humanURL: https://doc.fintecture.com/reference/getresv1providers
-    properties:
-      - url: https://doc.fintecture.com/reference/getresv1providers
-        type: Documentation
-      - url: openapi/fintecture-resources-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Catalog of supported banks (Providers) with per-bank AIS capabilities (accountholders, accounts, transactions) and
-      PIS rails (SEPA, iSCT instant, FPS, PLN, INT). Also exposes sandbox test accounts for each bank.
-  - aid: fintecture:fintecture-oac-api
-    name: Fintecture Organisation Access Credentials API
-    tags:
-      - Organisations
-      - Access Control
-      - Beta
-      - Multi-Tenant
-      - Console Management
-    humanURL: https://doc.fintecture.com/docs/request-an-oac-access-token
-    properties:
-      - url: https://doc.fintecture.com/docs/request-an-oac-access-token
-        type: Documentation
-      - url: openapi/fintecture-oac-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Beta multi-tenant management API for enterprise customers. Programmatically manage Applications, Bank Accounts,
-      Companies, Organisation Nodes (hierarchical tree), Memberships, and Users in the Fintecture Console. Requires an
-      OAC access token with per-resource read/write scopes.
-  - aid: fintecture:fintecture-transactions-api
-    name: Fintecture Transactions and Settlements API
-    tags:
-      - Transactions
-      - Settlements
-      - Local Acquiring
-      - Reconciliation
-      - Reporting
-    humanURL: https://doc.fintecture.com/reference/getpisv2settlements
-    properties:
-      - url: https://doc.fintecture.com/reference/getpisv2settlements
-        type: Documentation
-      - url: https://doc.fintecture.com/reference/listalltransactions
-        type: Documentation
-      - url: openapi/fintecture-transactions-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Inspect transactions and settlements. Settlements represent outgoing disbursements from the merchant's Local
-      Acquiring account to their own bank account. Sandbox includes a transaction simulator endpoint.
+- aid: fintecture:fintecture-customers-api
+  name: Fintecture Customers API
+  tags:
+  - Customers
+  - KYC
+  - Bank Accounts
+  - Verification
+  humanURL: https://doc.fintecture.com/reference/createcustomer
+  properties:
+  - url: https://doc.fintecture.com/reference/createcustomer
+    type: Documentation
+  - url: https://doc.fintecture.com/docs/api-verify-a-customer
+    type: Documentation
+  - url: openapi/fintecture-customers-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    Register and manage merchant customers, attach their bank accounts, and run identity verifications.
+    Persisted customer records pre-fill payment fields and accelerate repeat checkouts; verifications
+    confirm account holder identity through the AIS rails.
+- aid: fintecture:fintecture-oauth-api
+  name: Fintecture OAuth and Tokens API
+  tags:
+  - OAuth
+  - Authentication
+  - Access Tokens
+  - Security
+  humanURL: https://doc.fintecture.com/reference/createaccesstoken
+  properties:
+  - url: https://doc.fintecture.com/reference/createaccesstoken
+    type: Documentation
+  - url: https://doc.fintecture.com/docs/api-request-a-pis-access-token
+    type: Documentation
+  - url: https://doc.fintecture.com/docs/api-request-an-ais-token
+    type: Documentation
+  - url: openapi/fintecture-oauth-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    Issues access tokens via authorization_code and client_credentials grants. Distinct scopes for PIS,
+    AIS, Customers, E-Mandates, and OAC (Organisation Access Credentials, beta). Access tokens are valid
+    for 1 hour and can be refreshed.
+- aid: fintecture:fintecture-transactions-api
+  name: Fintecture Transactions and Settlements API
+  tags:
+  - Transactions
+  - Settlements
+  - Local Acquiring
+  - Reconciliation
+  - Reporting
+  humanURL: https://doc.fintecture.com/reference/getpisv2settlements
+  properties:
+  - url: https://doc.fintecture.com/reference/getpisv2settlements
+    type: Documentation
+  - url: https://doc.fintecture.com/reference/listalltransactions
+    type: Documentation
+  - url: openapi/fintecture-transactions-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    Inspect transactions and settlements. Settlements represent outgoing disbursements from the merchant's
+    Local Acquiring account to their own bank account. Sandbox includes a transaction simulator endpoint.
+- aid: fintecture:fintecture-accounts-api
+  name: Fintecture Accounts API
+  description: Bank accounts, balances, and holders
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-applications-api
+  name: Fintecture Applications API
+  description: The Applications API from Fintecture — 3 operation(s) for applications.
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-applications-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-authentication-api
+  name: Fintecture Authentication API
+  description: PSU bank authentication
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-bank-accounts-api
+  name: Fintecture Bank Accounts API
+  description: Customer bank accounts
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Bank Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-companies-api
+  name: Fintecture Companies API
+  description: The Companies API from Fintecture — 2 operation(s) for companies.
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-companies-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-e-mandates-api
+  name: Fintecture E-Mandates API
+  description: Customer e-mandates
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - E-Mandates
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-e-mandates-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-memberships-api
+  name: Fintecture Memberships API
+  description: The Memberships API from Fintecture — 2 operation(s) for memberships.
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Memberships
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-memberships-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-organisation-nodes-api
+  name: Fintecture Organisation Nodes API
+  description: The Organisation Nodes API from Fintecture — 4 operation(s) for organisation nodes.
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Organisation Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-organisation-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-payments-api
+  name: Fintecture Payments API
+  description: Create and inspect payment sessions
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-payments-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-payouts-api
+  name: Fintecture Payouts API
+  description: Verified payouts and request-for-payout
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Payouts
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-payouts-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-providers-api
+  name: Fintecture Providers API
+  description: Bank providers / coverage
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-providers-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-refunds-api
+  name: Fintecture Refunds API
+  description: Initiate immediate refunds
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Refunds
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-refunds-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-request-to-pay-api
+  name: Fintecture Request To Pay API
+  description: Generate Fintecture payment links
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Request To Pay
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-request-to-pay-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-sandbox-api
+  name: Fintecture Sandbox API
+  description: The Sandbox API from Fintecture — 1 operation(s) for sandbox.
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Sandbox
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-sandbox-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-settlements-api
+  name: Fintecture Settlements API
+  description: Local Acquiring disbursements
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Settlements
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-settlements-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-test-accounts-api
+  name: Fintecture Test Accounts API
+  description: Sandbox test accounts
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Test Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-test-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-users-api
+  name: Fintecture Users API
+  description: The Users API from Fintecture — 2 operation(s) for users.
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-users-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-verification-api
+  name: Fintecture Verification API
+  description: AIS-based identity verification
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-verification-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-verifications-api
+  name: Fintecture Verifications API
+  description: Customer identity verifications
+  humanURL: https://doc.fintecture.com/reference/createpisv2connect
+  tags:
+  - Verifications
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-verifications-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createpisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-an-immediate-payment
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-smart-transfer
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-initiate-a-request-to-pay
+  - type: JSONSchema
+    url: json-schema/fintecture-payment-schema.json
+  - type: JSONLD
+    url: json-ld/fintecture-context.jsonld
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getaisv2connect
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-accounts
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-recover-bank-account-transactions
+  - type: JSONSchema
+    url: json-schema/fintecture-account-schema.json
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createemandate
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-e-mandate-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/getresv1providers
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/request-an-oac-access-token
 name: Fintecture
 tags:
   - Open Banking
@@ -185,7 +780,20 @@ tags:
   - Account-to-Account
   - KYC
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fintecture.png
 access: 3rd-Party
 common:
   - type: AgenticAccess
