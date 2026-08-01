@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Account Information Services API
+  description: >
+    PSD2 Account Information Services. Authenticates a PSU at their bank using
+    either the redirect or decoupled (mobile-app) model, then retrieves bank
+    accounts, balances, holders, and transactions. Also exposes the AIS-backed
+    identity verification endpoint.
+  version: "v2"
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+
+servers:
+  - url: https://api.fintecture.com
+    description: Production
+  - url: https://api-sandbox.fintecture.com
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Authentication
+    description: PSU bank authentication
+  - name: Accounts
+    description: Bank accounts, balances, and holders
+  - name: Transactions
+    description: Account transactions
+  - name: Verification
+    description: AIS-based identity verification
+
+paths:
+  /ais/v1/provider/{provider_id}/authorize:
+    get:
+      summary: Get Provider Authorization
+      description: >
+        Authenticates a PSU at their bank for AIS access. Returns either a
+        redirect URL or triggers a decoupled authentication request on the PSU's
+        bank mobile app, depending on the model the bank supports.
+      operationId: getAisV1ProviderAuthorization
+      tags: [Authentication]
+      parameters:
+        - in: path
+          name: provider_id
+          required: true
+          schema: { type: string }
+        - in: query
+          name: redirect_uri
+          schema: { type: string, format: uri }
+        - in: query
+          name: state
+          schema: { type: string }
+        - in: query
+          name: psu_type
+          schema: { type: string, enum: [retail, corporate] }
+      responses:
+        '200':
+          description: Authorization details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AuthorizationResponse' }
+
+  /ais/v1/provider/{provider_id}/authorize/decoupled:
+    get:
+      summary: Get Decoupled Provider Authorization
+      description: >
+        Poll the authentication status within the decoupled model. Status moves
+        from PENDING -> COMPLETED on success, or FAILED on timeout/cancellation.
+      operationId: getAisV1ProviderAuthorizationDecoupled
+      tags: [Authentication]
+      parameters:
+        - in: path
+          name: provider_id
+          required: true
+          schema: { type: string }
+        - in: query
+          name: session_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Decoupled status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [PENDING, COMPLETED, FAILED]
+                  code: { type: string }
+
+  /ais/v2/connect:
+    get:
+      summary: Get AIS Connect Session
+      description: Provides a connect session for a PSU to create a connection enabling AIS access.
+      operationId: getAisV2Connect
+      tags: [Authentication]
+      parameters:
+        - in: query
+          name: redirect_uri
+          schema: { type: string, format: uri }
+        - in: query
+          name: state
+          schema: { type: string }
+      responses:
+        '200':
+          description: Connect session URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      session_id: { type: string }
+                      url: { type: string, format: uri }
+
+  /ais/v1/customer/{customer_id}:
+    delete:
+      summary: Delete Provider Connection
+      description: Deletes all active access tokens and PSU data linked to the requested connection.
+      operationId: deleteAisV1Customer
+      tags: [Authentication]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '204':
+          description: Connection deleted
+
+  /ais/v1/customer/{customer_id}/accounts:
+    get:
+      summary: Get All Accounts
+      description: Returns all accounts linked to a specific connection.
+      operationId: getAisV1CustomerAccounts
+      tags: [Accounts]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '200':
+          description: Accounts list
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AccountsList' }
+
+  /ais/v1/customer/{customer_id}/account/{account_id}:
+    get:
+      summary: Get Specific Account
+      description: Returns information for a specific account.
+      operationId: getAisV1CustomerAccount
+      tags: [Accounts]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+        - $ref: '#/components/parameters/AccountIdPath'
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Account' }
+
+  /ais/v1/customer/{customer_id}/account/{account_id}/holders:
+    get:
+      summary: Get Account Holders
+      description: Retrieves personal information of beneficiary owners — name, address, contact details.
+      operationId: getAisV1CustomerAccountHolders
+      tags: [Accounts]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+        - $ref: '#/components/parameters/AccountIdPath'
+      responses:
+        '200':
+          description: Holders list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/AccountHolder' }
+
+  /ais/v1/customer/{customer_id}/account/{account_id}/transactions:
+    get:
+      summary: Get Account Transactions
+      description: Returns all transactions linked to the requested account.
+      operationId: getAisV1CustomerAccountTransactions
+      tags: [Transactions]
+      parameters:
+        - $ref: '#/components/parameters/CustomerIdPath'
+        - $ref: '#/components/parameters/AccountIdPath'
+        - in: query
+          name: from
+          schema: { type: string, format: date }
+        - in: query
+          name: to
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          description: Transaction list
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TransactionList' }
+
+  /ais/v1/verification:
+    post:
+      summary: Create AIS Identity Verification
+      description: Identity verification based on AIS capabilities.
+      operationId: createAisV1Verification
+      tags: [Verification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                meta:
+                  type: object
+                  properties:
+                    customer_id: { type: string }
+                data:
+                  type: object
+                  properties:
+                    attributes:
+                      type: object
+                      properties:
+                        provider_id: { type: string }
+                        expected_name: { type: string }
+      responses:
+        '200':
+          description: Verification result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Verification' }
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema: { type: string }
+    AccountIdPath:
+      in: path
+      name: account_id
+      required: true
+      schema: { type: string }
+
+  schemas:
+    AuthorizationResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            url: { type: string, format: uri }
+            session_id: { type: string }
+            decoupled: { type: boolean }
+
+    Account:
+      type: object
+      properties:
+        id: { type: string }
+        iban: { type: string }
+        bic: { type: string }
+        currency: { type: string }
+        balances:
+          type: array
+          items: { $ref: '#/components/schemas/Balance' }
+        type:
+          type: string
+          enum: [CACC, SVGS, LOAN, CARD, OTHR]
+
+    Balance:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [available, current, closingBooked, expected]
+        amount: { type: string }
+        currency: { type: string }
+        timestamp: { type: string, format: date-time }
+
+    AccountsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Account' }
+
+    AccountHolder:
+      type: object
+      properties:
+        name: { type: string }
+        address: { type: string }
+        email: { type: string, format: email }
+        phone: { type: string }
+
+    Transaction:
+      type: object
+      properties:
+        id: { type: string }
+        amount: { type: string }
+        currency: { type: string }
+        booking_date: { type: string, format: date }
+        value_date: { type: string, format: date }
+        description: { type: string }
+        type:
+          type: string
+          enum: [debit, credit]
+        counterparty:
+          type: object
+          properties:
+            name: { type: string }
+            iban: { type: string }
+
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Transaction' }
+        meta:
+          type: object
+          properties:
+            count: { type: integer }
+
+    Verification:
+      type: object
+      properties:
+        id: { type: string }
+        status:
+          type: string
+          enum: [verified, unverified, pending, failed]
+        match_score: { type: number }
+        verified_at: { type: string, format: date-time }

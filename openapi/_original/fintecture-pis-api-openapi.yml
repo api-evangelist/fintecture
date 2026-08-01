@@ -1,0 +1,513 @@
+openapi: 3.1.0
+info:
+  title: Fintecture Payment Initiation Services API
+  description: >
+    PSD2 Payment Initiation Services exposed by Fintecture: Immediate Transfer,
+    Smart Transfer (auto-reconciled via merchant-allocated virtual IBANs),
+    Request To Pay (payment links via email/SMS/QR), Buy Now Pay Later, Verified
+    Payout, and Immediate Refund. The /pis/v2/connect endpoint serves all three
+    payment types and supports mixing them in the same session via the Payment
+    Hub.
+  version: "v2"
+  contact:
+    name: Fintecture Support
+    url: https://fintecture.com/contact
+  license:
+    name: Fintecture Terms of Service
+    url: https://fintecture.com/mentions-legales
+
+servers:
+  - url: https://api.fintecture.com
+    description: Production
+  - url: https://api-sandbox.fintecture.com
+    description: Sandbox
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Payments
+    description: Create and inspect payment sessions
+  - name: Request To Pay
+    description: Generate Fintecture payment links
+  - name: Refunds
+    description: Initiate immediate refunds
+  - name: Payouts
+    description: Verified payouts and request-for-payout
+  - name: Settlements
+    description: Local Acquiring disbursements
+
+paths:
+  /pis/v2/connect:
+    post:
+      summary: Create A Payment Session
+      description: >
+        Creates a payment session for a PSU to initiate an Immediate Transfer,
+        Smart Transfer, or Buy Now Pay Later payment. To mix them in a single
+        session, use the Payment Hub semantics. Signature, digest, date and
+        x-request-id headers are mandatory in production.
+      operationId: createPisV2Connect
+      tags: [Payments]
+      parameters:
+        - $ref: '#/components/parameters/SignatureHeader'
+        - $ref: '#/components/parameters/DigestHeader'
+        - $ref: '#/components/parameters/DateHeader'
+        - $ref: '#/components/parameters/RequestIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentConnectRequest'
+      responses:
+        '200':
+          description: Connect URL returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentConnectResponse'
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /pis/v2/payments:
+    get:
+      summary: Get All Payments
+      description: List all payments linked to the calling application. Supports filters.
+      operationId: getPisV2Payments
+      tags: [Payments]
+      parameters:
+        - in: query
+          name: filter[status]
+          schema: { type: string }
+        - in: query
+          name: filter[from]
+          schema: { type: string, format: date }
+        - in: query
+          name: filter[to]
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          description: Payment list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentList'
+
+  /pis/v2/payments/{payment_id}:
+    get:
+      summary: Get Specific Payment
+      description: Detailed information for a specific payment session.
+      operationId: getPaymentSession
+      tags: [Payments]
+      parameters:
+        - $ref: '#/components/parameters/PaymentIdPath'
+      responses:
+        '200':
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+    patch:
+      summary: Update A Payment
+      description: Modify information on a specific payment.
+      operationId: patchPisV2PaymentSession
+      tags: [Payments]
+      parameters:
+        - $ref: '#/components/parameters/PaymentIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPatch'
+      responses:
+        '200':
+          description: Updated payment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+
+  /pis/v2/payments/{payment_id}/refunds:
+    get:
+      summary: Get Payment Refunds
+      description: List all refunds related to a specific payment.
+      operationId: getPisV2PaymentRefunds
+      tags: [Refunds]
+      parameters:
+        - $ref: '#/components/parameters/PaymentIdPath'
+      responses:
+        '200':
+          description: Refund list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundList'
+
+  /pis/v2/refund:
+    post:
+      summary: Create A Refund
+      description: >
+        Initiate a refund. Refunds may be full or partial. By default the refund
+        is sent to the original payment account, but a payout account may be
+        specified instead.
+      operationId: createPisV2Refund
+      tags: [Refunds]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '200':
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+
+  /pis/v2/request-to-pay:
+    post:
+      summary: Create A Request To Pay
+      description: >
+        Generate a Fintecture payment link. Link can be returned in the response
+        and/or delivered to the customer by email or SMS. Same endpoint backs
+        Immediate Transfer, Smart Transfer, and Buy Now Pay Later.
+      operationId: createPisV2RequestToPay
+      tags: [Request To Pay]
+      parameters:
+        - $ref: '#/components/parameters/SignatureHeader'
+        - $ref: '#/components/parameters/DigestHeader'
+        - $ref: '#/components/parameters/DateHeader'
+        - $ref: '#/components/parameters/RequestIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestToPayRequest'
+      responses:
+        '200':
+          description: Request to pay created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestToPayResponse'
+
+  /pis/v2/request-for-payout:
+    post:
+      summary: Create A Request For Payout
+      description: Create a request for payout that the merchant can share with a customer for asynchronous payout.
+      operationId: createPisV2RequestForPayout
+      tags: [Payouts]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestForPayoutRequest'
+      responses:
+        '200':
+          description: Request for payout created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestForPayoutResponse'
+
+  /pis/v2/settlements:
+    get:
+      summary: Get All Settlements
+      description: List all disbursements from the merchant's Local Acquiring account.
+      operationId: getPisV2Settlements
+      tags: [Settlements]
+      responses:
+        '200':
+          description: Settlements list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementList'
+
+  /pis/v2/settlements/{settlement_id}:
+    get:
+      summary: Get Specific Settlement
+      description: Information about a specific settlement.
+      operationId: getSettlementById
+      tags: [Settlements]
+      parameters:
+        - in: path
+          name: settlement_id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Settlement details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    SignatureHeader:
+      in: header
+      name: Signature
+      required: true
+      description: HTTP message signature (RFC draft-cavage-http-signatures).
+      schema: { type: string }
+    DigestHeader:
+      in: header
+      name: Digest
+      required: true
+      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
+      schema: { type: string }
+    DateHeader:
+      in: header
+      name: Date
+      required: true
+      schema: { type: string }
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      required: true
+      description: Unique request identifier (UUID v4 recommended).
+      schema: { type: string, format: uuid }
+    PaymentIdPath:
+      in: path
+      name: payment_id
+      required: true
+      schema: { type: string }
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+  schemas:
+    PaymentMeta:
+      type: object
+      properties:
+        psu_name: { type: string }
+        psu_email: { type: string, format: email }
+        psu_phone: { type: string }
+        psu_address: { type: string }
+
+    PaymentAttributes:
+      type: object
+      required: [amount, currency, communication]
+      properties:
+        amount:
+          type: string
+          description: Amount in the given currency, as a string (e.g. "12.34").
+        currency:
+          type: string
+          enum: [EUR, GBP, PLN]
+        customer_id: { type: string }
+        end_to_end_id: { type: string }
+        communication:
+          type: string
+          description: Free-form payment communication / remittance information.
+        beneficiary:
+          type: object
+          properties:
+            name: { type: string }
+            iban: { type: string }
+            bic: { type: string }
+        payment_method:
+          type: string
+          enum: [immediate_transfer, smart_transfer, bnpl]
+
+    PaymentConnectRequest:
+      type: object
+      required: [meta, data]
+      properties:
+        meta: { $ref: '#/components/schemas/PaymentMeta' }
+        data:
+          type: object
+          properties:
+            type: { type: string, enum: [PIS] }
+            attributes: { $ref: '#/components/schemas/PaymentAttributes' }
+
+    PaymentConnectResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id: { type: string }
+            status: { type: string }
+            url: { type: string, format: uri }
+            code: { type: string }
+
+    Payment:
+      type: object
+      properties:
+        id: { type: string }
+        type: { type: string, enum: [PIS] }
+        attributes: { $ref: '#/components/schemas/PaymentAttributes' }
+        status:
+          type: string
+          enum:
+            - payment_created
+            - payment_pending
+            - payment_initiated
+            - payment_completed
+            - payment_rejected
+            - payment_cancelled
+            - payment_failed
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Payment' }
+        meta:
+          type: object
+          properties:
+            count: { type: integer }
+
+    PaymentPatch:
+      type: object
+      properties:
+        meta: { $ref: '#/components/schemas/PaymentMeta' }
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                communication: { type: string }
+
+    Refund:
+      type: object
+      properties:
+        id: { type: string }
+        amount: { type: string }
+        currency: { type: string }
+        status: { type: string }
+        original_payment_id: { type: string }
+        created_at: { type: string, format: date-time }
+
+    RefundRequest:
+      type: object
+      required: [meta, data]
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id: { type: string }
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                amount: { type: string }
+                currency: { type: string }
+                communication: { type: string }
+
+    RefundList:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Refund' }
+
+    RequestToPayRequest:
+      type: object
+      properties:
+        meta: { $ref: '#/components/schemas/PaymentMeta' }
+        data:
+          type: object
+          properties:
+            type: { type: string, enum: [PIS] }
+            attributes: { $ref: '#/components/schemas/PaymentAttributes' }
+
+    RequestToPayResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id: { type: string }
+            url: { type: string, format: uri }
+            link_id: { type: string }
+
+    RequestForPayoutRequest:
+      type: object
+      required: [meta, data]
+      properties:
+        meta:
+          type: object
+          properties:
+            customer_id: { type: string }
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                amount: { type: string }
+                currency: { type: string }
+                communication: { type: string }
+
+    RequestForPayoutResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id: { type: string }
+            status: { type: string }
+            url: { type: string, format: uri }
+
+    Settlement:
+      type: object
+      properties:
+        id: { type: string }
+        amount: { type: string }
+        currency: { type: string }
+        status: { type: string }
+        settled_at: { type: string, format: date-time }
+        beneficiary_iban: { type: string }
+        transactions:
+          type: array
+          items: { type: string }
+
+    SettlementList:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Settlement' }
+
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status: { type: string }
+              code: { type: string }
+              title: { type: string }
+              detail: { type: string }
