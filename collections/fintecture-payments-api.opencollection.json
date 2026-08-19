@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Payments API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Payment Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/pis/v2/connect",
+            "headers": [
+              {
+                "name": "Signature",
+                "value": ""
+              },
+              {
+                "name": "Digest",
+                "value": ""
+              },
+              {
+                "name": "Date",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a payment session for a PSU to initiate an Immediate Transfer, Smart Transfer, or Buy Now Pay Later payment. To mix them in a single session, use the Payment Hub semantics. Signature, digest, date and x-request-id headers are mandatory in production.\n"
+        },
+        {
+          "info": {
+            "name": "Get All Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/payments",
+            "params": [
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[from]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[to]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all payments linked to the calling application. Supports filters."
+        },
+        {
+          "info": {
+            "name": "Get Specific Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/payments/:payment_id",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Detailed information for a specific payment session."
+        },
+        {
+          "info": {
+            "name": "Update A Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.fintecture.com/pis/v2/payments/:payment_id",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify information on a specific payment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Users API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create User"
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get User"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.fintecture.com/v1/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update User"
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fintecture.com/v1/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destructive. Deletes Firebase auth credentials and all memberships."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

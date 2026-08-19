@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "ee665152-b2ed-4037-918e-8afb7d0ea5d1",
+      "id": "edd57ae9-0c83-44ed-9252-0d0572a243ec",
       "name": "OAuth",
       "description": {
         "content": "Access and refresh tokens",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "9d43776b-ef71-496c-ab2b-3e70abcb7310",
+          "id": "e55635ae-9aee-4ac2-b6c8-84a6c53c8988",
           "name": "Create Access Token",
           "request": {
             "name": "Create Access Token",
@@ -80,7 +80,7 @@
           },
           "response": [
             {
-              "id": "c145d101-5304-4c31-960e-9b9305b01ad7",
+              "id": "8477aed6-0436-4b36-9d02-1722eb48469f",
               "name": "Token issued",
               "originalRequest": {
                 "url": {
@@ -95,6 +95,14 @@
                   "variable": []
                 },
                 "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
@@ -153,7 +161,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 4409,\n  \"refresh_token\": \"string\",\n  \"scope\": \"string\"\n}",
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 200,\n  \"refresh_token\": \"string\",\n  \"scope\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -164,7 +172,7 @@
           }
         },
         {
-          "id": "dd2cb480-16d3-41cf-860f-93a3442bfff1",
+          "id": "84b608fe-0e7c-4b75-9a4a-11a771e238eb",
           "name": "Create Refresh Token",
           "request": {
             "name": "Create Refresh Token",
@@ -225,7 +233,7 @@
           },
           "response": [
             {
-              "id": "cb6e54fb-e1f5-4132-8cf8-532cb69c0c3a",
+              "id": "aaa335d7-b553-4b6a-b8b1-084c75838653",
               "name": "New token issued",
               "originalRequest": {
                 "url": {
@@ -240,6 +248,14 @@
                   "variable": []
                 },
                 "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
@@ -288,7 +304,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 4409,\n  \"refresh_token\": \"string\",\n  \"scope\": \"string\"\n}",
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 200,\n  \"refresh_token\": \"string\",\n  \"scope\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -310,12 +326,21 @@
       "key": "baseUrl"
     }
   ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
   "info": {
-    "_postman_id": "f2244c8a-c4ae-47d0-a1cd-57edc887cf25",
-    "name": "Fintecture OAuth and Tokens API",
+    "_postman_id": "1b59fe0d-9f7d-4721-a0d0-9bdaea60c2ae",
+    "name": "Fintecture Account Information Services Accounts OAuth API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "Authentication endpoints. The /v1/access-token endpoint issues access tokens via the authorization_code grant (used for AIS code exchange) and the client_credentials grant (used for PIS, Customers, E-Mandates, and OAC). Access tokens are valid for 1 hour and can be refreshed via /v1/refresh-token.\n\n\nContact Support:\n Name: Fintecture Support",
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
       "type": "text/plain"
     }
   }

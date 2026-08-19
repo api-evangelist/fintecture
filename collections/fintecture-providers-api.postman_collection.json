@@ -1,0 +1,231 @@
+{
+  "item": [
+    {
+      "id": "63b4561b-7400-4961-a353-18d73628135a",
+      "name": "Providers",
+      "description": {
+        "content": "Bank providers / coverage",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87378d5f-f901-4d0d-b738-ecfdba0bc229",
+          "name": "Get All Providers",
+          "request": {
+            "name": "Get All Providers",
+            "description": {
+              "content": "Retrieves the banks accessible for account data and payment initiation. The services available per bank are detailed under the `ais` and `pis` attributes — AIS values include Accountholders, Accounts, Transactions; PIS values include SEPA, iSCT, FPS, PLN, INT.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "res",
+                "v1",
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28e6cdb9-9d95-495a-8595-1e2f24b1a888",
+              "name": "Providers list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "res",
+                    "v1",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logo_url\": \"http://ETPRzbnDHPyKZRqwZ.teaftK1ZCsDqxZRdzL9p9aJ5vl5ru7\",\n      \"auth_models\": [\n        \"redirect\",\n        \"decoupled\"\n      ],\n      \"ais\": [\n        \"Accountholders\",\n        \"Accountholders\"\n      ],\n      \"pis\": [\n        \"SEPA\",\n        \"iSCT\"\n      ],\n      \"psu_types\": [\n        \"corporate\",\n        \"retail\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logo_url\": \"https://LWPGrUJPBdLsEPxeOMsiSxdTCgM.enAOQTVVluPeXSWkD3QnxqbTv52,-c\",\n      \"auth_models\": [\n        \"decoupled\",\n        \"decoupled\"\n      ],\n      \"ais\": [\n        \"Accountholders\",\n        \"Accountholders\"\n      ],\n      \"pis\": [\n        \"iSCT\",\n        \"SEPA\"\n      ],\n      \"psu_types\": [\n        \"corporate\",\n        \"corporate\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfa011fb-ad4d-4186-bf0f-800a42915ff4",
+          "name": "Get A Specific Provider",
+          "request": {
+            "name": "Get A Specific Provider",
+            "description": {},
+            "url": {
+              "path": [
+                "res",
+                "v1",
+                "providers",
+                ":provider_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "137bea22-880f-419e-a57c-071301d02871",
+              "name": "Provider details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "res",
+                    "v1",
+                    "providers",
+                    ":provider_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"country\": \"string\",\n  \"logo_url\": \"http://LGHWUTHlIkDKAJz.jgdgIOxp3O+iouI5T3zJeKimBSTEezv0RtOC2F7V.6oUSqfte3xff03olev3EQsfxqShhSyhiHKC,SBh53nqL\",\n  \"auth_models\": [\n    \"redirect\",\n    \"redirect\"\n  ],\n  \"ais\": [\n    \"Accounts\",\n    \"Accountholders\"\n  ],\n  \"pis\": [\n    \"iSCT\",\n    \"iSCT\"\n  ],\n  \"psu_types\": [\n    \"retail\",\n    \"retail\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c0c599a-53ad-47cd-97cc-7d3ac041a688",
+    "name": "Fintecture Account Information Services Accounts Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

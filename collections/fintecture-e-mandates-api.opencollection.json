@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts E-Mandates API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "E-Mandates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All E-Mandates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/e-mandates"
+          },
+          "docs": "List all merchant e-mandates."
+        },
+        {
+          "info": {
+            "name": "Create E-Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/v1/e-mandates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a customer e-mandate. Returns 409 Conflict if an e-mandate with the same RUM already exists."
+        },
+        {
+          "info": {
+            "name": "Get An E-Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/e-mandates/:mandate_id",
+            "params": [
+              {
+                "name": "mandate_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get An E-Mandate"
+        },
+        {
+          "info": {
+            "name": "Update An E-Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.fintecture.com/v1/e-mandates/:mandate_id",
+            "params": [
+              {
+                "name": "mandate_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a customer e-mandate. Only status updates are allowed. Accepted statuses are 'cancelled' and 'revoked'."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

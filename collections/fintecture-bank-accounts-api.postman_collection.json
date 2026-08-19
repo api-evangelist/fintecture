@@ -1,0 +1,732 @@
+{
+  "item": [
+    {
+      "id": "5ddff252-e84e-4af4-8d5d-7cf5df7a1b6a",
+      "name": "Bank Accounts",
+      "description": {
+        "content": "Customer bank accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba968cbb-2480-4b85-917e-92f813852285",
+          "name": "List All Customer Bank Accounts",
+          "request": {
+            "name": "List All Customer Bank Accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "customers",
+                ":customer_id",
+                "bank-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3419f13f-3112-42c5-9599-9027872611c9",
+              "name": "Bank account list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customers",
+                    ":customer_id",
+                    "bank-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"holder_name\": \"string\",\n      \"currency\": \"string\",\n      \"verified\": false\n    },\n    {\n      \"id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"holder_name\": \"string\",\n      \"currency\": \"string\",\n      \"verified\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3aa1be3-5256-46de-ad98-13ab372a67f8",
+          "name": "Create Customer Bank Account",
+          "request": {
+            "name": "Create Customer Bank Account",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "customers",
+                ":customer_id",
+                "bank-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fdb92598-f63c-496b-9cc2-f942352d63d4",
+              "name": "Bank account created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customers",
+                    ":customer_id",
+                    "bank-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"iban\": \"string\",\n  \"bic\": \"string\",\n  \"holder_name\": \"string\",\n  \"currency\": \"string\",\n  \"verified\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8567d88-6c66-46fb-a28d-67be97f54b9b",
+          "name": "Get A Bank Account From A Customer",
+          "request": {
+            "name": "Get A Bank Account From A Customer",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "customers",
+                ":customer_id",
+                "bank-accounts",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customer_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9e6f306-3574-45de-a81f-df77d9e8e1f8",
+              "name": "Bank account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customers",
+                    ":customer_id",
+                    "bank-accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customer_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"iban\": \"string\",\n  \"bic\": \"string\",\n  \"holder_name\": \"string\",\n  \"currency\": \"string\",\n  \"verified\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77d4c78b-6985-46d6-8244-376ddac3686f",
+          "name": "List Bank Accounts",
+          "request": {
+            "name": "List Bank Accounts",
+            "description": {
+              "content": "List bank accounts linked to companies in the authenticated organisation's subtree.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "bank-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2308c85d-7f6b-4517-82ad-d16aad651224",
+              "name": "Bank account list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bank-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"holder_name\": \"string\",\n      \"currency\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"holder_name\": \"string\",\n      \"currency\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1091142-ac81-4c68-82e8-6791bb2ecf9d",
+          "name": "Create Bank Account",
+          "request": {
+            "name": "Create Bank Account",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "bank-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6aa454ce-3286-42dd-869c-d9c187412be4",
+              "name": "Bank account created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bank-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "111a9d5f-ee6e-49a4-ae2c-019f20478859",
+          "name": "Update Bank Account",
+          "request": {
+            "name": "Update Bank Account",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "bank-accounts",
+                ":bank_account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bank_account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5be9221-02a2-4be6-9119-3eef3a1183d4",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bank-accounts",
+                    ":bank_account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bank_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"iban\": \"<string>\",\n  \"holder_name\": \"<string>\",\n  \"bic\": \"<string>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "979cf68e-5774-484a-b50d-761aaa534a90",
+          "name": "Delete Bank Account",
+          "request": {
+            "name": "Delete Bank Account",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "bank-accounts",
+                ":bank_account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bank_account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f628a636-daae-43b0-b024-00da0ba38b1f",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "bank-accounts",
+                    ":bank_account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bank_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f5b00efa-8304-491c-a61d-abfa471472e9",
+    "name": "Fintecture Account Information Services Accounts Bank Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,228 +1,29 @@
 {
   "item": [
     {
-      "id": "695cf531-a2c9-4714-95be-cd89bacf4499",
-      "name": "Customers",
+      "id": "2a051c20-16c5-455d-ba27-4e5bb78b0216",
+      "name": "Accounts",
       "description": {
-        "content": "Customer records",
+        "content": "Bank accounts, balances, and holders",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "29a32b8d-d60f-4c0e-9192-226880b10c41",
-          "name": "List All Customers",
+          "id": "40b4094c-c17e-4477-918b-160515abf491",
+          "name": "Get All Accounts",
           "request": {
-            "name": "List All Customers",
+            "name": "Get All Accounts",
             "description": {
-              "content": "Comprehensive overview of all registered customers.",
+              "content": "Returns all accounts linked to a specific connection.",
               "type": "text/plain"
             },
             "url": {
               "path": [
+                "ais",
                 "v1",
-                "customers"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page[number]",
-                  "value": "<integer>"
-                },
-                {
-                  "disabled": false,
-                  "key": "page[size]",
-                  "value": "<integer>"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "77d81788-ba8a-49a1-b57e-a3e16041519c",
-              "name": "Customer list",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "customers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page[number]",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page[size]",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"company_name\": \"string\",\n      \"email\": \"PupcCr@KuZkvqmckZUQVvVdkaJIMwFwVwokh.th\",\n      \"phone\": \"string\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"postal_code\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\"\n      },\n      \"external_id\": \"string\",\n      \"created_at\": \"2025-04-23T06:39:56.064Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"company_name\": \"string\",\n      \"email\": \"p0jPiuP8eM@JEbiNSyZfjWSZrpQRFEbONA.ua\",\n      \"phone\": \"string\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"postal_code\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\"\n      },\n      \"external_id\": \"string\",\n      \"created_at\": \"1951-07-24T11:04:10.069Z\"\n    }\n  ],\n  \"meta\": {\n    \"count\": 6349\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5e8acd32-ddd9-413d-be6c-72c60b7fb6ba",
-          "name": "Create Customer",
-          "request": {
-            "name": "Create Customer",
-            "description": {
-              "content": "Register a customer to accelerate payments.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "customers"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"company_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"external_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "3e60e2e1-3a3e-46d6-b1d4-f5d69099b995",
-              "name": "Customer created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "customers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"company_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"external_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"company_name\": \"string\",\n  \"email\": \"JSqcaiMyc@JkCmcnSC.ltex\",\n  \"phone\": \"string\",\n  \"address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"postal_code\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\"\n  },\n  \"external_id\": \"string\",\n  \"created_at\": \"1972-08-04T12:10:01.603Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "376e0da7-47d5-4a67-b7ea-ab9718df67e4",
-          "name": "Get A Customer",
-          "request": {
-            "name": "Get A Customer",
-            "description": {
-              "content": "Retrieve a customer's details by customer_id.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "customers",
-                ":customer_id"
+                "customer",
+                ":customer_id",
+                "accounts"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -249,14 +50,16 @@
           },
           "response": [
             {
-              "id": "26f87f1a-40c8-4f1c-9e29-79a209dfe9c1",
-              "name": "Customer details",
+              "id": "d29b1430-32ca-40e2-9d97-d5dd4e825779",
+              "name": "Accounts list",
               "originalRequest": {
                 "url": {
                   "path": [
+                    "ais",
                     "v1",
-                    "customers",
-                    ":customer_id"
+                    "customer",
+                    ":customer_id",
+                    "accounts"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -297,7 +100,245 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"company_name\": \"string\",\n  \"email\": \"JSqcaiMyc@JkCmcnSC.ltex\",\n  \"phone\": \"string\",\n  \"address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"postal_code\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\"\n  },\n  \"external_id\": \"string\",\n  \"created_at\": \"1972-08-04T12:10:01.603Z\"\n}",
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"currency\": \"string\",\n      \"balances\": [\n        {\n          \"type\": \"closingBooked\",\n          \"amount\": \"string\",\n          \"currency\": \"string\",\n          \"timestamp\": \"1974-01-04T01:33:02.295Z\"\n        },\n        {\n          \"type\": \"expected\",\n          \"amount\": \"string\",\n          \"currency\": \"string\",\n          \"timestamp\": \"1990-11-28T09:18:51.930Z\"\n        }\n      ],\n      \"type\": \"CACC\"\n    },\n    {\n      \"id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"currency\": \"string\",\n      \"balances\": [\n        {\n          \"type\": \"current\",\n          \"amount\": \"string\",\n          \"currency\": \"string\",\n          \"timestamp\": \"1973-07-13T13:50:37.247Z\"\n        },\n        {\n          \"type\": \"expected\",\n          \"amount\": \"string\",\n          \"currency\": \"string\",\n          \"timestamp\": \"1968-11-01T14:09:30.608Z\"\n        }\n      ],\n      \"type\": \"CARD\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38da08a6-2e2e-49c4-97a4-b6d0b8f6b02a",
+          "name": "Get Specific Account",
+          "request": {
+            "name": "Get Specific Account",
+            "description": {
+              "content": "Returns information for a specific account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ais",
+                "v1",
+                "customer",
+                ":customer_id",
+                "account",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customer_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95d45c81-52cd-403f-b320-adde34d19f1d",
+              "name": "Account details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ais",
+                    "v1",
+                    "customer",
+                    ":customer_id",
+                    "account",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customer_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"iban\": \"string\",\n  \"bic\": \"string\",\n  \"currency\": \"string\",\n  \"balances\": [\n    {\n      \"type\": \"current\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"timestamp\": \"1992-08-18T14:26:05.498Z\"\n    },\n    {\n      \"type\": \"expected\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"timestamp\": \"2011-09-24T19:32:33.973Z\"\n    }\n  ],\n  \"type\": \"SVGS\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1928d074-30a0-4525-a4d6-5fa86b072d4e",
+          "name": "Get Account Holders",
+          "request": {
+            "name": "Get Account Holders",
+            "description": {
+              "content": "Retrieves personal information of beneficiary owners — name, address, contact details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ais",
+                "v1",
+                "customer",
+                ":customer_id",
+                "account",
+                ":account_id",
+                "holders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customer_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e7d5855-531b-495f-8481-6844278c6291",
+              "name": "Holders list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ais",
+                    "v1",
+                    "customer",
+                    ":customer_id",
+                    "account",
+                    ":account_id",
+                    "holders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customer_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"email\": \"khMU@LMTq.veir\",\n      \"phone\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"address\": \"string\",\n      \"email\": \"09T-QHo9uDpGsk@xsFueyojEuFGlVGgX.pk\",\n      \"phone\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -329,8 +370,8 @@
     ]
   },
   "info": {
-    "_postman_id": "17979aa1-8143-43aa-9ee3-75ec11d7ecf7",
-    "name": "Fintecture Account Information Services Accounts Customers API",
+    "_postman_id": "77a175c2-c967-477c-8bc0-3a6b7bd70ac5",
+    "name": "Fintecture Account Information Services Accounts API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",

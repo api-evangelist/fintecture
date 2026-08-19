@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Authentication API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Provider Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/ais/v1/provider/:provider_id/authorize",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "psu_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Authenticates a PSU at their bank for AIS access. Returns either a redirect URL or triggers a decoupled authentication request on the PSU's bank mobile app, depending on the model the bank supports.\n"
+        },
+        {
+          "info": {
+            "name": "Get Decoupled Provider Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/ais/v1/provider/:provider_id/authorize/decoupled",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Poll the authentication status within the decoupled model. Status moves from PENDING -> COMPLETED on success, or FAILED on timeout/cancellation.\n"
+        },
+        {
+          "info": {
+            "name": "Get AIS Connect Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/ais/v2/connect",
+            "params": [
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides a connect session for a PSU to create a connection enabling AIS access."
+        },
+        {
+          "info": {
+            "name": "Delete Provider Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fintecture.com/ais/v1/customer/:customer_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes all active access tokens and PSU data linked to the requested connection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

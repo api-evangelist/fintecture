@@ -1,0 +1,621 @@
+{
+  "item": [
+    {
+      "id": "c28d74bc-5a31-4af4-a8c7-8b200ea68125",
+      "name": "Applications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "45d1c9a2-c0a2-44a5-b15e-fe5fca3c9b5f",
+          "name": "List Applications",
+          "request": {
+            "name": "List Applications",
+            "description": {
+              "content": "List applications linked to companies within the authenticated organisation's subtree. Requires `applications:read`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[company_id]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3eb057ac-7e8d-4b45-a30a-34d772753317",
+              "name": "Applications list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[company_id]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"app_name\": \"string\",\n      \"app_public_key\": \"string\",\n      \"app_urls\": {\n        \"return_url\": \"http://GsqiBRjqtmPfGQyDHARvWaWgkBcw.fhkeX3Zh6GwtM,CF-pk6KWPhqRn1NY\",\n        \"domain\": \"string\"\n      },\n      \"app_webhooks\": [\n        {\n          \"url\": \"http://mp.jwoP98c2fXu5tsnt5iCZzankR83M4hrMIGOAyflR\",\n          \"events\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"url\": \"http://IjyJAFOAniQRVMXmWsjARwmEvrBhYx.hvkxKR+0g3BHarwInUd8I5kH9nw6+YFqtih,LtqDkVTo+iwHVD1aoPtcOriE\",\n          \"events\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"app_name\": \"string\",\n      \"app_public_key\": \"string\",\n      \"app_urls\": {\n        \"return_url\": \"http://PxKRcfwqVpMjyIe.myABEtfHv1NWmKXnB5zVFghXkJXTjUE+Mofw7XeXGpXO.tef7SeG9R6R\",\n        \"domain\": \"string\"\n      },\n      \"app_webhooks\": [\n        {\n          \"url\": \"http://kUzMbxEeXXIroAlKNQpiUTIOi.evshvmwNiIEbdpo6o0ml3vFWQgSzVLqqnW+GZEEf\",\n          \"events\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"url\": \"https://QChtXNIlynqqaOiBFOJjUcGlvnTL.nkV2eAFuZrk1ImXh7ZFXJDJyQLQ3wWtEH-rm2,BRoCn,uNiVIKvqw\",\n          \"events\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92f84a4f-8f7f-4b30-bb95-de5dfe46b8a2",
+          "name": "Create Application",
+          "request": {
+            "name": "Create Application",
+            "description": {
+              "content": "Create a new application for a company within the authenticated organisation's subtree. Requires `applications:write`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_public_key\": \"<string>\"\n    },\n    \"relationships\": {\n      \"bank_account\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"lid\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65ef32a4-6263-4e04-90eb-add312e9d750",
+              "name": "Application created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_public_key\": \"<string>\"\n    },\n    \"relationships\": {\n      \"bank_account\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"lid\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27f60f98-028f-4065-9eba-466a22782d89",
+          "name": "Get Current Application",
+          "request": {
+            "name": "Get Current Application",
+            "description": {
+              "content": "Information related to the application used to sign the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "applications",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a257899-7f14-404f-a66d-5db4829e8238",
+              "name": "Current application",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "applications",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"app_name\": \"string\",\n  \"app_public_key\": \"string\",\n  \"app_urls\": {\n    \"return_url\": \"http://HNHKSIlpARqgNvNHym.bbdtyYtYW8c8iZ6w1P2vCHGgR0j-Jjz3czxRhEXkLi59Qndj\",\n    \"domain\": \"string\"\n  },\n  \"app_webhooks\": [\n    {\n      \"url\": \"http://otRcTdsTMqF.lndlR4dPtbxthXamKK3.UdGxpeCYmI79ncXE2GSuPTPw4-QTh\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"url\": \"http://cYuYICOtrsnyeqC.xgKWDmK2nuuKYDlJOXe.op1UMfHhducwSbfSBInJ\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "470e910d-603d-471e-afb8-b38f0a44e864",
+          "name": "Get An Application",
+          "request": {
+            "name": "Get An Application",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "applications",
+                ":app_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b07a0012-4aab-4e7b-9de3-c0634014a332",
+              "name": "Application",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "applications",
+                    ":app_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"app_name\": \"string\",\n  \"app_public_key\": \"string\",\n  \"app_urls\": {\n    \"return_url\": \"http://HNHKSIlpARqgNvNHym.bbdtyYtYW8c8iZ6w1P2vCHGgR0j-Jjz3czxRhEXkLi59Qndj\",\n    \"domain\": \"string\"\n  },\n  \"app_webhooks\": [\n    {\n      \"url\": \"http://otRcTdsTMqF.lndlR4dPtbxthXamKK3.UdGxpeCYmI79ncXE2GSuPTPw4-QTh\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"url\": \"http://cYuYICOtrsnyeqC.xgKWDmK2nuuKYDlJOXe.op1UMfHhducwSbfSBInJ\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78912076-22a4-4de0-8f4d-25734e793702",
+          "name": "Update Application",
+          "request": {
+            "name": "Update Application",
+            "description": {
+              "content": "Update app_name, app_webhooks, or app_urls. Requires `applications:write`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "applications",
+                ":app_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_webhooks\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"app_urls\": \"<object>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a2368a85-fa34-4099-85a2-096e5ec6146d",
+              "name": "Application updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "applications",
+                    ":app_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"app_name\": \"<string>\",\n      \"app_webhooks\": [\n        \"<object>\",\n        \"<object>\"\n      ],\n      \"app_urls\": \"<object>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4478c58-28fb-44e0-96e3-22f521e460ec",
+          "name": "Remove An Application",
+          "request": {
+            "name": "Remove An Application",
+            "description": {
+              "content": "Removing an application is irreversible. Requires `applications:write`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "applications",
+                ":app_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "273416ab-96a7-481e-bd53-2d3fc7d3842f",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "applications",
+                    ":app_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f7a602b2-a05a-4c97-8b93-afeaf6f3f69b",
+    "name": "Fintecture Account Information Services Accounts Applications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

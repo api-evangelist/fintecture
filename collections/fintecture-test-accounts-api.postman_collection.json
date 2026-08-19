@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "ac024525-630d-4da1-817f-fc914149b3a1",
+      "name": "Test Accounts",
+      "description": {
+        "content": "Sandbox test accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c656cea-e486-4be8-83ee-6652f6a13158",
+          "name": "Get All Test Accounts",
+          "request": {
+            "name": "Get All Test Accounts",
+            "description": {
+              "content": "Retrieves test accounts by bank for use in the sandbox environment only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "res",
+                "v1",
+                "test-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ae44683-1001-4fac-8b84-0cac78be4af2",
+              "name": "Test accounts list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "res",
+                    "v1",
+                    "test-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"provider_id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"holder_name\": \"string\",\n      \"balance\": \"string\",\n      \"currency\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"provider_id\": \"string\",\n      \"iban\": \"string\",\n      \"bic\": \"string\",\n      \"holder_name\": \"string\",\n      \"balance\": \"string\",\n      \"currency\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "692d7d9a-e0ad-49da-99ff-2eeb3ec8a2f1",
+          "name": "Get A Specific Test Account",
+          "request": {
+            "name": "Get A Specific Test Account",
+            "description": {},
+            "url": {
+              "path": [
+                "res",
+                "v1",
+                "test-accounts",
+                ":account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f174ad5d-1bf0-450f-af9a-373197198ce5",
+              "name": "Test account details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "res",
+                    "v1",
+                    "test-accounts",
+                    ":account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"provider_id\": \"string\",\n  \"iban\": \"string\",\n  \"bic\": \"string\",\n  \"holder_name\": \"string\",\n  \"balance\": \"string\",\n  \"currency\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a0bd4a2a-49be-4173-b81d-05ae07cae6e0",
+    "name": "Fintecture Account Information Services Accounts Test Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

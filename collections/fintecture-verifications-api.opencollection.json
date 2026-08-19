@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Verifications API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Verifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate Customer Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/v1/customers/:customer_id/verification",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate Customer Verification"
+        },
+        {
+          "info": {
+            "name": "List All Customer Verifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/customers/:customer_id/verifications",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List All Customer Verifications"
+        },
+        {
+          "info": {
+            "name": "Get A Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/customers/:customer_id/verification/:verification_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "verification_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get A Verification"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

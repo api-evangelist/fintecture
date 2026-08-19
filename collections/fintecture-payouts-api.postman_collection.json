@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "98398d04-aeef-4806-af05-95e33d4bedf0",
+      "name": "Payouts",
+      "description": {
+        "content": "Verified payouts and request-for-payout",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e131c923-a13e-4a68-82b7-edaacdc8c58c",
+          "name": "Create A Request For Payout",
+          "request": {
+            "name": "Create A Request For Payout",
+            "description": {
+              "content": "Create a request for payout that the merchant can share with a customer for asynchronous payout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pis",
+                "v2",
+                "request-for-payout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "01fe9aad-d8cf-44e5-ae6b-992ed6cde863",
+              "name": "Request for payout created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pis",
+                    "v2",
+                    "request-for-payout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"session_id\": \"string\",\n    \"status\": \"string\",\n    \"url\": \"https://jkisFzAKyfxACBSZaJArBnwmxelNtQYN.eksUH0XKSaTKwCnKH3sfxGEJheCsC4SI9bhetkYoE46PFqHZvuMVMNi6k+BYnm6AedfRRjN\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "055f0715-e797-4cc8-84a0-b0d3e3a7c597",
+    "name": "Fintecture Account Information Services Accounts Payouts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

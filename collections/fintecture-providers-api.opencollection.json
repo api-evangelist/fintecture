@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Providers API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/res/v1/providers",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the banks accessible for account data and payment initiation. The services available per bank are detailed under the `ais` and `pis` attributes — AIS values include Accountholders, Accounts, Transactions; PIS values include SEPA, iSCT, FPS, PLN, INT.\n"
+        },
+        {
+          "info": {
+            "name": "Get A Specific Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/res/v1/providers/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get A Specific Provider"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

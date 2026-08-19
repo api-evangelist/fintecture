@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Bank Accounts API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bank Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Customer Bank Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/customers/:customer_id/bank-accounts",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List All Customer Bank Accounts"
+        },
+        {
+          "info": {
+            "name": "Create Customer Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/v1/customers/:customer_id/bank-accounts",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Customer Bank Account"
+        },
+        {
+          "info": {
+            "name": "Get A Bank Account From A Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/customers/:customer_id/bank-accounts/:account_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get A Bank Account From A Customer"
+        },
+        {
+          "info": {
+            "name": "List Bank Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/v1/bank-accounts"
+          },
+          "docs": "List bank accounts linked to companies in the authenticated organisation's subtree."
+        },
+        {
+          "info": {
+            "name": "Create Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/v1/bank-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Bank Account"
+        },
+        {
+          "info": {
+            "name": "Update Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.fintecture.com/v1/bank-accounts/:bank_account_id",
+            "params": [
+              {
+                "name": "bank_account_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Bank Account"
+        },
+        {
+          "info": {
+            "name": "Delete Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fintecture.com/v1/bank-accounts/:bank_account_id",
+            "params": [
+              {
+                "name": "bank_account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Bank Account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

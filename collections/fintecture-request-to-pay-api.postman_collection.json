@@ -1,0 +1,192 @@
+{
+  "item": [
+    {
+      "id": "46a729dd-08ee-4630-a8f8-9cab5adee76b",
+      "name": "Request To Pay",
+      "description": {
+        "content": "Generate Fintecture payment links",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "610c0683-f6e8-43ad-a011-2c7e4db580d8",
+          "name": "Create A Request To Pay",
+          "request": {
+            "name": "Create A Request To Pay",
+            "description": {
+              "content": "Generate a Fintecture payment link. Link can be returned in the response and/or delivered to the customer by email or SMS. Same endpoint backs Immediate Transfer, Smart Transfer, and Buy Now Pay Later.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pis",
+                "v2",
+                "request-to-pay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                "key": "Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                "key": "Digest",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "Date",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                "key": "x-request-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta\": {\n    \"psu_name\": \"<string>\",\n    \"psu_email\": \"<email>\",\n    \"psu_phone\": \"<string>\",\n    \"psu_address\": \"<string>\"\n  },\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"end_to_end_id\": \"<string>\",\n      \"beneficiary\": {\n        \"name\": \"<string>\",\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\"\n      },\n      \"payment_method\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "daa46c0c-e733-4639-b7f7-057f6fcc2f96",
+              "name": "Request to pay created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pis",
+                    "v2",
+                    "request-to-pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) HTTP message signature (RFC draft-cavage-http-signatures).",
+                    "key": "Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.",
+                    "key": "Digest",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Date",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique request identifier (UUID v4 recommended).",
+                    "key": "x-request-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"psu_name\": \"string\",\n    \"psu_email\": \"dIpnUQpbN@bApRErdQVHbPjncrdManLI.tf\",\n    \"psu_phone\": \"string\",\n    \"psu_address\": \"string\"\n  },\n  \"data\": {\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"amount\": \"string\",\n      \"currency\": \"PLN\",\n      \"communication\": \"string\",\n      \"customer_id\": \"string\",\n      \"end_to_end_id\": \"string\",\n      \"beneficiary\": {\n        \"name\": \"string\",\n        \"iban\": \"string\",\n        \"bic\": \"string\"\n      },\n      \"payment_method\": \"immediate_transfer\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"session_id\": \"string\",\n    \"url\": \"http://PnOBXmC.jkjmLE\",\n    \"link_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a0de2da7-6c47-4452-bb4a-9b84cdb93e03",
+    "name": "Fintecture Account Information Services Accounts Request To Pay API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

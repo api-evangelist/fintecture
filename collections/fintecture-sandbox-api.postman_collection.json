@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "259c5ee7-82e0-480a-9a52-d02191a53fbc",
+      "name": "Sandbox",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "731e6290-a5cb-4503-98ce-5bb86617a279",
+          "name": "Simulate A Transaction",
+          "request": {
+            "name": "Simulate A Transaction",
+            "description": {
+              "content": "Simulate a credit/debit transaction in the Sandbox environment. Use this to test webhook and event flows.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "transactions",
+                "simulate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"bank_account_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c2e4e3f-c020-46c9-ade0-d3ca10f3ceca",
+              "name": "Simulation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "transactions",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"bank_account_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"amount\": \"string\",\n  \"currency\": \"string\",\n  \"type\": \"debit\",\n  \"status\": \"string\",\n  \"booking_date\": \"1974-12-25\",\n  \"value_date\": \"1987-11-22\",\n  \"description\": \"string\",\n  \"related_payment_id\": \"string\",\n  \"related_settlement_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6b4605a-356b-4c68-98de-d866c11e6c19",
+    "name": "Fintecture Account Information Services Accounts Sandbox API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

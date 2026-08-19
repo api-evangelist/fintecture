@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "80fd6c78-10aa-4dbe-96dd-e9dab61040c3",
+      "name": "Settlements",
+      "description": {
+        "content": "Local Acquiring disbursements",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68735433-d167-4cf3-985a-980f1256221b",
+          "name": "Get All Settlements",
+          "request": {
+            "name": "Get All Settlements",
+            "description": {
+              "content": "List all disbursements from the merchant's Local Acquiring account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pis",
+                "v2",
+                "settlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50dafddc-1eef-4146-934b-b26cd0d48686",
+              "name": "Settlements list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pis",
+                    "v2",
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"settled_at\": \"2024-08-08T03:54:40.693Z\",\n      \"beneficiary_iban\": \"string\",\n      \"transactions\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"settled_at\": \"1980-03-28T03:26:28.570Z\",\n      \"beneficiary_iban\": \"string\",\n      \"transactions\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82154a32-3c85-48f3-9fa1-9934909db26f",
+          "name": "Get Specific Settlement",
+          "request": {
+            "name": "Get Specific Settlement",
+            "description": {
+              "content": "Information about a specific settlement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pis",
+                "v2",
+                "settlements",
+                ":settlement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bdb862d-20cf-4c64-b4ef-c59dbeb03746",
+              "name": "Settlement details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pis",
+                    "v2",
+                    "settlements",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"amount\": \"string\",\n  \"currency\": \"string\",\n  \"status\": \"string\",\n  \"settled_at\": \"1983-05-03T17:35:39.548Z\",\n  \"beneficiary_iban\": \"string\",\n  \"transactions\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f76fce78-afea-4fae-a9b5-f187b3f1fc5e",
+    "name": "Fintecture Account Information Services Accounts Settlements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

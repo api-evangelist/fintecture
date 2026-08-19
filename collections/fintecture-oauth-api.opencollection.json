@@ -1,8 +1,14 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Fintecture OAuth and Tokens API",
-    "version": "v1"
+    "name": "Fintecture Account Information Services Accounts OAuth API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
   },
   "items": [
     {

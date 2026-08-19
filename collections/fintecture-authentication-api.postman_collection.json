@@ -1,31 +1,29 @@
 {
   "item": [
     {
-      "id": "27a908ca-b5b4-40db-bd11-d0e82c289d5c",
-      "name": "Transactions",
+      "id": "7613d5b7-ebdf-46ce-9447-e5ee6ef34dff",
+      "name": "Authentication",
       "description": {
-        "content": "Account transactions",
+        "content": "PSU bank authentication",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "3685eebe-0835-40da-b838-32d6c03b309b",
-          "name": "Get Account Transactions",
+          "id": "13793d86-c67c-43f6-9c6c-7b5ce87fbd7f",
+          "name": "Get Provider Authorization",
           "request": {
-            "name": "Get Account Transactions",
+            "name": "Get Provider Authorization",
             "description": {
-              "content": "Returns all transactions linked to the requested account.",
+              "content": "Authenticates a PSU at their bank for AIS access. Returns either a redirect URL or triggers a decoupled authentication request on the PSU's bank mobile app, depending on the model the bank supports.\n",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "ais",
                 "v1",
-                "customer",
-                ":customer_id",
-                "account",
-                ":account_id",
-                "transactions"
+                "provider",
+                ":provider_id",
+                "authorize"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -33,13 +31,18 @@
               "query": [
                 {
                   "disabled": false,
-                  "key": "from",
-                  "value": "<date>"
+                  "key": "redirect_uri",
+                  "value": "<uri>"
                 },
                 {
                   "disabled": false,
-                  "key": "to",
-                  "value": "<date>"
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "psu_type",
+                  "value": "<string>"
                 }
               ],
               "variable": [
@@ -47,14 +50,7 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "account_id",
+                  "key": "provider_id",
                   "description": "(Required) "
                 }
               ]
@@ -70,30 +66,32 @@
           },
           "response": [
             {
-              "id": "592e35a2-0ef7-436c-8f3d-11ee722af400",
-              "name": "Transaction list",
+              "id": "810aa817-7a32-4ff1-ac53-486c5acd0825",
+              "name": "Authorization details",
               "originalRequest": {
                 "url": {
                   "path": [
                     "ais",
                     "v1",
-                    "customer",
-                    ":customer_id",
-                    "account",
-                    ":account_id",
-                    "transactions"
+                    "provider",
+                    ":provider_id",
+                    "authorize"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
-                      "key": "from",
-                      "value": "<date>"
+                      "key": "redirect_uri",
+                      "value": "<uri>"
                     },
                     {
-                      "key": "to",
-                      "value": "<date>"
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "psu_type",
+                      "value": "<string>"
                     }
                   ],
                   "variable": [
@@ -101,14 +99,7 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "account_id",
+                      "key": "provider_id",
                       "description": "(Required) "
                     }
                   ]
@@ -138,7 +129,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"booking_date\": \"1971-10-17\",\n      \"value_date\": \"1961-08-31\",\n      \"description\": \"string\",\n      \"type\": \"debit\",\n      \"counterparty\": {\n        \"name\": \"string\",\n        \"iban\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"booking_date\": \"2024-06-22\",\n      \"value_date\": \"2019-02-24\",\n      \"description\": \"string\",\n      \"type\": \"credit\",\n      \"counterparty\": {\n        \"name\": \"string\",\n        \"iban\": \"string\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"count\": 990\n  }\n}",
+              "body": "{\n  \"meta\": {\n    \"url\": \"http://fhmmQpihlhbrge.jfokvxypVKh9lfsldYuiEAMcWjVHYjvIo6b1qXapsCB3CsRgb0y-CIsV0bL,95Rd3v0S\",\n    \"session_id\": \"string\",\n    \"decoupled\": false\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -149,15 +140,22 @@
           }
         },
         {
-          "id": "35566da1-b038-4789-bc62-58197dd947e5",
-          "name": "List All Transactions",
+          "id": "c99cb098-c25f-4c4b-bb02-8917cdfed918",
+          "name": "Get Decoupled Provider Authorization",
           "request": {
-            "name": "List All Transactions",
-            "description": {},
+            "name": "Get Decoupled Provider Authorization",
+            "description": {
+              "content": "Poll the authentication status within the decoupled model. Status moves from PENDING -> COMPLETED on success, or FAILED on timeout/cancellation.\n",
+              "type": "text/plain"
+            },
             "url": {
               "path": [
+                "ais",
                 "v1",
-                "transactions"
+                "provider",
+                ":provider_id",
+                "authorize",
+                "decoupled"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -165,17 +163,125 @@
               "query": [
                 {
                   "disabled": false,
-                  "key": "filter[from]",
-                  "value": "<date>"
+                  "key": "session_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0022af8b-ed0c-4831-adde-50528aa15176",
+              "name": "Decoupled status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ais",
+                    "v1",
+                    "provider",
+                    ":provider_id",
+                    "authorize",
+                    "decoupled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"COMPLETED\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a35db18a-5240-4743-83d0-5f7d585f1cb2",
+          "name": "Get AIS Connect Session",
+          "request": {
+            "name": "Get AIS Connect Session",
+            "description": {
+              "content": "Provides a connect session for a PSU to create a connection enabling AIS access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ais",
+                "v2",
+                "connect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "redirect_uri",
+                  "value": "<uri>"
                 },
                 {
                   "disabled": false,
-                  "key": "filter[to]",
-                  "value": "<date>"
-                },
-                {
-                  "disabled": false,
-                  "key": "filter[type]",
+                  "key": "state",
                   "value": "<string>"
                 }
               ],
@@ -192,28 +298,25 @@
           },
           "response": [
             {
-              "id": "65094870-2e4e-4069-b5ad-68a8a8df95d5",
-              "name": "Transactions list",
+              "id": "608ef280-f979-4e5c-8407-9f17bcc71384",
+              "name": "Connect session URL",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "v1",
-                    "transactions"
+                    "ais",
+                    "v2",
+                    "connect"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
-                      "key": "filter[from]",
-                      "value": "<date>"
+                      "key": "redirect_uri",
+                      "value": "<uri>"
                     },
                     {
-                      "key": "filter[to]",
-                      "value": "<date>"
-                    },
-                    {
-                      "key": "filter[type]",
+                      "key": "state",
                       "value": "<string>"
                     }
                   ],
@@ -244,7 +347,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"type\": \"debit\",\n      \"status\": \"string\",\n      \"booking_date\": \"1970-05-03\",\n      \"value_date\": \"1993-02-19\",\n      \"description\": \"string\",\n      \"related_payment_id\": \"string\",\n      \"related_settlement_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"type\": \"credit\",\n      \"status\": \"string\",\n      \"booking_date\": \"1947-09-07\",\n      \"value_date\": \"2016-05-08\",\n      \"description\": \"string\",\n      \"related_payment_id\": \"string\",\n      \"related_settlement_id\": \"string\"\n    }\n  ]\n}",
+              "body": "{\n  \"meta\": {\n    \"session_id\": \"string\",\n    \"url\": \"https://sQvqUGWwPoPYSbQwHhDsqktFQK.ignBz-,T0dj0KLcCswxDK8.9e2ILx31H9v6WuMUStp\"\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -255,16 +358,20 @@
           }
         },
         {
-          "id": "8af5b2e2-a62d-41b1-b37c-b5517fc6f7bc",
-          "name": "Get Specific Transaction",
+          "id": "cbd983c4-f8ab-407b-82d0-478457bb266a",
+          "name": "Delete Provider Connection",
           "request": {
-            "name": "Get Specific Transaction",
-            "description": {},
+            "name": "Delete Provider Connection",
+            "description": {
+              "content": "Deletes all active access tokens and PSU data linked to the requested connection.",
+              "type": "text/plain"
+            },
             "url": {
               "path": [
+                "ais",
                 "v1",
-                "transactions",
-                ":transaction_id"
+                "customer",
+                ":customer_id"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -275,30 +382,25 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "transaction_id",
+                  "key": "customer_id",
                   "description": "(Required) "
                 }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
+            "method": "DELETE",
             "auth": null
           },
           "response": [
             {
-              "id": "738d7d09-ae30-4347-bade-edcc4b5f70f9",
-              "name": "Transaction details",
+              "id": "b99d5e9e-3f21-4b78-bb1d-47d1034f93a2",
+              "name": "Connection deleted",
               "originalRequest": {
                 "url": {
                   "path": [
+                    "ais",
                     "v1",
-                    "transactions",
-                    ":transaction_id"
+                    "customer",
+                    ":customer_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -309,7 +411,7 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "transaction_id",
+                      "key": "customer_id",
                       "description": "(Required) "
                     }
                   ]
@@ -322,26 +424,22 @@
                     },
                     "key": "Authorization",
                     "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
                   }
                 ],
-                "method": "GET",
+                "method": "DELETE",
                 "body": {}
               },
-              "status": "OK",
-              "code": 200,
+              "status": "No Content",
+              "code": 204,
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/json"
+                  "value": "text/plain"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"amount\": \"string\",\n  \"currency\": \"string\",\n  \"type\": \"debit\",\n  \"status\": \"string\",\n  \"booking_date\": \"2020-07-19\",\n  \"value_date\": \"2014-03-02\",\n  \"description\": \"string\",\n  \"related_payment_id\": \"string\",\n  \"related_settlement_id\": \"string\"\n}",
+              "body": "",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "_postman_previewlanguage": "text"
             }
           ],
           "event": [],
@@ -371,8 +469,8 @@
     ]
   },
   "info": {
-    "_postman_id": "98fd1708-bebc-46e1-8548-c5c829b04790",
-    "name": "Fintecture Account Information Services Accounts Transactions API",
+    "_postman_id": "295e553f-7c85-4a5e-bdfc-68f486e139b4",
+    "name": "Fintecture Account Information Services Accounts Authentication API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",

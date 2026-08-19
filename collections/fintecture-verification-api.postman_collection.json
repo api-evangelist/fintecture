@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "374bff6a-c333-4ea1-9f68-0ead2687abed",
+      "name": "Verification",
+      "description": {
+        "content": "AIS-based identity verification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0d3e35d1-87b1-48c6-86f2-01bcf5e24d63",
+          "name": "Create AIS Identity Verification",
+          "request": {
+            "name": "Create AIS Identity Verification",
+            "description": {
+              "content": "Identity verification based on AIS capabilities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ais",
+                "v1",
+                "verification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"provider_id\": \"<string>\",\n      \"expected_name\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7af6933d-425a-435b-8644-1d65142c57da",
+              "name": "Verification result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ais",
+                    "v1",
+                    "verification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"customer_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"provider_id\": \"<string>\",\n      \"expected_name\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"failed\",\n  \"match_score\": 1452.878356017545,\n  \"verified_at\": \"2014-09-28T04:57:11.808Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10563fef-3011-461c-a92e-a950895a55ec",
+    "name": "Fintecture Account Information Services Accounts Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

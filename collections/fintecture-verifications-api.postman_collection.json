@@ -1,132 +1,39 @@
 {
   "item": [
     {
-      "id": "695cf531-a2c9-4714-95be-cd89bacf4499",
-      "name": "Customers",
+      "id": "73dd7902-efb5-4464-93b7-357733c85c8f",
+      "name": "Verifications",
       "description": {
-        "content": "Customer records",
+        "content": "Customer identity verifications",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "29a32b8d-d60f-4c0e-9192-226880b10c41",
-          "name": "List All Customers",
+          "id": "0d0b6172-ec41-4ea8-ae21-3311e34a2530",
+          "name": "Initiate Customer Verification",
           "request": {
-            "name": "List All Customers",
-            "description": {
-              "content": "Comprehensive overview of all registered customers.",
-              "type": "text/plain"
-            },
+            "name": "Initiate Customer Verification",
+            "description": {},
             "url": {
               "path": [
                 "v1",
-                "customers"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page[number]",
-                  "value": "<integer>"
-                },
-                {
-                  "disabled": false,
-                  "key": "page[size]",
-                  "value": "<integer>"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "77d81788-ba8a-49a1-b57e-a3e16041519c",
-              "name": "Customer list",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "customers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page[number]",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page[size]",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"company_name\": \"string\",\n      \"email\": \"PupcCr@KuZkvqmckZUQVvVdkaJIMwFwVwokh.th\",\n      \"phone\": \"string\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"postal_code\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\"\n      },\n      \"external_id\": \"string\",\n      \"created_at\": \"2025-04-23T06:39:56.064Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"company_name\": \"string\",\n      \"email\": \"p0jPiuP8eM@JEbiNSyZfjWSZrpQRFEbONA.ua\",\n      \"phone\": \"string\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"postal_code\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\"\n      },\n      \"external_id\": \"string\",\n      \"created_at\": \"1951-07-24T11:04:10.069Z\"\n    }\n  ],\n  \"meta\": {\n    \"count\": 6349\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5e8acd32-ddd9-413d-be6c-72c60b7fb6ba",
-          "name": "Create Customer",
-          "request": {
-            "name": "Create Customer",
-            "description": {
-              "content": "Register a customer to accelerate payments.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "customers"
+                "customers",
+                ":customer_id",
+                "verification"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
               "query": [],
-              "variable": []
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customer_id",
+                  "description": "(Required) "
+                }
+              ]
             },
             "header": [
               {
@@ -142,7 +49,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"company_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"external_id\": \"<string>\"\n}",
+              "raw": "{\n  \"provider_id\": \"<string>\",\n  \"expected_name\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -152,19 +59,29 @@
           },
           "response": [
             {
-              "id": "3e60e2e1-3a3e-46d6-b1d4-f5d69099b995",
-              "name": "Customer created",
+              "id": "2693aad8-0dfa-4716-aea2-bba99f6f1553",
+              "name": "Verification started",
               "originalRequest": {
                 "url": {
                   "path": [
                     "v1",
-                    "customers"
+                    "customers",
+                    ":customer_id",
+                    "verification"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": []
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customer_id",
+                      "description": "(Required) "
+                    }
+                  ]
                 },
                 "header": [
                   {
@@ -183,7 +100,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"company_name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"external_id\": \"<string>\"\n}",
+                  "raw": "{\n  \"provider_id\": \"<string>\",\n  \"expected_name\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -199,7 +116,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"company_name\": \"string\",\n  \"email\": \"JSqcaiMyc@JkCmcnSC.ltex\",\n  \"phone\": \"string\",\n  \"address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"postal_code\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\"\n  },\n  \"external_id\": \"string\",\n  \"created_at\": \"1972-08-04T12:10:01.603Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"pending\",\n  \"match_score\": 9762.030840095764,\n  \"provider_id\": \"string\",\n  \"verified_at\": \"1971-10-08T08:11:10.260Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -210,19 +127,17 @@
           }
         },
         {
-          "id": "376e0da7-47d5-4a67-b7ea-ab9718df67e4",
-          "name": "Get A Customer",
+          "id": "983623a0-6eec-4aa9-ae8c-221ed1e00205",
+          "name": "List All Customer Verifications",
           "request": {
-            "name": "Get A Customer",
-            "description": {
-              "content": "Retrieve a customer's details by customer_id.",
-              "type": "text/plain"
-            },
+            "name": "List All Customer Verifications",
+            "description": {},
             "url": {
               "path": [
                 "v1",
                 "customers",
-                ":customer_id"
+                ":customer_id",
+                "verifications"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -249,14 +164,15 @@
           },
           "response": [
             {
-              "id": "26f87f1a-40c8-4f1c-9e29-79a209dfe9c1",
-              "name": "Customer details",
+              "id": "ebb7bfd4-bad1-479e-b6eb-cede051c1cfb",
+              "name": "Verification list",
               "originalRequest": {
                 "url": {
                   "path": [
                     "v1",
                     "customers",
-                    ":customer_id"
+                    ":customer_id",
+                    "verifications"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -297,7 +213,120 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"company_name\": \"string\",\n  \"email\": \"JSqcaiMyc@JkCmcnSC.ltex\",\n  \"phone\": \"string\",\n  \"address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"postal_code\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\"\n  },\n  \"external_id\": \"string\",\n  \"created_at\": \"1972-08-04T12:10:01.603Z\"\n}",
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"unverified\",\n      \"match_score\": 971.6923294773471,\n      \"provider_id\": \"string\",\n      \"verified_at\": \"2025-08-11T13:12:08.283Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"unverified\",\n      \"match_score\": 2212.2171000309922,\n      \"provider_id\": \"string\",\n      \"verified_at\": \"1949-09-04T09:24:30.161Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f46f798a-8598-45c0-ab5d-b5da6043b87e",
+          "name": "Get A Verification",
+          "request": {
+            "name": "Get A Verification",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "customers",
+                ":customer_id",
+                "verification",
+                ":verification_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customer_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "verification_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d20ecd3-c2ef-47f3-8120-cfc61a6b95bf",
+              "name": "Verification details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customers",
+                    ":customer_id",
+                    "verification",
+                    ":verification_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customer_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "verification_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"pending\",\n  \"match_score\": 9762.030840095764,\n  \"provider_id\": \"string\",\n  \"verified_at\": \"1971-10-08T08:11:10.260Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -329,8 +358,8 @@
     ]
   },
   "info": {
-    "_postman_id": "17979aa1-8143-43aa-9ee3-75ec11d7ecf7",
-    "name": "Fintecture Account Information Services Accounts Customers API",
+    "_postman_id": "4087a61c-7ce6-4028-90f1-61f5bb60a723",
+    "name": "Fintecture Account Information Services Accounts Verifications API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",

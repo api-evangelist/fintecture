@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Refunds API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Payment Refunds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/pis/v2/payments/:payment_id/refunds",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all refunds related to a specific payment."
+        },
+        {
+          "info": {
+            "name": "Create A Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/pis/v2/refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a refund. Refunds may be full or partial. By default the refund is sent to the original payment account, but a payout account may be specified instead.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

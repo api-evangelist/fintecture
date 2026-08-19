@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts Request To Pay API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Request To Pay",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create A Request To Pay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fintecture.com/pis/v2/request-to-pay",
+            "headers": [
+              {
+                "name": "Signature",
+                "value": ""
+              },
+              {
+                "name": "Digest",
+                "value": ""
+              },
+              {
+                "name": "Date",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a Fintecture payment link. Link can be returned in the response and/or delivered to the customer by email or SMS. Same endpoint backs Immediate Transfer, Smart Transfer, and Buy Now Pay Later.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

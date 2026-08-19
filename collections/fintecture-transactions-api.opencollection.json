@@ -1,8 +1,8 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Fintecture Transactions and Settlements API",
-    "version": "v1"
+    "name": "Fintecture Account Information Services Accounts Transactions API",
+    "version": "v2"
   },
   "request": {
     "auth": {
@@ -17,6 +17,39 @@
         "type": "folder"
       },
       "items": [
+        {
+          "info": {
+            "name": "Get Account Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/ais/v1/customer/:customer_id/account/:account_id/transactions",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all transactions linked to the requested account."
+        },
         {
           "info": {
             "name": "List All Transactions",
@@ -62,29 +95,6 @@
             ]
           },
           "docs": "Get Specific Transaction"
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Sandbox",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "Simulate A Transaction",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://api.fintecture.com/v1/transactions/simulate",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Simulate a credit/debit transaction in the Sandbox environment. Use this to test webhook and event flows."
         }
       ]
     }

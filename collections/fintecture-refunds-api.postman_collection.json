@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "608a4000-9b1b-46e2-97c8-4e8c898551d2",
+      "name": "Refunds",
+      "description": {
+        "content": "Initiate immediate refunds",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0271920b-fc73-4fc4-bfb7-c1feca21b30c",
+          "name": "Get Payment Refunds",
+          "request": {
+            "name": "Get Payment Refunds",
+            "description": {
+              "content": "List all refunds related to a specific payment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pis",
+                "v2",
+                "payments",
+                ":payment_id",
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef965f7f-0a92-4048-8816-435cfa04ebcc",
+              "name": "Refund list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pis",
+                    "v2",
+                    "payments",
+                    ":payment_id",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"original_payment_id\": \"string\",\n      \"created_at\": \"2007-06-08T07:59:08.811Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": \"string\",\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"original_payment_id\": \"string\",\n      \"created_at\": \"1973-05-30T06:58:40.400Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e953a101-9cd2-46f7-9204-41d01e5df75c",
+          "name": "Create A Refund",
+          "request": {
+            "name": "Create A Refund",
+            "description": {
+              "content": "Initiate a refund. Refunds may be full or partial. By default the refund is sent to the original payment account, but a payout account may be specified instead.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pis",
+                "v2",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta\": {\n    \"session_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df0e40d2-f514-48c2-8000-c81b5b883429",
+              "name": "Refund created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pis",
+                    "v2",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"session_id\": \"<string>\"\n  },\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"communication\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"amount\": \"string\",\n  \"currency\": \"string\",\n  \"status\": \"string\",\n  \"original_payment_id\": \"string\",\n  \"created_at\": \"2011-02-24T02:14:45.449Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.fintecture.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7174e248-bf0a-402f-bb6c-074a81dad841",
+    "name": "Fintecture Account Information Services Accounts Refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.\n\n\nContact Support:\n Name: Fintecture Support",
+      "type": "text/plain"
+    }
+  }
+}

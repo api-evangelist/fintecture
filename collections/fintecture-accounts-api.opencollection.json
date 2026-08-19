@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fintecture Account Information Services Accounts API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/ais/v1/customer/:customer_id/accounts",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all accounts linked to a specific connection."
+        },
+        {
+          "info": {
+            "name": "Get Specific Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/ais/v1/customer/:customer_id/account/:account_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns information for a specific account."
+        },
+        {
+          "info": {
+            "name": "Get Account Holders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fintecture.com/ais/v1/customer/:customer_id/account/:account_id/holders",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves personal information of beneficiary owners — name, address, contact details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
