@@ -11,8 +11,11 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: pisApi
-  url: ../openapi/fintecture-pis-api-openapi.yml
+- name: paymentsApi
+  url: ../openapi/fintecture-payments-api-openapi.yml
+  type: openapi
+- name: requestToPayApi
+  url: ../openapi/fintecture-request-to-pay-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: request-to-pay-status

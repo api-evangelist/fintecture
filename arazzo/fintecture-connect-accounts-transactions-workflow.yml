@@ -11,8 +11,14 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: aisApi
-  url: ../openapi/fintecture-ais-api-openapi.yml
+- name: accountsApi
+  url: ../openapi/fintecture-accounts-api-openapi.yml
+  type: openapi
+- name: authenticationApi
+  url: ../openapi/fintecture-authentication-api-openapi.yml
+  type: openapi
+- name: transactionsApi
+  url: ../openapi/fintecture-transactions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: connect-accounts-transactions

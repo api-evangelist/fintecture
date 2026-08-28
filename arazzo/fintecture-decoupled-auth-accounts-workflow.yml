@@ -12,11 +12,14 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: resourcesApi
-  url: ../openapi/fintecture-resources-api-openapi.yml
+- name: accountsApi
+  url: ../openapi/fintecture-accounts-api-openapi.yml
   type: openapi
-- name: aisApi
-  url: ../openapi/fintecture-ais-api-openapi.yml
+- name: authenticationApi
+  url: ../openapi/fintecture-authentication-api-openapi.yml
+  type: openapi
+- name: providersApi
+  url: ../openapi/fintecture-providers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: decoupled-auth-accounts

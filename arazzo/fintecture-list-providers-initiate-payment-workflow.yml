@@ -12,11 +12,11 @@ info:
     underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: resourcesApi
-  url: ../openapi/fintecture-resources-api-openapi.yml
+- name: paymentsApi
+  url: ../openapi/fintecture-payments-api-openapi.yml
   type: openapi
-- name: pisApi
-  url: ../openapi/fintecture-pis-api-openapi.yml
+- name: providersApi
+  url: ../openapi/fintecture-providers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: list-providers-initiate-payment

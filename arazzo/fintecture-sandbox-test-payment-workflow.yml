@@ -11,11 +11,11 @@ info:
     opening the underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: resourcesApi
-  url: ../openapi/fintecture-resources-api-openapi.yml
+- name: paymentsApi
+  url: ../openapi/fintecture-payments-api-openapi.yml
   type: openapi
-- name: pisApi
-  url: ../openapi/fintecture-pis-api-openapi.yml
+- name: testAccountsApi
+  url: ../openapi/fintecture-test-accounts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: sandbox-test-payment

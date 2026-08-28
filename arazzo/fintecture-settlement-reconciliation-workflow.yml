@@ -11,8 +11,8 @@ info:
     can be read and executed without opening the underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: pisApi
-  url: ../openapi/fintecture-pis-api-openapi.yml
+- name: settlementsApi
+  url: ../openapi/fintecture-settlements-api-openapi.yml
   type: openapi
 - name: transactionsApi
   url: ../openapi/fintecture-transactions-api-openapi.yml

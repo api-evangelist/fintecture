@@ -14,8 +14,8 @@ sourceDescriptions:
 - name: oauthApi
   url: ../openapi/fintecture-oauth-api-openapi.yml
   type: openapi
-- name: pisApi
-  url: ../openapi/fintecture-pis-api-openapi.yml
+- name: paymentsApi
+  url: ../openapi/fintecture-payments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: token-then-payment

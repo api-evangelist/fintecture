@@ -11,8 +11,11 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: pisApi
-  url: ../openapi/fintecture-pis-api-openapi.yml
+- name: paymentsApi
+  url: ../openapi/fintecture-payments-api-openapi.yml
+  type: openapi
+- name: refundsApi
+  url: ../openapi/fintecture-refunds-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: payment-refund

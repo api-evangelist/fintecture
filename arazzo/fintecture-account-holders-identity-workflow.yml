@@ -11,8 +11,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: aisApi
-  url: ../openapi/fintecture-ais-api-openapi.yml
+- name: accountsApi
+  url: ../openapi/fintecture-accounts-api-openapi.yml
+  type: openapi
+- name: verificationApi
+  url: ../openapi/fintecture-verification-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: account-holders-identity

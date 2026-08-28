@@ -14,6 +14,9 @@ sourceDescriptions:
 - name: customersApi
   url: ../openapi/fintecture-customers-api-openapi.yml
   type: openapi
+- name: verificationsApi
+  url: ../openapi/fintecture-verifications-api-openapi.yml
+  type: openapi
 workflows:
 - workflowId: customer-verification-poll
   summary: Create a customer, start verification, and poll until verified or failed.
