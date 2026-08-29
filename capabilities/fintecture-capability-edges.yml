@@ -1,0 +1,65 @@
+slug: fintecture
+provider: Fintecture
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Payments
+  spec_file: fintecture-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.92
+  evidence: POST /pis/v2/connect  createPisV2Connect  Create A Payment Session
+  reason: 'PSD2 Payment Initiation Services: creating a payment session, retrieving and updating payments
+    (Payment, PaymentConnectRequest, PaymentAttributes). This is payment instruction capture, validation
+    and authorisation.'
+- tag: Request To Pay
+  spec_file: fintecture-request-to-pay-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /pis/v2/request-to-pay  createPisV2RequestToPay  Create A Request To Pay; schemas RequestToPayRequest,
+    PaymentAttributes
+  reason: A PSD2 payment-initiation endpoint that creates a payment request instruction, i.e. capture/authorisation
+    of a payment instruction, not account information despite the (unreliable) title.
+- tag: Payouts
+  spec_file: fintecture-payouts-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: POST /pis/v2/request-for-payout  createPisV2RequestForPayout  Create A Request For Payout
+  reason: Initiation of an outbound credit transfer to a beneficiary via the PIS rails (RequestForPayoutRequest/Response),
+    i.e. payment initiation. Single operation, so slightly lower confidence on the sub-capability split
+    between initiation and processing.
+- tag: Refunds
+  spec_file: fintecture-refunds-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: POST /pis/v2/refund  createPisV2Refund  Create A Refund
+  reason: Creation and retrieval of refunds against initiated payments (RefundRequest, Refund, RefundList)
+    — initiating a reverse credit transfer to the payer over the PIS rails. Sits within payment initiation/processing;
+    the exact sub-capability is somewhat ambiguous.
+- tag: Verifications
+  spec_file: fintecture-verifications-api-openapi.yml
+  capability_id: BC-1300.20
+  capability_id_l1: BC-1300
+  capability_name: KYC & Customer Due Diligence Management
+  confidence: 0.7
+  evidence: POST /v1/customers/{customer_id}/verification  initiateCustomerVerification  Initiate Customer
+    Verification; schema CustomerVerification
+  reason: Initiates and tracks verification checks against a customer record — customer due diligence
+    / identity verification on a regulated payment institution's platform.

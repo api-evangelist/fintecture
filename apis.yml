@@ -845,6 +845,9 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fintecture.png
 access: 3rd-Party
 common:
+  - type: CapabilityMap
+    url: capabilities/fintecture-capability-edges.yml
+    name: Fintecture Business Capability Map
   - type: AgenticAccess
     url: agentic-access/fintecture-agentic-access.yml
   - type: DomainSecurity
