@@ -20,31 +20,6 @@ apis:
     Register and manage merchant customers, attach their bank accounts, and run identity verifications.
     Persisted customer records pre-fill payment fields and accelerate repeat checkouts; verifications
     confirm account holder identity through the AIS rails.
-- aid: fintecture:fintecture-oauth-api
-  name: Fintecture OAuth and Tokens API
-  tags:
-  - Authentication
-  - Access Tokens
-  - Security
-  tags_raw:
-  - OAuth
-  - Authentication
-  - Access Tokens
-  - Security
-  humanURL: https://doc.fintecture.com/reference/createaccesstoken
-  properties:
-  - url: https://doc.fintecture.com/reference/createaccesstoken
-    type: Documentation
-  - url: https://doc.fintecture.com/docs/api-request-a-pis-access-token
-    type: Documentation
-  - url: https://doc.fintecture.com/docs/api-request-an-ais-token
-    type: Documentation
-  - url: openapi/fintecture-oauth-api-openapi.yml
-    type: OpenAPI
-  description: >-
-    Issues access tokens via authorization_code and client_credentials grants. Distinct scopes for PIS,
-    AIS, Customers, E-Mandates, and OAC (Organisation Access Credentials, beta). Access tokens are valid
-    for 1 hour and can be refreshed.
 - aid: fintecture:fintecture-transactions-api
   name: Fintecture Transactions and Settlements API
   tags:
@@ -785,6 +760,21 @@ apis:
     url: https://doc.fintecture.com/reference/getresv1providers
   - type: Documentation
     url: https://doc.fintecture.com/docs/request-an-oac-access-token
+- aid: fintecture:fintecture-oauth-api
+  name: Fintecture O Auth API
+  description: Access and refresh tokens
+  humanURL: https://doc.fintecture.com/reference/createcustomer
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/fintecture-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://doc.fintecture.com/reference/createaccesstoken
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-request-a-pis-access-token
+  - type: Documentation
+    url: https://doc.fintecture.com/docs/api-request-an-ais-token
 name: Fintecture
 tags:
   - Open Banking
