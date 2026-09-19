@@ -276,6 +276,8 @@ apis:
   description: The Memberships API from Fintecture — 2 operation(s) for memberships.
   humanURL: https://doc.fintecture.com/reference/createpisv2connect
   tags:
+  - Membership
+  tags_raw:
   - Memberships
   properties:
   - type: OpenAPI
@@ -765,6 +767,8 @@ apis:
   description: Access and refresh tokens
   humanURL: https://doc.fintecture.com/reference/createcustomer
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
