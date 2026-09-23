@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Authentication API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
+  title: Fintecture Account Information Services Authentication API
+  description: PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
   version: v2
   contact:
     name: Fintecture Support
@@ -22,9 +20,7 @@ paths:
   /ais/v1/provider/{provider_id}/authorize:
     get:
       summary: Get Provider Authorization
-      description: 'Authenticates a PSU at their bank for AIS access. Returns either a redirect URL or triggers a decoupled authentication request on the PSU''s bank mobile app, depending on the model the bank supports.
-
-        '
+      description: Authenticates a PSU at their bank for AIS access. Returns either a redirect URL or triggers a decoupled authentication request on the PSU's bank mobile app, depending on the model the bank supports.
       operationId: getAisV1ProviderAuthorization
       tags:
       - Authentication
@@ -60,9 +56,7 @@ paths:
   /ais/v1/provider/{provider_id}/authorize/decoupled:
     get:
       summary: Get Decoupled Provider Authorization
-      description: 'Poll the authentication status within the decoupled model. Status moves from PENDING -> COMPLETED on success, or FAILED on timeout/cancellation.
-
-        '
+      description: Poll the authentication status within the decoupled model. Status moves from PENDING -> COMPLETED on success, or FAILED on timeout/cancellation.
       operationId: getAisV1ProviderAuthorizationDecoupled
       tags:
       - Authentication
@@ -139,13 +133,6 @@ paths:
         '204':
           description: Connection deleted
 components:
-  parameters:
-    CustomerIdPath:
-      in: path
-      name: customer_id
-      required: true
-      schema:
-        type: string
   schemas:
     AuthorizationResponse:
       type: object
@@ -160,6 +147,13 @@ components:
               type: string
             decoupled:
               type: boolean
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

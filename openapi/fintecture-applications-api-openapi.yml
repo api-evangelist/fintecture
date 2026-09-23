@@ -1,10 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Applications API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
-  version: v2
+  title: Fintecture Organisation Access Credentials Applications API
+  description: Beta multi-tenant management API. Manages Applications, Bank Accounts, Companies, Organisation Nodes (hierarchical tree), Memberships, and Users in the Fintecture Console. Requires an OAC (Organisation Access Credentials) access token with per-resource read/write scopes. Currently in beta and available only to selected clients.
+  version: v1-beta
   contact:
     name: Fintecture Support
     url: https://fintecture.com/contact
@@ -127,43 +125,7 @@ paths:
         '204':
           description: Deleted
 components:
-  parameters:
-    AppIdPath:
-      in: path
-      name: app_id
-      required: true
-      schema:
-        type: string
   schemas:
-    Application:
-      type: object
-      properties:
-        id:
-          type: string
-        app_name:
-          type: string
-        app_public_key:
-          type: string
-        app_urls:
-          type: object
-          properties:
-            return_url:
-              type: string
-              format: uri
-            domain:
-              type: string
-        app_webhooks:
-          type: array
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-              events:
-                type: array
-                items:
-                  type: string
     ApplicationCreate:
       type: object
       required:
@@ -213,6 +175,42 @@ components:
                     type: object
                 app_urls:
                   type: object
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        app_name:
+          type: string
+        app_public_key:
+          type: string
+        app_urls:
+          type: object
+          properties:
+            return_url:
+              type: string
+              format: uri
+            domain:
+              type: string
+        app_webhooks:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+              events:
+                type: array
+                items:
+                  type: string
+  parameters:
+    AppIdPath:
+      in: path
+      name: app_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

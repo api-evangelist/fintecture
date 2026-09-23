@@ -1,10 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Organisation Nodes API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
-  version: v2
+  title: Fintecture Organisation Access Credentials Organisation…
+  description: Beta multi-tenant management API. Manages Applications, Bank Accounts, Companies, Organisation Nodes (hierarchical tree), Memberships, and Users in the Fintecture Console. Requires an OAC (Organisation Access Credentials) access token with per-resource read/write scopes. Currently in beta and available only to selected clients.
+  version: v1-beta
   contact:
     name: Fintecture Support
     url: https://fintecture.com/contact
@@ -120,6 +118,13 @@ paths:
         '200':
           description: Companies in this organisation subtree
 components:
+  parameters:
+    OrgNodeIdPath:
+      in: path
+      name: organisation_node_id
+      required: true
+      schema:
+        type: string
   schemas:
     OrganisationNode:
       type: object
@@ -146,13 +151,6 @@ components:
           type: string
         parent_id:
           type: string
-  parameters:
-    OrgNodeIdPath:
-      in: path
-      name: organisation_node_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

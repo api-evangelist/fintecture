@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts OAuth API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
+  title: Fintecture Account Information Services Accounts O Auth API
+  description: PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
   version: v2
   contact:
     name: Fintecture Support
@@ -22,9 +20,7 @@ paths:
   /oauth/accesstoken:
     post:
       summary: Create Access Token
-      description: 'The access token endpoint enables the TPP to authenticate to the Fintecture Authentication Server. Two grant types are supported — `authorization_code` for AIS, and `client_credentials` for PIS, Customers, E-Mandates, and the beta OAC (Organisation Access Credentials) scopes.
-
-        '
+      description: The access token endpoint enables the TPP to authenticate to the Fintecture Authentication Server. Two grant types are supported — `authorization_code` for AIS, and `client_credentials` for PIS, Customers, E-Mandates, and the beta OAC (Organisation Access Credentials) scopes.
       operationId: createAccessToken
       tags:
       - OAuth

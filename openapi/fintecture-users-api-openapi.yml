@@ -1,10 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Users API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
-  version: v2
+  title: Fintecture Organisation Access Credentials Users API
+  description: Beta multi-tenant management API. Manages Applications, Bank Accounts, Companies, Organisation Nodes (hierarchical tree), Memberships, and Users in the Fintecture Console. Requires an OAC (Organisation Access Credentials) access token with per-resource read/write scopes. Currently in beta and available only to selected clients.
+  version: v1-beta
   contact:
     name: Fintecture Support
     url: https://fintecture.com/contact
@@ -76,10 +74,31 @@ paths:
         '204':
           description: Deleted
 components:
+  parameters:
+    UserIdPath:
+      in: path
+      name: user_id
+      required: true
+      schema:
+        type: string
   schemas:
     UserPatch:
       type: object
       properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: string
         email:
           type: string
           format: email
@@ -106,20 +125,6 @@ components:
           type: string
         membership:
           $ref: '#/components/schemas/MembershipCreate'
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
     MembershipCreate:
       type: object
       required:
@@ -140,13 +145,6 @@ components:
           - viewer
         notification_preferences:
           type: object
-  parameters:
-    UserIdPath:
-      in: path
-      name: user_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

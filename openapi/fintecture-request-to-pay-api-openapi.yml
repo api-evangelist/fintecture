@@ -1,13 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Request To Pay API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
+  title: Fintecture Payment Initiation Services Request To Pay API
+  description: 'PSD2 Payment Initiation Services exposed by Fintecture: Immediate Transfer, Smart Transfer (auto-reconciled via merchant-allocated virtual IBANs), Request To Pay (payment links via email/SMS/QR), Buy Now Pay Later, Verified Payout, and Immediate Refund. The /pis/v2/connect endpoint serves all three payment types and supports mixing them in the same session via the Payment Hub.'
   version: v2
   contact:
     name: Fintecture Support
     url: https://fintecture.com/contact
+  license:
+    name: Fintecture Terms of Service
+    url: https://fintecture.com/mentions-legales
 servers:
 - url: https://api.fintecture.com
   description: Production
@@ -22,9 +23,7 @@ paths:
   /pis/v2/request-to-pay:
     post:
       summary: Create A Request To Pay
-      description: 'Generate a Fintecture payment link. Link can be returned in the response and/or delivered to the customer by email or SMS. Same endpoint backs Immediate Transfer, Smart Transfer, and Buy Now Pay Later.
-
-        '
+      description: Generate a Fintecture payment link. Link can be returned in the response and/or delivered to the customer by email or SMS. Same endpoint backs Immediate Transfer, Smart Transfer, and Buy Now Pay Later.
       operationId: createPisV2RequestToPay
       tags:
       - Request To Pay
@@ -47,48 +46,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RequestToPayResponse'
 components:
-  parameters:
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      required: true
-      description: Unique request identifier (UUID v4 recommended).
-      schema:
-        type: string
-        format: uuid
-    SignatureHeader:
-      in: header
-      name: Signature
-      required: true
-      description: HTTP message signature (RFC draft-cavage-http-signatures).
-      schema:
-        type: string
-    DigestHeader:
-      in: header
-      name: Digest
-      required: true
-      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
-      schema:
-        type: string
-    DateHeader:
-      in: header
-      name: Date
-      required: true
-      schema:
-        type: string
   schemas:
-    PaymentMeta:
-      type: object
-      properties:
-        psu_name:
-          type: string
-        psu_email:
-          type: string
-          format: email
-        psu_phone:
-          type: string
-        psu_address:
-          type: string
     RequestToPayResponse:
       type: object
       properties:
@@ -102,20 +60,6 @@ components:
               format: uri
             link_id:
               type: string
-    RequestToPayRequest:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/PaymentMeta'
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - PIS
-            attributes:
-              $ref: '#/components/schemas/PaymentAttributes'
     PaymentAttributes:
       type: object
       required:
@@ -154,6 +98,61 @@ components:
           - immediate_transfer
           - smart_transfer
           - bnpl
+    PaymentMeta:
+      type: object
+      properties:
+        psu_name:
+          type: string
+        psu_email:
+          type: string
+          format: email
+        psu_phone:
+          type: string
+        psu_address:
+          type: string
+    RequestToPayRequest:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/PaymentMeta'
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - PIS
+            attributes:
+              $ref: '#/components/schemas/PaymentAttributes'
+  parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      required: true
+      description: Unique request identifier (UUID v4 recommended).
+      schema:
+        type: string
+        format: uuid
+    DigestHeader:
+      in: header
+      name: Digest
+      required: true
+      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
+      schema:
+        type: string
+    DateHeader:
+      in: header
+      name: Date
+      required: true
+      schema:
+        type: string
+    SignatureHeader:
+      in: header
+      name: Signature
+      required: true
+      description: HTTP message signature (RFC draft-cavage-http-signatures).
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

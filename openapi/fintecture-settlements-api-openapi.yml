@@ -1,13 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Settlements API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
+  title: Fintecture Payment Initiation Services Settlements API
+  description: 'PSD2 Payment Initiation Services exposed by Fintecture: Immediate Transfer, Smart Transfer (auto-reconciled via merchant-allocated virtual IBANs), Request To Pay (payment links via email/SMS/QR), Buy Now Pay Later, Verified Payout, and Immediate Refund. The /pis/v2/connect endpoint serves all three payment types and supports mixing them in the same session via the Payment Hub.'
   version: v2
   contact:
     name: Fintecture Support
     url: https://fintecture.com/contact
+  license:
+    name: Fintecture Terms of Service
+    url: https://fintecture.com/mentions-legales
 servers:
 - url: https://api.fintecture.com
   description: Production
@@ -55,13 +56,6 @@ paths:
                 $ref: '#/components/schemas/Settlement'
 components:
   schemas:
-    SettlementList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Settlement'
     Settlement:
       type: object
       properties:
@@ -82,6 +76,13 @@ components:
           type: array
           items:
             type: string
+    SettlementList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settlement'
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,13 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Refunds API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
+  title: Fintecture Payment Initiation Services Refunds API
+  description: 'PSD2 Payment Initiation Services exposed by Fintecture: Immediate Transfer, Smart Transfer (auto-reconciled via merchant-allocated virtual IBANs), Request To Pay (payment links via email/SMS/QR), Buy Now Pay Later, Verified Payout, and Immediate Refund. The /pis/v2/connect endpoint serves all three payment types and supports mixing them in the same session via the Payment Hub.'
   version: v2
   contact:
     name: Fintecture Support
     url: https://fintecture.com/contact
+  license:
+    name: Fintecture Terms of Service
+    url: https://fintecture.com/mentions-legales
 servers:
 - url: https://api.fintecture.com
   description: Production
@@ -38,9 +39,7 @@ paths:
   /pis/v2/refund:
     post:
       summary: Create A Refund
-      description: 'Initiate a refund. Refunds may be full or partial. By default the refund is sent to the original payment account, but a payout account may be specified instead.
-
-        '
+      description: Initiate a refund. Refunds may be full or partial. By default the refund is sent to the original payment account, but a payout account may be specified instead.
       operationId: createPisV2Refund
       tags:
       - Refunds
@@ -58,37 +57,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Refund'
 components:
-  parameters:
-    PaymentIdPath:
-      in: path
-      name: payment_id
-      required: true
-      schema:
-        type: string
   schemas:
-    Refund:
-      type: object
-      properties:
-        id:
-          type: string
-        amount:
-          type: string
-        currency:
-          type: string
-        status:
-          type: string
-        original_payment_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-    RefundList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Refund'
     RefundRequest:
       type: object
       required:
@@ -112,6 +81,36 @@ components:
                   type: string
                 communication:
                   type: string
+    RefundList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Refund'
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+        original_payment_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  parameters:
+    PaymentIdPath:
+      in: path
+      name: payment_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

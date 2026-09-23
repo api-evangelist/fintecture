@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Fintecture Account Information Services Accounts API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
+  description: PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
   version: v2
   contact:
     name: Fintecture Support
@@ -76,15 +74,15 @@ paths:
                       $ref: '#/components/schemas/AccountHolder'
 components:
   parameters:
-    CustomerIdPath:
-      in: path
-      name: customer_id
-      required: true
-      schema:
-        type: string
     AccountIdPath:
       in: path
       name: account_id
+      required: true
+      schema:
+        type: string
+    CustomerIdPath:
+      in: path
+      name: customer_id
       required: true
       schema:
         type: string
@@ -101,6 +99,13 @@ components:
           format: email
         phone:
           type: string
+    AccountsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
     Account:
       type: object
       properties:
@@ -124,13 +129,6 @@ components:
           - LOAN
           - CARD
           - OTHR
-    AccountsList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
     Balance:
       type: object
       properties:

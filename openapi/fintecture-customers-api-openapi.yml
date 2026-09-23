@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts Customers API
-  description: 'PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
-
-    '
+  title: Fintecture Account Information Services Accounts ……
+  description: PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
   version: v2
   contact:
     name: Fintecture Support
@@ -79,6 +77,38 @@ paths:
                 $ref: '#/components/schemas/Customer'
 components:
   schemas:
+    CustomerCreate:
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        company_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        external_id:
+          type: string
+    CustomerList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
     Customer:
       type: object
       properties:
@@ -113,38 +143,6 @@ components:
         created_at:
           type: string
           format: date-time
-    CustomerList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-    CustomerCreate:
-      type: object
-      required:
-      - first_name
-      - last_name
-      - email
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        company_name:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        external_id:
-          type: string
   parameters:
     CustomerIdPath:
       in: path
