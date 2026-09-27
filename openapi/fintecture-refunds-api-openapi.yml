@@ -57,30 +57,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Refund'
 components:
+  parameters:
+    PaymentIdPath:
+      in: path
+      name: payment_id
+      required: true
+      schema:
+        type: string
   schemas:
-    RefundRequest:
-      type: object
-      required:
-      - meta
-      - data
-      properties:
-        meta:
-          type: object
-          properties:
-            session_id:
-              type: string
-        data:
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties:
-                amount:
-                  type: string
-                currency:
-                  type: string
-                communication:
-                  type: string
     RefundList:
       type: object
       properties:
@@ -104,13 +88,29 @@ components:
         created_at:
           type: string
           format: date-time
-  parameters:
-    PaymentIdPath:
-      in: path
-      name: payment_id
-      required: true
-      schema:
-        type: string
+    RefundRequest:
+      type: object
+      required:
+      - meta
+      - data
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id:
+              type: string
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                amount:
+                  type: string
+                currency:
+                  type: string
+                communication:
+                  type: string
   securitySchemes:
     BearerAuth:
       type: http

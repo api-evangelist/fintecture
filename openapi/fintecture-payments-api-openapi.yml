@@ -145,6 +145,63 @@ components:
               properties:
                 communication:
                   type: string
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+    PaymentMeta:
+      type: object
+      properties:
+        psu_name:
+          type: string
+        psu_email:
+          type: string
+          format: email
+        psu_phone:
+          type: string
+        psu_address:
+          type: string
+    PaymentConnectRequest:
+      type: object
+      required:
+      - meta
+      - data
+      properties:
+        meta:
+          $ref: '#/components/schemas/PaymentMeta'
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - PIS
+            attributes:
+              $ref: '#/components/schemas/PaymentAttributes'
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
     PaymentAttributes:
       type: object
       required:
@@ -183,35 +240,6 @@ components:
           - immediate_transfer
           - smart_transfer
           - bnpl
-    PaymentConnectRequest:
-      type: object
-      required:
-      - meta
-      - data
-      properties:
-        meta:
-          $ref: '#/components/schemas/PaymentMeta'
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - PIS
-            attributes:
-              $ref: '#/components/schemas/PaymentAttributes'
-    PaymentMeta:
-      type: object
-      properties:
-        psu_name:
-          type: string
-        psu_email:
-          type: string
-          format: email
-        psu_phone:
-          type: string
-        psu_address:
-          type: string
     Payment:
       type: object
       properties:
@@ -239,48 +267,11 @@ components:
         updated_at:
           type: string
           format: date-time
-    PaymentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              status:
-                type: string
-              code:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
   parameters:
-    RequestIdHeader:
-      in: header
-      name: x-request-id
+    PaymentIdPath:
+      in: path
+      name: payment_id
       required: true
-      description: Unique request identifier (UUID v4 recommended).
-      schema:
-        type: string
-        format: uuid
-    DigestHeader:
-      in: header
-      name: Digest
-      required: true
-      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
       schema:
         type: string
     SignatureHeader:
@@ -290,27 +281,36 @@ components:
       description: HTTP message signature (RFC draft-cavage-http-signatures).
       schema:
         type: string
+    DigestHeader:
+      in: header
+      name: Digest
+      required: true
+      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
+      schema:
+        type: string
     DateHeader:
       in: header
       name: Date
       required: true
       schema:
         type: string
-    PaymentIdPath:
-      in: path
-      name: payment_id
+    RequestIdHeader:
+      in: header
+      name: x-request-id
       required: true
+      description: Unique request identifier (UUID v4 recommended).
       schema:
         type: string
+        format: uuid
   responses:
-    Unauthorized:
-      description: Unauthorized
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:

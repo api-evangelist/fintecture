@@ -125,6 +125,13 @@ paths:
         '204':
           description: Deleted
 components:
+  parameters:
+    AppIdPath:
+      in: path
+      name: app_id
+      required: true
+      schema:
+        type: string
   schemas:
     ApplicationCreate:
       type: object
@@ -204,13 +211,6 @@ components:
                 type: array
                 items:
                   type: string
-  parameters:
-    AppIdPath:
-      in: path
-      name: app_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

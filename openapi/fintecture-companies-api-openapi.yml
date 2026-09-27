@@ -90,13 +90,6 @@ paths:
         '204':
           description: Deleted
 components:
-  parameters:
-    CompanyIdPath:
-      in: path
-      name: company_id
-      required: true
-      schema:
-        type: string
   schemas:
     Company:
       type: object
@@ -134,6 +127,13 @@ components:
               type: string
         external_id:
           type: string
+  parameters:
+    CompanyIdPath:
+      in: path
+      name: company_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

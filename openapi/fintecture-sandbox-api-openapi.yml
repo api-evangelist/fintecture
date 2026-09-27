@@ -38,26 +38,6 @@ paths:
                 $ref: '#/components/schemas/MerchantTransaction'
 components:
   schemas:
-    SimulateTransactionRequest:
-      type: object
-      required:
-      - amount
-      - currency
-      - type
-      properties:
-        amount:
-          type: string
-        currency:
-          type: string
-        type:
-          type: string
-          enum:
-          - debit
-          - credit
-        description:
-          type: string
-        bank_account_id:
-          type: string
     MerchantTransaction:
       type: object
       properties:
@@ -85,6 +65,26 @@ components:
         related_payment_id:
           type: string
         related_settlement_id:
+          type: string
+    SimulateTransactionRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      - type
+      properties:
+        amount:
+          type: string
+        currency:
+          type: string
+        type:
+          type: string
+          enum:
+          - debit
+          - credit
+        description:
+          type: string
+        bank_account_id:
           type: string
   securitySchemes:
     BearerAuth:

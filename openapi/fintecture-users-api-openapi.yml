@@ -74,14 +74,24 @@ paths:
         '204':
           description: Deleted
 components:
-  parameters:
-    UserIdPath:
-      in: path
-      name: user_id
-      required: true
-      schema:
-        type: string
   schemas:
+    UserCreate:
+      type: object
+      required:
+      - email
+      - membership
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        membership:
+          $ref: '#/components/schemas/MembershipCreate'
     UserPatch:
       type: object
       properties:
@@ -108,23 +118,6 @@ components:
           type: string
         phone:
           type: string
-    UserCreate:
-      type: object
-      required:
-      - email
-      - membership
-      properties:
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
-        membership:
-          $ref: '#/components/schemas/MembershipCreate'
     MembershipCreate:
       type: object
       required:
@@ -145,6 +138,13 @@ components:
           - viewer
         notification_preferences:
           type: object
+  parameters:
+    UserIdPath:
+      in: path
+      name: user_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

@@ -46,7 +46,48 @@ paths:
               schema:
                 $ref: '#/components/schemas/RequestToPayResponse'
 components:
+  parameters:
+    SignatureHeader:
+      in: header
+      name: Signature
+      required: true
+      description: HTTP message signature (RFC draft-cavage-http-signatures).
+      schema:
+        type: string
+    DigestHeader:
+      in: header
+      name: Digest
+      required: true
+      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
+      schema:
+        type: string
+    DateHeader:
+      in: header
+      name: Date
+      required: true
+      schema:
+        type: string
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      required: true
+      description: Unique request identifier (UUID v4 recommended).
+      schema:
+        type: string
+        format: uuid
   schemas:
+    PaymentMeta:
+      type: object
+      properties:
+        psu_name:
+          type: string
+        psu_email:
+          type: string
+          format: email
+        psu_phone:
+          type: string
+        psu_address:
+          type: string
     RequestToPayResponse:
       type: object
       properties:
@@ -60,6 +101,20 @@ components:
               format: uri
             link_id:
               type: string
+    RequestToPayRequest:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/PaymentMeta'
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - PIS
+            attributes:
+              $ref: '#/components/schemas/PaymentAttributes'
     PaymentAttributes:
       type: object
       required:
@@ -98,61 +153,6 @@ components:
           - immediate_transfer
           - smart_transfer
           - bnpl
-    PaymentMeta:
-      type: object
-      properties:
-        psu_name:
-          type: string
-        psu_email:
-          type: string
-          format: email
-        psu_phone:
-          type: string
-        psu_address:
-          type: string
-    RequestToPayRequest:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/PaymentMeta'
-        data:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - PIS
-            attributes:
-              $ref: '#/components/schemas/PaymentAttributes'
-  parameters:
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      required: true
-      description: Unique request identifier (UUID v4 recommended).
-      schema:
-        type: string
-        format: uuid
-    DigestHeader:
-      in: header
-      name: Digest
-      required: true
-      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
-      schema:
-        type: string
-    DateHeader:
-      in: header
-      name: Date
-      required: true
-      schema:
-        type: string
-    SignatureHeader:
-      in: header
-      name: Signature
-      required: true
-      description: HTTP message signature (RFC draft-cavage-http-signatures).
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

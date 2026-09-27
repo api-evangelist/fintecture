@@ -8,7 +8,7 @@
     "_original/fintecture-resources-api-openapi.yml",
     "fintecture-bank-accounts-api-openapi.yml",
     "fintecture-customers-api-openapi.yml",
-    "fintecture-o-auth-api-openapi.yml",
+    "fintecture-oauth-api-openapi.yml",
     "fintecture-sandbox-api-openapi.yml",
     "fintecture-transactions-api-openapi.yml",
     "fintecture-verifications-api-openapi.yml"
@@ -33,7 +33,7 @@
     "fintecture-providers-api-openapi.yml",
     "fintecture-test-accounts-api-openapi.yml",
     "fintecture-customers-api-openapi.yml",
-    "fintecture-o-auth-api-openapi.yml",
+    "fintecture-oauth-api-openapi.yml",
     "fintecture-sandbox-api-openapi.yml",
     "fintecture-verifications-api-openapi.yml"
   ],
@@ -42,7 +42,7 @@
   "warnings": [
     "fintecture-bank-accounts-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /v1/customers/{customer_id}/bank-accounts get, /v1/customers/{customer_id}/bank-accounts post, /v1/customers/{customer_id}/bank-accounts/{account_id} get); its other 4 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
     "fintecture-customers-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /v1/customers get, /v1/customers post, /v1/customers/{customer_id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
-    "fintecture-o-auth-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /oauth/accesstoken post, /oauth/refreshtoken post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "fintecture-oauth-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /oauth/accesstoken post, /oauth/refreshtoken post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
     "fintecture-sandbox-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /v1/transactions/simulate post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
     "fintecture-transactions-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /v1/transactions get, /v1/transactions/{transaction_id} get); its other 1 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
     "fintecture-verifications-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /v1/customers/{customer_id}/verification post, /v1/customers/{customer_id}/verification/{verification_id} get, /v1/customers/{customer_id}/verifications get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
