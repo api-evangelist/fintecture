@@ -118,14 +118,16 @@ paths:
         '200':
           description: Companies in this organisation subtree
 components:
-  parameters:
-    OrgNodeIdPath:
-      in: path
-      name: organisation_node_id
-      required: true
-      schema:
-        type: string
   schemas:
+    OrganisationNodeCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        parent_id:
+          type: string
     OrganisationNode:
       type: object
       properties:
@@ -142,15 +144,13 @@ components:
             properties:
               id:
                 type: string
-    OrganisationNodeCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        parent_id:
-          type: string
+  parameters:
+    OrgNodeIdPath:
+      in: path
+      name: organisation_node_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

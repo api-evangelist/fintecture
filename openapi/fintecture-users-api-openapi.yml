@@ -75,49 +75,6 @@ paths:
           description: Deleted
 components:
   schemas:
-    UserCreate:
-      type: object
-      required:
-      - email
-      - membership
-      properties:
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
-        membership:
-          $ref: '#/components/schemas/MembershipCreate'
-    UserPatch:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
     MembershipCreate:
       type: object
       required:
@@ -138,6 +95,49 @@ components:
           - viewer
         notification_preferences:
           type: object
+    UserCreate:
+      type: object
+      required:
+      - email
+      - membership
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        membership:
+          $ref: '#/components/schemas/MembershipCreate'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+    UserPatch:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
   parameters:
     UserIdPath:
       in: path

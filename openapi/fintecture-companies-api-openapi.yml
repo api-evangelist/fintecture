@@ -91,11 +91,11 @@ paths:
           description: Deleted
 components:
   schemas:
-    Company:
+    CompanyCreate:
       type: object
+      required:
+      - name
       properties:
-        id:
-          type: string
         name:
           type: string
         incorporation:
@@ -109,11 +109,11 @@ components:
               type: string
         external_id:
           type: string
-    CompanyCreate:
+    Company:
       type: object
-      required:
-      - name
       properties:
+        id:
+          type: string
         name:
           type: string
         incorporation:

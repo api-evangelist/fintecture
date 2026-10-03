@@ -42,19 +42,6 @@ paths:
                 $ref: '#/components/schemas/RequestForPayoutResponse'
 components:
   schemas:
-    RequestForPayoutResponse:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            session_id:
-              type: string
-            status:
-              type: string
-            url:
-              type: string
-              format: uri
     RequestForPayoutRequest:
       type: object
       required:
@@ -78,6 +65,19 @@ components:
                   type: string
                 communication:
                   type: string
+    RequestForPayoutResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id:
+              type: string
+            status:
+              type: string
+            url:
+              type: string
+              format: uri
   securitySchemes:
     BearerAuth:
       type: http

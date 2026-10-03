@@ -57,13 +57,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Refund'
 components:
-  parameters:
-    PaymentIdPath:
-      in: path
-      name: payment_id
-      required: true
-      schema:
-        type: string
   schemas:
     RefundList:
       type: object
@@ -111,6 +104,13 @@ components:
                   type: string
                 communication:
                   type: string
+  parameters:
+    PaymentIdPath:
+      in: path
+      name: payment_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

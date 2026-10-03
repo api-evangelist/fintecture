@@ -73,43 +73,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/AccountHolder'
 components:
-  parameters:
-    AccountIdPath:
-      in: path
-      name: account_id
-      required: true
-      schema:
-        type: string
-    CustomerIdPath:
-      in: path
-      name: customer_id
-      required: true
-      schema:
-        type: string
   schemas:
-    Account:
-      type: object
-      properties:
-        id:
-          type: string
-        iban:
-          type: string
-        bic:
-          type: string
-        currency:
-          type: string
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Balance'
-        type:
-          type: string
-          enum:
-          - CACC
-          - SVGS
-          - LOAN
-          - CARD
-          - OTHR
     AccountsList:
       type: object
       properties:
@@ -146,6 +110,42 @@ components:
           format: email
         phone:
           type: string
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        iban:
+          type: string
+        bic:
+          type: string
+        currency:
+          type: string
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+        type:
+          type: string
+          enum:
+          - CACC
+          - SVGS
+          - LOAN
+          - CARD
+          - OTHR
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    AccountIdPath:
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http
