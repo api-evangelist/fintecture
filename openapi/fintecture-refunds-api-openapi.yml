@@ -57,6 +57,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Refund'
 components:
+  parameters:
+    PaymentIdPath:
+      in: path
+      name: payment_id
+      required: true
+      schema:
+        type: string
   schemas:
     RefundList:
       type: object
@@ -65,22 +72,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Refund'
-    Refund:
-      type: object
-      properties:
-        id:
-          type: string
-        amount:
-          type: string
-        currency:
-          type: string
-        status:
-          type: string
-        original_payment_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
     RefundRequest:
       type: object
       required:
@@ -104,13 +95,22 @@ components:
                   type: string
                 communication:
                   type: string
-  parameters:
-    PaymentIdPath:
-      in: path
-      name: payment_id
-      required: true
-      schema:
-        type: string
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+        original_payment_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

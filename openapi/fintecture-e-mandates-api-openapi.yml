@@ -108,6 +108,32 @@ components:
       schema:
         type: string
   schemas:
+    EMandateCreate:
+      type: object
+      required:
+      - rum
+      - customer_id
+      - iban
+      - holder_name
+      properties:
+        rum:
+          type: string
+        customer_id:
+          type: string
+        iban:
+          type: string
+        holder_name:
+          type: string
+        type:
+          type: string
+          enum:
+          - recurring
+          - one-off
+        scheme:
+          type: string
+          enum:
+          - SEPA
+          - SEPA-B2B
     EMandate:
       type: object
       properties:
@@ -145,32 +171,6 @@ components:
         created_at:
           type: string
           format: date-time
-    EMandateCreate:
-      type: object
-      required:
-      - rum
-      - customer_id
-      - iban
-      - holder_name
-      properties:
-        rum:
-          type: string
-        customer_id:
-          type: string
-        iban:
-          type: string
-        holder_name:
-          type: string
-        type:
-          type: string
-          enum:
-          - recurring
-          - one-off
-        scheme:
-          type: string
-          enum:
-          - SEPA
-          - SEPA-B2B
   securitySchemes:
     BearerAuth:
       type: http

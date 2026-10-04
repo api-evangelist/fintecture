@@ -117,18 +117,50 @@ paths:
                 $ref: '#/components/schemas/Payment'
 components:
   schemas:
-    PaymentMeta:
+    PaymentPatch:
       type: object
       properties:
-        psu_name:
-          type: string
-        psu_email:
-          type: string
-          format: email
-        psu_phone:
-          type: string
-        psu_address:
-          type: string
+        meta:
+          $ref: '#/components/schemas/PaymentMeta'
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                communication:
+                  type: string
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+    PaymentConnectResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id:
+              type: string
+            status:
+              type: string
+            url:
+              type: string
+              format: uri
+            code:
+              type: string
     PaymentConnectRequest:
       type: object
       required:
@@ -146,34 +178,6 @@ components:
               - PIS
             attributes:
               $ref: '#/components/schemas/PaymentAttributes'
-    PaymentConnectResponse:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            session_id:
-              type: string
-            status:
-              type: string
-            url:
-              type: string
-              format: uri
-            code:
-              type: string
-    PaymentPatch:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/PaymentMeta'
-        data:
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties:
-                communication:
-                  type: string
     PaymentAttributes:
       type: object
       required:
@@ -212,22 +216,6 @@ components:
           - immediate_transfer
           - smart_transfer
           - bnpl
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              status:
-                type: string
-              code:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
     PaymentList:
       type: object
       properties:
@@ -240,6 +228,18 @@ components:
           properties:
             count:
               type: integer
+    PaymentMeta:
+      type: object
+      properties:
+        psu_name:
+          type: string
+        psu_email:
+          type: string
+          format: email
+        psu_phone:
+          type: string
+        psu_address:
+          type: string
     Payment:
       type: object
       properties:
@@ -267,20 +267,13 @@ components:
         updated_at:
           type: string
           format: date-time
-  responses:
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
+    PaymentIdPath:
+      in: path
+      name: payment_id
+      required: true
+      schema:
+        type: string
     RequestIdHeader:
       in: header
       name: x-request-id
@@ -295,10 +288,11 @@ components:
       required: true
       schema:
         type: string
-    PaymentIdPath:
-      in: path
-      name: payment_id
+    SignatureHeader:
+      in: header
+      name: Signature
       required: true
+      description: HTTP message signature (RFC draft-cavage-http-signatures).
       schema:
         type: string
     DigestHeader:
@@ -308,13 +302,19 @@ components:
       description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
       schema:
         type: string
-    SignatureHeader:
-      in: header
-      name: Signature
-      required: true
-      description: HTTP message signature (RFC draft-cavage-http-signatures).
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     BearerAuth:
       type: http

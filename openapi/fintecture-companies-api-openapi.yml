@@ -90,25 +90,14 @@ paths:
         '204':
           description: Deleted
 components:
+  parameters:
+    CompanyIdPath:
+      in: path
+      name: company_id
+      required: true
+      schema:
+        type: string
   schemas:
-    CompanyCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        incorporation:
-          type: object
-          properties:
-            siren:
-              type: string
-            vat:
-              type: string
-            hrb:
-              type: string
-        external_id:
-          type: string
     Company:
       type: object
       properties:
@@ -127,13 +116,24 @@ components:
               type: string
         external_id:
           type: string
-  parameters:
-    CompanyIdPath:
-      in: path
-      name: company_id
-      required: true
-      schema:
-        type: string
+    CompanyCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        incorporation:
+          type: object
+          properties:
+            siren:
+              type: string
+            vat:
+              type: string
+            hrb:
+              type: string
+        external_id:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

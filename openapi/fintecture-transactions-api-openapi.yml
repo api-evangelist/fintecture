@@ -115,6 +115,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/MerchantTransaction'
 components:
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    AccountIdPath:
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
   schemas:
     TransactionList:
       type: object
@@ -185,19 +198,6 @@ components:
           type: string
         related_settlement_id:
           type: string
-  parameters:
-    AccountIdPath:
-      in: path
-      name: account_id
-      required: true
-      schema:
-        type: string
-    CustomerIdPath:
-      in: path
-      name: customer_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

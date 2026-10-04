@@ -133,6 +133,13 @@ paths:
         '204':
           description: Connection deleted
 components:
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
   schemas:
     AuthorizationResponse:
       type: object
@@ -147,13 +154,6 @@ components:
               type: string
             decoupled:
               type: boolean
-  parameters:
-    CustomerIdPath:
-      in: path
-      name: customer_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

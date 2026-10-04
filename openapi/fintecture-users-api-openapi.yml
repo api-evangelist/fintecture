@@ -75,6 +75,32 @@ paths:
           description: Deleted
 components:
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+    UserPatch:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
     MembershipCreate:
       type: object
       required:
@@ -112,32 +138,6 @@ components:
           type: string
         membership:
           $ref: '#/components/schemas/MembershipCreate'
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
-    UserPatch:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
   parameters:
     UserIdPath:
       in: path
