@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/fintecture/integrations
 - https://n8n.io/integrations/fintecture/
@@ -9,8 +9,26 @@ checked:
 - https://composio.dev/toolkits/fintecture
 - https://monid.ai/tools/fintecture
 - https://n8n.io/integrations/fintecture/
+- https://www.openbanking.org.uk/regulated-providers/fintecture/
 - https://zapier.com/apps/fintecture/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: UK Open Banking
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.openbanking.org.uk/regulated-providers/fintecture/
+  contract_reference:
+    register: UK Open Banking regulated providers (OBL directory)
+    spec_file: null
+    role: Third Party Providers
+    registered_name: Fintecture
+    register_id: 6680
+    matched_domain: fintecture.com
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
 templates: []
