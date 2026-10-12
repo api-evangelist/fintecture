@@ -1,0 +1,32 @@
+name: Fintecture Changelog
+generated: '2026-10-12'
+method: searched
+source: https://doc.fintecture.com/llms.txt
+scheme: dated
+entries:
+- version: '22-09-2026'
+  date: '2026-09-22'
+  breaking: true
+  highlights:
+  - GET /v1/memberships paginated retrieval (removes 1,000-membership limit)
+  - settlement date filtering, new settlement/refund attributes and refund statuses
+  - KYB onboarding via email (Beta) with meta.send_kyb_to_contact_email
+  - sandbox URL changed to https://api.sandbox.fintecture.com
+  - POST /pis/v2/request-for-payout now requires the payout scope instead of pis
+  url: https://doc.fintecture.com/changelog/22-09-2026
+- version: '2025-03-11'
+  date: '2025-03-11'
+  breaking: false
+  highlights:
+  - Initiate a Verified Payout and Postman collection
+  url: https://doc.fintecture.com/changelog/2025-03-11-initiate-a-verified-payout-and-postman-collection
+- version: '2024-03-14'
+  date: '2024-03-14'
+  breaking: false
+  highlights:
+  - Branding recommendations
+- version: '2024-01-05'
+  date: '2024-01-05'
+  breaking: false
+  highlights:
+  - Customer verification API

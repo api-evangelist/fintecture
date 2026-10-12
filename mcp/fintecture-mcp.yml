@@ -1,0 +1,234 @@
+generated: '2026-10-12'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/fintecture-accounts-api-openapi.yml
+- openapi/fintecture-applications-api-openapi.yml
+- openapi/fintecture-authentication-api-openapi.yml
+- openapi/fintecture-bank-accounts-api-openapi.yml
+- openapi/fintecture-companies-api-openapi.yml
+- openapi/fintecture-customers-api-openapi.yml
+- openapi/fintecture-e-mandates-api-openapi.yml
+- openapi/fintecture-memberships-api-openapi.yml
+- openapi/fintecture-oauth-api-openapi.yml
+- openapi/fintecture-organisation-nodes-api-openapi.yml
+- openapi/fintecture-payments-api-openapi.yml
+- openapi/fintecture-payouts-api-openapi.yml
+- openapi/fintecture-providers-api-openapi.yml
+- openapi/fintecture-refunds-api-openapi.yml
+- openapi/fintecture-request-to-pay-api-openapi.yml
+- openapi/fintecture-sandbox-api-openapi.yml
+- openapi/fintecture-settlements-api-openapi.yml
+- openapi/fintecture-test-accounts-api-openapi.yml
+- openapi/fintecture-transactions-api-openapi.yml
+- openapi/fintecture-users-api-openapi.yml
+- openapi/fintecture-verification-api-openapi.yml
+- openapi/fintecture-verifications-api-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+note: No MCP server was found. No probe result in the dossier. Candidate tools below are derived from the 69 operation(s) in the provider's own
+  OpenAPI (40 listed); they describe what a server WOULD expose, not one that exists.
+tools:
+- name: get_ais_v1_customer_accounts
+  operationId: getAisV1CustomerAccounts
+  method: GET
+  path: /ais/v1/customer/{customer_id}/accounts
+  description: Get All Accounts
+- name: get_applications
+  operationId: getApplications
+  method: GET
+  path: /v1/applications
+  description: List Applications
+- name: get_ais_v1_provider_authorization
+  operationId: getAisV1ProviderAuthorization
+  method: GET
+  path: /ais/v1/provider/{provider_id}/authorize
+  description: Get Provider Authorization
+- name: get_bank_accounts
+  operationId: getBankAccounts
+  method: GET
+  path: /v1/bank-accounts
+  description: List Bank Accounts
+- name: get_companies
+  operationId: getCompanies
+  method: GET
+  path: /v1/companies
+  description: List Companies
+- name: list_all_customers
+  operationId: listAllCustomers
+  method: GET
+  path: /v1/customers
+  description: List All Customers
+- name: list_all_emandates
+  operationId: listAllEmandates
+  method: GET
+  path: /v1/e-mandates
+  description: List All E-Mandates
+- name: post_memberships
+  operationId: postMemberships
+  method: POST
+  path: /v1/memberships
+  description: Create Membership
+- name: create_access_token
+  operationId: createAccessToken
+  method: POST
+  path: /oauth/accesstoken
+  description: Create Access Token
+- name: post_organisation_nodes
+  operationId: postOrganisationNodes
+  method: POST
+  path: /v1/organisation-nodes
+  description: Create Organisation Node
+- name: create_pis_v2_connect
+  operationId: createPisV2Connect
+  method: POST
+  path: /pis/v2/connect
+  description: Create A Payment Session
+- name: create_pis_v2_request_for_payout
+  operationId: createPisV2RequestForPayout
+  method: POST
+  path: /pis/v2/request-for-payout
+  description: Create A Request For Payout
+- name: get_res_v1_providers
+  operationId: getResV1Providers
+  method: GET
+  path: /res/v1/providers
+  description: Get All Providers
+- name: get_pis_v2_payment_refunds
+  operationId: getPisV2PaymentRefunds
+  method: GET
+  path: /pis/v2/payments/{payment_id}/refunds
+  description: Get Payment Refunds
+- name: create_pis_v2_request_to_pay
+  operationId: createPisV2RequestToPay
+  method: POST
+  path: /pis/v2/request-to-pay
+  description: Create A Request To Pay
+- name: simulate_transaction_event
+  operationId: simulateTransactionEvent
+  method: POST
+  path: /v1/transactions/simulate
+  description: Simulate A Transaction
+- name: get_pis_v2_settlements
+  operationId: getPisV2Settlements
+  method: GET
+  path: /pis/v2/settlements
+  description: Get All Settlements
+- name: get_res_v1_test_accounts
+  operationId: getResV1TestAccounts
+  method: GET
+  path: /res/v1/test-accounts
+  description: Get All Test Accounts
+- name: get_ais_v1_customer_account_transactions
+  operationId: getAisV1CustomerAccountTransactions
+  method: GET
+  path: /ais/v1/customer/{customer_id}/account/{account_id}/transactions
+  description: Get Account Transactions
+- name: post_users
+  operationId: postUsers
+  method: POST
+  path: /v1/users
+  description: Create User
+- name: create_ais_v1_verification
+  operationId: createAisV1Verification
+  method: POST
+  path: /ais/v1/verification
+  description: Create AIS Identity Verification
+- name: initiate_customer_verification
+  operationId: initiateCustomerVerification
+  method: POST
+  path: /v1/customers/{customer_id}/verification
+  description: Initiate Customer Verification
+- name: get_ais_v1_customer_account
+  operationId: getAisV1CustomerAccount
+  method: GET
+  path: /ais/v1/customer/{customer_id}/account/{account_id}
+  description: Get Specific Account
+- name: post_applications
+  operationId: postApplications
+  method: POST
+  path: /v1/applications
+  description: Create Application
+- name: get_ais_v1_provider_authorization_decoupled
+  operationId: getAisV1ProviderAuthorizationDecoupled
+  method: GET
+  path: /ais/v1/provider/{provider_id}/authorize/decoupled
+  description: Get Decoupled Provider Authorization
+- name: post_bank_accounts
+  operationId: postBankAccounts
+  method: POST
+  path: /v1/bank-accounts
+  description: Create Bank Account
+- name: post_companies
+  operationId: postCompanies
+  method: POST
+  path: /v1/companies
+  description: Create Company
+- name: create_customer
+  operationId: createCustomer
+  method: POST
+  path: /v1/customers
+  description: Create Customer
+- name: create_emandate
+  operationId: createEmandate
+  method: POST
+  path: /v1/e-mandates
+  description: Create E-Mandate
+- name: patch_membership_by_id
+  operationId: patchMembershipById
+  method: PATCH
+  path: /v1/memberships/{membership_id}
+  description: Update Membership
+- name: create_refresh_token
+  operationId: createRefreshToken
+  method: POST
+  path: /oauth/refreshtoken
+  description: Create Refresh Token
+- name: get_organisation_node_by_id
+  operationId: getOrganisationNodeById
+  method: GET
+  path: /v1/organisation-nodes/{organisation_node_id}
+  description: Get Organisation
+- name: get_pis_v2_payments
+  operationId: getPisV2Payments
+  method: GET
+  path: /pis/v2/payments
+  description: Get All Payments
+- name: get_res_v1_provider
+  operationId: getResV1Provider
+  method: GET
+  path: /res/v1/providers/{provider_id}
+  description: Get A Specific Provider
+- name: create_pis_v2_refund
+  operationId: createPisV2Refund
+  method: POST
+  path: /pis/v2/refund
+  description: Create A Refund
+- name: get_settlement_by_id
+  operationId: getSettlementById
+  method: GET
+  path: /pis/v2/settlements/{settlement_id}
+  description: Get Specific Settlement
+- name: get_res_v1_test_account_by_id
+  operationId: getResV1TestAccountById
+  method: GET
+  path: /res/v1/test-accounts/{account_id}
+  description: Get A Specific Test Account
+- name: list_all_transactions
+  operationId: listAllTransactions
+  method: GET
+  path: /v1/transactions
+  description: List All Transactions
+- name: get_user_by_id
+  operationId: getUserById
+  method: GET
+  path: /v1/users/{user_id}
+  description: Get User
+- name: list_all_customer_verifications
+  operationId: listAllCustomerVerifications
+  method: GET
+  path: /v1/customers/{customer_id}/verifications
+  description: List All Customer Verifications

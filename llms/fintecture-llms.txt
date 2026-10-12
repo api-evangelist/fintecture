@@ -1,0 +1,201 @@
+# Fintecture Doc Documentation
+
+> Documentation for Fintecture Doc
+
+## Guides: API
+- [Overview](https://doc.fintecture.com/docs/api-overview.md)
+- [Take on our Postman collection](https://doc.fintecture.com/docs/api-take-on-our-postman-collection.md)
+- [Request a PIS access token](https://doc.fintecture.com/docs/api-request-a-pis-access-token.md)
+- [Request a Customers access token](https://doc.fintecture.com/docs/api-request-a-customers-access-token.md)
+- [Request an AIS access token](https://doc.fintecture.com/docs/api-request-an-ais-token.md)
+- [Request E-Mandate access token](https://doc.fintecture.com/docs/request-e-mandate-access-token.md)
+- [Request an OAC access token](https://doc.fintecture.com/docs/request-an-oac-access-token.md)
+- [HTTP Signature](https://doc.fintecture.com/docs/api-http-signature.md)
+- [Request payout access token](https://doc.fintecture.com/docs/request-payout-access-token.md)
+- [Setup the Payment Hub](https://doc.fintecture.com/docs/initiate-a-payment-connect.md)
+- [Initiate an Immediate Transfer](https://doc.fintecture.com/docs/api-initiate-an-immediate-payment.md)
+- [Initiate a Request To Pay](https://doc.fintecture.com/docs/api-initiate-a-request-to-pay.md)
+- [Initiate a Smart transfer](https://doc.fintecture.com/docs/api-initiate-a-smart-transfer.md)
+- [Initiate a Refund](https://doc.fintecture.com/docs/api-initiate-an-immediate-refund.md)
+- [Initiate a Verified Payout](https://doc.fintecture.com/docs/initiate-a-verified-payout.md)
+- [Follow all payments](https://doc.fintecture.com/docs/api-follow-all-payments.md)
+- [Follow a payment](https://doc.fintecture.com/docs/api-follow-a-payment.md)
+- [Update a payment](https://doc.fintecture.com/docs/api-update-a-payment.md)
+- [Manage settlements](https://doc.fintecture.com/docs/api-manage-settlements.md)
+- [Recover all bank accounts](https://doc.fintecture.com/docs/api-recover-bank-accounts.md)
+- [Consult bank account's details](https://doc.fintecture.com/docs/api-consult-bank-account.md)
+- [Recover bank account's holders](https://doc.fintecture.com/docs/api-recover-bank-account-holders.md)
+- [Recover bank account's transactions](https://doc.fintecture.com/docs/api-recover-bank-account-transactions.md)
+- [Verify a Customer](https://doc.fintecture.com/docs/api-verify-a-customer.md)
+- [Manage webhooks](https://doc.fintecture.com/docs/api-webhooks.md)
+- [Testing Complete Payment Flows in Sandbox](https://doc.fintecture.com/docs/testing-complete-payment-flows-in-sandbox.md)
+- [Payment Session Status](https://doc.fintecture.com/docs/api-payment-session-status.md)
+- [Payment Transfer States](https://doc.fintecture.com/docs/api-payment-transfer-states.md)
+- [Payment Transfer Reasons](https://doc.fintecture.com/docs/api-payment-rejected-reasons.md)
+
+## Guides: SHOPS : CMS
+- [Overview](https://doc.fintecture.com/docs/cms-overview.md)
+- [Link your shop to your Fintecture account](https://doc.fintecture.com/docs/prestashop-link-your-shop.md)
+- [Set your Prestashop preferences](https://doc.fintecture.com/docs/prestashop-set-your-preferences.md)
+- [Customize your checkout](https://doc.fintecture.com/docs/prestashop-customize-your-checkout.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Promote Fintecture payment methods](https://doc.fintecture.com/docs/prestashop-promote-fintecture-payment-methods.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Manage your order statuses](https://doc.fintecture.com/docs/prestashop-manage-your-order-statuses.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Manage your orders](https://doc.fintecture.com/docs/prestashop-manage-your-orders.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Customize your checkout](https://doc.fintecture.com/docs/magento-customize-your-checkout.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span><span class="product-badge bnpl-badge">Buy Now Pay Later</span>
+- [Promote Fintecture payment methods](https://doc.fintecture.com/docs/magento-promote-fintecture-payment-methods.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span><span class="product-badge bnpl-badge">Buy Now Pay Later</span>
+- [Manage your order statuses](https://doc.fintecture.com/docs/magento-manage-your-order-statuses.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span><span class="product-badge bnpl-badge">Buy Now Pay Later</span>
+- [Manage your orders](https://doc.fintecture.com/docs/magento-manage-your-orders.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span><span class="product-badge bnpl-badge">Buy Now Pay Later</span>
+- [Advanced settings](https://doc.fintecture.com/docs/magento-advanced-settings.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Install Fintecture for Shopify](https://doc.fintecture.com/docs/shopify-install-fintecture.md)
+- [Install Fintecture for WordPress](https://doc.fintecture.com/docs/wordpress-install-fintecture.md)
+- [Customize your checkout](https://doc.fintecture.com/docs/wordpress-customize-your-checkout.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Promote Fintecture payment methods](https://doc.fintecture.com/docs/wordpress-promote-fintecture-payment-methods.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Manage your order statuses](https://doc.fintecture.com/docs/wordpress-manage-your-order-statuses.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Manage your orders](https://doc.fintecture.com/docs/wordpress-manage-your-orders.md): <span class="product-badge it-badge">Immediate Transfer</span><span class="product-badge it-st-badge">Smart Transfer</span>
+- [Install Fintecture for Oasis](https://doc.fintecture.com/docs/install-fintecture-for-oasis.md)
+- [Install Fintecture for Intershop](https://doc.fintecture.com/docs/install-fintecture-for-intershop.md)
+- [Install Fintecture for Odoo](https://doc.fintecture.com/docs/install-fintecture-for-odoo.md)
+
+## Guides: CONSOLE (MERCHANT UI)
+- [Overview](https://doc.fintecture.com/docs/console-overview.md)
+- [Create a Fintecture account](https://doc.fintecture.com/docs/console-create-an-account.md)
+- [Activate my account](https://doc.fintecture.com/docs/console-activate-my-account.md)
+- [Generate a Request To Pay with Immediate Transfer](https://doc.fintecture.com/docs/console-generate-a-request-to-pay-with-immediate-transfer.md)
+- [Generate a Request To Pay with Smart Transfer](https://doc.fintecture.com/docs/console-generate-a-request-to-pay-with-smart-transfer.md)
+- [Track a payment](https://doc.fintecture.com/docs/console-track-my-payment.md)
+- [Pre-fill payment fields](https://doc.fintecture.com/docs/console-pre-fill-payment-fields.md)
+- [Payment details](https://doc.fintecture.com/docs/d-tails-du-paiement.md)
+- [Event Simulator](https://doc.fintecture.com/docs/event-simulator.md)
+- [Create a merchant account](https://doc.fintecture.com/docs/console-create-a-wallet.md)
+- [Create a Fintecture account](https://doc.fintecture.com/docs/console-create-a-fintecture-payment-account.md)
+- [Consult my Merchant payment account](https://doc.fintecture.com/docs/consult-my-merchant-payment-account.md)
+- [Consult my Fintecture payment account](https://doc.fintecture.com/docs/console-consult-my-fintecture-payment-account.md)
+- [Register a client application](https://doc.fintecture.com/docs/console-register-a-client-application.md)
+- [Link an application to a bank account](https://doc.fintecture.com/docs/console-link-an-application-to-a-wallet.md)
+- [Configure application's payment methods](https://doc.fintecture.com/docs/console-configure-application-payment-methods.md)
+- [Configure webhooks](https://doc.fintecture.com/docs/console-configure-webhooks.md)
+- [Configure SSO](https://doc.fintecture.com/docs/console-configure-sso.md)
+- [Console Payment Session Status](https://doc.fintecture.com/docs/console-payment-session-status.md)
+- [Console Payment Session Type](https://doc.fintecture.com/docs/console-payment-session-type.md)
+
+## Guides: CONNECT (CUSTOMER UI)
+- [Mobile app integration](https://doc.fintecture.com/docs/connect-mobile-app-integration.md): How to open Connect from an Android or iOS app so bank apps open and the payer returns to your order.
+- [Demo Bank](https://doc.fintecture.com/docs/demo-bank.md)
+
+## Guides: BRANDING
+- [Best practices](https://doc.fintecture.com/docs/branding-best-practices.md)
+- [Payments methods](https://doc.fintecture.com/docs/branding-payment-methods.md)
+- [Customer-facing assets](https://doc.fintecture.com/docs/branding-customer-facing-assets.md)
+
+## API Reference: API EXPLORER
+- [Create access token](https://doc.fintecture.com/reference/createaccesstoken.md): The access token API endpoint is used to get an access token. It enables the TPP to authenticate to the Fintecture Authentication Server.  There are 2 types of `grant_types`, `authorization_code` and…
+- [Create refresh token](https://doc.fintecture.com/reference/createrefreshtoken.md): The refresh token API is used to generate a new access_token and invalidate the previous one. This allows clients to continue to have a valid access token without further interaction with the user.
+- [Get current application](https://doc.fintecture.com/reference/getresv1applications.md): This endpoint provides you with all information related to the application used to sign the request.  <blockquote style="background: #D7E9FF;border-color: #1471EB;padding: 0.8rem;border-radius:…
+- [List applications](https://doc.fintecture.com/reference/get_v1-applications.md): List all applications linked to companies within the authenticated organisation's subtree. Supports pagination and filtering by company_id.  Related resources can be included via…
+- [Create application](https://doc.fintecture.com/reference/post_v1-applications.md): Create a new application for a company within the authenticated organisation's subtree.  You can create an application with: - An **existing bank account** by providing its UUID in…
+- [Get an application](https://doc.fintecture.com/reference/get_v1-applications-app-id.md): Retrieve a specific application by its ID.  Related resources can be included via `?include=bank_accounts`: - To fetch without related resources, **omit** the `include` parameter. - To include…
+- [Update application](https://doc.fintecture.com/reference/patch_v1-applications-app-id.md): Update an existing application's attributes.  You can update: - `app_name` - The application name - `app_webhooks` - Webhook configurations - `app_urls` - Application URLs (return, domain) -…
+- [Remove an application](https://doc.fintecture.com/reference/delete_v1-applications-app-id.md): Remove an application by its ID.  <blockquote style="background: #D7E9FF;border-color: #1471EB;padding: 0.8rem;border-radius: 5px;"><p>🔒 This endpoint requires an <a…
+- [Get all providers](https://doc.fintecture.com/reference/getresv1providers.md): This endpoint retrieves the banks to which you can access account data and initiate payments.  The services provided by the banks are detailed in the ‘ais’ and ‘pis’ attributes, and can be:  - AIS:…
+- [Get a specific provider](https://doc.fintecture.com/reference/getresv1provider.md): This endpoint provides information on a specific settlement
+- [Create a Payment Session](https://doc.fintecture.com/reference/createpisv2connect.md): This endpoint aims at providing a payment session for a PSU to initiate a payment.  The same endpoint can be used to generate an **Immediate Transfer**, a **Smart Transfer** or a **Buy Now Pay…
+- [Create a Request To Pay](https://doc.fintecture.com/reference/createpisv2requesttopay.md): This endpoint allows creation of a request to pay by providing the merchant with a Fintecture payment link. Link can either be sent by email or SMS or returned directly in the response.  The same…
+- [Create a refund](https://doc.fintecture.com/reference/createpisv2refund.md): This endpoint gives merchants the possibility to initiate a refund.<br> A refund can either be full or partial. By default it will be done to the original payment account but one can specify a payout…
+- [Get all payments](https://doc.fintecture.com/reference/getpisv2payments.md): This endpoint returns the details of all existing payments linked to caller.  **Default Date Filtering:** To improve performance, this endpoint applies default date filters when none are provided: -…
+- [Get specific payment](https://doc.fintecture.com/reference/getpaymentsession.md): This endpoint returns the details of linked to requested payment session.
+- [Get payment refunds](https://doc.fintecture.com/reference/getpisv2paymentrefunds.md): This endpoints allows refund creation based on an existing payment.
+- [Modify payment information](https://doc.fintecture.com/reference/patchpisv2paymentsession.md): This endpoint allows modification of information on a specific payment.
+- [Simulate a bank transition event](https://doc.fintecture.com/reference/simulatepaymentbanktransition.md): **Sandbox only.** Simulates an asynchronous bank transition event on a payment session, as if the real bank callback arrived. This lets you drive a pay-in session through its whole lifecycle…
+- [Create a Request For Payout](https://doc.fintecture.com/reference/createpisv2requestforpayout.md): This endpoint allows creation of a request for payout that merchant can then share to a customer for asynchronous payout
+- [Get completed settlements](https://doc.fintecture.com/reference/getpisv2settlements.md): Lists completed settlements for your Local Acquiring account, including reserve fill statements with a zero net amount and no outgoing payment. Pending, failed and cancelled settlements are excluded.…
+- [Get specific settlement](https://doc.fintecture.com/reference/getsettlementbyid.md): Returns a completed settlement, including reserve fill statements with a zero net amount and no outgoing payment. Pending, failed and cancelled settlements return 404, as do settlements that cannot…
+- [List all transactions](https://doc.fintecture.com/reference/listalltransactions.md): List all transactions
+- [Get specific transaction](https://doc.fintecture.com/reference/gettransactionbyid.md): Get specific transaction
+- [Simulate a transaction](https://doc.fintecture.com/reference/simulatetransactionevent.md): Simulate a credit/debit transaction in Sandbox env. See also https://doc.fintecture.com/docs/console-simulate-an-event
+- [List all customers](https://doc.fintecture.com/reference/listallcustomers.md): This endpoint provides a comprehensive overview of all registered customers.
+- [Create Customer](https://doc.fintecture.com/reference/createcustomer.md): This endpoint allows registering of your customers to accelerate your payments.
+- [Get a customer](https://doc.fintecture.com/reference/getcustomerbyid.md): This endpoint requires the customer_id parameter to be provided in the URL to identify the specific customer to retrieve. Upon receiving the request, all customer's details will be returned in the…
+- [List all customer bank accounts](https://doc.fintecture.com/reference/listallcustomerbankaccounts.md): List all customer bank accounts
+- [Create Customer Bank Account](https://doc.fintecture.com/reference/createcustomerbankaccount.md): Create Customer Bank Account
+- [Get a bank account from a customer](https://doc.fintecture.com/reference/getbankaccountbyid.md): Get a bank account from a customer
+- [List all customer verifications](https://doc.fintecture.com/reference/listallcustomerverifications.md): List all customer verifications
+- [Initiate Customer Verification](https://doc.fintecture.com/reference/initiatecustomerverification.md): Initiate Customer Verification - 2 methods can be used for customer to authenticate (see authentication_methods). Either `bank_transfer` (customer makes a 1€ transfer to a provided IBAN) or…
+- [Get a verification](https://doc.fintecture.com/reference/getcustomerverificationbyid.md): Get a verification
+- [Get provider's authorization](https://doc.fintecture.com/reference/getaisv1providerauthorization.md): This API endpoint is used to authenticate your customer to their Bank for AIS access. Banks can provide different ways of authentication, we implement both the redirection model and the decoupled…
+- [Get decoupled provider's authorization](https://doc.fintecture.com/reference/getaisv1providerauthorizationdecoupled.md): This endpoint is used to poll the authentication status within the decoupled model. Once the decoupled authentication flow is initiated, the status is \"PENDING\". Once the PSU has successfully…
+- [Get all accounts](https://doc.fintecture.com/reference/getaisv1customeraccounts.md): This endpoints aims at returning all accounts linked to a specific connection as requested using `connection_id`. A connection is a session as opened by the bank after a customer successfully logged…
+- [Get specific account](https://doc.fintecture.com/reference/getaisv1customeraccount.md): This endpoint returns information regarding a customer specific account as requested in the path through the `account_id` parameter.
+- [Get account transactions](https://doc.fintecture.com/reference/getaisv1customeraccounttransactions.md): This endpoint returns all transactions linked to requested account attached to specified customer.
+- [Get account holders](https://doc.fintecture.com/reference/getaisv1customeraccountholders.md): This endpoint retrieves all personal information of the client such as name, address and contact details for all the beneficiary owners.
+- [Make an AIS identity verification](https://doc.fintecture.com/reference/createaisv1verification.md): This endpoint allows identifiy verification based on AIS capabilities
+- [Delete provider's connection](https://doc.fintecture.com/reference/deleteaisv1customer.md): This endpoint deletes all active access tokens and all PSU data linked to requested connection.
+- [Get AIS Connect session](https://doc.fintecture.com/reference/getaisv2connect.md): This endpoint aims at providing a connect session for a PSU to create a connection that will enable access to AIS features.
+- [Get all test accounts](https://doc.fintecture.com/reference/getresv1testaccounts.md): This endpoint retrieves a set of test accounts by bank to be used in the sandbox environment only. These accounts are actual test accounts in the corresponding bank sandbox.   Fintecture does not…
+- [Get a specific test account](https://doc.fintecture.com/reference/getresv1testaccountbyid.md): This endpoint returns information on a specific test account
+- [Create organisation](https://doc.fintecture.com/reference/post_v1-organisation-nodes.md): Create a child organisation node in the Fintecture Console. Organisation nodes form a hierarchical tree structure for managing your organisation's entities and access control.  When using OAC token…
+- [Get organisation](https://doc.fintecture.com/reference/get_v1-organisation-nodes-organisation-node-id.md): Retrieve an organisation node by its ID. Organisation nodes form a hierarchical tree structure for managing your organisation's entities and access control.  Related resources can be returned with…
+- [Update organisation](https://doc.fintecture.com/reference/patch_v1-organisation-nodes-organisation-node-id.md): Update an organisation node in the Fintecture Console. Organisation nodes form a hierarchical tree structure for managing your organisation's entities and access control.  <blockquote…
+- [Remove organisation](https://doc.fintecture.com/reference/delete_v1-organisation-nodes-organisation-node-id.md): Remove an organisation node from the Fintecture Console. Organisation nodes form a hierarchical tree structure for managing your organisation's entities and access control.  <blockquote…
+- [Get companies in organisation](https://doc.fintecture.com/reference/get_v1-organisation-nodes-organisation-node-id-companies.md): Retrieve companies for an organisation node. Use `recursive=true` (default) to include all companies in the subtree, or `recursive=false` to get only companies directly assigned to this node.…
+- [Get organisation tree](https://doc.fintecture.com/reference/get_v1-organisation-nodes-organisation-node-id-tree.md): Retrieve the organisation tree expanded from top accessible node to the specified node. Returns the full path from the top accessible node to the requested node, with all ancestor branches expanded.…
+- [List all e-mandates](https://doc.fintecture.com/reference/listallemandates.md): List all merchant e-mandates
+- [Create E-Mandate](https://doc.fintecture.com/reference/createemandate.md): Create a customer e-mandate. Returns 409 Conflict if a mandate with the same RUM already exists.
+- [Get an e-mandate](https://doc.fintecture.com/reference/getemandatebyid.md): Get a customer e-mandate
+- [Update an e-mandate](https://doc.fintecture.com/reference/patchemandatebyid.md): Update a customer e-mandate. Only status updates are allowed. Accepted statuses are 'cancelled' and 'revoked'.
+- [Create company](https://doc.fintecture.com/reference/post_v1-companies.md): Create a company in the Fintecture Console. Companies are entities managed through your organisation structure that can be associated with organisation nodes.  <blockquote style="background:…
+- [List companies](https://doc.fintecture.com/reference/get_v1-companies.md): Lists all companies in the accessible organisation subtree. Companies are entities managed through your organisation structure that can be associated with organisation nodes.  Related resources can…
+- [Get a company](https://doc.fintecture.com/reference/get_v1-companies-company-id.md): Retrieve a company. Companies are entities managed through your organisation structure that can be associated with organisation nodes.  Related resources are only returned when requested via the…
+- [Update company](https://doc.fintecture.com/reference/patch_v1-companies-company-id.md): Update a company in the Fintecture Console. Companies are entities managed through your organisation structure that can be associated with organisation nodes.  <blockquote style="background:…
+- [Remove company](https://doc.fintecture.com/reference/delete_v1-companies-company-id.md): Remove a company from the Fintecture Console. Companies are entities managed through your organisation structure that can be associated with organisation nodes.  <blockquote style="background:…
+- [List the recipients of a membership notification type](https://doc.fintecture.com/reference/get_v1-companies-company-id-notifications.md): Members of the company's active memberships holding the given notification type, with the payment-origin flags of their setting.  For `payer_email_copy`: the members that receive a BCC copy of the…
+- [Create user](https://doc.fintecture.com/reference/post_v1-users.md): Create a user in the Fintecture Console along with a new membership. Users represent individuals who can access and manage resources within your organisation structure.  When creating a user, you…
+- [Get user](https://doc.fintecture.com/reference/get_v1-users-user-id.md): Retrieve a user by their ID. Users represent individuals who can access and manage resources within your organisation structure.  Related memberships are only returned when requested via the…
+- [Update user](https://doc.fintecture.com/reference/patch_v1-users-user-id.md): Update user information such as name, email, and phone number.  <blockquote style="background: #D7E9FF;border-color: #1471EB;padding: 0.8rem;border-radius: 5px;"><p>🔒 External clients call this…
+- [Delete user](https://doc.fintecture.com/reference/delete_v1-users-user-id.md): Delete a user from the Fintecture Console. This revokes the user's access: their Firebase authentication credentials are deleted and all their memberships are removed.  <blockquote style="background:…
+- [List users by email](https://doc.fintecture.com/reference/get_v1-users.md): Look up a user by email address when the internal user ID is not known. Since email is unique, the response contains **at most 1 item**. Returns an empty array when no match is found.  <blockquote…
+- [Create membership](https://doc.fintecture.com/reference/post_v1-memberships.md): Create a new membership associating a user with either a company or an organisation node. Memberships define the relationship between users and the entities they can access within your organisation…
+- [Update membership](https://doc.fintecture.com/reference/patch_v1-memberships-membership-id.md): Update membership attributes such as role, status, and notification preferences. This allows you to modify the access level and permissions for a user within a specific company or organisation node.…
+- [Delete membership](https://doc.fintecture.com/reference/delete_v1-memberships-membership-id.md): Remove a membership by its membership ID. This will revoke the user's access to the associated company or organisation node.  <blockquote style="background: #D7E9FF;border-color: #1471EB;padding:…
+- [List a user's memberships](https://doc.fintecture.com/reference/get_v1-memberships.md): Lists the memberships of a user within the accessible organisation subtree, paginated and ordered by creation. Alternative to `GET /v1/users/{user_id}?include=memberships` for users whose accessible…
+- [List bank accounts](https://doc.fintecture.com/reference/get_v1-bank-accounts.md): List all bank accounts linked to companies within the authenticated organisation's subtree. Supports pagination and filtering by company_id.  <blockquote style="background: #D7E9FF;border-color:…
+- [Create bank account](https://doc.fintecture.com/reference/post_v1-bank-accounts.md): Create a bank account linked to a company.  <blockquote style="background: #D7E9FF;border-color: #1471EB;padding: 0.8rem;border-radius: 5px;"><p>🔒 This endpoint requires an <a…
+- [Update bank account](https://doc.fintecture.com/reference/patch_v1-bank-accounts-bank-account-id.md): Update a bank account by its bank_account_id.  <blockquote style="background: #D7E9FF;border-color: #1471EB;padding: 0.8rem;border-radius: 5px;"><p>🔒 This endpoint requires an <a…
+- [Delete bank account](https://doc.fintecture.com/reference/delete_v1-bank-accounts-bank-account-id.md): Remove a bank account by its bank_account_id.  <blockquote style="background: #D7E9FF;border-color: #1471EB;padding: 0.8rem;border-radius: 5px;"><p>🔒 This endpoint requires an <a…
+
+## Recipes
+- [Consult a settlement](https://doc.fintecture.com/recipes/consult-a-settlement.md)
+- [Consult bank account's details](https://doc.fintecture.com/recipes/consult-bank-accounts-details.md)
+- [Follow a payment](https://doc.fintecture.com/recipes/follow-a-payment.md)
+- [Follow all payments](https://doc.fintecture.com/recipes/follow-all-payments.md)
+- [Get your settlements](https://doc.fintecture.com/recipes/get-your-settlements.md)
+- [Initiate a Request To Pay (B2C)](https://doc.fintecture.com/recipes/initiate-a-request-to-pay-b2c.md)
+- [Initiate a Smart Transfer (B2C)](https://doc.fintecture.com/recipes/initiate-a-smart-transfer-b2c.md)
+- [Initiate an Immediate Payment (B2B)](https://doc.fintecture.com/recipes/initiate-an-immediate-payment-b2b.md)
+- [Initiate an Immediate Refund](https://doc.fintecture.com/recipes/initiate-an-immediate-refund.md)
+
+## Pages
+- [Account Information](https://doc.fintecture.com/page/account-information.md)
+- [Immediate Transfer](https://doc.fintecture.com/page/immediate-payment.md)
+- [Immediate Refund](https://doc.fintecture.com/page/immediate-refund.md)
+- [Intershop](https://doc.fintecture.com/page/intershop.md)
+- [Magento](https://doc.fintecture.com/page/magento.md)
+- [Oasis](https://doc.fintecture.com/page/oasis.md)
+- [Odoo](https://doc.fintecture.com/page/odoo.md)
+- [Payment Hub](https://doc.fintecture.com/page/payment-hub.md)
+- [PrestaShop](https://doc.fintecture.com/page/prestashop.md)
+- [Request To Pay](https://doc.fintecture.com/page/request-to-pay.md)
+- [Shopify](https://doc.fintecture.com/page/shopify.md)
+- [Smart Transfer](https://doc.fintecture.com/page/smart-transfer.md)
+- [Verified Payout](https://doc.fintecture.com/page/verified-payout.md)
+- [WordPress](https://doc.fintecture.com/page/wordpress.md)
+
+## Changelog
+- [[22-09-2026] API Updates: Memberships, Settlements, Refunds & KYB](https://doc.fintecture.com/changelog/22-09-2026.md)
+- [[2025-03-11] Initiate a Verified Payout and Postman collection](https://doc.fintecture.com/changelog/2025-03-11-initiate-a-verified-payout-and-postman-collection.md)
+- [[2024-03-14] Branding recommendations](https://doc.fintecture.com/changelog/2024-03-14-branding-recommendations.md)
+- [[2024-01-18][CMS] Updated PrestaShop, Magento & WordPress documentation](https://doc.fintecture.com/changelog/2024-01-18cms-updated-prestashop-magento-wordpress-documentation.md)
+- [[2024-01-05][API] Customer verification](https://doc.fintecture.com/changelog/2024-01-05api-customer-verification.md)
+- [[2023-12-15][Console] Event simulator](https://doc.fintecture.com/changelog/2023-12-01console-event-simulator-payment-fields-pre-filling.md)
+- [[2023-12-12][Console] Payment fields pre-filling](https://doc.fintecture.com/changelog/2023-12-12console-pre-fill-your-requests-to-pay.md)
+- [[2023-06-13] Documentation global redesign](https://doc.fintecture.com/changelog/2023-06-09-website-redesign.md)
+- [[2023-05-29] Landing page redesign](https://doc.fintecture.com/changelog/2023-05-27-landing-page-redesign.md)

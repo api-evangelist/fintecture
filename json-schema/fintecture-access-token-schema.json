@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/fintecture/main/json-schema/fintecture-access-token-schema.json",
+  "title": "AccessToken",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/fintecture-oauth-api-openapi.yml#/components/schemas/AccessToken",
+  "type": "object",
+  "properties": {
+    "access_token": {
+      "type": "string"
+    },
+    "token_type": {
+      "type": "string",
+      "enum": [
+        "Bearer"
+      ]
+    },
+    "expires_in": {
+      "type": "integer",
+      "description": "Lifetime in seconds (3600 by default)."
+    },
+    "refresh_token": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    }
+  }
+}

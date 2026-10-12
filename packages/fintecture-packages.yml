@@ -1,0 +1,39 @@
+name: Fintecture Packages
+generated: '2026-10-12'
+method: searched
+source: registry metadata endpoints (registry.npmjs.org, pypi.org, rubygems.org, repo.packagist.org)
+packages:
+- name: fintecture-client
+  registry: npm
+  url: https://www.npmjs.com/package/fintecture-client
+  language: JavaScript
+  official: true
+  version: 2.5.3
+  published: '2026-06-05'
+  ownership_audit: metadata names fintecture.com
+- name: fintecture/fintecture-sdk-php
+  registry: packagist
+  url: https://packagist.org/packages/fintecture/fintecture-sdk-php
+  language: PHP
+  official: false
+  version: 2.6.2
+  published: '2026-06-05'
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: fintecture
+  registry: rubygems
+  url: https://rubygems.org/gems/fintecture
+  language: Ruby
+  official: true
+  version: 0.6.2
+  published: '2023-11-08'
+  note: source_code_uri github.com/Fintecture/fintecture-sdk-ruby
+  ownership_audit: metadata names fintecture.com
+- name: fintecture
+  registry: pypi
+  url: https://pypi.org/project/fintecture/
+  language: Python
+  official: true
+  version: 1.3.1
+  published: '2022-12-19'
+  note: last release predates the 2026-09-22 API changes (sandbox URL, payout scope)
+  ownership_audit: metadata names fintecture.com

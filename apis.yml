@@ -1,5 +1,282 @@
 aid: fintecture
+
 url: https://raw.githubusercontent.com/api-evangelist/fintecture/refs/heads/main/apis.yml
+
+name: Fintecture
+
+tags:
+- Open Banking
+- Payments
+- PSD2
+- France
+- Account Information
+- Payment Initiation
+- Instant Payments
+- SEPA
+- Smart Transfer
+- Request to Pay
+- Buy Now Pay Later
+- E-Mandates
+- Account-to-Account
+- KYC
+
+kind: contract
+
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
+
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: medium
+  source:
+  - plans
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
+
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fintecture.png
+
+access: 3rd-Party
+
+created: '2026-05-25T00:00:00.000Z'
+
+modified: '2026-05-25'
+
+position: Consuming
+
+description: Fintecture is a French Open Banking payments platform and ACPR-authorised payment institution (#17248). Its API stack covers PSD2
+  Payment Initiation (Immediate Transfer, Smart Transfer, Request To Pay, Buy Now Pay Later, Verified Payout, Immediate Refund), PSD2 Account
+  Information (accounts, holders, transactions, identity verification), Customers, E-Mandates, and a beta Organisation Access Credentials surface
+  for managing multi-tenant enterprise estates. Clients include Auchan, Bricoman, Pluxee, PMU, and Edenred, with 2M+ end payers served. Plug-and-play
+  modules for PrestaShop, Magento, Shopify, WordPress, Odoo, Intershop, and Oasis sit on top of official JavaScript, Python, PHP, and Ruby SDKs.
+
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com
+
+specificationVersion: '0.23'
+
+common:
+- type: Spectral
+  url: rules/fintecture-rules.yml
+- type: Spectral
+  url: rules/fintecture-jsonschema-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/fintecture-vocabulary.yml
+- type: DataModel
+  url: data-model/fintecture-data-model.yml
+- type: ChangeLog
+  url: changelog/fintecture-changelog.yml
+- type: Sandbox
+  url: sandbox/fintecture-sandbox.yml
+- type: ErrorCatalog
+  url: errors/fintecture-problem-types.yml
+- type: Conformance
+  url: conformance/fintecture-conformance.yml
+- type: LLMsTxt
+  url: llms/fintecture-llms.txt
+- type: Hosts
+  url: hosts/fintecture-hosts.yml
+- type: Vendors
+  url: vendors/fintecture-vendors.yml
+- type: Packages
+  url: packages/fintecture-packages.yml
+- type: Plans
+  url: plans/fintecture-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/fintecture-rate-limits.yml
+- type: FinOps
+  url: finops/fintecture-finops.yml
+- type: Website
+  url: https://www.fintecture.com/
+- type: CapabilityMap
+  url: capabilities/fintecture-capability-edges.yml
+  name: Fintecture Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/fintecture-agentic-access.yml
+- type: DomainSecurity
+  url: security/fintecture-domain-security.yml
+- type: Authentication
+  url: authentication/fintecture-authentication.yml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/fintecture/overview
+- type: Arazzo
+  url: arazzo/fintecture-account-holders-identity-workflow.yml
+  name: Fintecture Account Holders and Identity Verification
+- type: Arazzo
+  url: arazzo/fintecture-connect-accounts-transactions-workflow.yml
+  name: Fintecture Connect, List Accounts, and Pull Transactions
+- type: Arazzo
+  url: arazzo/fintecture-customer-onboard-payment-workflow.yml
+  name: Fintecture Onboard Customer and Initiate Payment
+- type: Arazzo
+  url: arazzo/fintecture-customer-verification-poll-workflow.yml
+  name: Fintecture Customer Verification with Polling
+- type: Arazzo
+  url: arazzo/fintecture-decoupled-auth-accounts-workflow.yml
+  name: Fintecture Decoupled Authentication then List Accounts
+- type: Arazzo
+  url: arazzo/fintecture-list-providers-initiate-payment-workflow.yml
+  name: Fintecture List Providers and Initiate Payment
+- type: Arazzo
+  url: arazzo/fintecture-payment-refund-workflow.yml
+  name: Fintecture Refund a Completed Payment
+- type: Arazzo
+  url: arazzo/fintecture-payment-status-poll-workflow.yml
+  name: Fintecture Create Payment and Poll Status
+- type: Arazzo
+  url: arazzo/fintecture-request-to-pay-status-workflow.yml
+  name: Fintecture Request To Pay and Track Status
+- type: Arazzo
+  url: arazzo/fintecture-sandbox-test-payment-workflow.yml
+  name: Fintecture Sandbox Test Payment
+- type: Arazzo
+  url: arazzo/fintecture-settlement-reconciliation-workflow.yml
+  name: Fintecture Settlement Reconciliation
+- type: Arazzo
+  url: arazzo/fintecture-token-then-payment-workflow.yml
+  name: Fintecture Mint Token then Initiate Payment
+- type: Arazzo
+  url: arazzo/fintecture-update-payment-communication-workflow.yml
+  name: Fintecture Update Payment Communication
+- type: LinkedIn
+  url: https://www.linkedin.com/company/fintecture
+- type: Portal
+  url: https://fintecture.com
+- type: Documentation
+  url: https://doc.fintecture.com
+- type: Documentation
+  url: https://doc.fintecture.com/docs/api-overview
+  name: API Overview
+- type: GettingStarted
+  url: https://doc.fintecture.com/docs/api-overview
+- type: Documentation
+  url: https://doc.fintecture.com/docs/api-http-signature
+  name: HTTP Signature Guide
+- type: Documentation
+  url: https://doc.fintecture.com/docs/api-webhooks
+  name: Webhooks Guide
+- type: Documentation
+  url: https://doc.fintecture.com/docs/demo-bank
+  name: Demo Bank Sandbox
+- type: Documentation
+  url: https://doc.fintecture.com/docs/testing-complete-payment-flows-in-sandbox
+  name: Testing Payment Flows in Sandbox
+- type: ChangeLog
+  url: https://doc.fintecture.com/changelog
+- type: Signup
+  url: https://console.fintecture.com/
+  name: Fintecture Console
+- type: Sandbox
+  url: https://console-sandbox.fintecture.com/
+  name: Sandbox Console
+- type: Postman
+  url: https://doc.fintecture.com/docs/api-take-on-our-postman-collection
+  name: Postman Collection
+- type: GitHubOrganization
+  url: https://github.com/Fintecture
+- type: SDKs
+  url: https://github.com/Fintecture/fintecture-sdk-javascript
+  name: JavaScript / TypeScript SDK
+- type: SDKs
+  url: https://github.com/Fintecture/fintecture-sdk-python
+  name: Python SDK
+- type: SDKs
+  url: https://github.com/Fintecture/fintecture-sdk-php
+  name: PHP SDK
+- type: SDKs
+  url: https://github.com/Fintecture/fintecture-sdk-ruby
+  name: Ruby SDK
+- type: SampleCode
+  url: https://github.com/Fintecture/sample-nodejs
+  name: Node.js Express sample app
+- type: SampleCode
+  url: https://github.com/Fintecture/sample-ror
+  name: Ruby on Rails sample app
+- type: SampleCode
+  url: https://github.com/Fintecture/signature-guide
+  name: HTTP Signature Implementation Guide
+- type: Plugins
+  url: https://github.com/Fintecture/magento
+  name: Magento 2 Payment Module
+- type: Plugins
+  url: https://github.com/Fintecture/magento-hyva
+  name: Magento Hyva Theme Module
+- type: Plugins
+  url: https://github.com/Fintecture/magento19
+  name: Magento 1.9 Payment Module
+- type: Plugins
+  url: https://github.com/Fintecture/odoo
+  name: Odoo Payment Module
+- type: Integrations
+  url: https://doc.fintecture.com/docs/cms-overview
+  name: CMS Integrations (PrestaShop, Magento, Shopify, WordPress, Odoo, Intershop, Oasis)
+- type: PrivacyPolicy
+  url: https://fintecture.com/politique-de-confidentialite
+- type: Support
+  url: https://fintecture.com/contact
+- type: StatusPage
+  url: https://status.fintecture.com
+- type: Blog
+  url: https://fintecture.com/blog
+- type: Regions
+  data:
+  - France
+  - European Economic Area
+  - United Kingdom
+  description: 'Fintecture is a French payment institution (ACPR/Banque de France authorization #17248) operating PSD2 services across the EEA
+    and connecting to UK Open Banking via the Faster Payments Service (FPS).'
+- type: Regulator
+  url: https://acpr.banque-france.fr/
+  name: ACPR — Autorite de Controle Prudentiel et de Resolution
+- type: Features
+  data:
+  - Immediate Transfer — pay-by-bank Open Banking transfers without IBAN entry, near-instant settlement
+  - Smart Transfer — auto-reconciled transfers using merchant-allocated virtual unique IBANs
+  - Request To Pay — payment links delivered via email, SMS, QR code, or invoice
+  - Verified Payout — refunds and customer reimbursements to verified bank accounts
+  - Buy Now Pay Later — BNPL composed inside the Payment Hub
+  - Immediate Refund — initiate full or partial refunds to original or alternative bank accounts
+  - Account Information Services (AIS) — accounts, holders, balances, transactions
+  - AIS-backed customer identity verification
+  - E-Mandates — SEPA-style mandates with unique RUM identifier and cancel/revoke lifecycle
+  - Payment Hub — single endpoint that orchestrates Immediate Transfer, Smart Transfer, and BNPL in one session
+  - Local Acquiring — merchant funds collected then settled to merchant bank account
+  - Decoupled bank authentication via PSU mobile banking app
+  - HTTP message signature security (RFC draft-cavage-http-signatures) with digest and x-request-id mandatory on production
+  - Webhook events with signature verification and an in-console Event Simulator
+  - Sandbox Demo Bank plus real test accounts for each provider bank
+  - Organisation Access Credentials (OAC, beta) — hierarchical Organisation Nodes, Companies, Memberships, Users
+  - Multi-currency PIS rails — SEPA, iSCT (SEPA Instant), FPS (UK), PLN (Poland), INT (international)
+  - Official SDKs for JavaScript / TypeScript, PHP, Python, Ruby
+  - Plug-and-play modules for PrestaShop, Magento (2, 1.9, Hyva), WooCommerce / WordPress, Shopify, Odoo, Intershop, Oasis
+  - Console with payment session tracking, application registration, SSO configuration, webhook setup, and pre-fill controls
+  - Fraud detection and transaction monitoring beyond regulatory minimums
+  sources:
+  - https://fintecture.com/
+  - https://doc.fintecture.com/
+  - https://doc.fintecture.com/llms.txt
+  - https://github.com/Fintecture
+  updated: '2026-05-25'
+
 apis:
 - aid: fintecture:fintecture-customers-api
   name: Fintecture Customers API
@@ -16,10 +293,14 @@ apis:
     type: Documentation
   - url: openapi/fintecture-customers-api-openapi.yml
     type: OpenAPI
-  description: >-
-    Register and manage merchant customers, attach their bank accounts, and run identity verifications.
-    Persisted customer records pre-fill payment fields and accelerate repeat checkouts; verifications
-    confirm account holder identity through the AIS rails.
+  - type: JSONSchema
+    url: json-schema/fintecture-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/fintecture-customer-create-schema.json
+  - type: JSONSchema
+    url: json-schema/fintecture-customer-list-schema.json
+  description: Register and manage merchant customers, attach their bank accounts, and run identity verifications. Persisted customer records
+    pre-fill payment fields and accelerate repeat checkouts; verifications confirm account holder identity through the AIS rails.
 - aid: fintecture:fintecture-transactions-api
   name: Fintecture Transactions and Settlements API
   tags:
@@ -42,9 +323,12 @@ apis:
     type: Documentation
   - url: openapi/fintecture-transactions-api-openapi.yml
     type: OpenAPI
-  description: >-
-    Inspect transactions and settlements. Settlements represent outgoing disbursements from the merchant's
-    Local Acquiring account to their own bank account. Sandbox includes a transaction simulator endpoint.
+  - type: JSONSchema
+    url: json-schema/fintecture-merchant-transaction-schema.json
+  - type: JSONSchema
+    url: json-schema/fintecture-transaction-list-schema.json
+  description: Inspect transactions and settlements. Settlements represent outgoing disbursements from the merchant's Local Acquiring account
+    to their own bank account. Sandbox includes a transaction simulator endpoint.
 - aid: fintecture:fintecture-accounts-api
   name: Fintecture Accounts API
   description: Bank accounts, balances, and holders
@@ -779,269 +1063,26 @@ apis:
     url: https://doc.fintecture.com/docs/api-request-a-pis-access-token
   - type: Documentation
     url: https://doc.fintecture.com/docs/api-request-an-ais-token
-name: Fintecture
-tags:
-  - Open Banking
-  - Payments
-  - PSD2
-  - France
-  - Account Information
-  - Payment Initiation
-  - Instant Payments
-  - SEPA
-  - Smart Transfer
-  - Request to Pay
-  - Buy Now Pay Later
-  - E-Mandates
-  - Account-to-Account
-  - KYC
+  - type: JSONSchema
+    url: json-schema/fintecture-access-token-schema.json
+
 tags_raw:
-  - Open Banking
-  - Payments
-  - PSD2
-  - France
-  - Account Information
-  - Payment Initiation
-  - Instant Payments
-  - SEPA
-  - Smart Transfer
-  - Request To Pay
-  - Buy Now Pay Later
-  - E-Mandates
-  - Account-to-Account
-  - KYC
-kind: contract
-deliveryModel:
-  model: saas
-  open_source: false
-  commercial: true
-  callable_host: true
-  label: Hosted service · you call their endpoint
-  confidence: high
-  source:
-  - openapi
-  - pricing
-  generated: '2026-08-28'
-  method: derived
-accessModel:
-  pricing: free
-  onboarding: self-serve
-  trial: false
-  try_now: true
-  public: false
-  label: Free · Self-serve signup
-  confidence: medium
-  source:
-  - plans
-  - authentication
-  - security
-  generated: '2026-09-03'
-  method: derived
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fintecture.png
-access: 3rd-Party
-common:
-  - type: Plans
-    url: plans/fintecture-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/fintecture-rate-limits.yml
-  - type: FinOps
-    url: finops/fintecture-finops.yml
-  - type: Website
-    url: https://www.fintecture.com/
-  - type: CapabilityMap
-    url: capabilities/fintecture-capability-edges.yml
-    name: Fintecture Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/fintecture-agentic-access.yml
-  - type: DomainSecurity
-    url: security/fintecture-domain-security.yml
-  - type: Authentication
-    url: authentication/fintecture-authentication.yml
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/fintecture/overview
-  - type: Arazzo
-    url: arazzo/fintecture-account-holders-identity-workflow.yml
-    name: Fintecture Account Holders and Identity Verification
-  - type: Arazzo
-    url: arazzo/fintecture-connect-accounts-transactions-workflow.yml
-    name: Fintecture Connect, List Accounts, and Pull Transactions
-  - type: Arazzo
-    url: arazzo/fintecture-customer-onboard-payment-workflow.yml
-    name: Fintecture Onboard Customer and Initiate Payment
-  - type: Arazzo
-    url: arazzo/fintecture-customer-verification-poll-workflow.yml
-    name: Fintecture Customer Verification with Polling
-  - type: Arazzo
-    url: arazzo/fintecture-decoupled-auth-accounts-workflow.yml
-    name: Fintecture Decoupled Authentication then List Accounts
-  - type: Arazzo
-    url: arazzo/fintecture-list-providers-initiate-payment-workflow.yml
-    name: Fintecture List Providers and Initiate Payment
-  - type: Arazzo
-    url: arazzo/fintecture-payment-refund-workflow.yml
-    name: Fintecture Refund a Completed Payment
-  - type: Arazzo
-    url: arazzo/fintecture-payment-status-poll-workflow.yml
-    name: Fintecture Create Payment and Poll Status
-  - type: Arazzo
-    url: arazzo/fintecture-request-to-pay-status-workflow.yml
-    name: Fintecture Request To Pay and Track Status
-  - type: Arazzo
-    url: arazzo/fintecture-sandbox-test-payment-workflow.yml
-    name: Fintecture Sandbox Test Payment
-  - type: Arazzo
-    url: arazzo/fintecture-settlement-reconciliation-workflow.yml
-    name: Fintecture Settlement Reconciliation
-  - type: Arazzo
-    url: arazzo/fintecture-token-then-payment-workflow.yml
-    name: Fintecture Mint Token then Initiate Payment
-  - type: Arazzo
-    url: arazzo/fintecture-update-payment-communication-workflow.yml
-    name: Fintecture Update Payment Communication
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/fintecture
-  - type: Portal
-    url: https://fintecture.com
-  - type: Documentation
-    url: https://doc.fintecture.com
-  - type: Documentation
-    url: https://doc.fintecture.com/docs/api-overview
-    name: API Overview
-  - type: GettingStarted
-    url: https://doc.fintecture.com/docs/api-overview
-  - type: Documentation
-    url: https://doc.fintecture.com/docs/api-http-signature
-    name: HTTP Signature Guide
-  - type: Documentation
-    url: https://doc.fintecture.com/docs/api-webhooks
-    name: Webhooks Guide
-  - type: Documentation
-    url: https://doc.fintecture.com/docs/demo-bank
-    name: Demo Bank Sandbox
-  - type: Documentation
-    url: https://doc.fintecture.com/docs/testing-complete-payment-flows-in-sandbox
-    name: Testing Payment Flows in Sandbox
-  - type: ChangeLog
-    url: https://doc.fintecture.com/changelog
-  - type: Signup
-    url: https://console.fintecture.com/
-    name: Fintecture Console
-  - type: Sandbox
-    url: https://console-sandbox.fintecture.com/
-    name: Sandbox Console
-  - type: Postman
-    url: https://doc.fintecture.com/docs/api-take-on-our-postman-collection
-    name: Postman Collection
-  - type: GitHubOrganization
-    url: https://github.com/Fintecture
-  - type: SDKs
-    url: https://github.com/Fintecture/fintecture-sdk-javascript
-    name: JavaScript / TypeScript SDK
-  - type: SDKs
-    url: https://github.com/Fintecture/fintecture-sdk-python
-    name: Python SDK
-  - type: SDKs
-    url: https://github.com/Fintecture/fintecture-sdk-php
-    name: PHP SDK
-  - type: SDKs
-    url: https://github.com/Fintecture/fintecture-sdk-ruby
-    name: Ruby SDK
-  - type: SampleCode
-    url: https://github.com/Fintecture/sample-nodejs
-    name: Node.js Express sample app
-  - type: SampleCode
-    url: https://github.com/Fintecture/sample-ror
-    name: Ruby on Rails sample app
-  - type: SampleCode
-    url: https://github.com/Fintecture/signature-guide
-    name: HTTP Signature Implementation Guide
-  - type: Plugins
-    url: https://github.com/Fintecture/magento
-    name: Magento 2 Payment Module
-  - type: Plugins
-    url: https://github.com/Fintecture/magento-hyva
-    name: Magento Hyva Theme Module
-  - type: Plugins
-    url: https://github.com/Fintecture/magento19
-    name: Magento 1.9 Payment Module
-  - type: Plugins
-    url: https://github.com/Fintecture/odoo
-    name: Odoo Payment Module
-  - type: Integrations
-    url: https://doc.fintecture.com/docs/cms-overview
-    name: CMS Integrations (PrestaShop, Magento, Shopify, WordPress, Odoo, Intershop, Oasis)
-  - type: Pricing
-    url: https://fintecture.com/tarifs
-  - type: TermsOfService
-    url: https://fintecture.com/mentions-legales
-  - type: PrivacyPolicy
-    url: https://fintecture.com/politique-de-confidentialite
-  - type: Support
-    url: https://fintecture.com/contact
-  - type: StatusPage
-    url: https://status.fintecture.com
-  - type: Blog
-    url: https://fintecture.com/blog
-  - type: Regions
-    data:
-      - France
-      - European Economic Area
-      - United Kingdom
-    description: >-
-      Fintecture is a French payment institution (ACPR/Banque de France authorization #17248) operating PSD2 services
-      across the EEA and connecting to UK Open Banking via the Faster Payments Service (FPS).
-  - type: Regulator
-    url: https://acpr.banque-france.fr/
-    name: ACPR — Autorite de Controle Prudentiel et de Resolution
-  - type: Features
-    data:
-      - Immediate Transfer — pay-by-bank Open Banking transfers without IBAN entry, near-instant settlement
-      - Smart Transfer — auto-reconciled transfers using merchant-allocated virtual unique IBANs
-      - Request To Pay — payment links delivered via email, SMS, QR code, or invoice
-      - Verified Payout — refunds and customer reimbursements to verified bank accounts
-      - Buy Now Pay Later — BNPL composed inside the Payment Hub
-      - Immediate Refund — initiate full or partial refunds to original or alternative bank accounts
-      - Account Information Services (AIS) — accounts, holders, balances, transactions
-      - AIS-backed customer identity verification
-      - E-Mandates — SEPA-style mandates with unique RUM identifier and cancel/revoke lifecycle
-      - Payment Hub — single endpoint that orchestrates Immediate Transfer, Smart Transfer, and BNPL in one session
-      - Local Acquiring — merchant funds collected then settled to merchant bank account
-      - Decoupled bank authentication via PSU mobile banking app
-      - >-
-        HTTP message signature security (RFC draft-cavage-http-signatures) with digest and x-request-id mandatory on
-        production
-      - Webhook events with signature verification and an in-console Event Simulator
-      - Sandbox Demo Bank plus real test accounts for each provider bank
-      - Organisation Access Credentials (OAC, beta) — hierarchical Organisation Nodes, Companies, Memberships, Users
-      - Multi-currency PIS rails — SEPA, iSCT (SEPA Instant), FPS (UK), PLN (Poland), INT (international)
-      - Official SDKs for JavaScript / TypeScript, PHP, Python, Ruby
-      - >-
-        Plug-and-play modules for PrestaShop, Magento (2, 1.9, Hyva), WooCommerce / WordPress, Shopify, Odoo, Intershop,
-        Oasis
-      - >-
-        Console with payment session tracking, application registration, SSO configuration, webhook setup, and pre-fill
-        controls
-      - Fraud detection and transaction monitoring beyond regulatory minimums
-    sources:
-      - https://fintecture.com/
-      - https://doc.fintecture.com/
-      - https://doc.fintecture.com/llms.txt
-      - https://github.com/Fintecture
-    updated: '2026-05-25'
-created: '2026-05-25T00:00:00.000Z'
-modified: '2026-05-25'
-position: Consuming
-description: >-
-  Fintecture is a French Open Banking payments platform and ACPR-authorised payment institution (#17248). Its API stack
-  covers PSD2 Payment Initiation (Immediate Transfer, Smart Transfer, Request To Pay, Buy Now Pay Later, Verified
-  Payout, Immediate Refund), PSD2 Account Information (accounts, holders, transactions, identity verification),
-  Customers, E-Mandates, and a beta Organisation Access Credentials surface for managing multi-tenant enterprise
-  estates. Clients include Auchan, Bricoman, Pluxee, PMU, and Edenred, with 2M+ end payers served. Plug-and-play modules
-  for PrestaShop, Magento, Shopify, WordPress, Odoo, Intershop, and Oasis sit on top of official JavaScript, Python,
-  PHP, and Ruby SDKs.
-maintainers:
-  - FN: Kin Lane
-    email: info@apievangelist.com
-    X: apievangelist
-    url: https://apievangelist.com
-specificationVersion: '0.23'
+- Open Banking
+- Payments
+- PSD2
+- France
+- Account Information
+- Payment Initiation
+- Instant Payments
+- SEPA
+- Smart Transfer
+- Request To Pay
+- Buy Now Pay Later
+- E-Mandates
+- Account-to-Account
+- KYC
+x-enrichment:
+  date: '2026-10-12'
+  status: enriched
+  artifacts_added: 4
+  pass: local-v5

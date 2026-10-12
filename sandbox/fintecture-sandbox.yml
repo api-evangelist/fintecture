@@ -1,0 +1,24 @@
+name: Fintecture Sandbox
+generated: '2026-10-12'
+method: searched
+source: https://doc.fintecture.com/docs/testing-complete-payment-flows-in-sandbox
+description: Sandbox environment configured per application in the Fintecture Console; payer flows are completed against Demo Bank (Fintecture's mock bank, outcome chosen in the bank UI) or real bank sandboxes (e.g. Credit Mutuel, CIC). Acquiring-account fund arrival is simulated with the Event Simulator; sandbox-only endpoints simulate bank transitions and transactions, and test accounts per bank are listed by API.
+docs: https://doc.fintecture.com/docs/testing-complete-payment-flows-in-sandbox
+base_url: https://api.sandbox.fintecture.com
+base_url_source: https://doc.fintecture.com/changelog/22-09-2026
+tools:
+- name: Demo Bank
+  docs: https://doc.fintecture.com/docs/demo-bank
+- name: Event Simulator
+  docs: https://doc.fintecture.com/docs/event-simulator
+- name: Simulate a bank transition event (sandbox only, session must be payment_pending)
+  docs: https://doc.fintecture.com/reference/simulatepaymentbanktransition
+- name: Simulate a transaction
+  docs: https://doc.fintecture.com/reference/simulatetransactionevent
+- name: Get all test accounts
+  docs: https://doc.fintecture.com/reference/getresv1testaccounts
+webhooks_delivery:
+  source: https://doc.fintecture.com/docs/api-webhooks
+  signature: Signature header (keyId, algorithm rsa-sha256, headers "date digest x-request-id")
+  retries: Webhook will retry 20x with an exponential time increment if your server doesn't respond with a HTTP code in the 2XX range.
+  timeout: Webhooks have a timeout time of 20 seconds.
