@@ -117,6 +117,18 @@ paths:
                 $ref: '#/components/schemas/Payment'
 components:
   schemas:
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
     PaymentPatch:
       type: object
       properties:
@@ -130,37 +142,33 @@ components:
               properties:
                 communication:
                   type: string
-    Error:
+    Payment:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              status:
-                type: string
-              code:
-                type: string
-              title:
-                type: string
-              detail:
-                type: string
-    PaymentConnectResponse:
-      type: object
-      properties:
-        meta:
-          type: object
-          properties:
-            session_id:
-              type: string
-            status:
-              type: string
-            url:
-              type: string
-              format: uri
-            code:
-              type: string
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - PIS
+        attributes:
+          $ref: '#/components/schemas/PaymentAttributes'
+        status:
+          type: string
+          enum:
+          - payment_created
+          - payment_pending
+          - payment_initiated
+          - payment_completed
+          - payment_rejected
+          - payment_cancelled
+          - payment_failed
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     PaymentConnectRequest:
       type: object
       required:
@@ -178,6 +186,49 @@ components:
               - PIS
             attributes:
               $ref: '#/components/schemas/PaymentAttributes'
+    PaymentConnectResponse:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            session_id:
+              type: string
+            status:
+              type: string
+            url:
+              type: string
+              format: uri
+            code:
+              type: string
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              code:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+    PaymentMeta:
+      type: object
+      properties:
+        psu_name:
+          type: string
+        psu_email:
+          type: string
+          format: email
+        psu_phone:
+          type: string
+        psu_address:
+          type: string
     PaymentAttributes:
       type: object
       required:
@@ -216,61 +267,23 @@ components:
           - immediate_transfer
           - smart_transfer
           - bnpl
-    PaymentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
-    PaymentMeta:
-      type: object
-      properties:
-        psu_name:
-          type: string
-        psu_email:
-          type: string
-          format: email
-        psu_phone:
-          type: string
-        psu_address:
-          type: string
-    Payment:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - PIS
-        attributes:
-          $ref: '#/components/schemas/PaymentAttributes'
-        status:
-          type: string
-          enum:
-          - payment_created
-          - payment_pending
-          - payment_initiated
-          - payment_completed
-          - payment_rejected
-          - payment_cancelled
-          - payment_failed
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
   parameters:
+    DigestHeader:
+      in: header
+      name: Digest
+      required: true
+      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
+      schema:
+        type: string
     PaymentIdPath:
       in: path
       name: payment_id
+      required: true
+      schema:
+        type: string
+    DateHeader:
+      in: header
+      name: Date
       required: true
       schema:
         type: string
@@ -282,12 +295,6 @@ components:
       schema:
         type: string
         format: uuid
-    DateHeader:
-      in: header
-      name: Date
-      required: true
-      schema:
-        type: string
     SignatureHeader:
       in: header
       name: Signature
@@ -295,22 +302,15 @@ components:
       description: HTTP message signature (RFC draft-cavage-http-signatures).
       schema:
         type: string
-    DigestHeader:
-      in: header
-      name: Digest
-      required: true
-      description: SHA-256 digest of the request body, base64-encoded, prefixed with `SHA-256=`.
-      schema:
-        type: string
   responses:
-    Unauthorized:
-      description: Unauthorized
+    BadRequest:
+      description: Bad request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:

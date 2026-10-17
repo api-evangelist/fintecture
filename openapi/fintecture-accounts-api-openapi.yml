@@ -73,26 +73,20 @@ paths:
                     items:
                       $ref: '#/components/schemas/AccountHolder'
 components:
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    AccountIdPath:
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
   schemas:
-    AccountHolder:
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-    AccountsList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
     Account:
       type: object
       properties:
@@ -133,19 +127,25 @@ components:
         timestamp:
           type: string
           format: date-time
-  parameters:
-    AccountIdPath:
-      in: path
-      name: account_id
-      required: true
-      schema:
-        type: string
-    CustomerIdPath:
-      in: path
-      name: customer_id
-      required: true
-      schema:
-        type: string
+    AccountHolder:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    AccountsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
   securitySchemes:
     BearerAuth:
       type: http

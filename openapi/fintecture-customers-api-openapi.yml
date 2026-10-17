@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Fintecture Account Information Services Accounts ……………
+  title: Fintecture Account Information Services Accounts ………………
   description: PSD2 Account Information Services. Authenticates a PSU at their bank using either the redirect or decoupled (mobile-app) model, then retrieves bank accounts, balances, holders, and transactions. Also exposes the AIS-backed identity verification endpoint.
   version: v2
   contact:
@@ -111,18 +111,6 @@ components:
         created_at:
           type: string
           format: date-time
-    CustomerList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
     CustomerCreate:
       type: object
       required:
@@ -143,6 +131,18 @@ components:
           type: string
         external_id:
           type: string
+    CustomerList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
   parameters:
     CustomerIdPath:
       in: path

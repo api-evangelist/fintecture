@@ -56,6 +56,13 @@ paths:
                 $ref: '#/components/schemas/Settlement'
 components:
   schemas:
+    SettlementList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settlement'
     Settlement:
       type: object
       properties:
@@ -76,13 +83,6 @@ components:
           type: array
           items:
             type: string
-    SettlementList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Settlement'
   securitySchemes:
     BearerAuth:
       type: http

@@ -115,32 +115,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MerchantTransaction'
 components:
-  parameters:
-    CustomerIdPath:
-      in: path
-      name: customer_id
-      required: true
-      schema:
-        type: string
-    AccountIdPath:
-      in: path
-      name: account_id
-      required: true
-      schema:
-        type: string
   schemas:
-    TransactionList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
-        meta:
-          type: object
-          properties:
-            count:
-              type: integer
     Transaction:
       type: object
       properties:
@@ -170,6 +145,18 @@ components:
               type: string
             iban:
               type: string
+    TransactionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
     MerchantTransaction:
       type: object
       properties:
@@ -198,6 +185,19 @@ components:
           type: string
         related_settlement_id:
           type: string
+  parameters:
+    CustomerIdPath:
+      in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    AccountIdPath:
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

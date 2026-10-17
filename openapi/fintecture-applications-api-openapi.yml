@@ -126,6 +126,23 @@ paths:
           description: Deleted
 components:
   schemas:
+    ApplicationPatch:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                app_name:
+                  type: string
+                app_webhooks:
+                  type: array
+                  items:
+                    type: object
+                app_urls:
+                  type: object
     ApplicationCreate:
       type: object
       required:
@@ -158,23 +175,6 @@ components:
                           type: string
                         lid:
                           type: string
-    ApplicationPatch:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            attributes:
-              type: object
-              properties:
-                app_name:
-                  type: string
-                app_webhooks:
-                  type: array
-                  items:
-                    type: object
-                app_urls:
-                  type: object
     Application:
       type: object
       properties:
