@@ -6,9 +6,16 @@ source:
 - https://composio.dev/toolkits/fintecture
 - https://monid.ai/tools/fintecture
 checked:
+- https://api.nuget.org/v3
 - https://composio.dev/toolkits/fintecture
+- https://crates.io/api/v1
 - https://monid.ai/tools/fintecture
 - https://n8n.io/integrations/fintecture/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://www.openbanking.org.uk/regulated-providers/fintecture/
 - https://zapier.com/apps/fintecture/integrations
 summary: null
@@ -31,4 +38,94 @@ edges:
     api_families: null
     detected_by: sweep-standard-registers.py
     detected: '2026-10-14'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/fintecture-client
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: fintecture-client
+      version: 2.5.3
+      released: '2026-06-05'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/fintecture-client
+      repo_leg: domain:fintecture.com
+      publisher_leg: email:fintecture.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Python)
+  evidence: https://pypi.org/project/fintecture/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: fintecture
+      version: 1.3.1
+      released: '2022-12-19'
+      released_field: upload_time
+      lapsed: true
+      page: https://pypi.org/project/fintecture/
+      repo_leg: github-org:fintecture
+      publisher_leg: email:fintecture.com
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: RubyGems
+  partner: rubygems
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Ruby)
+  evidence: https://rubygems.org/gems/fintecture
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: RubyGems (public registry JSON)
+    spec_file: null
+    language: Ruby
+    packages:
+    - name: fintecture
+      version: 0.6.2
+      released: '2023-11-08'
+      released_field: version_created_at
+      lapsed: true
+      page: https://rubygems.org/gems/fintecture
+      repo_leg: domain:fintecture.com
+      publisher_leg: org:fintecture
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 templates: []

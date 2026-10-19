@@ -23,3 +23,96 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
+- slug: fintecture-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/fintecture-client
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: fintecture-client
+      version: 2.5.3
+      released: '2026-06-05'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/fintecture-client
+      repo_leg: domain:fintecture.com
+      publisher_leg: email:fintecture.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: fintecture-pypi
+  label: PyPI
+  partner: pypi
+  partner_name: PyPI
+  category: official SDK (Python)
+  type: register
+  channel: package-registry
+  evidence: https://pypi.org/project/fintecture/
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: fintecture
+      version: 1.3.1
+      released: '2022-12-19'
+      released_field: upload_time
+      lapsed: true
+      page: https://pypi.org/project/fintecture/
+      repo_leg: github-org:fintecture
+      publisher_leg: email:fintecture.com
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: fintecture-rubygems
+  label: RubyGems
+  partner: rubygems
+  partner_name: RubyGems
+  category: official SDK (Ruby)
+  type: register
+  channel: package-registry
+  evidence: https://rubygems.org/gems/fintecture
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: RubyGems (public registry JSON)
+    spec_file: null
+    language: Ruby
+    packages:
+    - name: fintecture
+      version: 0.6.2
+      released: '2023-11-08'
+      released_field: version_created_at
+      lapsed: true
+      page: https://rubygems.org/gems/fintecture
+      repo_leg: domain:fintecture.com
+      publisher_leg: org:fintecture
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
