@@ -1,4 +1,4 @@
-# Fintecture (fintecture)
+# Fintecture
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,256 +66,232 @@
 
 Fintecture is a French Open Banking payments platform and ACPR-authorised payment institution (#17248). Its API stack covers PSD2 Payment Initiation (Immediate Transfer, Smart Transfer, Request To Pay, Buy Now Pay Later, Verified Payout, Immediate Refund), PSD2 Account Information (accounts, holders, transactions, identity verification), Customers, E-Mandates, and a beta Organisation Access Credentials surface for managing multi-tenant enterprise estates. Clients include Auchan, Bricoman, Pluxee, PMU, and Edenred, with 2M+ end payers served. Plug-and-play modules for PrestaShop, Magento, Shopify, WordPress, Odoo, Intershop, and Oasis sit on top of official JavaScript, Python, PHP, and Ruby SDKs.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/fintecture/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/fintecture/refs/heads/main/apis.yml)
+**Areas:** Open Banking · Payments · PSD2 · France · Account Information · Payment Initiation · Instant Payments · SEPA · Smart Transfer · Request to Pay · Buy Now Pay Later · E-Mandates
 
-## Scope
+## Fintecture on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Fintecture is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fintecture/](https://apis.io/providers/fintecture/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (22)
 
-- Open Banking
-- Payments
-- PSD2
-- France
-- Account Information
-- Payment Initiation
-- Instant Payments
-- SEPA
-- Smart Transfer
-- Request To Pay
-- Buy Now Pay Later
-- E-Mandates
-- Account-to-Account
-- KYC
+- [Fintecture Customers API](https://apis.io/apis/fintecture/fintecture-customers-api/) — Register and manage merchant customers, attach their bank accounts, and run identity verifications. Persisted customer records pre-fill payment fields and…
+- [Fintecture Transactions and Settlements API](https://apis.io/apis/fintecture/fintecture-transactions-api/) — Inspect transactions and settlements. Settlements represent outgoing disbursements from the merchant's Local Acquiring account to their own bank account.…
+- [Fintecture Accounts API](https://apis.io/apis/fintecture/fintecture-accounts-api/) — Bank accounts, balances, and holders
+- [Fintecture Applications API](https://apis.io/apis/fintecture/fintecture-applications-api/) — The Applications API from Fintecture — 3 operation(s) for applications.
+- [Fintecture Authentication API](https://apis.io/apis/fintecture/fintecture-authentication-api/) — PSU bank authentication
+- [Fintecture Bank Accounts API](https://apis.io/apis/fintecture/fintecture-bank-accounts-api/) — Customer bank accounts
+- [Fintecture Companies API](https://apis.io/apis/fintecture/fintecture-companies-api/) — The Companies API from Fintecture — 2 operation(s) for companies.
+- [Fintecture E-Mandates API](https://apis.io/apis/fintecture/fintecture-e-mandates-api/) — Customer e-mandates
+- [Fintecture Memberships API](https://apis.io/apis/fintecture/fintecture-memberships-api/) — The Memberships API from Fintecture — 2 operation(s) for memberships.
+- [Fintecture Organisation Nodes API](https://apis.io/apis/fintecture/fintecture-organisation-nodes-api/) — The Organisation Nodes API from Fintecture — 4 operation(s) for organisation nodes.
+- [Fintecture Payments API](https://apis.io/apis/fintecture/fintecture-payments-api/) — Create and inspect payment sessions
+- [Fintecture Payouts API](https://apis.io/apis/fintecture/fintecture-payouts-api/) — Verified payouts and request-for-payout
+- [Fintecture Providers API](https://apis.io/apis/fintecture/fintecture-providers-api/) — Bank providers / coverage
+- [Fintecture Refunds API](https://apis.io/apis/fintecture/fintecture-refunds-api/) — Initiate immediate refunds
+- [Fintecture Request To Pay API](https://apis.io/apis/fintecture/fintecture-request-to-pay-api/) — Generate Fintecture payment links
+- [Fintecture Sandbox API](https://apis.io/apis/fintecture/fintecture-sandbox-api/) — The Sandbox API from Fintecture — 1 operation(s) for sandbox.
+- [Fintecture Settlements API](https://apis.io/apis/fintecture/fintecture-settlements-api/) — Local Acquiring disbursements
+- [Fintecture Test Accounts API](https://apis.io/apis/fintecture/fintecture-test-accounts-api/) — Sandbox test accounts
+- [Fintecture Users API](https://apis.io/apis/fintecture/fintecture-users-api/) — The Users API from Fintecture — 2 operation(s) for users.
+- [Fintecture Verification API](https://apis.io/apis/fintecture/fintecture-verification-api/) — AIS-based identity verification
+- [Fintecture Verifications API](https://apis.io/apis/fintecture/fintecture-verifications-api/) — Customer identity verifications
+- [Fintecture O Auth API](https://apis.io/apis/fintecture/fintecture-oauth-api/) — Access and refresh tokens
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (13)
 
-## Timestamps
+Multi-step workflows that chain operations into a business task.
 
-- **Created:** 2026-05-25T00:00:00.000Z
-- **Modified:** 2026-05-25
+- [Fintecture Account Holders and Identity Verification](https://apis.io/arazzos/fintecture/fintecture-account-holders-identity-workflow/)
+- [Fintecture Connect, List Accounts, and Pull Transactions](https://apis.io/arazzos/fintecture/fintecture-connect-accounts-transactions-workflow/)
+- [Fintecture Onboard Customer and Initiate Payment](https://apis.io/arazzos/fintecture/fintecture-customer-onboard-payment-workflow/)
+- [Fintecture Customer Verification with Polling](https://apis.io/arazzos/fintecture/fintecture-customer-verification-poll-workflow/)
+- [Fintecture Decoupled Authentication then List Accounts](https://apis.io/arazzos/fintecture/fintecture-decoupled-auth-accounts-workflow/)
+- [Fintecture List Providers and Initiate Payment](https://apis.io/arazzos/fintecture/fintecture-list-providers-initiate-payment-workflow/)
+- [Fintecture Refund a Completed Payment](https://apis.io/arazzos/fintecture/fintecture-payment-refund-workflow/)
+- [Fintecture Create Payment and Poll Status](https://apis.io/arazzos/fintecture/fintecture-payment-status-poll-workflow/)
+- [Fintecture Request To Pay and Track Status](https://apis.io/arazzos/fintecture/fintecture-request-to-pay-status-workflow/)
+- [Fintecture Sandbox Test Payment](https://apis.io/arazzos/fintecture/fintecture-sandbox-test-payment-workflow/)
+- [Fintecture Settlement Reconciliation](https://apis.io/arazzos/fintecture/fintecture-settlement-reconciliation-workflow/)
+- [Fintecture Mint Token then Initiate Payment](https://apis.io/arazzos/fintecture/fintecture-token-then-payment-workflow/)
+- [Fintecture Update Payment Communication](https://apis.io/arazzos/fintecture/fintecture-update-payment-communication-workflow/)
 
-## APIs
+#### MCP servers (1)
 
-### Fintecture Payment Initiation Services API
+Model Context Protocol servers that expose the API to agents.
 
-PSD2 Payment Initiation Services for Immediate Transfer, Smart Transfer (auto-reconciled with virtual IBANs), Request To Pay (payment links via email/SMS/QR), Buy Now Pay Later, and Verified Payout. The same /pis/v2/connect endpoint serves immediate transfers, smart transfers, and BNPL via a single Payment Hub abstraction. Production calls require HTTP message signature (RFC draft-cavage-http-signatures), digest, date, and x-request-id headers.
+- [fintecture-mcp.yml](https://apis.io/servers/fintecture/fintecture-mcp-yml/)
 
-- **Human URL:** [https://doc.fintecture.com/reference/createpisv2connect](https://doc.fintecture.com/reference/createpisv2connect)
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Open Banking
-- Payments
-- PIS
-- PSD2
-- Bank Transfers
-- Account-to-Account
+- [Fintecture Agentic Access](https://apis.io/agentic-access/fintecture/fintecture-agentic-access/)
 
-#### Properties
+#### JSON Schema (8)
 
-- [Documentation](https://doc.fintecture.com/reference/createpisv2connect)
-- [Documentation](https://doc.fintecture.com/docs/api-initiate-an-immediate-payment)
-- [Documentation](https://doc.fintecture.com/docs/api-initiate-a-smart-transfer)
-- [Documentation](https://doc.fintecture.com/docs/api-initiate-a-request-to-pay)
-- [OpenAPI](openapi/fintecture-pis-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-pis-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-pis-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/fintecture-payment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/fintecture-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+The data models the API reads and writes.
 
-### Fintecture Account Information Services API
+- [AccessToken](https://apis.io/schemas/fintecture/fintecture-access-token/)
+- [Fintecture Bank Account](https://apis.io/schemas/fintecture/fintecture-account/)
+- [Customer](https://apis.io/schemas/fintecture/fintecture-customer/)
+- [CustomerCreate](https://apis.io/schemas/fintecture/fintecture-customer-create/)
+- [CustomerList](https://apis.io/schemas/fintecture/fintecture-customer-list/)
+- [MerchantTransaction](https://apis.io/schemas/fintecture/fintecture-merchant-transaction/)
+- [Fintecture Payment](https://apis.io/schemas/fintecture/fintecture-payment/)
+- [TransactionList](https://apis.io/schemas/fintecture/fintecture-transaction-list/)
 
-PSD2 Account Information Services. Retrieve PSU bank accounts, holders, balances, and transaction history after the PSU authenticates with their bank via the redirect or decoupled (mobile app) flow. Includes an AIS-based identity verification endpoint used to confirm the bank account holder name matches the merchant's customer record.
+#### JSON-LD (1)
 
-- **Human URL:** [https://doc.fintecture.com/reference/getaisv2connect](https://doc.fintecture.com/reference/getaisv2connect)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Fintecture Context](https://apis.io/jsonld/fintecture/fintecture-context/)
 
-- Open Banking
-- AIS
-- PSD2
-- Account Information
-- Bank Data
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://doc.fintecture.com/reference/getaisv2connect)
-- [Documentation](https://doc.fintecture.com/docs/api-recover-bank-accounts)
-- [Documentation](https://doc.fintecture.com/docs/api-recover-bank-account-transactions)
-- [OpenAPI](openapi/fintecture-ais-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-ais-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-ais-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/fintecture-account-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Fintecture Vocabulary](https://apis.io/vocabularies/fintecture/fintecture-vocabulary/)
 
-### Fintecture Customers API
+#### Examples (3)
 
-Register and manage merchant customers, attach their bank accounts, and run identity verifications. Persisted customer records pre-fill payment fields and accelerate repeat checkouts; verifications confirm account holder identity through the AIS rails.
+Example requests and responses.
 
-- **Human URL:** [https://doc.fintecture.com/reference/createcustomer](https://doc.fintecture.com/reference/createcustomer)
+- [Fintecture Get Accounts Example](https://apis.io/examples/fintecture/fintecture-get-accounts-example/)
+- [Fintecture Immediate Transfer Example](https://apis.io/examples/fintecture/fintecture-immediate-transfer-example/)
+- [Fintecture Request To Pay Example](https://apis.io/examples/fintecture/fintecture-request-to-pay-example/)
 
-#### Tags
+#### Collections (35)
 
-- Customers
-- KYC
-- Bank Accounts
-- Verification
+Postman and Open Collection request collections.
 
-#### Properties
+- [Fintecture Account Information Services Accounts API](https://apis.io/collections/fintecture/open-fintecture-accounts-api/)
+- [Fintecture Account Information Services API](https://apis.io/collections/fintecture/open-fintecture-ais-api/)
+- [Fintecture Account Information Services Accounts Applications API](https://apis.io/collections/fintecture/open-fintecture-applications-api/)
+- [Fintecture Account Information Services Accounts Authentication API](https://apis.io/collections/fintecture/open-fintecture-authentication-api/)
+- [Fintecture Account Information Services Accounts Bank Accounts API](https://apis.io/collections/fintecture/open-fintecture-bank-accounts-api/)
+- [Fintecture Account Information Services Accounts Companies API](https://apis.io/collections/fintecture/open-fintecture-companies-api/)
+- [Fintecture Account Information Services Accounts Customers API](https://apis.io/collections/fintecture/open-fintecture-customers-api/)
+- [Fintecture Account Information Services Accounts E-Mandates API](https://apis.io/collections/fintecture/open-fintecture-e-mandates-api/)
+- [Fintecture E-Mandates API](https://apis.io/collections/fintecture/open-fintecture-emandates-api/)
+- [Fintecture Account Information Services Accounts Memberships API](https://apis.io/collections/fintecture/open-fintecture-memberships-api/)
+- [Fintecture Organisation Access Credentials API](https://apis.io/collections/fintecture/open-fintecture-oac-api/)
+- [Fintecture Account Information Services Accounts OAuth API](https://apis.io/collections/fintecture/open-fintecture-oauth-api/)
+- [Fintecture Account Information Services Accounts Organisation Nodes API](https://apis.io/collections/fintecture/open-fintecture-organisation-nodes-api/)
+- [Fintecture Account Information Services Accounts Payments API](https://apis.io/collections/fintecture/open-fintecture-payments-api/)
+- [Fintecture Account Information Services Accounts Payouts API](https://apis.io/collections/fintecture/open-fintecture-payouts-api/)
+- [Fintecture Payment Initiation Services API](https://apis.io/collections/fintecture/open-fintecture-pis-api/)
+- [Fintecture Account Information Services Accounts Providers API](https://apis.io/collections/fintecture/open-fintecture-providers-api/)
+- [Fintecture Account Information Services Accounts Refunds API](https://apis.io/collections/fintecture/open-fintecture-refunds-api/)
+- [Fintecture Account Information Services Accounts Request To Pay API](https://apis.io/collections/fintecture/open-fintecture-request-to-pay-api/)
+- [Fintecture Resources API](https://apis.io/collections/fintecture/open-fintecture-resources-api/)
+- [Fintecture Account Information Services Accounts Sandbox API](https://apis.io/collections/fintecture/open-fintecture-sandbox-api/)
+- [Fintecture Account Information Services Accounts Settlements API](https://apis.io/collections/fintecture/open-fintecture-settlements-api/)
+- [Fintecture Account Information Services Accounts Test Accounts API](https://apis.io/collections/fintecture/open-fintecture-test-accounts-api/)
+- [Fintecture Account Information Services Accounts Transactions API](https://apis.io/collections/fintecture/open-fintecture-transactions-api/)
+- [Fintecture Account Information Services Accounts Users API](https://apis.io/collections/fintecture/open-fintecture-users-api/)
+- …and 10 more published on APIs.io
 
-- [Documentation](https://doc.fintecture.com/reference/createcustomer)
-- [Documentation](https://doc.fintecture.com/docs/api-verify-a-customer)
-- [OpenAPI](openapi/fintecture-customers-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-customers-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-customers-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-### Fintecture E-Mandates API
+Spectral rulesets for the provider's contracts.
 
-Create, list, retrieve, update (cancel/revoke), and manage SEPA-style customer e-mandates identified by a unique Reference Unique Mandate (RUM). Returns 409 Conflict on duplicate RUM. Requires a dedicated E-Mandate access token.
+- [Fintecture — jsonschema rules](https://apis.io/rules/fintecture/fintecture-jsonschema-spectral-rules/)
+- [Fintecture API Rules](https://apis.io/rules/fintecture/fintecture-rules/)
 
-- **Human URL:** [https://doc.fintecture.com/reference/createemandate](https://doc.fintecture.com/reference/createemandate)
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- E-Mandates
-- SEPA
-- Direct Debit
-- Recurring Payments
+- [Fintecture Authentication](https://apis.io/security/fintecture/fintecture-authentication/)
+- [Fintecture Domain Security](https://apis.io/security/fintecture/fintecture-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://doc.fintecture.com/reference/createemandate)
-- [Documentation](https://doc.fintecture.com/docs/request-e-mandate-access-token)
-- [OpenAPI](openapi/fintecture-emandates-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-emandates-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-emandates-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Fintecture OAuth and Tokens API
+- [Fintecture Plans Pricing](https://apis.io/plans/fintecture/fintecture-plans-pricing/)
 
-Issues access tokens via authorization_code and client_credentials grants. Distinct scopes for PIS, AIS, Customers, E-Mandates, and OAC (Organisation Access Credentials, beta). Access tokens are valid for 1 hour and can be refreshed.
+#### Rate limits (1)
 
-- **Human URL:** [https://doc.fintecture.com/reference/createaccesstoken](https://doc.fintecture.com/reference/createaccesstoken)
+Published request limits.
 
-#### Tags
+- [Fintecture Rate Limits](https://apis.io/rate-limits/fintecture/fintecture-rate-limits/)
 
-- OAuth
-- Authentication
-- Access Tokens
-- Security
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://doc.fintecture.com/reference/createaccesstoken)
-- [Documentation](https://doc.fintecture.com/docs/api-request-a-pis-access-token)
-- [Documentation](https://doc.fintecture.com/docs/api-request-an-ais-token)
-- [OpenAPI](openapi/fintecture-oauth-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-oauth-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-oauth-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Fintecture Finops](https://apis.io/finops/fintecture/fintecture-finops/)
 
-### Fintecture Resources API
+## Where to find this API
 
-Catalog of supported banks (Providers) with per-bank AIS capabilities (accountholders, accounts, transactions) and PIS rails (SEPA, iSCT instant, FPS, PLN, INT). Also exposes sandbox test accounts for each bank.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://doc.fintecture.com/reference/getresv1providers](https://doc.fintecture.com/reference/getresv1providers)
-
-#### Tags
-
-- Banks
-- Providers
-- Reference Data
-- Sandbox
-
-#### Properties
-
-- [Documentation](https://doc.fintecture.com/reference/getresv1providers)
-- [OpenAPI](openapi/fintecture-resources-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-resources-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-resources-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Fintecture Organisation Access Credentials API
-
-Beta multi-tenant management API for enterprise customers. Programmatically manage Applications, Bank Accounts, Companies, Organisation Nodes (hierarchical tree), Memberships, and Users in the Fintecture Console. Requires an OAC access token with per-resource read/write scopes.
-
-- **Human URL:** [https://doc.fintecture.com/docs/request-an-oac-access-token](https://doc.fintecture.com/docs/request-an-oac-access-token)
-
-#### Tags
-
-- Organisations
-- Access Control
-- Beta
-- Multi-Tenant
-- Console Management
-
-#### Properties
-
-- [Documentation](https://doc.fintecture.com/docs/request-an-oac-access-token)
-- [OpenAPI](openapi/fintecture-oac-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-oac-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-oac-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Fintecture Transactions and Settlements API
-
-Inspect transactions and settlements. Settlements represent outgoing disbursements from the merchant's Local Acquiring account to their own bank account. Sandbox includes a transaction simulator endpoint.
-
-- **Human URL:** [https://doc.fintecture.com/reference/getpisv2settlements](https://doc.fintecture.com/reference/getpisv2settlements)
-
-#### Tags
-
-- Transactions
-- Settlements
-- Local Acquiring
-- Reconciliation
-- Reporting
-
-#### Properties
-
-- [Documentation](https://doc.fintecture.com/reference/getpisv2settlements)
-- [Documentation](https://doc.fintecture.com/reference/listalltransactions)
-- [OpenAPI](openapi/fintecture-transactions-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fintecture-transactions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fintecture-transactions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [LinkedIn](https://www.linkedin.com/company/fintecture)
-- [Portal](https://fintecture.com)
+- [Website](https://www.fintecture.com/)
 - [Documentation](https://doc.fintecture.com)
-- [Documentation](https://doc.fintecture.com/docs/api-overview)
-- [Getting Started](https://doc.fintecture.com/docs/api-overview)
-- [Documentation](https://doc.fintecture.com/docs/api-http-signature)
-- [Documentation](https://doc.fintecture.com/docs/api-webhooks)
-- [Documentation](https://doc.fintecture.com/docs/demo-bank)
-- [Documentation](https://doc.fintecture.com/docs/testing-complete-payment-flows-in-sandbox)
-- [Changelog](https://doc.fintecture.com/changelog)
-- [Sign Up](https://console.fintecture.com/)
-- [Sandbox](https://console-sandbox.fintecture.com/)
-- [Postman](https://doc.fintecture.com/docs/api-take-on-our-postman-collection) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [GitHub Organization](https://github.com/Fintecture)
-- [SDK](https://github.com/Fintecture/fintecture-sdk-javascript)
-- [SDK](https://github.com/Fintecture/fintecture-sdk-python)
-- [SDK](https://github.com/Fintecture/fintecture-sdk-php)
-- [SDK](https://github.com/Fintecture/fintecture-sdk-ruby)
-- [Sample Code](https://github.com/Fintecture/sample-nodejs)
-- [Sample Code](https://github.com/Fintecture/sample-ror)
-- [Sample Code](https://github.com/Fintecture/signature-guide)
-- [Plugins](https://github.com/Fintecture/magento)
-- [Plugins](https://github.com/Fintecture/magento-hyva)
-- [Plugins](https://github.com/Fintecture/magento19)
-- [Plugins](https://github.com/Fintecture/odoo)
-- [Integrations](https://doc.fintecture.com/docs/cms-overview)
-- [Pricing](https://fintecture.com/tarifs)
-- [Terms of Service](https://fintecture.com/mentions-legales)
-- [Privacy Policy](https://fintecture.com/politique-de-confidentialite)
+- [Getting started](https://doc.fintecture.com/docs/api-overview)
 - [Support](https://fintecture.com/contact)
-- [Status Page](https://status.fintecture.com)
+- [Changelog](https://doc.fintecture.com/changelog)
 - [Blog](https://fintecture.com/blog)
-- [Regions](undefined)
-- [Regulator](https://acpr.banque-france.fr/)
-- [Features](undefined)
+- [Privacy policy](https://fintecture.com/politique-de-confidentialite)
+- [GitHub](https://github.com/Fintecture)
+- [Status](https://status.fintecture.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 50.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 60.1 |
+| Contract governance | 22.0 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 63.1 |
+| Access clarity | 39.5 |
+
+**Agent readiness 21.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 16.5** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fintecture/](https://apis.io/providers/fintecture/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Fintecture: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fintecture/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
